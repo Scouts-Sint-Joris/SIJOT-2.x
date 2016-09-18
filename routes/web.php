@@ -11,6 +11,4 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::post('backend/users', 'UserManagementController@store')->name('auth.new');
