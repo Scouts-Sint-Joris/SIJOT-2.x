@@ -13,7 +13,26 @@ class SettingsController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     *
+     */
     public function index()
+    {
+
+    }
+
+    /**
+     *
+     */
+    public function updatePlatformSettings()
+    {
+
+    }
+
+    /**
+     *
+     */
+    public function updateBackUpSettings()
     {
 
     }
