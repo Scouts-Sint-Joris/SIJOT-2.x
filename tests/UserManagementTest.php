@@ -25,7 +25,6 @@ class UserManagementTest extends TestCase
     }
 
     /**
-<<<<<<< HEAD
      * POST:  /backend/users
      * ROUTE: auth.new
      *
@@ -34,9 +33,6 @@ class UserManagementTest extends TestCase
      * @group all
      * @group auth
      * @group backend
-=======
-     *
->>>>>>> develop
      */
     public function testCreateMethodWithError()
     {
@@ -46,11 +42,7 @@ class UserManagementTest extends TestCase
     /**
      *
      */
-<<<<<<< HEAD
     public function testCreateMethodWithoutErrors()
-=======
-    public function testCreateMeethodWithoutErrors()
->>>>>>> develop
     {
 
     }
