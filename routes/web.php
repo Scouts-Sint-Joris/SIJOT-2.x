@@ -10,5 +10,6 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-
+Auth::routes();
 Route::post('backend/users', 'UserManagementController@store')->name('auth.new');
+
