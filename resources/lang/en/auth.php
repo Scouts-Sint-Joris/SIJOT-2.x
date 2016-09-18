@@ -13,7 +13,18 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed'    => 'These credentials do not match our records.',
+    'throttle'  => 'Too many login attempts. Please try again in :seconds seconds.',
+
+    /*
+     |--------------------------------------------------------------------------
+     | Flash Messages Language Lines
+     |--------------------------------------------------------------------------
+     |
+     | The following language lines are used during the feedback after
+     | the redirect. These are typical used in the flash sessions.
+     |
+     */
+    'FlashInfo' => 'The account information has been updated.'
 
 ];
