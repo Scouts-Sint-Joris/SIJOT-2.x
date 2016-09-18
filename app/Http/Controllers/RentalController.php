@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RentalValidator;
+use App\Http\Requests;
 use App\Rental;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 
 /**
  * Class RentalController
@@ -24,6 +23,8 @@ class RentalController extends Controller
     public function __construct()
     {
         // TODO: Set auth middleware for the backend routes.
+        // TODO: Implement language middleware
+        // TODO: User activity middleware.
     }
 
     /**
@@ -95,9 +96,45 @@ class RentalController extends Controller
     }
 
     /**
-     * [METHOD]: Delete method for the rental method.
+     * [BACK-END]: Update view for the rental module.
      *
      * @url:platform
+     * @see:phpunit
+     *
+     * @param  int $id the rental id in the database.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        return view();
+    }
+
+    /**
+     * [METHOD]: Update the rental in the module.
+     *
+     * @url:platform
+     * @see:phpunit   TODO: write test when validation passes.
+     * @see:phpunit   TODO: write test when validation fails
+     *
+     * @param  RentalValidator $input
+     * @param  int $id the rental id in the database.
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(RentalValidator $input, $id)
+    {
+        $rental = Rental::find($id);
+        $rental->input($input->except('_token'));
+
+        session()->flash('class', 'alert alert-success');
+        session()->flash('message', '');
+
+        return redirect()->back();
+    }
+
+    /**
+     * [METHOD]: Delete method for the rental method.
+     *
+     * @url:platform:  GET|HEAD:
      * @see:phpunit
      *
      * @param  int $id the rental id in the database
