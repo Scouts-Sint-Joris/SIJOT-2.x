@@ -23,7 +23,7 @@ class RentalController extends Controller
     public function __construct()
     {
         // TODO: Set auth middleware for the backend routes.
-        $this->middlware('lang');
+        $this->middleware('lang');
         // TODO: User activity middleware.
     }
 
