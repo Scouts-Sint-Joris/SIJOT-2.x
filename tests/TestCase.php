@@ -10,7 +10,7 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
      *
      * @var string
      */
-    protected $baseUrl = 'http://localhost';
+    protected $baseUrl = 'http://localhost:8000';
 
     /** @var $user the user factory */
     protected $user;

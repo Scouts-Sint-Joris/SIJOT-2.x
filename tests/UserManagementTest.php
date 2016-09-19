@@ -9,11 +9,18 @@ class UserManagementTest extends TestCase
     use DatabaseMigrations, DatabaseTransactions;
 
     /**
-     *
+	 * GET|HEAD:  /backend/users
+	 * ROUTE: users.index 
+	 * 
+	 * @group all 
+	 * @group auth
+	 * @group backend
      */
     public function testOverview()
     {
-
+		$this->authentication();
+		$this->get(route('users.index'));
+		$this->seeStatusCode(200);
     }
 
     /**
@@ -55,7 +62,12 @@ class UserManagementTest extends TestCase
     }
 
     /**
-     *
+	 * GET|HEAD: /backend/users/destroy/1
+	 * ROUTE:    users.destroy
+	 *
+	 * @group all
+	 * @group auth
+	 * @group backend
      */
     public function testDeleteMethod()
     {
@@ -66,9 +78,9 @@ class UserManagementTest extends TestCase
 
         $this->authentication();
         $this->seeInDatabase('users', $routeParam);
-        $this->visit(route('user.destroy', $routeParam));
+        $this->get(route('users.destroy', ['id' => $this->user['id']]));
         $this->dontSeeInDatabase('users', $routeParam);
-        $this->seeStatusCode(200);
+        $this->seeStatusCode(302);
         $this->session($session);
     }
 }

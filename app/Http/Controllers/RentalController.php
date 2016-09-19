@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 
 /**
  * Class RentalController
- * @package App\Http\Controllers
- *
+ * 
+ * @package   App\Http\Controllers
  * @author    Tim Joosten <Topairy@gmail.com>
  * @copyright Tim Joosten 2015 - 2016
  * @version   2.0.0
@@ -39,11 +39,11 @@ class RentalController extends Controller
     public function indexBackEnd($filter)
     {
         if ($filter == 'new') {
-            $data['rentals'] = '';
+            $data['rentals'] = Rental::where()->paginate(15);
         } elseif ($filter = 'bevestigd') {
-            $data['rentals'] = '';
+            $data['rentals'] = Rental::where('', '')->paginate(15);
         } else {
-            $data['rentals'] = '';
+            $data['rentals'] = Rental::paginate(15);
         }
 
         return view('', $data);
@@ -52,7 +52,7 @@ class RentalController extends Controller
     /**
      * [FRONT-END]: Front-end view for the rental Calendar
      *
-     * @url:platform
+     * @url:platform  GET|HEAD:
      * @see:phpunit
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -65,7 +65,7 @@ class RentalController extends Controller
     /**
      * [FRONT-END]: Front-end insert view fcr the rental view.
      *
-     * @url:platform
+     * @url:platform  GET|HEAD: 
      * @see:phpunit
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -98,7 +98,7 @@ class RentalController extends Controller
     /**
      * [BACK-END]: Update view for the rental module.
      *
-     * @url:platform
+     * @url:platform  GET|HEAD:
      * @see:phpunit
      *
      * @param  int $id the rental id in the database.
@@ -106,13 +106,13 @@ class RentalController extends Controller
      */
     public function edit($id)
     {
-        return view();
+	    return view();
     }
 
     /**
      * [METHOD]: Update the rental in the module.
      *
-     * @url:platform
+     * @url:platform 
      * @see:phpunit   TODO: write test when validation passes.
      * @see:phpunit   TODO: write test when validation fails
      *
@@ -134,7 +134,7 @@ class RentalController extends Controller
     /**
      * [METHOD]: Delete method for the rental method.
      *
-     * @url:platform:  GET|HEAD:
+     * @url:platform:  GET|HEAD: /rental/destroy/{id}
      * @see:phpunit
      *
      * @param  int $id the rental id in the database

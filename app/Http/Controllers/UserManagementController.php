@@ -27,14 +27,15 @@ class UserManagementController extends Controller
     /**
      * [BACK-END]: backend user management overview.
      *
-     * @url:platform
+     * @url:platform  GET|HEAD: /backend/users
      * @see:phpunit
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function overview()
     {
-        return view();
+		$data['users'] = User::paginate(15);
+        return view('users.index', $data);
     }
 
     public function create()
@@ -73,9 +74,7 @@ class UserManagementController extends Controller
      */
     public function destroy($id)
     {
-        // TODO: test fails. Fix me later. Because i need to slay some dragons.
-
-        if (User::destroy($id)) {
+		if (User::destroy($id)) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', '');
         }
