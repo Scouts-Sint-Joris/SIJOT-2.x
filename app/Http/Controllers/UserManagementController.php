@@ -73,6 +73,8 @@ class UserManagementController extends Controller
      */
     public function destroy($id)
     {
+        // TODO: test fails. Fix me later. Because i need to slay some dragons.
+
         if (User::destroy($id)) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', '');
