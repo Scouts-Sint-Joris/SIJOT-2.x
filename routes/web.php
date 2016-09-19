@@ -12,4 +12,4 @@
 */
 Auth::routes();
 Route::post('backend/users', 'UserManagementController@store')->name('auth.new');
-
+Route::get('backend/users/destroy/{id}', 'UserManagementController@destroy')->name('user.destroy');

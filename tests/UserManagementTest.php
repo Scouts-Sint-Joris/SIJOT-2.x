@@ -28,7 +28,7 @@ class UserManagementTest extends TestCase
      * POST:  /backend/users
      * ROUTE: auth.new
      *
-     * - with validation erroros
+     * - with validation errors
      *
      * @group all
      * @group auth
@@ -36,15 +36,22 @@ class UserManagementTest extends TestCase
      */
     public function testCreateMethodWithError()
     {
-
+        $this->authentication();
     }
 
     /**
+     * POST:  /backend/users
+     * ROUTE: auth.new
      *
+     * - without validation errors
+     *
+     * @group all
+     * @group auth
+     * @group backend
      */
     public function testCreateMethodWithoutErrors()
     {
-
+        $this->authentication();
     }
 
     /**
@@ -52,6 +59,16 @@ class UserManagementTest extends TestCase
      */
     public function testDeleteMethod()
     {
+        $routeParam = ['id' => $this->user->id];
 
+        $session['class']   = 'alert alert-success';
+        $session['message'] = '';
+
+        $this->authentication();
+        $this->seeInDatabase('users', $routeParam);
+        $this->visit(route('user.destroy', $routeParam));
+        $this->dontSeeInDatabase('users', $routeParam);
+        $this->seeStatusCode(200);
+        $this->session($session);
     }
 }

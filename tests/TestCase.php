@@ -45,7 +45,7 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     protected function authentication()
     {
-        $this->actingAs();
-        $this->seeIsAuthenticatedAs();
+        $this->actingAs($this->user);
+        $this->seeIsAuthenticatedAs($this->user);
     }
 }

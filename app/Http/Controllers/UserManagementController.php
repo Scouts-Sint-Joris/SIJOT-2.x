@@ -39,7 +39,7 @@ class UserManagementController extends Controller
 
     public function create()
     {
-
+        return view();
     }
 
     /**
@@ -65,13 +65,13 @@ class UserManagementController extends Controller
     /**
      * [METHOD]: Delete a user out off the system.
      *
-     * @url:platform
+     * @url:platform  GET|HEAD: /backend/users/destroy/{id}
      * @see:phpunit
      *
      * @param  int $id the login id in the database.
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete($id)
+    public function destroy($id)
     {
         if (User::destroy($id)) {
             session()->flash('class', 'alert alert-success');
