@@ -23,6 +23,30 @@ class RentalTest extends TestCase
     
     }
 
+	/**
+	 * 
+	 */
+	public function testRentalUpdateView() 
+	{
+		//
+	}
+
+	/**
+	 * 
+	 */
+	public function testRentalUpdateWithoutSuccess() 
+	{
+		//
+	}
+
+	/**
+	 * 
+	 */
+	public function testRentalUpdateWithSuccess() 
+	{
+		
+	}
+
     /**
      *
      */

@@ -38,6 +38,11 @@ class UserManagementController extends Controller
         return view('users.index', $data);
     }
 
+    /**
+     * 
+	 * 
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         return view();
@@ -90,6 +95,9 @@ class UserManagementController extends Controller
      */
     public function block($id)
     {
+		session()->flash('class', ''); 
+		session()->flash('message', '');
+
         return redirect()->back();
     }
 
@@ -104,6 +112,9 @@ class UserManagementController extends Controller
      */
     public function unblock($id)
     {
+		session()->flash('class', 'alert alert-success'); 
+		session()->flash('message', ''); 
+
         return redirect()->back();
     }
 }

@@ -23,13 +23,20 @@ class UserManagementTest extends TestCase
 		$this->seeStatusCode(200);
     }
 
-    /**
-     *
-     */
-    public function testCreateView()
-    {
+	/**
+	 * GET|HEAD: 
+	 * 
+	 * @group all 
+	 * @group auth 
+	 * @group backend
+	 */
+	public function testCreateViewBackend() 
+	{
+		$this->authentication(); 
+		$this->get(); 
+		$this->seeStatusCode(200);
+	}
 
-    }
 
     /**
      * POST:  /backend/users
