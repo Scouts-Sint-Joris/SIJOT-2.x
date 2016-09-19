@@ -20,7 +20,7 @@ class UserManagementController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        // TODO: Implement language middleware
+        $this->middleware('lang');
         // TODO: Implement user activity middleware.
     }
 
