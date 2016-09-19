@@ -10,11 +10,6 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
-
-Route::get('/home', 'HomeController@index');
+Route::post('backend/users', 'UserManagementController@store')->name('auth.new');
+Route::get('backend/users/destroy/{id}', 'UserManagementController@destroy')->name('user.destroy');

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class TestCase
+ */
 abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     /**
@@ -9,6 +12,9 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     protected $baseUrl = 'http://localhost';
 
+    /** @var $user the user factory */
+    protected $user;
+
     /**
      * Creates the application.
      *
@@ -17,9 +23,29 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
     public function createApplication()
     {
         $app = require __DIR__.'/../bootstrap/app.php';
-
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
         return $app;
+    }
+
+    /**
+     * Testing facility constructor.
+     */
+    public function setUp()
+    {
+        parent::setUp();
+        $this->user = factory(App\User::class)->create();
+    }
+
+    /**
+     * [STUB]: Authencation users.
+     *
+     * Authenticate the user through the testing facilities.
+     * USAGE: $this->authencation();
+     */
+    protected function authentication()
+    {
+        $this->actingAs($this->user);
+        $this->seeIsAuthenticatedAs($this->user);
     }
 }
