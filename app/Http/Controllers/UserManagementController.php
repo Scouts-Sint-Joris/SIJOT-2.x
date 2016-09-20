@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Mail\NewUser;
+use App\Http\Requests;
 use App\Http\Requests\LoginValidator;
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\User;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * Class UserManagementController
@@ -66,11 +68,16 @@ class UserManagementController extends Controller
      */
     public function store(LoginValidator $input)
     {
-        $password = [ 'password' => bcrypt(str_random(16)) ];
+        $password = ['password' => bcrypt(str_random(16))];
         $newUser  = User::create($input->except('_token'));
-        $setPass  = User::find($newUser->id)->update($password); 
+
+        $findNewUser = User::find($newUser->id);
+        $setPass     = $findNewUser->update($password);
 
         if ($newUser && $setPass) {
+            // TODO: Build up the mail.
+            Mail::to($findNewUser->email)->send(new NewUser($findNewUser));
+
             session()->flash('class', 'alert alert-success');
             session()->flash('message', '');
         }
@@ -105,7 +112,7 @@ class UserManagementController extends Controller
      */
     public function block($id)
     {
-        $user = User::find($id); 
+        $user = User::find($id);
         $user->revokePermissionTo('active');
         $user->givePermssionTo('blocked');
 
@@ -127,8 +134,8 @@ class UserManagementController extends Controller
     public function unblock($id)
     {
         $user = User::find($id);
-        $user->revokePermissionTo('blocked'); 
-        $user->givePermissionTo('active'); 
+        $user->revokePermissionTo('blocked');
+        $user->givePermissionTo('active');
 
 		session()->flash('class', 'alert alert-success');
 		session()->flash('message', '');
