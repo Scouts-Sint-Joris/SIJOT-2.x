@@ -21,6 +21,12 @@ class SettingsController extends Controller
     }
 
     /**
+     * [BACK-END]: Get the update view for the application settings. 
+     * 
+     * @url:platform  GET|HEAD: 
+     * @see:phpunit 
+     * @see:phpunit 
+     * 
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()

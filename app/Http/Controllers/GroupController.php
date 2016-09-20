@@ -8,7 +8,10 @@ use App\Http\Requests\GroupValidator;
 use App\Http\Requests;
 
 /**
- * 
+ * @package   App\Http\Controllers
+ * @author    Tim Joosten <Topairy@gmail.com>
+ * @copyright Tim Joosten 2015 - 2016
+ * @version   2.0.0
  */
 class GroupController extends Controller
 {
@@ -22,31 +25,31 @@ class GroupController extends Controller
 	}
 
 	/**
-	 * [FRONT-END]: Display all the scouting groups. 
-	 * 
-	 * @url:platform  GET|HEAD: 
+	 * [FRONT-END]: Display all the scouting groups.
+	 *
+	 * @url:platform  GET|HEAD:
 	 * @see:phpunit   GroupControllerTest::
-	 * 
+	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function overview()
 	{
         // TODO: Controller needs debugging.
-        
+
         $groups = Groups::all(['selector']);
         // dd($groups);
-        
+
         foreach ($groups as $group) {
             $data[$group->selector] = Groups::getGroup($group->selector)->get();
         }
-        
+
 		return view('', $data);
 	}
 
 	/**
 	 * [FRONT-END]: Get a specific group and display them.
-	 * 
-	 * @url:platform  GET|HEAD: 
+	 *
+	 * @url:platform  GET|HEAD:
 	 * @see:phpunit   GroupControllerTest::
 	 *
 	 * @param  string $param the gorup identifier in the database.
@@ -59,11 +62,11 @@ class GroupController extends Controller
 	}
 
 	/**
-	 * [BACK-END]: Update for a group. 
-	 * 
-	 * @url:platform  GET|HEAD: 
+	 * [BACK-END]: Update for a group.
+	 *
+	 * @url:platform  GET|HEAD:
 	 * @see:phpunit   GroupControllerTest::
-	 * 
+	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit()
@@ -75,7 +78,7 @@ class GroupController extends Controller
 	 * [METHOD]: Update a group description.
 	 *
 	 * @url:platform  PUT|PATCH:
-	 * @see:phpunit   GroupControllerTest:: 
+	 * @see:phpunit   GroupControllerTest::
 	 * @see:phpunit   GroupControllerTest::
 	 *
 	 * @param  GroupValidator $input
@@ -85,7 +88,7 @@ class GroupController extends Controller
 	public function update(GroupValidator $input, $param)
 	{
 		$group = Groups::where('selector', $param);
-		
+
 		if ($group->update($input->except('_token'))) {
 			session()->flash('class', 'alert alert-success');
 			session()->flash('message',  '');

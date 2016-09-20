@@ -10,7 +10,10 @@ use App\User;
 /**
  * Class UserManagementController
  *
- * @package App\Http\Controllers
+ * @package   App\Http\Controllers
+ * @author    Tim Joosten <Topairy@gmail.com>
+ * @copyright Tim Joosten 2015 - 2016
+ * @version   2.0.0
  */
 class UserManagementController extends Controller
 {
@@ -39,8 +42,8 @@ class UserManagementController extends Controller
     }
 
     /**
-     * 
-	 * 
+     *
+	 *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
@@ -95,7 +98,7 @@ class UserManagementController extends Controller
      */
     public function block($id)
     {
-		session()->flash('class', ''); 
+		session()->flash('class', '');
 		session()->flash('message', '');
 
         return redirect()->back();
@@ -112,8 +115,8 @@ class UserManagementController extends Controller
      */
     public function unblock($id)
     {
-		session()->flash('class', 'alert alert-success'); 
-		session()->flash('message', ''); 
+		session()->flash('class', 'alert alert-success');
+		session()->flash('message', '');
 
         return redirect()->back();
     }

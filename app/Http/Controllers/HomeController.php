@@ -5,25 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 /**
- *
+ * @package   App\Http\Controllers
+ * @author    Tim Joosten <Topairy@gmail.com>
+ * @copyright Tim Joosten 2015 - 2016
+ * @version   2.0.0
  */
 class HomeController extends Controller
 {
     /**
-     * HomeController constructor. 
+     * HomeController constructor.
      */
     public function __construct()
     {
 		$this->middleware('lang');
-		$this->middleware('auth', ['only' => ['homeFront']]); 
+		$this->middleware('auth', ['only' => ['homeFront']]);
     }
 
     /**
      * [FRONT-END]: Get the front-end index page.
 	 *
-	 * @url:platform 
-	 * @see:phpunit 
-	 * 
+	 * @url:platform
+	 * @see:phpunit
+	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
     public function homeFront()
@@ -41,6 +44,6 @@ class HomeController extends Controller
      */
     public function homeBackend()
     {
-        return view();
+        return view('');
     }
 }
