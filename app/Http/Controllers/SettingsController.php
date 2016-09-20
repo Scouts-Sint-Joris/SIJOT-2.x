@@ -43,7 +43,6 @@ class SettingsController extends Controller
     }
 
     /**
-     * Summary of updateBackUpSettings
      * @param  BackUpSettingsValidator $input
      * @return \Illuminate\Http\RedirectResponse
      */
