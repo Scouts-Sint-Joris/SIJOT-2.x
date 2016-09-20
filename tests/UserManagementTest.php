@@ -33,7 +33,7 @@ class UserManagementTest extends TestCase
 	public function testCreateViewBackend() 
 	{
 		$this->authentication(); 
-		$this->get(); 
+		$this->get(route('users.create')); 
 		$this->seeStatusCode(200);
 	}
 

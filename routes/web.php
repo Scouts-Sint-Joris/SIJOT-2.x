@@ -11,16 +11,17 @@
 |
 */
 
-// Authencation routes. 
+// Authencation routes.
 
 Auth::routes();
 
-// User management routes. 
-Route::post('backend/users', 'UserManagementController@store')->name('auth.new');
+// User management routes.
+Route::get('backend/users/create', 'UserManagementController@create')->name('users.create');
 Route::get('backend/users', 'UserManagementController@overview')->name('users.index');
 Route::get('backend/users/destroy/{id}', 'UserManagementController@destroy')->name('users.destroy');
+Route::post('backend/users', 'UserManagementController@store')->name('auth.new');
 
 // Group module routes.
 
-// Rental module routes. 
+// Rental module routes.
 Route::get('/rental/destroy/{id}', 'RentalController@destroy')->name('rental.destroy');

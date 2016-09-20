@@ -42,13 +42,16 @@ class UserManagementController extends Controller
     }
 
     /**
+     * [BACK-END] Backend view for creating a new user.
      *
+     * @url:platform  GET|HEAD: backend/users/create
+     * @see:phpunit   UserManagementTest::testCreateViewBackend()
 	 *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        return view();
+        return view('users.create');
     }
 
     /**
