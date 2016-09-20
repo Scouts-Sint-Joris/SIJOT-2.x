@@ -39,6 +39,8 @@ class SettingsController extends Controller
      */
     public function updatePlatformSettings()
     {
+        session()->flash('class', 'alert alert-success'); 
+        session()->flash('message', '');
 		return redirect()->back();
     }
 
