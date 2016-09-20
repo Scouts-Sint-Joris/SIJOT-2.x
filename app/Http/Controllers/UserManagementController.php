@@ -66,7 +66,11 @@ class UserManagementController extends Controller
      */
     public function store(LoginValidator $input)
     {
-        if (User::create($input->except('_token'))) {
+        $password = [ 'password' => bcrypt(str_random(16)) ];
+        $newUser  = User::create($input->except('_token'));
+        $setPass  = User::find($newUser->id)->update($password); 
+
+        if ($newUser && $setPass) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', '');
         }
