@@ -11,8 +11,16 @@
 |
 */
 
-// TODO: Assign the groups factory. 
-// TODO: Assign the rentals factory
+// TODO: Assign the rentals factory.
+
+$factory->define(App\Groups::class, function (Faker\Generator $faker) {
+    return [
+        'selector'    => $faker->name,
+        'sub_heading' => $faker->name, 
+        'heading'     => $faker->name, 
+        'description' => $faker->name
+    ];
+});
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;

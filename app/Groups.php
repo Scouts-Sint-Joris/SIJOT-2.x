@@ -11,7 +11,7 @@ class Groups extends Model
      * 
      * @var array 
      */
-    protected $fillable = ['selector', 'title', 'sub_heading', 'heading', 'description'];
+    protected $fillable = ['selector', 'sub_heading', 'heading', 'description'];
     
     /**
      * Hidden fields 
