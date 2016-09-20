@@ -4,11 +4,12 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    // Notifiable = Trait for using the notification module. 
-    use Notifiable;
+    // Notifiable = Trait for using the notification module.
+    use Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.

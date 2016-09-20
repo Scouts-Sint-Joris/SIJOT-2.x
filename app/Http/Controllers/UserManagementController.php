@@ -101,6 +101,10 @@ class UserManagementController extends Controller
      */
     public function block($id)
     {
+        $user = User::find($id); 
+        $user->revokePermissionTo('active');
+        $user->givePermssionTo('blocked');
+
 		session()->flash('class', '');
 		session()->flash('message', '');
 
@@ -118,6 +122,10 @@ class UserManagementController extends Controller
      */
     public function unblock($id)
     {
+        $user = User::find($id);
+        $user->revokePermissionTo('blocked'); 
+        $user->givePermissionTo('active'); 
+
 		session()->flash('class', 'alert alert-success');
 		session()->flash('message', '');
 

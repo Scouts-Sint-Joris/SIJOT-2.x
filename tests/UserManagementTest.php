@@ -10,9 +10,9 @@ class UserManagementTest extends TestCase
 
     /**
 	 * GET|HEAD:  /backend/users
-	 * ROUTE: users.index 
-	 * 
-	 * @group all 
+	 * ROUTE: users.index
+	 *
+	 * @group all
 	 * @group auth
 	 * @group backend
      */
@@ -24,16 +24,16 @@ class UserManagementTest extends TestCase
     }
 
 	/**
-	 * GET|HEAD: 
-	 * 
-	 * @group all 
-	 * @group auth 
+	 * GET|HEAD:
+	 *
+	 * @group all
+	 * @group auth
 	 * @group backend
 	 */
-	public function testCreateViewBackend() 
+	public function testCreateViewBackend()
 	{
-		$this->authentication(); 
-		$this->get(route('users.create')); 
+		$this->authentication();
+		$this->get(route('users.create'));
 		$this->seeStatusCode(200);
 	}
 
@@ -51,8 +51,8 @@ class UserManagementTest extends TestCase
     public function testCreateMethodWithError()
     {
         $this->authentication();
-        $this->post(route('auth.new'), []); 
-        $this->assertHasOldInput(); 
+        $this->post(route('auth.new'), []);
+        $this->assertHasOldInput();
         $this->assertSessionHasErrors();
         $this->seeStatusCode(302);
     }
@@ -69,7 +69,22 @@ class UserManagementTest extends TestCase
      */
     public function testCreateMethodWithoutErrors()
     {
+        // Test fails:
+        // ---
+        // Integrity constraint violation: 19 NOT NULL constraint failed: users.password
+
+        $session['class']   = 'alert alert-success';
+        $session['message'] = '';
+
+        $input['name']  = 'Test user';
+        $input['email'] = 'Test@example.be';
+
         $this->authentication();
+        $this->dontSeeInDatabase('users', $input);
+        $this->post(route('auth.new'), $input);
+        $this->seeInDatabase('users', $input);
+        $this->seeStatusCode(200);
+        $this->session($session);
     }
 
     /**
