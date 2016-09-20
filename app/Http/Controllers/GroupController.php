@@ -58,7 +58,7 @@ class GroupController extends Controller
 	public function specific($string)
 	{
 		$data['data'] = '';
-		return view('', $data);
+		return view('groups.show', $data);
 	}
 
 	/**

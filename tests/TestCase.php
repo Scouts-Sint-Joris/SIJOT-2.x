@@ -2,6 +2,8 @@
 
 /**
  * Class TestCase
+ * 
+ * TODO: Implement mailing stub.
  */
 abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 {

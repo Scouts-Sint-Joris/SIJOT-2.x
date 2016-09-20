@@ -78,7 +78,7 @@ class UserManagementController extends Controller
      * [METHOD]: Delete a user out off the system.
      *
      * @url:platform  GET|HEAD: /backend/users/destroy/{id}
-     * @see:phpunit
+     * @see:phpunit   UserManagementTest::testDeleteMethod()
      *
      * @param  int $id the login id in the database.
      * @return \Illuminate\Http\RedirectResponse
