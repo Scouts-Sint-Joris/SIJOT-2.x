@@ -58,8 +58,8 @@ class UserManagementController extends Controller
      * [METHOD]: Insert a new login into the database.
      *
      * @url:platform  POST: /backend/users
-     * @see:phpunit
-     * @see:phpunit
+     * @see:phpunit   UserManagementTest::testCreateMethodWithoutErrors()
+     * @see:phpunit   UserManagementTest::testCreateMethodWithError()
      *
      * @param LoginValidator $input
      * @return \Illuminate\Http\RedirectResponse

@@ -51,6 +51,10 @@ class UserManagementTest extends TestCase
     public function testCreateMethodWithError()
     {
         $this->authentication();
+        $this->post(route('auth.new'), []); 
+        $this->assertHasOldInput(); 
+        $this->assertSessionHasErrors();
+        $this->seeStatusCode(302);
     }
 
     /**
