@@ -27,5 +27,8 @@
     "vue-resource": "^0.9.3",
     "vue-style-loader": "^1.0.0",
     "webpack": "^1.13.2"
+  },
+  "dependencies": {
+    "admin-lte": "^2.3.6"
   }
 }

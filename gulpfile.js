@@ -13,7 +13,27 @@ require('laravel-elixir-vue');
  |
  */
 
+var adminLTE = '../../../node_modules/admin-lte/build/less/';
+var assetCss = './public/assets/css';
+
 elixir(mix => {
     mix.sass('app.scss')
-       .webpack('app.js');
+        // adminLTE
+        .less(adminLTE +'AdminLTE.less', assetCss)
+        .less(adminLTE + 'skins/_all-skins.less', assetCss)
+        .less(adminLTE + 'skins/skin-black-light.less', assetCss)
+        .less(adminLTE + 'skins/skin-black.less', assetCss)
+        .less(adminLTE + 'skins/skin-blue-light.less', assetCss)
+        .less(adminLTE + 'skins/skin-blue.less', assetCss)
+        .less(adminLTE + 'skins/skin-green-light.less', assetCss)
+        .less(adminLTE + 'skins/skin-green.less', assetCss)
+        .less(adminLTE + 'skins/skin-purple-light.less', assetCss)
+        .less(adminLTE + 'skins/skin-purple.less', assetCss)
+        .less(adminLTE + 'skins/skin-red-light.less', assetCss)
+        .less(adminLTE + 'skins/skin-red.less', assetCss)
+        .less(adminLTE + 'skins/skin-yellow-light.less', assetCss)
+        .less(adminLTE + 'skins/skin-yellow.less', assetCss)
+
+        // Application javascript
+        .webpack('app.js');
 });
