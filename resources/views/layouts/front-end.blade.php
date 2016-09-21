@@ -10,13 +10,13 @@
         <title> Scouts en Gidsen Sint-Joris Turnhout </title> 
         
         <link rel="icon" href="{{ asset('favicon.ico') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/app.css')}}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="{{ asset('css/app.css')}}">
         
         {{-- IE10 vieuwport hack for Surface/Desktop Windows 8 bug --}}
         <link rel="stylesheet" href="{{ asset('assets/css/ie-10-viewport-bug-workaround.css') }}">
     </head>
-    <body class="background">
+    <body class="background front-end">
         {{-- Navigation bar --}}
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
@@ -84,7 +84,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         @if (Auth::check())
                             <li><a href="">Backend</a></li>
-                            <li><a href="{{ route('/logout') }}">Uitloggen</a></li>
+                            <li><a href="">Uitloggen</a></li>
                         @else 
                             <li><a href="{{ route('/login') }}">Login</a></li>
                         @endif

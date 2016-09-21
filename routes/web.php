@@ -15,6 +15,11 @@
 
 Auth::routes();
 
+
+Route::get('/test', function () {
+    return view('welcome');
+});
+
 // User management routes.
 Route::get('backend/users/create', 'UserManagementController@create')->name('users.create');
 Route::get('backend/users', 'UserManagementController@overview')->name('users.index');
