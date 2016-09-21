@@ -112,6 +112,12 @@
                             <span>Login beheer</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="">
+                            <i class="fa fa-cogs"></i>
+                            <span>Website instellingen</span>
+                        </a>
+                    </li>
                 </ul>
             </section>
             {{-- /.sidebar --}}
