@@ -107,13 +107,19 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="#">
+                            <i class="fa fa-leaf"></i>
+                            <span>Takken</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('users.index') }}">
                             <i class="fa fa-group"></i>
                             <span>Login beheer</span>
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="{{ route('settings.index') }}">
                             <i class="fa fa-cogs"></i>
                             <span>Website instellingen</span>
                         </a>

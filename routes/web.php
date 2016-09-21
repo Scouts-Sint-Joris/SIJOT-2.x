@@ -21,6 +21,8 @@ Route::get('backend/users', 'UserManagementController@overview')->name('users.in
 Route::get('backend/users/destroy/{id}', 'UserManagementController@destroy')->name('users.destroy');
 Route::post('backend/users', 'UserManagementController@store')->name('auth.new');
 
+Route::get('settings', 'SettingsController@index')->name('settings.index');
+
 // Group module routes.
 
 // Rental module routes.
