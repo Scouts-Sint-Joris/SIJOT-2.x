@@ -36,10 +36,12 @@ elixir(mix => {
         .less(adminLTE + 'build/less/skins/skin-yellow.less', assetCss)
 
         // adminLTE iCheck
+        .copy('./node_modules/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js', assetJs + '/jquery.slimscroll.min.js')
+        .copy('./node_modules/admin-lte/plugins/fastclick/fastclick.js', assetJs + '/fastclick.js')
         .copy('./node_modules/admin-lte/plugins/iCheck/square/blue.css', assetCss + '/icheck-blue.css')
         .copy('./node_modules/admin-lte/plugins/iCheck/square/blue.png', assetCss + '/blue.png')
         .scripts(adminLTE + 'plugins/iCheck/icheck.min.js', assetJs + '/icheck.min.js')
-
-        // Application javascript
+        
+        // custom css
         .webpack('app.js');
 });
