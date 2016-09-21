@@ -13,26 +13,32 @@ require('laravel-elixir-vue');
  |
  */
 
-var adminLTE = '../../../node_modules/admin-lte/build/less/';
+var adminLTE = '../../../node_modules/admin-lte/';
 var assetCss = './public/assets/css';
+var assetJs  = './public/assets/js';
 
 elixir(mix => {
     mix.sass('app.scss')
-        // adminLTE
-        .less(adminLTE +'AdminLTE.less', assetCss)
-        .less(adminLTE + 'skins/_all-skins.less', assetCss)
-        .less(adminLTE + 'skins/skin-black-light.less', assetCss)
-        .less(adminLTE + 'skins/skin-black.less', assetCss)
-        .less(adminLTE + 'skins/skin-blue-light.less', assetCss)
-        .less(adminLTE + 'skins/skin-blue.less', assetCss)
-        .less(adminLTE + 'skins/skin-green-light.less', assetCss)
-        .less(adminLTE + 'skins/skin-green.less', assetCss)
-        .less(adminLTE + 'skins/skin-purple-light.less', assetCss)
-        .less(adminLTE + 'skins/skin-purple.less', assetCss)
-        .less(adminLTE + 'skins/skin-red-light.less', assetCss)
-        .less(adminLTE + 'skins/skin-red.less', assetCss)
-        .less(adminLTE + 'skins/skin-yellow-light.less', assetCss)
-        .less(adminLTE + 'skins/skin-yellow.less', assetCss)
+        // adminLTE css + themes. 
+        .less(adminLTE + 'build/less/AdminLTE.less', assetCss)
+        .less(adminLTE + 'build/less/skins/_all-skins.less', assetCss)
+        .less(adminLTE + 'build/less/skins/skin-black-light.less', assetCss)
+        .less(adminLTE + 'build/less/skins/skin-black.less', assetCss)
+        .less(adminLTE + 'build/less/skins/skin-blue-light.less', assetCss)
+        .less(adminLTE + 'build/less/skins/skin-blue.less', assetCss)
+        .less(adminLTE + 'build/less/skins/skin-green-light.less', assetCss)
+        .less(adminLTE + 'build/less/skins/skin-green.less', assetCss)
+        .less(adminLTE + 'build/less/skins/skin-purple-light.less', assetCss)
+        .less(adminLTE + 'build/less/skins/skin-purple.less', assetCss)
+        .less(adminLTE + 'build/less/skins/skin-red-light.less', assetCss)
+        .less(adminLTE + 'build/less/skins/skin-red.less', assetCss)
+        .less(adminLTE + 'build/less/skins/skin-yellow-light.less', assetCss)
+        .less(adminLTE + 'build/less/skins/skin-yellow.less', assetCss)
+
+        // adminLTE iCheck
+        .copy('./node_modules/admin-lte/plugins/iCheck/square/blue.css', assetCss + '/icheck-blue.css')
+        .copy('./node_modules/admin-lte/plugins/iCheck/square/blue.png', assetCss + '/blue.png')
+        .scripts(adminLTE + 'plugins/iCheck/icheck.min.js', assetJs + '/icheck.min.js')
 
         // Application javascript
         .webpack('app.js');
