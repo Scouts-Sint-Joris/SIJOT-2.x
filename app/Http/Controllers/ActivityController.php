@@ -38,8 +38,8 @@ class ActivityController extends Controller
      * [METHOD]: Store a new activity in the database.
      *
      * @url:platform  POST:
-     * @see:phpunit   ActivityControllerTest::
-     * @see:phpunit   ActivityControllerTest::
+     * @see:phpunit   ActivityControllerTest::testInsertWithError()
+     * @see:phpunit   ActivityControllerTest::testInsertWithOutError()
      *
      * @param  Requests\ActivityValidator $input
      * @return \Illuminate\Http\RedirectResponse

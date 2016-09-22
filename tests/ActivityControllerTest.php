@@ -15,15 +15,25 @@ class ActivityControllerTest extends TestCase
      */
     public function testOverview()
     {
-
+        
     }
 
     /**
      * @group all 
-     * @group activity
+     * @group activity 
      * @group back-end
      */
-    public function testEditView() 
+    public function testInsertWithOutError() 
+    {
+                
+    }
+
+    /**
+     * @group all 
+     * @group activity 
+     * @group back-end
+     */
+    public function testInsertWithError() 
     {
         
     }
