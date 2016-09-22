@@ -10,6 +10,7 @@
         <title> Scouts en Gidsen Sint-Joris Turnhout </title> 
         
         <link rel="icon" href="{{ asset('favicon.ico') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
         <link rel="stylesheet" href="{{ asset('css/app.css')}}">
         
@@ -86,7 +87,7 @@
                             <li><a href="">Backend</a></li>
                             <li><a href="">Uitloggen</a></li>
                         @else 
-                            <li><a href="{{ route('/login') }}">Login</a></li>
+                            <li><a href="">Login</a></li>
                         @endif
                     </ul>
                 </div>

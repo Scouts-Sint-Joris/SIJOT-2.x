@@ -52,12 +52,13 @@ class GroupController extends Controller
 	 * @url:platform  GET|HEAD:
 	 * @see:phpunit   GroupControllerTest::
 	 *
-	 * @param  string $param the gorup identifier in the database.
+	 * @param  string $param the group identifier in the database.
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function specific($string)
 	{
-		$data['data'] = '';
+		$data['group']    = Groups::getGroup('selector', $string)->get();
+        $data['activity'] = ''; 
 		return view('groups.show', $data);
 	}
 
