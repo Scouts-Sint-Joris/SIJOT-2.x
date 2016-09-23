@@ -35,13 +35,29 @@
 
         {{-- Published activities --}}
         <div class="tab-pane active" id="tab_1">
-            
+            @if(count($published) == 0)
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="alert alert-info alert-dismissible">
+                            
+                            <h4>
+                                <i class="icon fa fa-info-circle"></i> 
+                                Oh snapp!
+                            </h4>
+
+                            Er zijn geen gepubliceerde activiteiten gevonden in het systeem. 
+                            Je kunt er een creeren of dit gewoon laten. Aan jouw de keuze.
+                        </div>
+                    </div>
+                </div>
+            @else 
+            @endif
         </div>
         {{-- /.tab-pane --}}
 
         {{-- Draft activities --}}
         <div class="tab-pane" id="tab_2">
-            
+            {{-- TODO: create if else and data overview. --}}
         </div>
         {{-- /.tab-pane --}}
         

@@ -29,8 +29,12 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        $data['drafts']    = 0;
-        $data['published'] = 0;
+        // Activity states. 
+        // 0 = draft 
+        // 1 = publish
+
+        $data['drafts']    = Activity::where('state', 0)->orderBy('date', 'ASC')->paginate(25);
+        $data['published'] = Activity::where('state', 1)->orderBy('date', 'ASC')->paginate(25);
         $data['groups']    = Groups::all();
 
         return view('activity.index', $data);
