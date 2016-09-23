@@ -31,7 +31,7 @@ class GroupsTableSeeder extends Seeder
                 'heading'  => 'De Jong-Givers'
             ], [
                 'selector' => 'givers',
-                'title'    => 'De Givers'
+                'heading'  => 'De Givers'
             ], [
                 'selector' => 'jins',
                 'heading'  => 'De Jins'

@@ -130,6 +130,17 @@
                         </div>
                     </div>
 
+                    {{-- Activity name form-group --}}
+                    <div class="form-group">
+                        <label id="name" class="control-label col-sm-1">
+                            Naam: <span class="text-danger">*</span>
+                        </label>
+
+                        <div class="col-sm-2">
+                            <input type="text" placeholder="Activiteit naam" name="heading" class="form-control">
+                        </div>
+                    </div>
+
                     {{-- Activity description form-group --}}
                     <div class="form-group">
                         <label class="control-label col-sm-1" id="description">

@@ -18,7 +18,7 @@ class Activity extends Model
      *
      * @var array 
      */ 
-    protected $fillable = ['start_time', 'end_time', 'date', 'title', 'description'];
+    protected $fillable = ['start_time', 'end_time', 'date', 'title', 'state', 'heading', 'description'];
     
     /**
      * Get the affected groups for this activity. 
