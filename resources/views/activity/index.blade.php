@@ -99,6 +99,21 @@
                         </div>
                     </div>
 
+                    {{-- State form-group --}}
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">
+                             Status: <span class="text-danger">*</span> 
+                        </label>
+
+                        <div class="col-sm-1">
+                            <input type="radio" name="state" /> Publiceer.
+                        </div>
+
+                        <div class="col-sm-1">
+                            <input type="radio" name="state" /> Klad activiteit
+                        </div>
+                    </div>
+
                     {{-- Activity description form-group --}}
                     <div class="form-group">
                         <label class="control-label col-sm-1" id="description">
@@ -107,11 +122,12 @@
 
                         <div class="col-md-4">
                             <textarea class="form-control" name="" rows="7" placeholder="Activiteit beschrijving" id="description" type="test"></textarea>
+
+                            <span class="help-block">
+                                <i>( Bechrijvings veld is <a target="_blank" href="https://guides.github.com/features/mastering-markdown/">Markdown</a> gevoelig).</i>
+                            </span>
                         </div>
                     </div>
-
-                    {{-- State form-group --}}
-
 
                     {{-- SUBMIT & RESET form group --}}
                     <div class="form-group">
