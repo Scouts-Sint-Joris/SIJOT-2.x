@@ -124,7 +124,7 @@
                             <textarea class="form-control" name="" rows="7" placeholder="Activiteit beschrijving" id="description" type="test"></textarea>
 
                             <span class="help-block">
-                                <i>( Bechrijvings veld is <a target="_blank" href="https://guides.github.com/features/mastering-markdown/">Markdown</a> gevoelig).</i>
+                                <i>(Beschrijvings veld is <a target="_blank" href="https://guides.github.com/features/mastering-markdown/">Markdown</a> gevoelig).</i>
                             </span>
                         </div>
                     </div>
