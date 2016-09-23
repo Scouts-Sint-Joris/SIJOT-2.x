@@ -110,6 +110,9 @@
                         </div>
                     </div>
 
+                    {{-- State form-group --}}
+
+
                     {{-- SUBMIT & RESET form group --}}
                     <div class="form-group">
                         <div class="col-sm-offset-1 col-sm-3">
