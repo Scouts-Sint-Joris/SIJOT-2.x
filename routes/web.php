@@ -15,20 +15,17 @@
 
 Auth::routes();
 
-
-Route::get('/test', function () {
-    return view('welcome');
-});
-
 // User management routes.
 Route::get('backend/users/create', 'UserManagementController@create')->name('users.create');
 Route::get('backend/users', 'UserManagementController@overview')->name('users.index');
 Route::get('backend/users/destroy/{id}', 'UserManagementController@destroy')->name('users.destroy');
 Route::post('backend/users', 'UserManagementController@store')->name('auth.new');
 
+// Settings routes. 
 Route::get('settings', 'SettingsController@index')->name('settings.index');
 
-// Group module routes.
+// Activity routes 
+Route::get('backend/activity', 'ActivityController@index')->name('activity.index');
 
 // Rental module routes.
 Route::get('/rental/destroy/{id}', 'RentalController@destroy')->name('rental.destroy');

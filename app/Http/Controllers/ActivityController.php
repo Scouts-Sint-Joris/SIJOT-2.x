@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Groups;
 use App\Activity;
 use App\Http\Requests;
 use App\Http\Requests\ActivityValidator;
@@ -28,10 +29,11 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        $data['drafts']    = '';
-        $data['published'] = '';
+        $data['drafts']    = 0;
+        $data['published'] = 0;
+        $data['groups']    = Groups::all();
 
-        return view('', $data);
+        return view('activity.index', $data);
     }
 
     /**
@@ -85,6 +87,9 @@ class ActivityController extends Controller
      */
     public function update(ActivityValidator $input, $id)
     {
+        $activity = Activity::find($id); 
+
+
         return redirect()->back();
     }
 

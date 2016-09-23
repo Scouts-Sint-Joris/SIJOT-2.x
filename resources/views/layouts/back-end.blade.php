@@ -113,9 +113,15 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('users.index') }}">
+                        <a href="{{route('users.index') }}">
                             <i class="fa fa-group"></i>
                             <span>Login beheer</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('activity.index') }}">
+                            <i class="fa fa-file-text-o"></i>
+                            <span>Activiteiten</span>
                         </a>
                     </li>
                     <li>
@@ -151,7 +157,7 @@
 
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
-                <b>Version</b> 2.3.6
+                <b>Version</b> 1.0.0-alpha
             </div>
             <strong>Copyright &copy; 2014-{{ date('Y')}} </strong>Tim Joosten.  Alle rechten voorbehouden.
         </footer>
