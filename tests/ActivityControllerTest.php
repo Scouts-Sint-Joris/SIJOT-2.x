@@ -59,13 +59,24 @@ class ActivityControllerTest extends TestCase
     }
 
     /**
+     * PUT|PATCH: /backend/activity/update/{id}
+     * ROUTE:     activity.update
+     *
+     * - Update method with validation errors.
+     *
      * @group all
      * @group activity
      * @group back-end
      */
     public function testUpdateError()
     {
+        $activity = factory(App\Activity::class)->create();
 
+        $this->authentication();
+        $this->post(route('activity.update', ['id' => $activity->id]));
+        $this->seeStatusCode(302);
+        $this->assertSessionHasErrors();
+        $this->assertHasOldInput();
     }
 
     /**

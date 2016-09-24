@@ -112,7 +112,7 @@ class ActivityController extends Controller
     /**
      * [METHOD]: Update a activity in the database.
      *
-     * @url::platform  PUT|PATCH:
+     * @url::platform  PUT|PATCH: /backend/activity/update/{id}
      * @see:phpunit    ActivityControllerTest::testUpdateWithError()
      * @see:phpunit    ActivityControllerTest::testUpdateWithOutError()
      *

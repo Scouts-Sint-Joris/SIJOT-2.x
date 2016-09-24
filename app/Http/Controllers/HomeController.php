@@ -44,6 +44,6 @@ class HomeController extends Controller
      */
     public function homeBackend()
     {
-        return view('');
+        return view('backend');
     }
 }

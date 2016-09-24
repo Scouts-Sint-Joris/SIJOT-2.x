@@ -16,6 +16,7 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@homeFront')->name('home');
+Route::get('/home', 'Homecontroller@homeBackend')->name('home.backend'); 
 
 // User management routes.
 Route::get('backend/users/create', 'UserManagementController@create')->name('users.create');
@@ -23,11 +24,12 @@ Route::get('backend/users', 'UserManagementController@overview')->name('users.in
 Route::get('backend/users/destroy/{id}', 'UserManagementController@destroy')->name('users.destroy');
 Route::post('backend/users', 'UserManagementController@store')->name('auth.new');
 
-// Settings routes. 
+// Settings routes.
 Route::get('settings', 'SettingsController@index')->name('settings.index');
 
-// Activity routes 
+// Activity routes
 Route::get('backend/activity', 'ActivityController@index')->name('activity.index');
+Route::post('backend/activity/update/{id}', 'ActivityController@update')->name('activity.update');
 Route::get('backend/activity/destroy/{id}', 'ActivityController@destroy')->name('activity.destroy');
 Route::post('backend/activity', 'ActivityController@store')->name('activity.store');
 
