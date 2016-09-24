@@ -18,7 +18,7 @@ class HomeController extends Controller
     public function __construct()
     {
 		$this->middleware('lang');
-		$this->middleware('auth', ['only' => ['homeFront']]);
+		$this->middleware('auth', ['only' => ['homeBackend']]);
     }
 
     /**
@@ -31,7 +31,7 @@ class HomeController extends Controller
 	 */
     public function homeFront()
     {
-        return view('');
+        return view('welcome');
     }
 
     /**

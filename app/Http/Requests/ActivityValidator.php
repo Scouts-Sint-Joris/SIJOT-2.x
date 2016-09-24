@@ -24,7 +24,13 @@ class ActivityValidator extends FormRequest
     public function rules()
     {
         return [
-            //
+            'state'       => 'required',
+            'group'       => 'required', 
+            'date'        => 'required',
+            'start_time'  => 'required', 
+            'end_time'    => 'required', 
+            'description' => 'required',
+            'heading'     => 'required',
         ];
     }
 }

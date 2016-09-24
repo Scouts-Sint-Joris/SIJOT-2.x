@@ -11,31 +11,56 @@ use Illuminate\Http\Request;
 class ActivityController extends Controller
 {
     /**
+     * Inputs not included in the mass-assigns.
+     *
+     * @var array
+     */
+    protected $inputFilter;
+
+    /**
+     * MySQL database relations array. 
+     * 
+     * @var array  
+     */
+    protected $dbRelations; 
+
+    /**
      * ActivityController constructor
      */
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('lang');
+        $this->inputFilter = ['_token', 'group'];   // Fill in the filter array for the inputs.
+        $this->dbRelations = ['groups', 'creator']; // The MySQL database relations.    
+
+        $this->middleware('auth'); // See if the user is logged in.
+        $this->middleware('lang'); // Determine the language and get the correct trans. files.
     }
 
     /**
      * [BACK-END]: Get the activity overview.
      *
-     * @url:platform  GET|HEAD:
+     * @url:platform  GET|HEAD: /backend/activity
      * @see:phpunit   ActivityControllerTest::testOverview()
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        // Activity states. 
-        // 0 = draft 
+        // Activity states.
+        // 0 = draft
         // 1 = publish
 
-        $data['drafts']    = Activity::where('state', 0)->orderBy('date', 'ASC')->paginate(25);
-        $data['published'] = Activity::where('state', 1)->orderBy('date', 'ASC')->paginate(25);
-        $data['groups']    = Groups::all();
+        $data['drafts'] = Activity::with($this->dbRelations)
+            ->where('state', 0)
+            ->orderBy('date', 'ASC')
+            ->paginate(25);
+
+        $data['published'] = Activity::with($this->dbRelations)
+            ->where('state', 1)
+            ->orderBy('date', 'ASC')
+            ->paginate(25);
+
+        $data['groups'] = Groups::all();
 
         return view('activity.index', $data);
     }
@@ -43,7 +68,7 @@ class ActivityController extends Controller
     /**
      * [METHOD]: Store a new activity in the database.
      *
-     * @url:platform  POST:
+     * @url:platform  POST: /backend/activity
      * @see:phpunit   ActivityControllerTest::testInsertWithError()
      * @see:phpunit   ActivityControllerTest::testInsertWithOutError()
      *
@@ -52,7 +77,13 @@ class ActivityController extends Controller
      */
     public function store(ActivityValidator $input)
     {
-        $create = Activity::create($input->except(['_token', 'state']));
+        // For DEBUGGING propose.
+        // dd($input->all());
+
+        $inputs = array_merge(['user_id' => auth()->user()->id], $input->except($this->inputFilter));
+        $create = Activity::create($inputs);
+
+        Activity::find($create->id)->groups()->attach($input->group);
 
         if ($create) {
             session()->flash('class', 'alert alert-success');
@@ -91,8 +122,14 @@ class ActivityController extends Controller
      */
     public function update(ActivityValidator $input, $id)
     {
-        $activity = Activity::find($id); 
+        $activity = Activity::find($id);
+        $inputs = array_merge(['user_id' => auth()->user()->id], $input->except($this->inputFilter));
+        $update   = $activity->update($inputs);
 
+        if ($update) {
+            session()->flash('alert alert-success');
+            session()->flash('message', '');
+        }
 
         return redirect()->back();
     }

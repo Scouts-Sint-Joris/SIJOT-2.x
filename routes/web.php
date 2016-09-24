@@ -15,6 +15,8 @@
 
 Auth::routes();
 
+Route::get('/', 'HomeController@homeFront')->name('home');
+
 // User management routes.
 Route::get('backend/users/create', 'UserManagementController@create')->name('users.create');
 Route::get('backend/users', 'UserManagementController@overview')->name('users.index');
@@ -26,6 +28,8 @@ Route::get('settings', 'SettingsController@index')->name('settings.index');
 
 // Activity routes 
 Route::get('backend/activity', 'ActivityController@index')->name('activity.index');
+Route::get('backend/activity/destroy/{id}', 'ActivityController@destroy')->name('activity.destroy');
+Route::post('backend/activity', 'ActivityController@store')->name('activity.store');
 
 // Rental module routes.
 Route::get('/rental/destroy/{id}', 'RentalController@destroy')->name('rental.destroy');

@@ -28,7 +28,7 @@ class RentalTest extends TestCase
 	 */
 	public function testRentalUpdateView() 
 	{
-		//
+       //
 	}
 
 	/**

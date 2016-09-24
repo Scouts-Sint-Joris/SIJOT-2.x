@@ -15,13 +15,20 @@ class CreateActivitiesTable extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->nullable();
             $table->integer('state')->nullable();
-            $table->string('title')->nullable(); 
             $table->string('heading')->nullable();
-            $table->text('description')->nullable(); 
+            $table->text('description')->nullable();
             $table->string('date')->nullable();
-            $table->string('start_time')->nullable(); 
-            $table->string('end_time')->nullable();
+            $table->integer('start_time')->nullable();
+            $table->integer('end_time')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('activity_groups', function (Blueprint $table) {
+            $table->increments('id'); 
+            $table->integer('groups_id');
+            $table->integer('activity_id');
             $table->timestamps();
         });
     }
@@ -33,6 +40,7 @@ class CreateActivitiesTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('activity_groups');
         Schema::dropIfExists('activities');
     }
 }
