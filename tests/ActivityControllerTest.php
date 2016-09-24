@@ -38,7 +38,17 @@ class ActivityControllerTest extends TestCase
      */
     public function testInsertWithOutError()
     {
+        // Route 
+        $route = route('activity.store'); 
 
+        // Input 
+
+        // Session 
+
+        // Testing logic.
+        $this->authentication();
+        $this->post($route, $input);
+        $this->seeStatusCode(302);  
     }
 
     /**

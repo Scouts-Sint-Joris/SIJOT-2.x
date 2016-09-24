@@ -39,8 +39,10 @@ class RentalController extends Controller
     public function indexBackEnd($filter)
     {
         if ($filter == 'new') {
-            $data['rentals'] = Rental::where()->paginate(15);
-        } elseif ($filter = 'bevestigd') {
+            $data['rentals'] = Rental::where('', '')->paginate(15);
+        } elseif ($filter == 'bevestigd') {
+            $data['rentals'] = Rental::where('', '')->paginate(15);
+        } elseif($filter == 'optie') {
             $data['rentals'] = Rental::where('', '')->paginate(15);
         } else {
             $data['rentals'] = Rental::paginate(15);

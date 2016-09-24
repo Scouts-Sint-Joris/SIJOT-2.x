@@ -147,7 +147,7 @@
                                 tot {{ date('H:i', strtotime($draft->end_time)) }}
                             </td>
                             <td>{{ $draft->heading }}</td>
-                            <td>{{    $draft->creator->name }}</td>
+                            <td>{{ $draft->creator->name }}</td>
 
                             {{-- Functions --}}
                             <td>

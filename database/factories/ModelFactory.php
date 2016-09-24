@@ -12,8 +12,16 @@ use Carbon\Carbon;
 | database. Just tell the factory how a default model should look.
 |
 */
+$factory->define(App\Rental::class, function (Faker\Generator $faker) {
+    return [
+        'start_date'   => $faker->word, 
+        'end_date'     => $faker->word, 
+        'group'        => $faker->name,
+        'phone_number' => $faker->phoneNumber, 
+        'email'        => $faker->email
+    ];
 
-// TODO: Assign the rentals factory.
+});
 
 $factory->define(App\Activity::class, function (Faker\Generator $faker) {
     // $faker->unixTime($max = 'now')                 -> (timestamp) 58781813
