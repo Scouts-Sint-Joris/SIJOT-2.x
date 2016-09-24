@@ -87,7 +87,7 @@
                                 {{-- Functions --}}
                                 <td>
                                     <a href="" class="label label-success">Bekijk</a>
-                                    <a href="" class="label label-danger">Verwijder</a>
+                                    <a href="{{ route('activity.destroy', ['id' => $pub->id]) }}" class="label label-danger">Verwijder</a>
                                 </td>
                                 {{-- /Functions --}}
                             </tr>
@@ -147,12 +147,12 @@
                                 tot {{ date('H:i', strtotime($draft->end_time)) }}
                             </td>
                             <td>{{ $draft->heading }}</td>
-                            <td>{{ $draft->creator->name }}</td>
+                            <td>{{    $draft->creator->name }}</td>
 
                             {{-- Functions --}}
                             <td>
                                 <a href="" class="label label-success">Bekijk</a>
-                                <a href="" class="label label-danger">Verwijder</a>
+                                <a href="{{ route('activity.destroy', ['id' => $draft->id]) }}" class="label label-danger">Verwijder</a>
                             </td>
                             {{-- /Functions --}}
                         </tr>
