@@ -29,7 +29,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     
-                    <a class="navbar-brand" href="#">Project name</a>
+                    <a class="navbar-brand font-heading" href="#">Sint-Joris</a>
                 </div>
                 
                 <div id="navbar" class="collapse navbar-collapse">

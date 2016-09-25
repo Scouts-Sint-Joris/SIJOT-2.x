@@ -1,6 +1,7 @@
 @import "variables";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url(http://fonts.googleapis.com/css?family=Allan:700);
+// @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 
 .background {
      background: #bdd732 url('http://st-joris-turnhout.be/assets/img/background.png') no-repeat fixed 75px;
@@ -8,6 +9,11 @@
 
 .front-end {
     margin-top: 75px;
+}
+
+.font-heading {
+    font-family: Allan, helvetica, arial, sans-serif;
+  font-size: 22px;
 }
 
 // Footer 
