@@ -15,8 +15,12 @@
 
 Auth::routes();
 
+// Home routes.
 Route::get('/', 'HomeController@homeFront')->name('home');
-Route::get('/home', 'Homecontroller@homeBackend')->name('home.backend'); 
+Route::get('/home', 'Homecontroller@homeBackend')->name('home.backend');
+
+// Rental routes
+Route::get('/rental', 'RentalController@indexFrontEnd')->name('rental.frontend.index');
 
 // User management routes.
 Route::get('backend/users/create', 'UserManagementController@create')->name('users.create');

@@ -51,8 +51,8 @@
                         </li>
                         
                         <li>
-                            <a href="">
-                                Verhuur
+                            <a href="{{ route('rental.frontend.index') }}">
+                                <span class="fa fa-home"></span> Verhuur
                             </a>
                         </li>
                         

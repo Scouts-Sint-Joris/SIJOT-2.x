@@ -52,6 +52,19 @@ class RentalController extends Controller
     }
 
     /**
+     * [FRONT-END]: front-end overview with the domain description.
+     *
+     * @url:platform  GET|HEAD: /rental
+     * @see:phpunit   RentalTest::testFrontendOverView()
+     * 
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function indexFrontEnd()
+    {
+        return view('rental.frontend-overview');
+    }
+
+    /**
      * [FRONT-END]: Front-end view for the rental Calendar
      *
      * @url:platform  GET|HEAD:
@@ -61,14 +74,14 @@ class RentalController extends Controller
      */
     public function Calendar()
     {
-        return view();
+        return view('');
     }
 
     /**
      * [FRONT-END]: Front-end insert view fcr the rental view.
      *
      * @url:platform  GET|HEAD:
-     * @see:phpunit   Rentaltest::
+     * @see:phpunit   RentalTest::
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
