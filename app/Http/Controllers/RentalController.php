@@ -87,7 +87,13 @@ class RentalController extends Controller
      */
     public function insertViewFrontEnd()
     {
-        return view('');
+        /**
+         * @todo: write the unit test.
+         * @todo: build up the view. 
+         * @todo: Register the routes.
+         */
+
+        return view('rental.frontend-insert');
     }
 
     /**

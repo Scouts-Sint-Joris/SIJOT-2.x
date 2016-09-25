@@ -64,7 +64,10 @@
                             </a>
                             <a href="" class="list-group-item">Bereikbaarheid</a>
                             <a href="" class="list-group-item">Verhuur kalender</a>
-                            <a href="" class="list-group-item">Verhuur aanvragen</a>
+                            <a href="{{ route('rental.frontend.insert') }}" class="list-group-item">
+                                <span class="fa fa-asterisk"></span>
+                                Verhuur aanvragen
+                            </a>
                             <a href="mailto:contact@sjoris-turnhout.be" class="list-group-item">
                                 <span class="fa fa-envelope"></span> Contact
                             </a>
