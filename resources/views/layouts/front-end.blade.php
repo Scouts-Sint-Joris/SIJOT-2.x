@@ -75,8 +75,8 @@
                         </li>
                         
                         <li>
-                            <a href="">
-                                Contact
+                            <a href="mailto:contact@st-joris-turnhout.be">
+                                <span class="fa fa-envelope"></span> Contact
                             </a>
                         </li>
                     </ul>
