@@ -32,14 +32,17 @@ class AccountController extends Controller
     /**
      * [BACK-END]: Get the profile view.
      *
-     * @url:platform
-     * @see;phpunit
+     * @url:platform  GET|HEAD: settings/profile
+     * @see:phpunit   TODO: Write test.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        return view();
+        $userId       = auth()->user()->id;
+        $data['user'] = User::find($userId); 
+        
+        return view('auth.profile', $data);
     }
 
     /**

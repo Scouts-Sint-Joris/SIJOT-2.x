@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
         <link rel="stylesheet" href="{{ asset('assets/css/AdminLTE.css') }}" />
-        <link rel="stylesheet" href="{{asset('assets/css/_all-skins.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/_all-skins.css') }}">
 
         {{-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries --}}
         {{-- WARNING: Respond.js doesn't work if you view the page via file:// --}}
@@ -54,7 +54,7 @@
                         
                         {{-- User Account: style can be found in dropdown.less --}}
                         <li class="user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="{{ route('settings.profile') }}">
                                 <img src="https://placehold.it/160x160" class="user-image" alt="User Image">
                                 <span class="hidden-xs">{{ auth()->user()->name }}</span>
                             </a>
