@@ -6,6 +6,7 @@ use App\Http\Requests\RentalValidator;
 use App\Http\Requests;
 use App\Rental;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * Class RentalController
@@ -80,7 +81,7 @@ class RentalController extends Controller
     /**
      * [FRONT-END]: Front-end insert view fcr the rental view.
      *
-     * @url:platform  GET|HEAD:
+     * @url:platform  GET|HEAD: /rental/insert
      * @see:phpunit   RentalTest::
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -89,8 +90,6 @@ class RentalController extends Controller
     {
         /**
          * @todo: write the unit test.
-         * @todo: build up the view. 
-         * @todo: Register the routes.
          */
 
         return view('rental.frontend-insert');
@@ -111,6 +110,13 @@ class RentalController extends Controller
         if (Rental::create($input->except('_token'))) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', '');
+
+            if (! auth()->check()) {
+                /**
+                 *  @todo implement notification mail to requester. 
+                 *  @todo implement notification mail to leaders and sharity members.
+                 */
+            }
         }
 
         return redirect()->back();
