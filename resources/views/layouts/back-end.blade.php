@@ -56,7 +56,7 @@
                         <li class="user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="https://placehold.it/160x160" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Alexander Pierce</span>
+                                <span class="hidden-xs">{{ auth()->user()->name }}</span>
                             </a>
                         </li>
                         <li>
@@ -80,7 +80,7 @@
                         <img src="https://placehold.it/160x160" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>Alexander Pierce</p>
+                        <p>{{ auth()->user()->name }}</p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
