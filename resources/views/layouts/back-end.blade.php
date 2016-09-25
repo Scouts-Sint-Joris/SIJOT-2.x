@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
         <link rel="stylesheet" href="{{ asset('assets/css/AdminLTE.css') }}" />
-        <link rel="stylesheet" href="{{ asset('assets/css/_all-skins.css') }}">
+        <link rel="stylesheet" href="{{asset('assets/css/_all-skins.css') }}">
 
         {{-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries --}}
         {{-- WARNING: Respond.js doesn't work if you view the page via file:// --}}
@@ -57,6 +57,11 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="https://placehold.it/160x160" class="user-image" alt="User Image">
                                 <span class="hidden-xs">Alexander Pierce</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('logout') }}">
+                                <span class="fa fa-sign-out"></span>
                             </a>
                         </li>
                     </ul>
