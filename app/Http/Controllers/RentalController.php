@@ -82,16 +82,12 @@ class RentalController extends Controller
      * [FRONT-END]: Front-end insert view fcr the rental view.
      *
      * @url:platform  GET|HEAD: /rental/insert
-     * @see:phpunit   RentalTest::
+     * @see:phpunit   RentalTest::testRentalInsertFormFrontEnd()
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function insertViewFrontEnd()
     {
-        /**
-         * @todo: write the unit test.
-         */
-
         return view('rental.frontend-insert');
     }
 

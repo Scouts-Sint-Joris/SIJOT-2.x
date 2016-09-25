@@ -92,12 +92,17 @@ class RentalTest extends TestCase
     }
 
     /**
+     * GET|HEAD:  /rental/insert
+     * ROUTE:     rental.frontend.insert
+     *
      * @group all
+     * @group frontend
      * @group rental
      */
     public function testRentalInsertFormFrontEnd()
     {
-
+        $this->get(route('rental.frontend.insert'));
+        $this->seeStatusCode(200);
     }
 
     /**
