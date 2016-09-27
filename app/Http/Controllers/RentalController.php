@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\RentalNotification; 
+use App\Mail\RentalNotification;
 use App\Mail\RentalNotificationRequest;
 use App\Http\Requests\RentalValidator;
 use App\Http\Requests;
@@ -71,8 +71,8 @@ class RentalController extends Controller
     /**
      * [FRONT-END]: Front-end view for the rental Calendar
      *
-     * @url:platform  GET|HEAD:
-     * @see:phpunit   RentalTest::
+     * @url:platform  GET|HEAD: /rental/calendar
+     * @see:phpunit   RentalTest::testRentalCalendar()
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -86,23 +86,19 @@ class RentalController extends Controller
      * [FRONT-END]: Front-end insert view fcr the rental view.
      *
      * @url:platform  GET|HEAD: /rental/insert
-     * @see:phpunit   RentalTest::
+     * @see:phpunit   RentalTest::testRentalInsertFormFrontEnd()
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function insertViewFrontEnd()
     {
-        /**
-         * @todo: write the unit test.
-         */
-
         return view('rental.frontend-insert');
     }
 
     /**
      * [METHOD]: Insert method for the rental module.
      *
-     * @url:platform  POST:
+     * @url:platform  POST: /rental/insert
 	 * @see:phpunit	  RentalTest::testRentalInsertErrors()
 	 * @see:phpunit   RentalTest::testRentalInsertSuccess()
      *
@@ -111,7 +107,7 @@ class RentalController extends Controller
      */
     public function insert(RentalValidator $input)
     {
-        $insert = Rental::create($input->except('_token')); 
+        $insert = Rental::create($input->except('_token'));
 
         if ($insert) {
             session()->flash('class', 'alert alert-success');
@@ -120,10 +116,10 @@ class RentalController extends Controller
             if (! auth()->check()) {
                 $rental = Rental::find($insert->id);
 
-                // Trigger mailable error for now. because there is no one with the role. 
+                // Trigger mailable error for now. because there is no one with the role.
                 $logins = User::with('permissions')->whereIn('name', ['rental']);
 
-                Mail::to($insert)->queue(new RentalNotificationRequest($rental)); 
+                Mail::to($insert)->queue(new RentalNotificationRequest($rental));
                 Mail::to($logins)->queue(new RentalNotification($rental));
 
             }
@@ -182,10 +178,12 @@ class RentalController extends Controller
      */
     public function destroy($id)
     {
-        Rental::destroy($id);
+        $delete = Rental::destroy($id);
 
-        session()->flash('class', 'alert alert-success');
-        session()->flash('message', '');
+        if ($delete) {
+            session()->flash('class', 'alert alert-success');
+            session()->flash('message', '');
+        }
 
         return redirect()->back();
     }
