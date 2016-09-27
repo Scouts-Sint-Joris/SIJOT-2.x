@@ -11,15 +11,6 @@ class RentalTest extends TestCase
     use DatabaseMigrations, DatabaseTransactions;
 
     /**
-     * @group all
-     * @group rental
-     */
-    public function testRentalInsertErrors()
-    {
-
-    }
-
-    /**
      * GET|HEAD:  /rental
      * ROUTE:     rental.frontend.index
      *
@@ -35,11 +26,25 @@ class RentalTest extends TestCase
     }
 
     /**
+     * @group frontend
+     * @group backend
      * @group all
      * @group rental
      */
-    public function testRentalInsertSuccess() {
+    public function testRentalInsertErrors()
+    {
 
+    }
+
+    /**
+     * @group frontend
+     * @group backend
+     * @group all
+     * @group rental
+     */
+    public function testRentalInsertSuccess()
+    {
+        $this->authentication();
     }
 
 	/**
@@ -85,7 +90,7 @@ class RentalTest extends TestCase
     /**
      * GET|HEAD: /rental/calendar
      * ROUTE:    rental.frontend-calendar
-     * 
+     *
      * @group frontend
      * @group all
      * @group rental
@@ -93,18 +98,25 @@ class RentalTest extends TestCase
     public function testRentalCalendar()
     {
         $route =  route('rental.frontend-calendar');
-        
-        $this->get($route); 
+
+        $this->get($route);
         $this->seeStatusCode(200);
     }
 
     /**
+     * GET|HEAD: /rental/insert
+     * ROUTE:    rental.frontend.insert
+     *
+     * @group frontend
      * @group all
      * @group rental
      */
     public function testRentalInsertFormFrontEnd()
     {
+        $route = route('rental.frontend.insert');
 
+        $this->get($route); 
+        $this->seeStatusCode(200);
     }
 
     /**
