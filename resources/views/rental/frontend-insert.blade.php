@@ -18,7 +18,7 @@
                     </div>
                     
                     {{-- Request form --}}
-                    <form class="form-horizontal" method="POST" action="">
+                    <form class="form-horizontal" method="POST" action="{{ route('rental.store') }}">
                         {{-- CSRF TOKEN --}}
                         {{ csrf_field() }}
 
@@ -28,7 +28,7 @@
                             </label>
 
                             <div class="col-sm-4">
-                                <input type="date" id="start" name="name" value="" class="form-control" />
+                                <input type="date" id="start" name="start_date" value="" class="form-control" />
                             </div>
                         </div>
 
@@ -38,7 +38,7 @@
                             </label>
 
                             <div class="col-sm-4">
-                                <input type="date" id="eind" name="name" value="" class="form-control" />
+                                <input type="date" id="eind" name="end_date" value="" class="form-control" />
                             </div>
                         </div>
 
@@ -48,7 +48,7 @@
                             </label>
 
                             <div class="col-sm-4">
-                                <input class="form-control" placeholder="Groep naam" value="" name="" id="groep">
+                                <input class="form-control" placeholder="Groep naam" value="" name="group" id="groep">
                             </div>
                         </div>
 
@@ -58,7 +58,7 @@
                             </label>   
 
                             <div class="col-sm-4">
-                                <input class="form-control" placeholder="Email adres" value="" name="" id="email">
+                                <input class="form-control" placeholder="Email adres" value="" name="email" id="email">
                             </div>
                         </div>
 
@@ -68,7 +68,7 @@
                             </label> 
 
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" placeholder="GSM nummer" value="" name="" id="tel">
+                                <input type="text" class="form-control" placeholder="GSM nummer" value="" name="phone_number" id="tel">
                             </div>
                         </div>
 

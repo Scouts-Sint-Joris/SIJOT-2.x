@@ -41,19 +41,7 @@ class Activity extends Model
         return $this->belongsToMany('App\Groups');
     }
 
-    /**
-     * Format the timestamp format
-     *
-     * @param  string $date The start time from the form
-     * @return string
-     */
-    public function setDateAttribute($date)
-    {
-        // Use with Carbon instance:
-        // -------
-        // Carbon::createFromFormat('H:i', $date)->format('H:i');
-        return $this->attributes['date'] = strtotime(str_replace('/', '-', $date));
-    }
+   
 
     /**
      * Format the timestamp format

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RentalNotification; 
+use App\Mail\RentalNotificationRequest;
 use App\Http\Requests\RentalValidator;
 use App\Http\Requests;
 use App\Rental;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -57,7 +60,7 @@ class RentalController extends Controller
      *
      * @url:platform  GET|HEAD: /rental
      * @see:phpunit   RentalTest::testFrontendOverView()
-     * 
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function indexFrontEnd()
@@ -107,15 +110,21 @@ class RentalController extends Controller
      */
     public function insert(RentalValidator $input)
     {
-        if (Rental::create($input->except('_token'))) {
+        $insert = Rental::create($input->except('_token')); 
+
+        if ($insert) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', '');
 
             if (! auth()->check()) {
-                /**
-                 *  @todo implement notification mail to requester. 
-                 *  @todo implement notification mail to leaders and sharity members.
-                 */
+                $rental = Rental::find($insert->id);
+
+                // Trigger mailable error for now. because there is no one with the role. 
+                $logins = User::with('permissions')->whereIn('name', ['rental']);
+
+                Mail::to($insert)->queue(new RentalNotificationRequest($rental)); 
+                Mail::to($logins)->queue(new RentalNotification($rental));
+
             }
         }
 

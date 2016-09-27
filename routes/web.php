@@ -21,7 +21,8 @@ Route::get('/home', 'Homecontroller@homeBackend')->name('home.backend');
 
 // Rental routes
 Route::get('/rental', 'RentalController@indexFrontEnd')->name('rental.frontend.index');
-route::get('/rental/insert', 'RentalCOntroller@insertViewFrontEnd')->name('rental.frontend.insert');
+Route::get('/rental/insert', 'RentalCOntroller@insertViewFrontEnd')->name('rental.frontend.insert');
+Route::post('/rental/insert','RentalController@insert')->name('rental.store');
 
 // User management routes.
 Route::get('backend/users/create', 'UserManagementController@create')->name('users.create');
