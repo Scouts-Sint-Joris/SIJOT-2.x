@@ -1,5 +1,7 @@
 @extends('layouts.front-end')
 
+{{-- TODO: Set the rental pictures local --}}
+
 @section('content')
 <div class="row">
     <div class="col-sm-12">
@@ -11,76 +13,45 @@
         <div style="border-radius:0px; border: 0px;" class="panel panel-default">
             <div class="panel-body">
                 <div class="col-md-8">
-                    <h3>Verhuur aanvraag.</h3>
+                    <h3>Verhuur kalender.</h3>
 
-                    <div class="alert alert-danger">
-                        <span class="fa fa-info-circle"></span> Het laatste weekend van een maand verhuren we niet.
-                    </div>
-                    
-                    {{-- Request form --}}
-                    <form class="form-horizontal" method="POST" action="{{ route('rental.store') }}">
-                        {{-- CSRF TOKEN --}}
-                        {{ csrf_field() }}
+                    <p>
+                        Hier vind u wanner onze lokalen al reeds verhuurd zijn.
+                        Vind u hier de datum niet dat u onze lokalen wilt huren leg dan snel je datum vast.
+                        Dat doe je door dit <a href="{{ route('rental.frontend.insert') }}">formulier</a> in te vullen.
+                    </p>
 
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" id="start">
-                                Start datum: <span class="text-danger">*</span>
-                            </label>
+                    <h4 style="margin-top: 20px;">Bevestigde datums:</h4>
 
+                    @if (count($items) == 0)
+                        <div class="alert alert-info">
+                            Wij hebben momenteel geen verhuringen. 
+                        </div>
+                    @else
+                        <div class="row">
                             <div class="col-sm-4">
-                                <input type="date" id="start" name="start_date" value="" class="form-control" />
+                                <table class="table table-condensed table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th width="200"><span class="text-center">Start datum:</span></th>
+                                            <th width="100"></th> {{-- Seperator --}}
+                                            <th width="200"><span class="text-center">Eind datum:</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($items as $item)
+                                        <tr>
+                                            <td><span class="text-center">{{ date('d/m/Y', strtotime($item->start_date)) }}</span></td>
+                                            <td><span class="text-center">-</span></td>
+                                            <td><span class="text-center">{{ date('d/m/Y', strtotime($item->end_date)) }}</span></td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
+                    @endif
 
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" id="eind">
-                                Eind datum: <span class="text-danger">*</span> 
-                            </label>
-
-                            <div class="col-sm-4">
-                                <input type="date" id="eind" name="end_date" value="" class="form-control" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" id="groep">
-                                Groep: <span class="text-danger">*</span>
-                            </label>
-
-                            <div class="col-sm-4">
-                                <input class="form-control" placeholder="Groep naam" value="" name="group" id="groep">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label id="email" class="control-label col-sm-2">
-                                Email adres: <span class="text-danger">*</span>
-                            </label>   
-
-                            <div class="col-sm-4">
-                                <input class="form-control" placeholder="Email adres" value="" name="email" id="email">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label id="tel" class="control-label col-sm-2">
-                                Nummer:  {{-- <span class="text-danger">*</span> --}}
-                            </label> 
-
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" placeholder="GSM nummer" value="" name="phone_number" id="tel">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-5 col-sm-offset-2">
-                                <button type="submit" class="btn btn-sm btn-success">Aanvragen</button> 
-                                <button type="reset" class="btn btn-sm btn-danger">Reset</button>
-                            </div>
-                        </div>
-
-                    </form>
-                    {{-- /Request form --}}
                 </div>
 
                 <div class="col-md-4">
@@ -93,8 +64,7 @@
                             </a>
                             <a href="" class="list-group-item">Bereikbaarheid</a>
                             <a href="{{ route('rental.frontend-calendar') }}" class="list-group-item">
-                                <span class="fa fa-calendar"></span>
-                                Verhuur kalender
+                                <span class="fa fa-calendar"></span> Verhuur kalender
                             </a>
                             <a href="{{ route('rental.frontend.insert') }}" class="list-group-item">
                                 <span class="fa fa-asterisk"></span>

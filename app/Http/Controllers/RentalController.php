@@ -76,9 +76,10 @@ class RentalController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function Calendar()
+    public function calendar()
     {
-        return view('');
+        $data['items'] = Rental::all();
+        return view('rental.frontend-calendar', $data);
     }
 
     /**

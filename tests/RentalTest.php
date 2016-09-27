@@ -30,7 +30,7 @@ class RentalTest extends TestCase
     public function testFrontendOverView()
     {
         $route = route('rental.frontend.index');
-        $this->get($route); 
+        $this->get($route);
         $this->seeStatusCode(200);
     }
 
@@ -83,12 +83,19 @@ class RentalTest extends TestCase
     }
 
     /**
+     * GET|HEAD: /rental/calendar
+     * ROUTE:    rental.frontend-calendar
+     * 
+     * @group frontend
      * @group all
      * @group rental
      */
     public function testRentalCalendar()
     {
-
+        $route =  route('rental.frontend-calendar');
+        
+        $this->get($route); 
+        $this->seeStatusCode(200);
     }
 
     /**
