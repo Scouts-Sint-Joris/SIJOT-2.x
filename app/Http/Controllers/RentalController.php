@@ -8,6 +8,7 @@ use App\Http\Requests\RentalValidator;
 use App\Http\Requests;
 use App\Rental;
 use App\User;
+use App\RentalStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -34,25 +35,15 @@ class RentalController extends Controller
     /**
      * [BACK-END]: The backend side for the rental module.
      *
-     * @url:platform
+     * @url:platform  GET|HEAD: /backend/rental
      * @see:phpunit   RentalTest::
      *
-     * @param  int $filter the rental status parameter.
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function indexBackEnd($filter)
+    public function indexBackEnd()
     {
-        if ($filter == 'new') {
-            $data['rentals'] = Rental::where('', '')->paginate(15);
-        } elseif ($filter == 'bevestigd') {
-            $data['rentals'] = Rental::where('', '')->paginate(15);
-        } elseif($filter == 'optie') {
-            $data['rentals'] = Rental::where('', '')->paginate(15);
-        } else {
-            $data['rentals'] = Rental::paginate(15);
-        }
-
-        return view('', $data);
+        $data['rentals'] = Rental::with('status')->paginate(20);
+        return view('rental.backend-overview', $data);
     }
 
     /**
@@ -78,7 +69,10 @@ class RentalController extends Controller
      */
     public function calendar()
     {
-        $data['items'] = Rental::all();
+        $data['items'] = Rental::whereHas('status', function ($query) {
+            $query->where('name', 'Bevestigd');
+        })->get();
+
         return view('rental.frontend-calendar', $data);
     }
 
@@ -108,6 +102,9 @@ class RentalController extends Controller
     public function insert(RentalValidator $input)
     {
         $insert = Rental::create($input->except('_token'));
+        $status = RentalStatus::find(1);
+
+        Rental::find($insert->id)->update(['status_id' => $status->id]);
 
         if ($insert) {
             session()->flash('class', 'alert alert-success');
@@ -117,6 +114,9 @@ class RentalController extends Controller
                 $rental = Rental::find($insert->id);
 
                 // Trigger mailable error for now. because there is no one with the role.
+
+                // TODO: Write patch with standard platform config variable.
+                // TODO: Write notification.
                 $logins = User::with('permissions')->whereIn('name', ['rental']);
 
                 Mail::to($insert)->queue(new RentalNotificationRequest($rental));
@@ -158,8 +158,6 @@ class RentalController extends Controller
     {
         $rental = Rental::find($id);
         $rental->input($input->except('_token'));
-
-		// TODO: One-To-Many relation define.
 
         session()->flash('class', 'alert alert-success');
         session()->flash('message', '');

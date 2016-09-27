@@ -18,7 +18,7 @@ class Rental extends Model
      *
      * @var array
      */
-    protected $fillable = ['start_date', 'end_date', 'group', 'phone_number', 'email'];
+    protected $fillable = ['start_date', 'status_id', 'end_date', 'group', 'phone_number', 'email'];
 
     /**
      * Hidden fields.
@@ -53,6 +53,16 @@ class Rental extends Model
         // -------
         // Carbon::createFromFormat('H:i', $date)->format('H:i');
         return $this->attributes['end_date'] = strtotime(str_replace('/', '-', $date));
+    }
+
+    /**
+     * Rental status relation. 
+     * 
+     * @return mixed
+     */
+    public function status() 
+    {
+        return $this->belongsTo('App\RentalStatus', 'status_id', 'id');
     }
 
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRentalsTable extends Migration
+class CreateRentalStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateRentalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('rentals', function (Blueprint $table) {
+        Schema::create('rental_statuses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('status_id')->nullable();
-            $table->integer('start_date');
-            $table->integer('end_date'); 
-            $table->string('group');
-            $table->string('phone_number'); 
-            $table->string('email');
+            $table->string('name');
+            $table->string('class');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateRentalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rentals');
+        Schema::dropIfExists('rental_statuses');
     }
 }

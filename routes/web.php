@@ -25,6 +25,8 @@ Route::get('/rental/insert', 'RentalController@insertViewFrontEnd')->name('renta
 Route::get('/rental/calendar', 'RentalController@calendar')->name('rental.frontend-calendar');
 Route::post('/rental/insert','RentalController@insert')->name('rental.store');
 
+Route::get('/backend/rental', 'RentalController@indexBackEnd')->name('rental.backend');
+
 // User management routes.
 Route::get('backend/users/create', 'UserManagementController@create')->name('users.create');
 Route::get('backend/users', 'UserManagementController@overview')->name('users.index');
@@ -34,7 +36,7 @@ Route::post('backend/users', 'UserManagementController@store')->name('auth.new')
 // Settings routes.
 Route::get('settings', 'SettingsController@index')->name('settings.index');
 
-// Profile seetings routes 
+// Profile seetings routes
 Route::get('settings/profile', 'Auth\AccountController@index')->name('settings.profile');
 
 // Activity routes

@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Mail\NewUser;
 use App\Http\Requests;
-use App\Http\Requests\LoginValidator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\LoginValidator;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class UserManagementController
@@ -19,6 +20,12 @@ use Illuminate\Support\Facades\Mail;
  */
 class UserManagementController extends Controller
 {
+    /**
+     * @todo: set flash messages to translation files.
+     * @todo: build up the mailable views. 
+     * @todo: write search controller & test.
+     */
+
     /**
      * UserManagementController constructor.
      */
@@ -54,6 +61,21 @@ class UserManagementController extends Controller
     public function create()
     {
         return view('users.create');
+    }
+
+
+    /**
+     * [METHOD]: Search for a specific user. 
+     * 
+     * @url:platform 
+     * @see:phpunit
+     * 
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function search() 
+    {
+        $data['users'] = '';
+        return view('', $data);     
     }
 
     /**
@@ -107,6 +129,9 @@ class UserManagementController extends Controller
     /**
      * [METHOD]: block a user login
      *
+     * @url:platform  GET|HEAD: 
+     * @see:phpunit
+     * 
      * @param  int $id the login id in the database.
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -116,7 +141,10 @@ class UserManagementController extends Controller
         $user->revokePermissionTo('active');
         $user->givePermssionTo('blocked');
 
-		session()->flash('class', '');
+        // Delete session if user is authencated. 
+        DB::table('sessions')->where('user_id', $id)->delete();
+
+		session()->flash('class', 'alert alert-success');
 		session()->flash('message', '');
 
         return redirect()->back();
@@ -125,7 +153,7 @@ class UserManagementController extends Controller
     /**
      * [METHOD]: Unblock a user login.
      *
-     * @url:platform
+     * @url:platform  GET|HEAD:
      * @see:phpunit
      *
      * @param  int $id the login id in the database.

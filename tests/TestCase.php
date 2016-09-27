@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Hash;
 abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     /**
+     * @todo: implement mailing stub.
+     */
+
+    /**
      * The base URL to use while testing the application.
      *
      * @var string

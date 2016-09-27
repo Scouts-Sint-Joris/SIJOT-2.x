@@ -45,8 +45,11 @@ class SettingsController extends Controller
      */
     public function updatePlatformSettings()
     {
+        dd($input->all()); // For debugging propose. 
+
         session()->flash('class', 'alert alert-success'); 
         session()->flash('message', '');
+
 		return redirect()->back();
     }
 
@@ -58,7 +61,7 @@ class SettingsController extends Controller
     {
 		dd($input->all()); // For debugging propose 
 
-		session()->flash('class', '');
+		session()->flash('class', 'alert alert-success');
 		session()->flash('message', '');
 
 		return redirect()->back();
