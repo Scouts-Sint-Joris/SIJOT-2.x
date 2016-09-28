@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Groups;
+use App\Activity; 
 use Illuminate\Http\Request;
 use App\Http\Requests\GroupValidator;
 use App\Http\Requests;
@@ -58,7 +59,7 @@ class GroupController extends Controller
 	public function specific($string)
 	{
 		$data['group']    = Groups::getGroup('selector', $string)->get();
-        $data['activity'] = ''; 
+        $data['activity'] = Activity::where('', '')->get(); 
 		return view('groups.show', $data);
 	}
 

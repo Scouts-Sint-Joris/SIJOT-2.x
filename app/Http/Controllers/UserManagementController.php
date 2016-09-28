@@ -21,9 +21,10 @@ use Illuminate\Support\Facades\DB;
 class UserManagementController extends Controller
 {
     /**
-     * @todo: set flash messages to translation files.
      * @todo: build up the mailable views. 
      * @todo: write search controller & test.
+     * @todo: Implement user specific index view. 
+     * @todo: add create new user wizard.
      */
 
     /**
@@ -101,7 +102,7 @@ class UserManagementController extends Controller
             Mail::to($findNewUser->email)->send(new NewUser($findNewUser));
 
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', '');
+            session()->flash('message', trans('flash-session.user-store'));
         }
 
         return redirect()->back();
@@ -120,7 +121,7 @@ class UserManagementController extends Controller
     {
 		if (User::destroy($id)) {
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', '');
+            session()->flash('message', trans('flash-session.user-destroy'));
         }
 
         return redirect()->back();
@@ -145,7 +146,7 @@ class UserManagementController extends Controller
         DB::table('sessions')->where('user_id', $id)->delete();
 
 		session()->flash('class', 'alert alert-success');
-		session()->flash('message', '');
+		session()->flash('message', trans('flash-session.user-block'));
 
         return redirect()->back();
     }
@@ -166,7 +167,7 @@ class UserManagementController extends Controller
         $user->givePermissionTo('active');
 
 		session()->flash('class', 'alert alert-success');
-		session()->flash('message', '');
+		session()->flash('message', trans('flash-session.user-unblock'));
 
         return redirect()->back();
     }
