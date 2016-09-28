@@ -15,15 +15,15 @@ class RentalStatusSeeder extends Seeder
         $data = [
             [
                 'name'  => 'Optie', 
-                'class' => 'alert alert-warning',
+                'class' => 'label label-warning',
             ], 
             [
                 'name'  => 'Bevestigd',
-                'class' => 'alert alert-success', 
+                'class' => 'label label-success', 
             ], 
             [
                 'name'  => 'Nieuwe aanvraag', 
-                'class' => 'alert alert-danger',
+                'class' => 'label label-danger',
             ],
         ];
 

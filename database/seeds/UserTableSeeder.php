@@ -13,16 +13,24 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $data['name']       = 'Administrator';
-		$data['email']      = 'admin@st-joris-turnhout.be';
-		$data['password']   = bcrypt('root1995');
+        $data1['name']       = 'Administrator';
+		$data1['email']      = 'admin@st-joris-turnhout.be';
+		$data1['password']   = bcrypt('root1995');
+
+        $data2['name']       = 'Tim Joosten'; 
+        $data2['email']      = 'Topairy@gmail.com'; 
+        $data2['password']   = bcrypt('admin1995');
 
 		$table = DB::table('users');
 		$table->delete();
 
-        $create = User::create($data);
-        $user   = User::find($create->id);
+        $create1 = User::create($data1);
+        $create2 = User::create($data2);
 
-        $user->givePermissionTo('active');
+        $user1   = User::find($create1->id);
+        $user2   = User::find($create2->id);
+
+        $user1->givePermissionTo('active');
+        $user2->givePermissionTo('active');
     }
 }

@@ -46,12 +46,63 @@
         </div>
     </div>
     <div class="box-body">
-        Start creating your amazing application!
+        <table class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Start datum:</th>
+                    <th>Eind datum:</th>
+                    <th>Status:</th>
+                    <th>Groep:</th>
+                    <th>Email:</th>
+                    <th>GSM-nummer:</th>
+                    <th>Aanvraag datum:</th>
+                    <th></th> {{-- Options --}}
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($rentals as $rental)
+                    <tr>
+                        <td><code>#R{{ $rental->id }}</code></td>
+                        <td>{{ date('d/m/Y', strtotime($rental->start_date)) }}</td>
+                        <td>{{ date('d/m/Y', strtotime($rental->end_date)) }}</td>
+                        <td><span class="{{ $rental->status->class }}">{{ $rental->status->name}}</span></td>
+                        <td>{{ $rental->group }}</td>
+                        <td>{{ $rental->email }}</td>
+                        <td>{{ $rental->phone_number }}</td>
+                        <td>{{ $rental->created_at }}</td>
+
+                        {{-- Options --}}
+                        <td>
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <a class="btn btn-xs btn-success @if($rental->status->name === 'Bevestigd') disabled @endif" href="{{ route('rental.backend.confirm', ['id' => $rental->id]) }}">
+                                        <span class="fa fa-check"></span> Bevestig
+                                    </a>
+
+                                    <a class="btn btn-xs btn-warning @if($rental->status->name === 'Optie') disabled @endif" href="{{ route('rental.backend.option', ['id' => $rental->id]) }}">
+                                        <span class="fa fa-asterisk"></span>Optie
+                                    </a>
+                                </div>
+                                <div class="btn-group">
+                                    <a class="btn btn-xs btn-danger" href="{{ route('rental.backend.destroy', ['id' => $rental->id]) }}">
+                                        <span class="fa fa-close"></span> Verwijder
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                        {{-- /Options --}}
+                    </tr>
+                @endforeach
+            </tbody> 
+        </table>
     </div>
     {{-- /.box-body --}}
-    <div class="box-footer">
-        Footer
-    </div>
+    @if (count($rentals) > 25)
+        <div class="box-footer">
+            {{ $rentals->render() }}
+        </div>
+    @endif
     {{-- /.box-footer--}}
 </div>
 @endsection

@@ -26,6 +26,9 @@ Route::get('/rental/calendar', 'RentalController@calendar')->name('rental.fronte
 Route::post('/rental/insert','RentalController@insert')->name('rental.store');
 
 Route::get('/backend/rental', 'RentalController@indexBackEnd')->name('rental.backend');
+Route::get('/backend/rental/option/{id}', 'RentalController@setOption')->name('rental.backend.option');
+Route::get('/backend/rental/confirm/{id}', 'RentalController@setConfirmed')->name('rental.backend.confirm');
+Route::get('/backend/rental/destroy/{id}', 'RentalController@destroy')->name('rental.backend.destroy');
 
 // User management routes.
 Route::get('backend/users/create', 'UserManagementController@create')->name('users.create');
@@ -47,3 +50,14 @@ Route::post('backend/activity', 'ActivityController@store')->name('activity.stor
 
 // Rental module routes.
 Route::get('/rental/destroy/{id}', 'RentalController@destroy')->name('rental.destroy');
+
+// Debugging routes 
+if (config('app.debug')) {
+    app()->register(PrettyRoutes\ServiceProvider::class); 
+
+    Route::get('/routes', function () {
+        return view('pretty-routes::routes', [
+            'routes' => Route::getRoutes(),    
+        ]);   
+    });
+}

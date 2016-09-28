@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
         <link rel="stylesheet" href="{{ asset('assets/css/AdminLTE.css') }}" />
-        <link rel="stylesheet" href="{{ asset('assets/css/_all-skins.css') }}">
+        <link rel="stylesheet" href="{{asset('assets/css/_all-skins.css') }}">
 
         {{-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries --}}
         {{-- WARNING: Respond.js doesn't work if you view the page via file:// --}}
@@ -45,12 +45,37 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         {{-- Notifications: style can be found in dropdown.less --}}
-                        <li class="notifications-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-bell-o"></i>
-                                <span class="label label-warning">10</span>
-                            </a>
-                        </li>
+                        @if (count(auth()->user()->unreadNotifications) > 0)
+                            <li class="dropdown notifications-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-bell-o"></i>
+                                    <span class="label label-warning">10</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="header">You have 10 notifications</li>
+                                    <li>
+                                        <!-- inner menu: contains the actual data -->
+                                        <ul class="menu">
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-users text-aqua"></i>5 new members joined today
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="footer">
+                                        <a href="#">View all</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @else
+                           <li class="notifications-menu">
+                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                   <i class="fa fa-bell-o"></i>
+                                   <span class="label label-warning">0</span>
+                               </a>
+                           </li>
+                        @endif
                         
                         {{-- User Account: style can be found in dropdown.less --}}
                         <li class="user user-menu">

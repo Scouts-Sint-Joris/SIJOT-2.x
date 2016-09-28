@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Mail\RentalNotification;
 use App\Mail\RentalNotificationRequest;
-use App\Http\Requests\RentalValidator;
 use App\Http\Requests;
 use App\Rental;
 use App\User;
 use App\RentalStatus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\RentalOption;
+use App\Notifications\RentalConfirmed; 
+
+
 use Illuminate\Support\Facades\Mail;
 
 /**
@@ -23,13 +27,23 @@ use Illuminate\Support\Facades\Mail;
 class RentalController extends Controller
 {
     /**
+     * Authencation middleware protected routes.
+     * @var mixed
+     */
+    protected $authMiddleware;
+
+    /**
      * RentalController constructor.
      */
     public function __construct()
     {
-        // TODO: Set auth middleware for the backend routes.
+        $this->authMiddleware = [
+            'indexBackEnd', 'setOption', 'setConfirmed', 'destroy'
+        ];
+
+        // Middleware
         $this->middleware('lang');
-        // TODO: User activity middleware.
+        $this->middleware('auth')->only($this->authMiddleware);
     }
 
     /**
@@ -42,7 +56,7 @@ class RentalController extends Controller
      */
     public function indexBackEnd()
     {
-        $data['rentals'] = Rental::with('status')->paginate(20);
+        $data['rentals'] = Rental::with('status')->paginate(25);
         return view('rental.backend-overview', $data);
     }
 
@@ -77,6 +91,47 @@ class RentalController extends Controller
     }
 
     /**
+     * [METHOD]: Set a rental status to 'Option'.
+     *
+     * @url:platform
+     * @see:phpunit
+     *
+     * @param  int $id the rental id in the database.
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function setOption($id)
+    {
+        if (Rental::find($id)->update(['status_id' => 1])) {
+            session()->flash('class', 'alert alert-success');
+            session()->flash('message', '');
+        }
+
+        return redirect()->back();
+    }
+
+    /**
+     * [METHOD]: Set a rental status to 'confirmed'.
+     *
+     * @url:platform
+     * @see:phpunit
+     *
+     * @param  int $id the rental id in the database.
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function setConfirmed($id)
+    {
+        if (Rental::find($id)->update(['status_id' => 2])) {
+            session()->flash('class', 'alert alert-success');
+            session()->flash('message', '');
+
+            // Notification
+            Notification::send(User::all(), new RentalConfirmed());
+        }
+
+        return redirect()->back();
+    }
+
+    /**
      * [FRONT-END]: Front-end insert view fcr the rental view.
      *
      * @url:platform  GET|HEAD: /rental/insert
@@ -96,13 +151,13 @@ class RentalController extends Controller
 	 * @see:phpunit	  RentalTest::testRentalInsertErrors()
 	 * @see:phpunit   RentalTest::testRentalInsertSuccess()
      *
-     * @param  RentalValidator $input
+     * @param  Requests\RentalValidator $input
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function insert(RentalValidator $input)
+    public function insert(Requests\RentalValidator $input)
     {
         $insert = Rental::create($input->except('_token'));
-        $status = RentalStatus::find(1);
+        $status = RentalStatus::find(3);
 
         Rental::find($insert->id)->update(['status_id' => $status->id]);
 
@@ -121,7 +176,6 @@ class RentalController extends Controller
 
                 Mail::to($insert)->queue(new RentalNotificationRequest($rental));
                 Mail::to($logins)->queue(new RentalNotification($rental));
-
             }
         }
 
@@ -150,11 +204,11 @@ class RentalController extends Controller
 	 * @see:phpunit   RentalTest::testRentalUpdateWithoutSuccess()
 	 * @see:phpunit   RentalTest::testRentalUpdateWithSuccess()
      *
-     * @param  RentalValidator $input
+     * @param  Requests\RentalValidator $input
      * @param  int $id the rental id in the database.
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(RentalValidator $input, $id)
+    public function update(Requests\RentalValidator $input, $id)
     {
         $rental = Rental::find($id);
         $rental->input($input->except('_token'));

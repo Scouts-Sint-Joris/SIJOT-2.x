@@ -169,6 +169,8 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+        PrettyRoutes\ServiceProvider::class,
+        Themsaid\Langman\LangmanServiceProvider::class,
 
         /*
          * Application Service Providers...
