@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <form class="form-horizontal" method="POST" action="">
+                    <form class="form-horizontal" method="POST" action="{{ route('rental.store') }}">
                         {{-- CSRF TOKEN --}}
                         {{ csrf_field() }}
 

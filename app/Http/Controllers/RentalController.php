@@ -176,7 +176,8 @@ class RentalController extends Controller
                 Mail::to($insert)->queue(new RentalNotificationRequest($rental));
                 Mail::to($logins)->queue(new RentalNotification($rental));
             } elseif (auth()->check()) {
-                Notification::send(Users::all(), new RentalInsertNotification());
+                // TODO: Create the notification class.
+                // Notification::send(User::all(), new RentalInsertNotification());
             }
         }
 
