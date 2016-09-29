@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 /**
- * 
+ * @package   App\Http\Controllers
+ * @author    Tim Joosten <Topairy@gmail.com>
+ * @copyright Tim Joosten 2015 - 2016
+ * @version   2.0.0
  */
 class SettingsController extends Controller
 {
@@ -21,12 +24,12 @@ class SettingsController extends Controller
     }
 
     /**
-     * [BACK-END]: Get the update view for the application settings. 
-     * 
-     * @url:platform  GET|HEAD: 
-     * @see:phpunit 
-     * @see:phpunit 
-     * 
+     * [BACK-END]: Get the update view for the application settings.
+     *
+     * @url:platform  GET|HEAD:
+     * @see:phpunit
+     * @see:phpunit
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
@@ -45,12 +48,26 @@ class SettingsController extends Controller
      */
     public function updatePlatformSettings()
     {
-        dd($input->all()); // For debugging propose. 
+        dd($input->all()); // For debugging propose.
 
-        session()->flash('class', 'alert alert-success'); 
+        session()->flash('class', 'alert alert-success');
         session()->flash('message', '');
 
 		return redirect()->back();
+    }
+
+    /**
+     * [METHOD]: Update the environment settings.
+     *
+     * @url:platform
+     * @see:phpunit
+     * @see:phpunit
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateEnvironmentSettings()
+    {
+
     }
 
     /**
@@ -59,7 +76,7 @@ class SettingsController extends Controller
      */
     public function updateBackUpSettings(BackUpSettingsValidator $input)
     {
-		dd($input->all()); // For debugging propose 
+		dd($input->all()); // For debugging propose
 
 		session()->flash('class', 'alert alert-success');
 		session()->flash('message', '');

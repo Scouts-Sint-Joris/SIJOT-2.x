@@ -5,6 +5,7 @@ namespace App\Http\Controllers\auth;
 use App\Http\Requests\ProfileInfoValidator;
 use App\Http\Requests\SecurityInfoValidator;
 use App\User;
+use App\Themes; 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -40,7 +41,8 @@ class AccountController extends Controller
     public function index()
     {
         $userId       = auth()->user()->id;
-        $data['user'] = User::find($userId); 
+        $data['themes'] = Themes::all();
+        $data['user']   = User::find($userId); 
         
         return view('auth.profile', $data);
     }
