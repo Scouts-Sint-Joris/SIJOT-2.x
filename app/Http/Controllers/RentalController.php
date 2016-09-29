@@ -101,7 +101,7 @@ class RentalController extends Controller
     {
         if (Rental::find($id)->update(['status_id' => 1])) {
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', '');
+            session()->flash('message', trans('flash-session.rental-option'));
         }
 
         return redirect()->back();
@@ -120,7 +120,7 @@ class RentalController extends Controller
     {
         if (Rental::find($id)->update(['status_id' => 2])) {
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', '');
+            session()->flash('message', trans('flash-session.rental-confirm'));
 
             // Notification
             Notification::send(User::all(), new RentalConfirmed());
@@ -161,7 +161,7 @@ class RentalController extends Controller
 
         if ($insert) {
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', '');
+            session()->flash('message', 'flash-session.rental-insert');
 
             if (! auth()->check()) {
                 $rental = Rental::find($insert->id);
@@ -214,7 +214,7 @@ class RentalController extends Controller
         $rental->input($input->except('_token'));
 
         session()->flash('class', 'alert alert-success');
-        session()->flash('message', '');
+        session()->flash('message', trans('flash-session.rental-update'));
 
         return redirect()->back();
     }
@@ -234,7 +234,7 @@ class RentalController extends Controller
 
         if ($delete) {
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', '');
+            session()->flash('message', trans('flash-session.rental-delete'));
         }
 
         return redirect()->back();

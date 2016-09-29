@@ -23,6 +23,11 @@ return [
      // Settings flash messages. 
 
      // Rental flash messages. 
+     'rental-option'  => 'The rental has been set to option.',
+     'rental-confirm' => 'The rental has been set to confirmed.',
+     'rental-insert'  => 'The rental request has been stored',
+     'rental-update'  => 'The rental data has been updated',
+     'rental-delete'  => 'The rental has been deleted.',
 
 
 ];
