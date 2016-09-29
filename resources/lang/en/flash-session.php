@@ -29,5 +29,4 @@ return [
      'rental-update'  => 'The rental data has been updated',
      'rental-delete'  => 'The rental has been deleted.',
 
-
 ];

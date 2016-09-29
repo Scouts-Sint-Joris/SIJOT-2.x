@@ -111,7 +111,7 @@ class MailingController extends Controller
         if ($data->count() === 1) {
             $data->destroy();
 
-            session()->flash('class', '');
+            session()->flash('class', 'alert alert-success');
             session()->flash('message', '');
         }
 

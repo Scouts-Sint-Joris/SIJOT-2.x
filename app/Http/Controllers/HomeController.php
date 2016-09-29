@@ -38,6 +38,9 @@ class HomeController extends Controller
             ->paginate(25)
             ->take(6);
 
+        // TODO: Add news posts query.
+        //       Also need to embed this in the view.
+
         return view('welcome', $data);
     }
 
