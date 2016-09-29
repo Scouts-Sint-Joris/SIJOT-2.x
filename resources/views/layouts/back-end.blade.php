@@ -162,6 +162,12 @@
                             <span>Website instellingen</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="">
+                            <i class="fa fa-envelope"></i>
+                            <span>Mailing</span>
+                        </a>
+                    </li>
                 </ul>
             </section>
             {{-- /.sidebar --}}
