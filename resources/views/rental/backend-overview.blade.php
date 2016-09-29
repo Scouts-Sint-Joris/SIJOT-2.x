@@ -42,7 +42,7 @@
                 </ul>
             </div>
 
-            <a href="" class="btn btn-success btn-xs">Verhuring toevoegen</a>
+            <a href="" class="btn btn-success btn-xs" data-toggle="modal" data-target="#insert">Verhuring toevoegen</a>
         </div>
     </div>
     <div class="box-body">
@@ -104,5 +104,9 @@
         </div>
     @endif
     {{-- /.box-footer--}}
+
+    {{-- Insert modal --}}
+        @include('rental.backend-insert')
+    {{-- /Insert modal --}}
 </div>
 @endsection

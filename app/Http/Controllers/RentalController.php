@@ -171,11 +171,12 @@ class RentalController extends Controller
                 // Trigger mailable error for now. because there is no one with the role.
 
                 // TODO: Write patch with standard platform config variable.
-                // TODO: Write notification.
                 $logins = User::with('permissions')->whereIn('name', ['rental']);
 
                 Mail::to($insert)->queue(new RentalNotificationRequest($rental));
                 Mail::to($logins)->queue(new RentalNotification($rental));
+            } elseif (auth()->check()) {
+                Notification::send(Users::all(), new RentalInsertNotification());
             }
         }
 
