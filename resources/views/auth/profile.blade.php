@@ -24,17 +24,39 @@
                 Account beveiliging.
             </a>
         </li>
-        <li>
-            <a href="#tab_3" data-toggle="tab">
-                Weergave
-            </a>
-        </li>
     </ul>
 
     <div class="tab-content">
 
         {{-- Account information --}}
         <div class="tab-pane fade in active" id="tab_1">
+            <div class="row">
+                <form action="" method="POST" class="form-horizontal">
+                    {{-- CSRF TOKEN --}}
+                    {{ csrf_field() }}
+
+                    <div class="form-group">
+                        <label for="name" class="control-label col-sm-1">
+                            Naam: <span class="text-danger">*</span>
+                        </label>
+
+                        <div class="col-sm-2">
+                            <input type="text" id="name" class="form-control" placeholder="Gebruikersnaam" value="{{ auth()->user()->name}}" name="name" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="control-label col-sm-1">
+                            Email adres: <span class="text-danger">*</span>
+                        </label>
+
+                        <div class="col-sm-2">
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Email adres." value="{{ auth()->user()->email }}" />
+                        </div>
+                    </div>
+
+                </form>
+            </form>
         </div>
         {{-- /Account information--}}
 
@@ -42,28 +64,5 @@
         <div class="tab-pane fade in" id="tab_2">
         </div>
         {{-- /Account security --}}
-
-        {{-- Layout --}}
-        <div class="tab-pane fade in" id="tab_3">
-            <div class="row">
-                <form method="POST" action="" class="form-horizontal">
-                    {{-- CSRF TOKEN--}}
-                    {{-- csrf_field() --}}
-
-                    <div class="col-sm-4">
-                        <table class="table table-condensed table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Naam:</th>
-                                    <th>Actief:</th>
-                                    <th>Niet actief.</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </form> 
-            </div>
-        </div>
-        {{-- /Layout --}}
     </div>
 @endsection
