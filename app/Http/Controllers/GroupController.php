@@ -17,12 +17,21 @@ use App\Http\Requests;
 class GroupController extends Controller
 {
     /**
+     * Auth middleware protected routes. 
+     * 
+     * @var array
+     */
+    protected $authRoutes:
+    
+    /**
      * GroupController constuctor
      */
     public function __construct()
 	{
+        $this->authRoutes = [];
+        
 		$this->middleware('lang');
-		// TODO: set the authencation middleware.
+		$this->middleware('auth')->only($this->authRoutes);
 	}
 
 	/**
@@ -60,6 +69,7 @@ class GroupController extends Controller
 	{
 		$data['group']    = Groups::getGroup('selector', $string)->get();
         $data['activity'] = Activity::where('', '')->get(); 
+        
 		return view('groups.show', $data);
 	}
 
@@ -93,7 +103,7 @@ class GroupController extends Controller
 
 		if ($group->update($input->except('_token'))) {
 			session()->flash('class', 'alert alert-success');
-			session()->flash('message',  '');
+			session()->flash('message',  trans('flash-session.group-update'));
 		}
 	}
 }

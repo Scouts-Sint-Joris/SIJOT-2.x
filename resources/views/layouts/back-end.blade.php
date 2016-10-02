@@ -157,13 +157,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('settings.index') }}">
+                        <a href="{{route('settings.index') }}">
                             <i class="fa fa-cogs"></i>
                             <span>Website instellingen</span>
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="{{ route('backend.mailing.index') }}">
                             <i class="fa fa-envelope"></i>
                             <span>Mailing</span>
                         </a>

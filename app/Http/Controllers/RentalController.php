@@ -161,7 +161,7 @@ class RentalController extends Controller
 
         if ($insert) {
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', 'flash-session.rental-insert');
+            session()->flash('message', trans('flash-session.rental-insert'));
 
             if (! auth()->check()) {
                 $rental = Rental::find($insert->id);

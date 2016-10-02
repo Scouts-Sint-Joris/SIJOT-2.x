@@ -40,7 +40,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $userId       = auth()->user()->id;
+        $userId         = auth()->user()->id;
         $data['themes'] = Themes::all();
         $data['user']   = User::find($userId); 
         

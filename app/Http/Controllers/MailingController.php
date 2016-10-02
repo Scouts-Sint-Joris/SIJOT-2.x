@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Mailing; 
+use App\Mailing;
 use App\NewsLetter;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -31,7 +31,7 @@ class MailingController extends Controller
      */
     public function __construct()
     {
-        $this->authMiddleware = [];
+        $this->authMiddleware = ['index'];
 
         // Middleware
         // $this->middleware('auth');
@@ -40,19 +40,19 @@ class MailingController extends Controller
     }
 
     /**
-     * [BACKEND]: Index overview for the mailing module. 
+     * [BACKEND]: Index overview for the mailing module.
      * 
      * @url:platform 
      * @see:phpunit
      * 
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index() 
+    public function index()
     {
         $data['newsletter'] = NewsLetter::paginate(25); 
         $data['mailing']    = Mailing::paginate(25);  
 
-        return view('', $data);        
+        return view('mailing.index', $data);        
     }
 
     /**
@@ -93,6 +93,51 @@ class MailingController extends Controller
         return redirect()->back(302);
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function registerMailing() 
+    {
+        return redirect()->back(); 
+    }
+    
+    /**
+     * [BACKEND]: Update view for the mailing data. 
+     * 
+     * @url:platform 
+     * @see:phpunit 
+     * @see:phpunit
+     * 
+     * @param  Int $id the mailing record in the database.
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function editMailing($id) 
+    {
+        
+    }
+
+    /**
+     * [METHOD]: Update the mailing address in the database. 
+     * 
+     * @url:platform 
+     * @see:phpunit 
+     * @see:phpunit
+     *
+     * @param  Requests\Mailingvalidator $input
+     * @param  int $id the mailing row in the database. 
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateMailing(Requests\MailingValidator $input, $id) 
+    {
+        $insert = Mailing::find($id)->update($input->except('_token'));
+            
+        if ($insert) {
+            session()->flash('class', 'alert alert-success');
+            session()->flash('message', '');
+        }
+        
+        return redirect()->back(); 
+    }
 
     /**
      * [METHOD]: Delete a email address out of the system.
@@ -104,7 +149,7 @@ class MailingController extends Controller
      * @param  string $string the checksum for the email address.
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function DestroyNewsletter($string)
+    public function destroyNewsletter($string)
     {
         $data = NewsLetter::where('string', $string);
 

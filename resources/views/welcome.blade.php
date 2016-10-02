@@ -86,7 +86,7 @@
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button"><span class="fa fa-envelope"></span></button>
                     </span>
-                </div><!-- /input-group -->
+                </div>{{-- /input-group --}}
             </p>
         </div>
     </div>

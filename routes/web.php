@@ -30,6 +30,9 @@ Route::get('/backend/rental/option/{id}', 'RentalController@setOption')->name('r
 Route::get('/backend/rental/confirm/{id}', 'RentalController@setConfirmed')->name('rental.backend.confirm');
 Route::get('/backend/rental/destroy/{id}', 'RentalController@destroy')->name('rental.backend.destroy');
 
+// Mailing routes 
+Route::get('/backend/mailing', 'MailingController@index')->name('backend.mailing.index'); 
+
 // User management routes.
 Route::get('backend/users/create', 'UserManagementController@create')->name('users.create');
 Route::get('backend/users', 'UserManagementController@overview')->name('users.index');
