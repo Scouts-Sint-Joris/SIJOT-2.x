@@ -130,7 +130,9 @@
                         <a href="#">
                             <i class="fa fa-home"></i> <span>Verhuur</span>
                             <span class="pull-right-container">
-                                <i class="fa fa-angle-right pull-right"></i>
+                                <small class="label pull-right bg-yellow">{{ $option }}</small>
+                                <small class="label pull-right bg-green">{{ $confirmed }}</small>
+                                <small class="label pull-right bg-red">{{ $new }}</small>
                             </span>
                         </a>
                         <ul class="treeview-menu">
