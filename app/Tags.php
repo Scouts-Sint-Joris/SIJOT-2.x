@@ -10,5 +10,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Tags extends Model
 {
-    //
+    /**
+     * Mass-assign fields.
+     *
+     * @var array
+     */
 }
