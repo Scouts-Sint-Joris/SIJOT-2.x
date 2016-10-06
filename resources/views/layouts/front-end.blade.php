@@ -37,7 +37,7 @@
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="">
-                                <span class="fa fa-leaf"></span> Takken
+                                <span class="icon-green fa fa-leaf"></span> Takken
                             </a>
                             
                             <ul class="dropdown-menu">
@@ -52,31 +52,31 @@
                         
                         <li>
                             <a href="{{ route('rental.frontend.index') }}">
-                                <span class="fa fa-home"></span> Verhuur
+                                <span class="icon-green fa fa-home"></span> Verhuur
                             </a>
                         </li>
                         
                         <li>
                             <a href="">
-                                <span class="fa fa-picture-o"></span> Foto's
+                                <span class="icon-green fa fa-picture-o"></span> Foto's
                             </a>
                         </li>
                         
                         <li>
                             <a href="">
-                                <span class="fa fa-file-text-o"></span> Planning
+                                <span class="icon-green fa fa-file-text-o"></span> Planning
                             </a>
                         </li>
                         
                         <li>
                             <a href="">
-                                <span class="fa fa-info-circle"></span> Info
+                                <span class="icon-green fa fa-info-circle"></span> Info
                             </a>
                         </li>
                         
                         <li>
                             <a href="mailto:contact@st-joris-turnhout.be">
-                                <span class="fa fa-envelope"></span> Contact
+                                <span class="icon-green fa fa-envelope"></span> Contact
                             </a>
                         </li>
                     </ul>
@@ -86,18 +86,18 @@
                         @if (Auth::check())
                             <li>
                                 <a href="">
-                                    <span class="fa fa-chevron-circle-right"></span> Backend
+                                    <span class="icon-green fa fa-chevron-circle-right"></span> Backend
                                 </a>
                             </li>
                             <li>
                                 <a href="">
-                                    <span class="fa fa-sign-out"></span> Uitloggen
+                                    <span class="icon-green fa fa-sign-out"></span> Uitloggen
                                 </a>
                             </li>
                         @else 
                             <li>
                                 <a href="{{ url('login') }}">
-                                    <span class="fa fa-sign-in"></span> Login
+                                    <span class="icon-green fa fa-sign-in"></span> Login
                                 </a>
                             </li>
                         @endif
