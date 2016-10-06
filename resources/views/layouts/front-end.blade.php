@@ -58,19 +58,19 @@
                         
                         <li>
                             <a href="">
-                                Foto's
+                                <span class="fa fa-picture-o"></span> Foto's
                             </a>
                         </li>
                         
                         <li>
                             <a href="">
-                                Planning
+                                <span class="fa fal-file-text-o"></span> Planning
                             </a>
                         </li>
                         
                         <li>
                             <a href="">
-                                Info
+                                <span class="fa fa-info-circle"></span> Info
                             </a>
                         </li>
                         
