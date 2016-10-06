@@ -42,6 +42,17 @@ class RentalTest extends TestCase
      * @group all
      * @group rental
      */
+    public function testReachablePage() 
+    {
+
+    }
+
+    /**
+     * @group frontend
+     * @group backend
+     * @group all
+     * @group rental
+     */
     public function testRentalInsertSuccess()
     {
         $this->authentication();

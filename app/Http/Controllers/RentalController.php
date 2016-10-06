@@ -231,7 +231,7 @@ class RentalController extends Controller
      */
     public function domainReachable()
     {
-        return view('');
+        return view('rental.frontend-reachable');
     }
 
     /**
