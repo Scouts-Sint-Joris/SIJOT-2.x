@@ -166,7 +166,7 @@ class NewsController extends Controller
     /**
      * [METHOD]: Delete a news post.
      *
-     * @url:platform
+     * @url:platform  GET|HEAD: 
      * @see:phpunit
      *
      * @param  int $id The news post id in the database.
@@ -174,7 +174,7 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        $destroy = News::find($id);
+        $destroy = News::findOrFail($id);
         $destroy->tags()->sync([]); 
         $destroy->delete();
 

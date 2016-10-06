@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\auth;
 
-use App\Http\Requests\ProfileInfoValidator;
-use App\Http\Requests\SecurityInfoValidator;
 use App\User;
 use App\Themes; 
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProfileInfoValidator;
+use App\Http\Requests\SecurityInfoValidator;
 
 /**
  * Class AccountController
@@ -60,7 +59,8 @@ class AccountController extends Controller
     {
         $userId = auth()->user()->id;
 
-        if (User::find($userId)->update($input->except('_token'))){
+        if (User::find($userId)->update($input->except('_token'))) // Check if we can do the update
+        {
             session()->flash('class',   'alert alert-success');
             session()->flash('message', trans('auth.FlashInfo'));
         }
@@ -82,8 +82,11 @@ class AccountController extends Controller
     {
         $userId = auth()->user()->id;
 
-        session()->flash('class', 'alert alert-success');
-        session()->flash('message', '');
+        if (User::find($userId)->update($input->except('_token'))) // Check if we can do the update
+        {
+            session()->flash('class', 'alert alert-success');
+            session()->flash('message', '');
+        }
 
         return redirect()->back();
     }
