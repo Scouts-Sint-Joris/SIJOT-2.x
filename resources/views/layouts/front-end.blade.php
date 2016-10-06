@@ -84,10 +84,22 @@
                     {{-- Right navbar. (authencation) --}}
                     <ul class="nav navbar-nav navbar-right">
                         @if (Auth::check())
-                            <li><a href="">Backend</a></li>
-                            <li><a href="">Uitloggen</a></li>
+                            <li>
+                                <a href="">
+                                    <span class="fa fa-chevron-circle-right"></span> Backend
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <span class="fa fa-sign-out"></span> Uitloggen
+                                </a>
+                            </li>
                         @else 
-                            <li><a href="{{ url('login') }}">Login</a></li>
+                            <li>
+                                <a href="{{ url('login') }}">
+                                    <span class="fa fa-sign-in"></span> Login
+                                </a>
+                            </li>
                         @endif
                     </ul>
                 </div>
