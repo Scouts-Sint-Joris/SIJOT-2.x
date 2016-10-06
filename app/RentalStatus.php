@@ -4,6 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class RentalStatus
+ * @package App
+ */
 class RentalStatus extends Model
 {
     /**

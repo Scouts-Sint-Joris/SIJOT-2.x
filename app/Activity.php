@@ -5,6 +5,10 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Activity
+ * @package App
+ */
 class Activity extends Model
 {
     /**

@@ -222,6 +222,19 @@ class RentalController extends Controller
     }
 
     /**
+     * [FRONT-END]: Display how reachable the domain is.
+     *
+     * @url:platform  GET|HEAD: /rental/reachablew
+     * @see:phpunit   RentalTest::testReachablePage()
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function domainReachable()
+    {
+        return view('');
+    }
+
+    /**
      * [METHOD]: Delete method for the rental method.
      *
      * @url:platform:  GET|HEAD: /rental/destroy/{id}
