@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-sm-12">
-            <img src="https://placehold.it/160x160" style="height:400px; width:100%; border-top-right-radius: 6px; border-top-left-radius: 6px;" alt="Alternate Text" />
+            <img src="{{ asset('assets/img/front.jpg') }}" style="height:400px; width:100%; border-top-right-radius: 6px; border-top-left-radius: 6px;" alt="Alternate Text" />
         </div>
     </div>
 
@@ -15,7 +15,7 @@
                         <h3>Alice in Wonderland, part dos</h3>
                         <p>
                             'You ought to be ashamed of yourself for asking such a simple question,' added the Gryphon; and then they both sat silent and looked at poor Alice, who felt ready to sink into the earth. At last the Gryphon said to the Mock Turtle, 'Drive on, old fellow! Don't be all day about it!' and he went on in these words:
-                            'Yes, we went to school in the sea, though you mayn't believe it—'
+                            'Yes, we went to school in the sea, though you mayn't believe itï¿½'
                             'I never said I didn't!' interrupted Alice.
                             'You did,' said the Mock Turtle.
                         </p>
@@ -29,7 +29,7 @@
                         <h3>Revolution has begun!</h3>
                         <p>
                             'I am bound to Tahiti for more men.'
-                            'Very good. Let me board you a moment—I come in peace.' With that he leaped from the canoe, swam to the boat; and climbing the gunwale, stood face to face with the captain.
+                            'Very good. Let me board you a momentï¿½I come in peace.' With that he leaped from the canoe, swam to the boat; and climbing the gunwale, stood face to face with the captain.
                             'Cross your arms, sir; throw back your head. Now, repeat after me. As soon as Steelkilt leaves me, I swear to beach this boat on yonder island, and remain there six days. If I do not, may lightning strike me!'A pretty scholar,' laughed the Lakeman. 'Adios, Senor!' and leaping into the sea, he swam back to his comrades.
                         </p>
                         <div>
