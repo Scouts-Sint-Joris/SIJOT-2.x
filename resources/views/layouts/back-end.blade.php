@@ -20,7 +20,7 @@
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition @if(isset(auth()->user()->theme)) {{ auth()->user()->theme }} @else skin-blue @endif sidebar-mini">
     {{-- Site wrapper --}}
     <div class="wrapper">
 

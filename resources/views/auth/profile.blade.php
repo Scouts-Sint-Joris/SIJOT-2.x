@@ -55,6 +55,22 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="view" class="control-label col-sm-1">
+                            Weergave: {{-- <span class="text-danger">*</span> --}}
+                        </label>
+
+                        <div class="col-sm-2">
+                            <select id="view" class="form-control" name="theme">
+                                <option value="">-- Selecteer uw weergave --</option>µ
+
+                                @foreach($themes as $theme) 
+                                    <option value="{{ $theme->class }}">{{ $theme->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
                 </form>
             </form>
         </div>

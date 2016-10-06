@@ -15,10 +15,12 @@ class UserTableSeeder extends Seeder
     {
         $data1['name']       = 'Administrator';
 		$data1['email']      = 'admin@st-joris-turnhout.be';
+        $data1['theme']      = 'skin-red';
 		$data1['password']   = bcrypt('root1995');
 
         $data2['name']       = 'Tim Joosten'; 
         $data2['email']      = 'Topairy@gmail.com'; 
+        $data2['theme']      = 'skin-red';
         $data2['password']   = bcrypt('admin1995');
 
 		$table = DB::table('users');

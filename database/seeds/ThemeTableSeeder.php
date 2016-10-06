@@ -17,40 +17,40 @@ class ThemeTableSeeder extends Seeder
             // ['name' => '', 'class' => ''],
             [
                 'name' => 'Thema zwart', 
-                'class' => ''
+                'class' => 'skin-black'
             ], [
                 'name' => 'Thema licht zwart', 
-                'class' => ''
+                'class' => 'skin-black-light'
             ], [
                 'name' => 'Thema blauw', 
-                'class' => ''
+                'class' => 'skin-blue'
             ], [
                 'name' => 'Theme licht blauw', 
-                'class' => ''
+                'class' => 'skin-blue-light'
             ], [
                 'name' => 'Thema Groen', 
-                'class' => ''
+                'class' => 'skin-green'
             ], [
                 'name' => 'Thema licht groen', 
-                'class' => ''
+                'class' => 'skin-green-light'
             ], [
                 'name' => 'Thema purper',
-                'class' => ''
+                'class' => 'skin-purple'
             ], [   
                 'name' => 'Thema licht purper', 
-                'class' => ''
+                'class' => 'skin-purple-light'
             ], [   
                 'name' => 'Thema rood', 
-                'class' => ''
+                'class' => 'skin-red'
             ], [   
                 'name' => 'Thema licht rood', 
-                'class' => ''
+                'class' => 'skin-red-light'
             ], [
                 'name' => 'Thema geel', 
-                'class' => ''
+                'class' => 'skin-yellow'
             ], [
                 'name' => 'Thema licht geel', 
-                'class' => ''
+                'class' => 'skin-yellow-light'
             ],
         ];
 
