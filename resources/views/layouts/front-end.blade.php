@@ -64,7 +64,7 @@
                         
                         <li>
                             <a href="">
-                                <span class="fa fal-file-text-o"></span> Planning
+                                <span class="fa fa-file-text-o"></span> Planning
                             </a>
                         </li>
                         
