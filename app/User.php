@@ -24,4 +24,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    /**
+     * Check if the user is logged in. 
+     * --------
+     * USAGE: auth()->user()->isOnline();
+     *
+     * @return boolean
+     */
+    public function isOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
+    }
 }

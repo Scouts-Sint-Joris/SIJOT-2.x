@@ -30,6 +30,9 @@ Route::get('/backend/rental/option/{id}', 'RentalController@setOption')->name('r
 Route::get('/backend/rental/confirm/{id}', 'RentalController@setConfirmed')->name('rental.backend.confirm');
 Route::get('/backend/rental/destroy/{id}', 'RentalController@destroy')->name('rental.backend.destroy');
 
+// News items. 
+Route::get('/backend/news', 'NewsController@index')->name('news.backend.index');
+
 // Mailing routes 
 Route::get('/backend/mailing', 'MailingController@index')->name('backend.mailing.index'); 
 

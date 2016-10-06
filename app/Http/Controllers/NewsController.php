@@ -27,23 +27,25 @@ class NewsController extends Controller
     }
 
     /**
-     * [BACKEND]: 
+     * [BACKEND]: Get the backend overview page. 
+     *
+     * @url:platform  GET|HEAD: /backend/news
+     * @see:phpunit 
      * 
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
+        // Item states: 
+        // -----
+        // 1 = publish 
+        // 0 = draft. 
 
-    }
-    
-    /**
-     * [BACKEND]: 
-     * 
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create() 
-    {
-        return view();
+        $data['draft']   = News::where('state', 0)->get(); 
+        $data['publish'] = News::where('state', 1)->get();
+        $data['tags']    = Tags::all();
+
+        return view('news.index', $data);
     }
 
     /**
@@ -58,6 +60,14 @@ class NewsController extends Controller
      */
     public function store($input)
     {
+        $create = News::create($input->except('_token')); 
+
+        if ($create) // Can create  the news item.
+        {
+            session()->flash('class', 'alert alert-success');
+            session()->flash('message', trans('flash-session.news-create')); 
+        }
+
         return redirect()->back();
     }
 
@@ -73,7 +83,7 @@ class NewsController extends Controller
     public function BackendShow($id)
     {
         $data['item'] = News::find($id);
-        return view(); 
+        return view('', $data); 
     }
     
     /**
@@ -124,9 +134,10 @@ class NewsController extends Controller
      */
     public function draft($id)
     {
-        if (News::findOrFail($id)->update(['state' => 0])) {
-            session()->flash('class', ''); 
-            session()->flash('message', ''); 
+        if (News::findOrFail($id)->update(['state' => 0])) 
+        {
+            session()->flash('class', 'alert alert-success'); 
+            session()->flash('message', trans('flash-session.new-draft')); 
         } 
 
         return redirect()->back();
@@ -143,9 +154,10 @@ class NewsController extends Controller
      */
     public function publish($id)
     {
-        if (News::findOrFail($id)->update(['state' => 1])) {
+        if (News::findOrFail($id)->update(['state' => 1])) 
+        {
             session()->flash('class', 'alert alert-danger'); 
-            session()->flash('message', '');
+            session()->flash('message', trans('flash-session.news-publish'));
         }
 
         return redirect()->back();
@@ -162,9 +174,14 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        if (News::destroy($id)) {
+        $destroy = News::find($id);
+        $destroy->tags()->sync([]); 
+        $destroy->delete();
+
+        if ($destroy) // Check: can destroy a news item. 
+        {
             session()->flash('class', 'alert alert-danger');
-            session()->flash('message', '');
+            session()->flash('message', trans('flash-session.news-destroy'));
         }
 
         return redirect()->back();

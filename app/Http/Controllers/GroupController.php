@@ -101,7 +101,8 @@ class GroupController extends Controller
 	{
 		$group = Groups::where('selector', $param);
 
-		if ($group->update($input->except('_token'))) {
+		if ($group->update($input->except('_token'))) // Update the group data
+		{
 			session()->flash('class', 'alert alert-success');
 			session()->flash('message',  trans('flash-session.group-update'));
 		}

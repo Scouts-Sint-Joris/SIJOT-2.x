@@ -63,9 +63,10 @@ class MailingController extends Controller
      */
     public function MailingDestroy($id) 
     {
-        if (Mailing::destroy($id)) {
+        if (Mailing::destroy($id)) // Check if the mailing record is deleted.
+        {
             session()->flash('class', 'alert alert-success'); 
-            session()->flash('message', '');
+            session()->flash('message', trans('flash-session.mailing-destroy'));
         }
 
         return redirect()->back(); 
@@ -78,26 +79,40 @@ class MailingController extends Controller
      * @see:phpunit   TODO: create test when validation fails.
      * @see:phpunit   TODO: create test when validation passes.
      *
+     * @param  Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function registerNewsLetter(Request $input)
     {
         // TODO: Create notification to the inserted email address.
         //       In the notification the user must un subscribe his email.
+        $insert = NewsLetter::create($input->except('_token'));
 
-        if (NewsLetter::create($input->except('_token'))) {
+        if ($insert) // Check if the newsletter email is inserted.
+        {
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', '');
+            session()->flash('message', trans('flash-session.newsletter-register'));
         }
 
         return redirect()->back(302);
     }
 
     /**
+     * [METHOD]: Register the email data to mailinglists. 
+     *
+     * @param  Request $input
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function registerMailing() 
+    public function registerMailing(Request $înput) 
     {
+        $create = Mailing::create($input->except('_token'));
+
+        if ($create) // Create the email address for the mailing platform.  
+        {
+            session()->flash('class', 'alert alert-success'); 
+            session()->flash('message', trans('flash-session.mailing-register'));
+        }
+
         return redirect()->back(); 
     }
     
@@ -113,7 +128,8 @@ class MailingController extends Controller
      */
     public function editMailing($id) 
     {
-        
+        $data['mailing'] = Mailing::find($id);
+        return view('', $data);  
     }
 
     /**
@@ -131,9 +147,10 @@ class MailingController extends Controller
     {
         $insert = Mailing::find($id)->update($input->except('_token'));
             
-        if ($insert) {
+        if ($insert) // Mailing details insert check.
+        {
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', '');
+            session()->flash('message', trans('flash-session.mailing-update'));
         }
         
         return redirect()->back(); 
@@ -153,7 +170,8 @@ class MailingController extends Controller
     {
         $data = NewsLetter::where('string', $string);
 
-        if ($data->count() === 1) {
+        if ($data->count() === 1) // Delete control function.
+        {
             $data->destroy();
 
             session()->flash('class', 'alert alert-success');

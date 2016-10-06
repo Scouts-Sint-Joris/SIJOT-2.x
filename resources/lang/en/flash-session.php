@@ -18,8 +18,20 @@ return [
     'user-block'   => 'The user has been blocked from the system.',
     'user-unblock' => 'The user is active again.',
 
-    // Mailing flash sessions. 
+    // news section flash messages. 
+    'news-destroy' => 'The news message has been deleted.',
+    'news-publish' => 'The news message has been published.', 
+    'news-draft'   => 'The news message is now a draft.',
+    'new-create'   => 'The new message has been created',
 
+    // Newsletter flash messages. 
+    'newsletter-register' => 'The email address has been saved in the database.',
+
+    // Mailing flash sessions. 
+    'mailing-register' => 'The email data has been saved in the mailing module.',
+    'mailing-update'   => 'The email data has been updated.',
+    'mailing-destroy'  => 'The email data has been removed out off the mailing module.'
+ 
     // Settings flash messages. 
     
     // Group flash messages. 

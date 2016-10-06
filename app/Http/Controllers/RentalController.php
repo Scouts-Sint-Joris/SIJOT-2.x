@@ -99,7 +99,8 @@ class RentalController extends Controller
      */
     public function setOption($id)
     {
-        if (Rental::find($id)->update(['status_id' => 1])) {
+        if (Rental::find($id)->update(['status_id' => 1])) // Rental update check.
+        {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.rental-option'));
         }
@@ -118,7 +119,8 @@ class RentalController extends Controller
      */
     public function setConfirmed($id)
     {
-        if (Rental::find($id)->update(['status_id' => 2])) {
+        if (Rental::find($id)->update(['status_id' => 2])) // Rental update check.
+        {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.rental-confirm'));
 
@@ -159,21 +161,21 @@ class RentalController extends Controller
 
         Rental::find($insert->id)->update(['status_id' => $status->id]);
 
-        if ($insert) {
+        if ($insert) // The Rental data has been inserted.
+        {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.rental-insert'));
 
-            if (! auth()->check()) {
+            if (! auth()->check()) // No logged in user found.
+            {
                 $rental = Rental::find($insert->id);
-
-                // Trigger mailable error for now. because there is no one with the role.
-
-                // TODO: Write patch with standard platform config variable.
                 $logins = User::with('permissions')->whereIn('name', ['rental']);
 
                 Mail::to($insert)->queue(new RentalNotificationRequest($rental));
                 Mail::to($logins)->queue(new RentalNotification($rental));
-            } elseif (auth()->check()) {
+            } 
+            elseif (auth()->check()) // User is authencated.  
+            {
                 // TODO: Create the notification class.
                 // Notification::send(User::all(), new RentalInsertNotification());
             }
@@ -232,7 +234,8 @@ class RentalController extends Controller
     {
         $delete = Rental::destroy($id);
 
-        if ($delete) {
+        if ($delete) // Check if a rental has been deleted. 
+        {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.rental-delete'));
         }

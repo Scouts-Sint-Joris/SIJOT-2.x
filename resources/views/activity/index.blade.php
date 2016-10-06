@@ -270,7 +270,7 @@
                 </div>
             
             </div>
-        {{-- /.tab-pane -->
+        {{-- /.tab-pane --}}
 
     </div>
     {{-- /.tab-content --}}

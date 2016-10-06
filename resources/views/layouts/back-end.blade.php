@@ -56,7 +56,7 @@
                                 <li class="header">You have 10 notifications</li>
                                 <li>
                                     <!-- Inner Menu: contains the notifications -->
-                                    <ul class="menu">
+                                    <ul class="menu" style="overflow: hidden; width: 100%; height: auto !important;">
                                         <li>
                                             <!-- start notification -->
                                             <a href="#">
@@ -160,6 +160,12 @@
                         <a href="{{route('settings.index') }}">
                             <i class="fa fa-cogs"></i>
                             <span>Website instellingen</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('news.backend.index') }}">
+                            <i class="fa fa-asterisk"></i>
+                            <span>Nieuws berichten</span>
                         </a>
                     </li>
                     <li>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\News;
+use App\User;
 use App\Activity;
 use Illuminate\Http\Request;
 
@@ -32,14 +34,12 @@ class HomeController extends Controller
 	 */
     public function homeFront()
     {
+        $data['news']       = News::paginate(4);
         $data['activities'] = Activity::with(['groups', 'creator'])
             ->where('state', 1)
             ->orderBy('date', 'ASC')
             ->paginate(25)
             ->take(6);
-
-        // TODO: Add news posts query.
-        //       Also need to embed this in the view.
 
         return view('welcome', $data);
     }
@@ -54,6 +54,7 @@ class HomeController extends Controller
      */
     public function homeBackend()
     {
-        return view('backend');
+        $data['users'] = User::all();
+        return view('backend', $data);
     }
 }
