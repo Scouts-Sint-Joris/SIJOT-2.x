@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-sm-12">
-        <img src="https://placehold.it/160x160" style="height:400px; width:100%; border-top-right-radius: 6px; border-top-left-radius: 6px;" alt="Alternate Text" />
+        <img src="{{ asset('assets/img/front.jpg') }}" style="height:400px; width:100%; border-top-right-radius: 6px; border-top-left-radius: 6px;" alt="Alternate Text" />
     </div>
 </div>
 <div style="margin-bottom: -22px;" class="row">
@@ -22,27 +22,27 @@
                         {{-- CSRF TOKEN --}}
                         {{ csrf_field() }}
 
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('start_date') ? 'has-error' : '' }}">
                             <label class="control-label col-sm-2" id="start">
                                 Start datum: <span class="text-danger">*</span>
                             </label>
 
                             <div class="col-sm-4">
-                                <input type="date" id="start" name="start_date" value="" class="form-control" />
+                                <input placeholder="Start datum" type="date" id="start" name="start_date" value="" class="form-control" />
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('end_date') ? 'has-error' : '' }}">
                             <label class="control-label col-sm-2" id="eind">
                                 Eind datum: <span class="text-danger">*</span> 
                             </label>
 
                             <div class="col-sm-4">
-                                <input type="date" id="eind" name="end_date" value="" class="form-control" />
+                                <input placeholder="Eind datum" type="date" id="eind" name="end_date" value="" class="form-control" />
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('group') ? 'has-error' : '' }}">
                             <label class="control-label col-sm-2" id="groep">
                                 Groep: <span class="text-danger">*</span>
                             </label>
@@ -52,7 +52,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                             <label id="email" class="control-label col-sm-2">
                                 Email adres: <span class="text-danger">*</span>
                             </label>   

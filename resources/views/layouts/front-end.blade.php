@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Web site van scouts en gidsen Sint-joris | Turnhout">
-        <meta name="author" content="Tim Joosten">
+        <meta name="author" content="Scouts en Gidsen - Sint-Joris">
         
         <title> Scouts en Gidsen Sint-Joris Turnhout </title> 
         

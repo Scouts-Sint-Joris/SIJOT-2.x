@@ -5,7 +5,7 @@
 @section('content')
 <div class="row">
     <div class="col-sm-12">
-        <img src="https://placehold.it/160x160" style="height:400px; width:100%; border-top-right-radius: 6px; border-top-left-radius: 6px;" alt="Alternate Text" />
+        <img src="{{ asset('assets/img/front.jpg') }}" style="height:400px; width:100%; border-top-right-radius: 6px; border-top-left-radius: 6px;" alt="Alternate Text" />
     </div>
 </div>
 <div style="margin-bottom: -22px;" class="row">
