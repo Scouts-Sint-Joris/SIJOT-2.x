@@ -2,8 +2,7 @@
 
 @section('content-header')
 <h1>
-    Account configuratie
-    <small>Configuratie module voor uw profiel..</small>
+    Account configuratie <small>Configuratie module voor uw profiel..</small>
 </h1>
 <ol class="breadcrumb">
     <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Home</a></li>

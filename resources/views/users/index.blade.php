@@ -92,5 +92,10 @@
         </ul>
     </div>
     {{-- /.box footer --}}
+
+    {{-- Partials --}}
+        @include('users.create')
+        @include('users.search')
+    {{-- /Partials --}}
 </div>
 @endsection
