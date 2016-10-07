@@ -78,6 +78,12 @@
 
         {{-- Account security --}}
         <div class="tab-pane fade in" id="tab_2">
+            <div class="row">
+                <form action="" method="POST" class="form-horizontal">
+                    {{-- CSRF Token --}}
+                    {{ csrf_field() }}
+                </form>
+            </div>
         </div>
         {{-- /Account security --}}
     </div>
