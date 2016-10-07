@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BackUpSettingsValidator;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
@@ -39,21 +38,22 @@ class SettingsController extends Controller
 
     /**
      * [METHOD]: Update the general application settings.
-	 *
-	 * @url:platform  POST:
-	 * @see:phpunit   Write phpunit test -> when validation fails.
-	 * @see:phpunit   Write phpunit test -> when validation passes.
-	 *
+     *
+     * @url:platform  POST:
+     * @see:phpunit   Write phpunit test -> when validation fails.
+     * @see:phpunit   Write phpunit test -> when validation passes.
+     *
+     * @param  Requests\SettingsUpdateValidator $input
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updatePlatformSettings()
+    public function updatePlatformSettings(Requests\SettingsUpdateValidator $input)
     {
         dd($input->all()); // For debugging propose.
 
         session()->flash('class', 'alert alert-success');
-        session()->flash('message', '');
+        session()->flash('message', trans());
 
-		return redirect()->back();
+		return redirect()->back(302);
     }
 
     /**
@@ -63,24 +63,34 @@ class SettingsController extends Controller
      * @see:phpunit
      * @see:phpunit
      *
+     * @param  Requests\EnvironmentValidator $input
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateEnvironmentSettings()
+    public function updateEnvironmentSettings(Requests\EnvironmentValidator $input)
     {
+        session()->flash('class', 'alert alert-success');
+        session()->flash('message', trans());
 
+        return redirect()->back(302);
     }
 
     /**
-     * @param  BackUpSettingsValidator $input
+     * [METHOD]: Update the database backup settings.
+     *
+     * @url:platform
+     * @see:phpunit
+     * @see:phpunit
+     *
+     * @param  Requests\BackUpSettingsValidator $input
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateBackUpSettings(BackUpSettingsValidator $input)
+    public function updateBackUpSettings(Requests\BackUpSettingsValidator $input)
     {
 		dd($input->all()); // For debugging propose
 
 		session()->flash('class', 'alert alert-success');
-		session()->flash('message', '');
+		session()->flash('message', trans());
 
-		return redirect()->back();
+		return redirect()->back(302);
     }
 }
