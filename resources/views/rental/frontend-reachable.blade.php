@@ -11,76 +11,9 @@
         <div style="border-radius:0px; border: 0px;" class="panel panel-default">
             <div class="panel-body">
                 <div class="col-md-8">
-                    <h3>Verhuur aanvraag.</h3>
-
-                    <div class="alert alert-danger">
-                        <span class="fa fa-info-circle"></span> Het laatste weekend van een maand verhuren we niet.
-                    </div>
+                    <h3>Bereikbaarheid van het domein. </h3>    
+                    <p>Ons domein is vlot te bereiken op de volgende manieren:</p>
                     
-                    {{-- Request form --}}
-                    <form class="form-horizontal" method="POST" action="{{ route('rental.store') }}">
-                        {{-- CSRF TOKEN --}}
-                        {{ csrf_field() }}
-
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" id="start">
-                                Start datum: <span class="text-danger">*</span>
-                            </label>
-
-                            <div class="col-sm-4">
-                                <input type="date" id="start" name="start_date" value="" class="form-control" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" id="eind">
-                                Eind datum: <span class="text-danger">*</span> 
-                            </label>
-
-                            <div class="col-sm-4">
-                                <input type="date" id="eind" name="end_date" value="" class="form-control" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" id="groep">
-                                Groep: <span class="text-danger">*</span>
-                            </label>
-
-                            <div class="col-sm-4">
-                                <input class="form-control" placeholder="Groep naam" value="" name="group" id="groep">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label id="email" class="control-label col-sm-2">
-                                Email adres: <span class="text-danger">*</span>
-                            </label>   
-
-                            <div class="col-sm-4">
-                                <input class="form-control" placeholder="Email adres" value="" name="email" id="email">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label id="tel" class="control-label col-sm-2">
-                                Nummer:  {{-- <span class="text-danger">*</span> --}}
-                            </label> 
-
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" placeholder="GSM nummer" value="" name="phone_number" id="tel">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-5 col-sm-offset-2">
-                                <button type="submit" class="btn btn-sm btn-success">Aanvragen</button> 
-                                <button type="reset" class="btn btn-sm btn-danger">Reset</button>
-                            </div>
-                        </div>
-
-                    </form>
-                    {{-- /Request form --}}
                 </div>
 
                 <div class="col-md-4">
@@ -91,7 +24,7 @@
                             <a href="{{route('rental.frontend.index') }}" class="list-group-item">
                                 <span class="fa fa-info-circle"></span> Informatie
                             </a>
-                             <a href="{{ route('rental.frontend.reachable')) }}" class="list-group-item">
+                             <a href="{{ route('rental.frontend.reachable') }}" class="list-group-item">
                                 <span class="fa fa-asterisk"></span>Bereikbaarheid
                             </a>
                             <a href="{{ route('rental.frontend-calendar') }}" class="list-group-item">

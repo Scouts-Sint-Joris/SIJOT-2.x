@@ -29,7 +29,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     
-                    <a class="navbar-brand font-heading" href="#">Sint-Joris</a>
+                    <a class="navbar-brand font-heading" href="{{ route('home') }}">Sint-Joris</a>
                 </div>
                 
                 <div id="navbar" class="collapse navbar-collapse">
@@ -68,10 +68,15 @@
                             </a>
                         </li>
                         
-                        <li>
-                            <a href="">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="icon-green fa fa-info-circle"></span> Info
                             </a>
+
+                            <ul class="dropdown-menu">
+                                <li><a href="">Lid worden</a></li>
+                                <li><a href="">Medische fiche.</a></li>
+                            </ul>
                         </li>
                         
                         <li>
@@ -112,7 +117,7 @@
         </div>
     
         {{-- Javascript --}}
-        <script src=""></script>
-        <script src=""></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </body>
 </html>

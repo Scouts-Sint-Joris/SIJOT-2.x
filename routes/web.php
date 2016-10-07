@@ -23,6 +23,7 @@ Route::get('/home', 'Homecontroller@homeBackend')->name('home.backend');
 Route::get('/rental', 'RentalController@indexFrontEnd')->name('rental.frontend.index');
 Route::get('/rental/insert', 'RentalController@insertViewFrontEnd')->name('rental.frontend.insert');
 Route::get('/rental/calendar', 'RentalController@calendar')->name('rental.frontend-calendar');
+Route::get('/rental/reachable', 'RentalController@domainReachable')->name('rental.frontend.reachable');
 Route::post('/rental/insert','RentalController@insert')->name('rental.store');
 
 Route::get('/backend/rental', 'RentalController@indexBackEnd')->name('rental.backend');
