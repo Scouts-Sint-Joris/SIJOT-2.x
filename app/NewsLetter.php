@@ -10,5 +10,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class NewsLetter extends Model
 {
-    //
+    /**
+     * Mass-assign fields
+     *
+     * @var array
+     */
+    protected $fillable = [];
 }

@@ -15,4 +15,16 @@ class Tags extends Model
      *
      * @var array
      */
+    protected $fillable = ['name', 'class'];
+
+    /**
+     * Connect the tags to the news items.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function news()
+    {
+        return $this->belongsToMany('App\News')
+            ->withTimestamps();
+    }
 }
