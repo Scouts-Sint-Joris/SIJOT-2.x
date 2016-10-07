@@ -5,10 +5,10 @@
 @section('content')
 <div class="row">
     <div class="col-sm-12">
-        <img src="{{ asset('assets/img/front.jpg') }}" style="height:400px; width:100%; border-top-right-radius: 6px; border-top-left-radius: 6px;" alt="Alternate Text" />
+        <img class="front-image" src="{{ asset('assets/img/front.jpg') }}" alt="Alternate Text" />
     </div>
 </div>
-<div style="margin-bottom: -22px;" class="row">
+<div class="content-margin row">
     <div class="col-sm-12">
         <div style="border-radius:0px; border: 0px;" class="panel panel-default">
             <div class="panel-body">
@@ -109,7 +109,7 @@
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button"><span class="fa fa-envelope"></span></button>
                     </span>
-                </div><!-- /input-group -->
+                </div>{{-- /input-group --}}
             </p>
         </div>
     </div>

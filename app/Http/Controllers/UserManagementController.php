@@ -34,7 +34,6 @@ class UserManagementController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('lang');
-        // TODO: Implement user activity middleware.
     }
 
     /**
@@ -139,7 +138,7 @@ class UserManagementController extends Controller
      */
     public function block($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->revokePermissionTo('active');
         $user->givePermssionTo('blocked');
 
@@ -163,7 +162,7 @@ class UserManagementController extends Controller
      */
     public function unblock($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->revokePermissionTo('blocked');
         $user->givePermissionTo('active');
 

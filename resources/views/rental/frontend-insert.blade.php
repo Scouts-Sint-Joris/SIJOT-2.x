@@ -6,9 +6,9 @@
         <img src="{{ asset('assets/img/front.jpg') }}" style="height:400px; width:100%; border-top-right-radius: 6px; border-top-left-radius: 6px;" alt="Alternate Text" />
     </div>
 </div>
-<div style="margin-bottom: -22px;" class="row">
+<div class="content-margin row">
     <div class="col-sm-12">
-        <div style="border-radius:0px; border: 0px;" class="panel panel-default">
+        <div class="content-border panel panel-default">
             <div class="panel-body">
                 <div class="col-md-8">
                     <h3>Verhuur aanvraag.</h3>
@@ -28,7 +28,7 @@
                             </label>
 
                             <div class="col-sm-4">
-                                <input placeholder="Start datum" type="date" id="start" name="start_date" value="" class="form-control" />
+                                <input placeholder="Start datum" type="date" id="start" name="start_date" value="{{ old('start_date') }}" class="form-control" />
                             </div>
                         </div>
 
@@ -38,7 +38,7 @@
                             </label>
 
                             <div class="col-sm-4">
-                                <input placeholder="Eind datum" type="date" id="eind" name="end_date" value="" class="form-control" />
+                                <input placeholder="Eind datum" type="date" id="eind" name="end_date" value="{{ old('end_date') }}" class="form-control" />
                             </div>
                         </div>
 
@@ -48,7 +48,7 @@
                             </label>
 
                             <div class="col-sm-4">
-                                <input class="form-control" placeholder="Groep naam" value="" name="group" id="groep">
+                                <input class="form-control" placeholder="Groep naam" value="{{ old('group') }}" name="group" id="groep">
                             </div>
                         </div>
 
@@ -58,7 +58,7 @@
                             </label>   
 
                             <div class="col-sm-4">
-                                <input class="form-control" placeholder="Email adres" value="" name="email" id="email">
+                                <input class="form-control" placeholder="Email adres" value="{{ old('email') }}" name="email" id="email">
                             </div>
                         </div>
 
@@ -68,7 +68,7 @@
                             </label> 
 
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" placeholder="GSM nummer" value="" name="phone_number" id="tel">
+                                <input type="text" class="form-control" placeholder="GSM nummer" value="{{ old('phone_number') }}" name="phone_number" id="tel">
                             </div>
                         </div>
 

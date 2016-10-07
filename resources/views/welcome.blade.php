@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    <div style="margin-bottom: -22px;" class="row">
+    <div class="content-margin row">
         <div class="col-sm-12">
             <div style="border-radius:0px; border: 0px;" class="panel panel-default">
                 <div class="panel-body">
