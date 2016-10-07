@@ -63,6 +63,14 @@ class UserManagementController extends Controller
         return view('users.create');
     }
 
+    /**
+     * @param  int $id The user id in the database.
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function resetPassword($id)
+    {
+        return redirect()->back();
+    }
 
     /**
      * [METHOD]: Search for a specific user.
