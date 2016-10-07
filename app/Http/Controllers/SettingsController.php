@@ -26,8 +26,8 @@ class SettingsController extends Controller
      * [BACK-END]: Get the update view for the application settings.
      *
      * @url:platform  GET|HEAD:
-     * @see:phpunit
-     * @see:phpunit
+     * @see:phpunit   SettingsTest::
+     * @see:phpunit   SettingsTest::
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -39,9 +39,9 @@ class SettingsController extends Controller
     /**
      * [METHOD]: Update the general application settings.
      *
-     * @url:platform  POST:
-     * @see:phpunit   Write phpunit test -> when validation fails.
-     * @see:phpunit   Write phpunit test -> when validation passes.
+     * @url:platform  PUT|PATCH:
+     * @see:phpunit   SettingsTest::
+     * @see:phpunit   SettingsTest::
      *
      * @param  Requests\SettingsUpdateValidator $input
      * @return \Illuminate\Http\RedirectResponse
@@ -51,7 +51,7 @@ class SettingsController extends Controller
         dd($input->all()); // For debugging propose.
 
         session()->flash('class', 'alert alert-success');
-        session()->flash('message', trans());
+        session()->flash('message', trans('flash-session.update-platform'));
 
 		return redirect()->back(302);
     }
@@ -59,17 +59,19 @@ class SettingsController extends Controller
     /**
      * [METHOD]: Update the environment settings.
      *
-     * @url:platform
-     * @see:phpunit
-     * @see:phpunit
+     * @url:platform  PUT|PATCH:
+     * @see:phpunit   SettingsTest::
+     * @see:phpunit   SettingsTest::
      *
      * @param  Requests\EnvironmentValidator $input
      * @return \Illuminate\Http\RedirectResponse
      */
     public function updateEnvironmentSettings(Requests\EnvironmentValidator $input)
     {
+        dd($input->all()); // For debugging propose.
+
         session()->flash('class', 'alert alert-success');
-        session()->flash('message', trans());
+        session()->flash('message', trans('flash-session.update-environment'));
 
         return redirect()->back(302);
     }
@@ -77,9 +79,9 @@ class SettingsController extends Controller
     /**
      * [METHOD]: Update the database backup settings.
      *
-     * @url:platform
-     * @see:phpunit
-     * @see:phpunit
+     * @url:platform  PUT|PATCH:
+     * @see:phpunit   SettingsTest::
+     * @see:phpunit   SettingsTest::
      *
      * @param  Requests\BackUpSettingsValidator $input
      * @return \Illuminate\Http\RedirectResponse
@@ -89,7 +91,7 @@ class SettingsController extends Controller
 		dd($input->all()); // For debugging propose
 
 		session()->flash('class', 'alert alert-success');
-		session()->flash('message', trans());
+		session()->flash('message', trans('flash-session.update-backup'));
 
 		return redirect()->back(302);
     }

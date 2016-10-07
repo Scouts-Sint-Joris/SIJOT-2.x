@@ -103,7 +103,7 @@ class MailingController extends Controller
      * @param  Request $input
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function registerMailing(Request $înput) 
+    public function registerMailing(Request $input)
     {
         $create = Mailing::create($input->except('_token'));
 

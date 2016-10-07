@@ -174,7 +174,7 @@ class RentalController extends Controller
                 Mail::to($insert)->queue(new RentalNotificationRequest($rental));
                 Mail::to($logins)->queue(new RentalNotification($rental));
             } 
-            elseif (auth()->check()) // User is authencated.  
+            elseif (auth()->check()) // User is authencated. Send notification.
             {
                 // TODO: Create the notification class.
                 // Notification::send(User::all(), new RentalInsertNotification());
@@ -254,5 +254,29 @@ class RentalController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    /**
+     *
+     */
+    public function exportExcel()
+    {
+
+    }
+
+    /**
+     *
+     */
+    public function exportPdf()
+    {
+
+    }
+
+    /**
+     *
+     */
+    public function exportCsv()
+    {
+
     }
 }

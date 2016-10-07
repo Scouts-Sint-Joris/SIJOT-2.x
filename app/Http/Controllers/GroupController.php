@@ -21,7 +21,7 @@ class GroupController extends Controller
      * 
      * @var array
      */
-    protected $authRoutes:
+    protected $authRoutes;
     
     /**
      * GroupController constuctor
@@ -79,10 +79,12 @@ class GroupController extends Controller
 	 * @url:platform  GET|HEAD:
 	 * @see:phpunit   GroupControllerTest::
 	 *
+     * @param  string $param The group selector in the database.
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-	public function edit()
+	public function edit($param)
 	{
+	    $data['group'] = Groups::getGroup($param)->get();
 		return view('', $data);
 	}
 
