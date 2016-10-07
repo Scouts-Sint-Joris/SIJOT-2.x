@@ -257,25 +257,9 @@ class RentalController extends Controller
     }
 
     /**
-     *
+     * [METHOD]:
      */
     public function exportExcel()
-    {
-
-    }
-
-    /**
-     *
-     */
-    public function exportPdf()
-    {
-
-    }
-
-    /**
-     *
-     */
-    public function exportCsv()
     {
 
     }

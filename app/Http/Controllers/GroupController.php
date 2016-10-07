@@ -65,9 +65,9 @@ class GroupController extends Controller
 	 * @param  string $param the group identifier in the database.
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-	public function specific($string)
+	public function specific($param)
 	{
-		$data['group']    = Groups::getGroup('selector', $string)->get();
+		$data['group']    = Groups::getGroup('selector', $param)->get();
         $data['activity'] = Activity::where('', '')->get(); 
         
 		return view('groups.show', $data);

@@ -34,7 +34,7 @@ class HomeController extends Controller
 	 */
     public function homeFront()
     {
-        $data['news']       = News::paginate(4);
+        $data['news']       = News::where('state', 1)->paginate(4);
         $data['activities'] = Activity::with(['groups', 'creator'])
             ->where('state', 1)
             ->orderBy('date', 'ASC')
