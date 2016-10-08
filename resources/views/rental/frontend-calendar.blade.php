@@ -59,10 +59,12 @@
                         <div class="panel-heading">Menu:</div>
 
                         <div class="list-group">
-                            <a href="{{route('rental.frontend.index') }}" class="list-group-item">
+                            <a href="{{ route('rental.frontend.index') }}" class="list-group-item">
                                 <span class="fa fa-info-circle"></span> Informatie
                             </a>
-                            <a href="" class="list-group-item">Bereikbaarheid</a>
+                             <a href="{{ route('rental.frontend.reachable')) }}" class="list-group-item">
+                                <span class="fa fa-info-circle"></span> Bereikbaarheid
+                            </a>
                             <a href="{{ route('rental.frontend-calendar') }}" class="list-group-item">
                                 <span class="fa fa-calendar"></span> Verhuur kalender
                             </a>

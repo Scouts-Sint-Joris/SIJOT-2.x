@@ -1,11 +1,9 @@
 @extends('layouts.front-end')
 
-{{-- TODO: Set the rental pictures local --}}
-
 @section('content')
 <div class="row">
     <div class="col-sm-12">
-        <img src="{{ asset('assets/img/front.jpg') }}" style="height:400px; width:100%; border-top-right-radius: 6px; border-top-left-radius: 6px;" alt="Alternate Text" />
+        <img src="https://placehold.it/160x160" style="height:400px; width:100%; border-top-right-radius: 6px; border-top-left-radius: 6px;" alt="Alternate Text" />
     </div>
 </div>
 <div style="margin-bottom: -22px;" class="row">
@@ -13,45 +11,9 @@
         <div style="border-radius:0px; border: 0px;" class="panel panel-default">
             <div class="panel-body">
                 <div class="col-md-8">
-                    <h3>Verhuur info.</h3>
+                    <h3>Bereikbaarheid van het domein. </h3>    
+                    <p>Ons domein is vlot te bereiken op de volgende manieren:</p>
                     
-                    <p>
-                        Onze Lokalen zijn het hele jaar te huur voor verenigingen.<br>
-                        Of je een kampplaats in een mooie, avontuurlijke omgeving met speelterrein voor kinderen.<br>
-                        een overnachtings plaats zoekt, of ...! We zijn rustig gelegen nabij het stadspark van Turnhout.<br>
-                    </p>
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <img style="width: 100%; height: 200px;" src="http://st-joris-turnhout.be/assets/files/1.jpg" class="img-rounded img-thumbnail" alt="Verhuur foto 1" />
-                        </div>
-
-                        <div class="col-sm-6">
-                            <img style="width: 100%; height: 200px;" src="http://st-joris-turnhout.be/assets/files/2.jpg" class="img-rounded img-thumbnail" alt="Verhuur foto 2" />
-                        </div>
-                    </div>
-
-                    <p style="margin-top: 7px;">
-                        Onze lokalen Bestaan uit 2 Blokken. Waarin 1 grote zaal en 5 lokalen en sanitaire blok gevestigd zijn. De grote zaal is polyvalent. 
-                        Verder is er ook nog een keuken. Deze keuken is voorzien 2 gasfornuizen, friet ketel ,keuken eiland, enz...
-                    </p>
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <img style="width: 100%; height: 200px;" src="http://st-joris-turnhout.be/assets/files/3.jpg" class="img-rounded img-thumbnail" alt="Verhuur foto 3" />
-                        </div>
-
-                        <div class="col-sm-6">
-                            <img style="width: 100%; height: 200px;" src="http://st-joris-turnhout.be/assets/files/4.jpg" class="img-rounded img-thumbnail" alt="Verhuur foto 4" />
-                        </div>
-                    </div>
-
-                    <p style="margin-top: 7px;">
-                        In alle gebouwen is er verwarming aanwezig. Aan de gebouwen grenst er zich een groot grasveld, bos, vuurplaats
-                        + u bevindt zich op wandel afstand van het stadspark. U hoeft ook echter 2 km te rijden voor zich u aan een
-                        supermarkt bevind.
-                    </p>
-
                 </div>
 
                 <div class="col-md-4">
@@ -62,11 +24,11 @@
                             <a href="{{route('rental.frontend.index') }}" class="list-group-item">
                                 <span class="fa fa-info-circle"></span> Informatie
                             </a>
-                            <a href="{{ route('rental.frontend.reachable') }}" class="list-group-item">
-                                <span class="fa fa-info-circle"></span> Bereikbaarheid
+                             <a href="{{ route('rental.frontend.reachable') }}" class="list-group-item">
+                                <span class="fa fa-asterisk"></span>Bereikbaarheid
                             </a>
                             <a href="{{ route('rental.frontend-calendar') }}" class="list-group-item">
-                                <span class="fa fa-calendar"></span> 
+                                <span class="fa fa-calendar"></span>
                                 Verhuur kalender
                             </a>
                             <a href="{{ route('rental.frontend.insert') }}" class="list-group-item">
