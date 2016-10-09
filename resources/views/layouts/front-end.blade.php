@@ -36,7 +36,7 @@
                     {{-- Left navbar --}}
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="{{ route('frontend.groups') }}">
                                 <span class="icon-green fa fa-leaf"></span> Takken
                             </a>
                             

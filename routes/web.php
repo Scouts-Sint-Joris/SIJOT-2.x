@@ -19,6 +19,9 @@ Auth::routes();
 Route::get('/', 'HomeController@homeFront')->name('home');
 Route::get('/home', 'Homecontroller@homeBackend')->name('home.backend');
 
+// Group routes.
+Route::get('/groups', 'GroupController@overview')->name('frontend.groups');
+
 // Rental routes
 Route::get('/rental', 'RentalController@indexFrontEnd')->name('rental.frontend.index');
 Route::get('/rental/insert', 'RentalController@insertViewFrontEnd')->name('rental.frontend.insert');
@@ -54,9 +57,6 @@ Route::get('backend/activity', 'ActivityController@index')->name('activity.index
 Route::post('backend/activity/update/{id}', 'ActivityController@update')->name('activity.update');
 Route::get('backend/activity/destroy/{id}', 'ActivityController@destroy')->name('activity.destroy');
 Route::post('backend/activity', 'ActivityController@store')->name('activity.store');
-
-// Rental module routes.
-Route::get('/rental/destroy/{id}', 'RentalController@destroy')->name('rental.destroy');
 
 // Debugging routes 
 if (config('app.debug')) {

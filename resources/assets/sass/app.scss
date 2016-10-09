@@ -35,3 +35,36 @@
     border-top-right-radius: 6px;
     border-top-left-radius: 6px;
 }
+
+.color-white {
+    background-color: #ffffff;
+    padding: 6px;
+    border: 1.2px solid #dddddd;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.color-kapoenen {
+    background-color: #ffff00;
+}
+
+.color-welpen {
+    background-color: #228b22;
+}
+
+.color-jonggivers {
+    background-color: #f5821f;
+}
+
+.color-givers {
+    background-color: #256f91;
+}
+
+.color-jins {
+    background-color: #ed1c23;
+}
+
+.color-leiding {
+    background-color: #663399;
+}

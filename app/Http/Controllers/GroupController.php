@@ -37,7 +37,7 @@ class GroupController extends Controller
 	/**
 	 * [FRONT-END]: Display all the scouting groups.
 	 *
-	 * @url:platform  GET|HEAD:
+	 * @url:platform  GET|HEAD: /groups
 	 * @see:phpunit   GroupControllerTest::
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -49,11 +49,14 @@ class GroupController extends Controller
         $groups = Groups::all(['selector']);
         // dd($groups);
 
-        foreach ($groups as $group) {
-            $data[$group->selector] = Groups::getGroup($group->selector)->get();
-        }
+        $data['kapoenen']   = Groups::getGroup('kapoenen')->get();
+        $data['welpen']     = Groups::getGroup('welpen')->get();
+        $data['jongGivers'] = Groups::getGroup('jonggivers')->get();
+        $data['givers']     = Groups::getGroup('givers')->get();
+        $data['jins']       = Groups::getGroup('jins')->get();
+        $data['leiding']    = Groups::getGroup('leiding')->get();
 
-		return view('', $data);
+		return view('groups.frontend-index', $data);
 	}
 
 	/**

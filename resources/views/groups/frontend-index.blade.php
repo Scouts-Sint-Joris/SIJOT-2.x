@@ -12,7 +12,7 @@
             <div style="border-radius:0px; border: 0px;" class="panel panel-default">
                 <div class="panel-body">
                     <div class="col-md-8">
-                        <h2>Takken:</span>
+                        <h2>Takken:</h2>
                     </div>    
                 </div>
             </div>
