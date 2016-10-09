@@ -74,8 +74,8 @@
                             </a>
 
                             <ul class="dropdown-menu">
-                                <li><a href="">Lid worden</a></li>
-                                <li><a href="">Medische fiche.</a></li>
+                                <li><a href="https://groepsadmin.scoutsengidsenvlaanderen.be/groepsadmin/lidworden?groep=A4102G">Lid worden</a></li>
+                                <li><a href="https://www.scoutsengidsenvlaanderen.be/publicatie/individuele-steekkaart">Medische fiche.</a></li>
                             </ul>
                         </li>
                         
