@@ -12,13 +12,20 @@ class newNewsletter extends Mailable
     use Queueable, SerializesModels;
 
     /**
+     * The variable for the newly created newsletter insert.
+     *
+     * @var array
+     */
+    public $insert;
+
+    /**
      * Create a new message instance.
      *
-     * @return void
+     * @param array $insert The newly inserted newsletter email.
      */
-    public function __construct()
+    public function __construct($insert)
     {
-        //
+        $this->insert = $insert;
     }
 
     /**

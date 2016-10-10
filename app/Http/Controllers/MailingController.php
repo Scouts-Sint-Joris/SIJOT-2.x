@@ -86,12 +86,12 @@ class MailingController extends Controller
      */
     public function registerNewsLetter(Requests\NewsLetterValidator $input)
     {
-        // TODO: Create notification to the inserted email address.
-        //       In the notification the user must un subscribe his email.
         $insert = NewsLetter::create($input->except('_token'));
 
         if ($insert) // Check if the newsletter email is inserted.
         {
+            Mail::to($insert)->send(new newNewsletter($insert));
+
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.newsletter-register'));
         }
@@ -100,7 +100,7 @@ class MailingController extends Controller
     }
 
     /**
-     * [METHOD]: Register the email data to mailinglists. 
+     * [METHOD]: Register the email data to mailinglists.
      *
      * @param  Request $input
      * @return \Illuminate\Http\RedirectResponse
@@ -111,7 +111,7 @@ class MailingController extends Controller
 
         if ($create) // Create the email address for the mailing platform.  
         {
-            session()->flash('class', 'alert alert-success'); 
+            session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.mailing-register'));
         }
 
@@ -151,8 +151,6 @@ class MailingController extends Controller
             
         if ($insert) // Mailing details insert check.
         {
-            Mail::to($insert)->send(new newNewsletter);
-
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.mailing-update'));
         }
