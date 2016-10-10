@@ -69,10 +69,14 @@
                         <td>{{ $user->created_at }}</td>
                         <td>
                             <a class="label label-info" href="mailto:{{ $user->email }}">Email gebruiker</a>
-                            <a class="label label-danger" href="#">Reset wachtwoord</a>
+                            <a class="label label-warning" href="#">Reset wachtwoord</a>
 
                             @if ($user->can('active'))
                             @elseif ($user->can('blocked'))
+                            @endif
+
+                            @if (auth()->user()->can('admin'))
+                                <a href="{{ route('users.destroy', $user->id) }}" class="label label-danger">Verwijder</a>
                             @endif
                         </td>
                     </tr>
