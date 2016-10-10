@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\newNewsletter;
 use App\Mailing;
 use App\NewsLetter;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * Class RentalController
@@ -149,6 +151,8 @@ class MailingController extends Controller
             
         if ($insert) // Mailing details insert check.
         {
+            Mail::to($insert)->send(new newNewsletter);
+
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.mailing-update'));
         }
