@@ -8,22 +8,34 @@ class MailingTest extends TestCase
 {
     use DatabaseMigrations, DatabaseTransactions;
 
+    /**
+     *
+     */
     public function testBackendEndIndex()
     {
 
     }
 
+    /**
+     *
+     */
     public function testMailingDestory()
     {
 
     }
 
+    /**
+     *
+     */
     public function testNewsLetterDestroy()
     {
 
     }
 
-    public function testNewsLetterCreateWithError()
+    /**
+     *
+     */
+    public function testNewsLetterCreateWithErrors()
     {
 
     }
@@ -33,23 +45,35 @@ class MailingTest extends TestCase
 
     }
 
+    /**
+     *
+     */
     public function testMailingInsertWithError()
     {
 
     }
 
+    /**
+     *
+     */
     public function testMailingInsertWithoutError()
     {
 
     }
 
+    /**
+     *
+     */
     public function testMailingUpdateWithoutErrors()
     {
-
+        $this->authentication();
     }
 
+    /**
+     *
+     */
     public function testMailingUpdateWithErrors()
     {
-
+        $this->authentication();
     }
 }

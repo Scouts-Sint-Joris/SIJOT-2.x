@@ -28,8 +28,6 @@ class MailingController extends Controller
 
     /**
      * MailingController constructor.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -44,8 +42,8 @@ class MailingController extends Controller
     /**
      * [BACKEND]: Index overview for the mailing module.
      * 
-     * @url:platform 
-     * @see:phpunit
+     * @url:platform  GET|HEAD: /backend/mailing
+     * @see:phpunit   MailingTest::testBackendEndIndex()
      * 
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -59,7 +57,10 @@ class MailingController extends Controller
 
     /**
      * [METHOD]: Delete a mailing record out of the database. 
-     * 
+     *
+     * @url:platform  DELETE:
+     * @see:phpunit   MailingTest::
+     *
      * @param  int $id the id for the email record in the database.  
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -78,8 +79,8 @@ class MailingController extends Controller
      * [METHOD]: Register the email to the newletter module.
      *
      * @url:platform  POST
-     * @see:phpunit   TODO: create test when validation fails.
-     * @see:phpunit   TODO: create test when validation passes.
+     * @see:phpunit   MailingTest::testNewsLetterCreateWithErrors()
+     * @see:phpunit   MailingTest::testNewsLetterCreateWithoutErrors()
      *
      * @param  Requests\NewsLetterValidator $input
      * @return \Illuminate\Http\RedirectResponse
@@ -102,6 +103,10 @@ class MailingController extends Controller
     /**
      * [METHOD]: Register the email data to mailinglists.
      *
+     * @url:platform  POST:
+     * @see:phpunit   MailingTest::
+     * @see:phpunit   MailingTest::
+     *
      * @param  Request $input
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -121,9 +126,9 @@ class MailingController extends Controller
     /**
      * [BACKEND]: Update view for the mailing data. 
      * 
-     * @url:platform 
-     * @see:phpunit 
-     * @see:phpunit
+     * @url:platform  GET|HEAD:
+     * @see:phpunit   MailingTest::
+     * @see:phpunit   MailingTest::
      * 
      * @param  Int $id the mailing record in the database.
      * @return \Illuminate\Http\RedirectResponse
@@ -137,9 +142,9 @@ class MailingController extends Controller
     /**
      * [METHOD]: Update the mailing address in the database. 
      * 
-     * @url:platform 
-     * @see:phpunit 
-     * @see:phpunit
+     * @url:platform  PUT|PATCH:
+     * @see:phpunit   MailingTest::
+     * @see:phpunit   MailingTest::
      *
      * @param  Requests\Mailingvalidator $input
      * @param  int $id the mailing row in the database. 
