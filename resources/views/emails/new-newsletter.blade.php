@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
     <head>
+        <title>Nieuwsbrief inschrijving.</title>
     </head>
     <body>
         <h4>Geachte,</h4>

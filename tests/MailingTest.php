@@ -46,19 +46,39 @@ class MailingTest extends TestCase
     }
 
     /**
+     * POST:  /newsletter/register
+     * ROUTE: newsletter.register
      *
+     * - With validation errors.
+     *
+     * @group mailing
+     * @group newsletter
+     * @group all
      */
     public function testMailingInsertWithError()
     {
-
+        $this->post(route('newsletter.register'), []);
+        $this->seeStatusCode(302);
+        $this->assertHasOldInput();
     }
 
     /**
+     * POST:  /newsletter/register
+     * ROUTE: newsletter.register
      *
+     * - Without validation errors.
+     *
+     * @group mailing
+     * @group newsletter
+     * @group all
      */
     public function testMailingInsertWithoutError()
     {
+        $input['email'] = 'jhon@doe.tld';
 
+        $this->post(route('newsletter.register'), $input);
+        $this->seeInDatabase('news_letters', $input);
+        $this->seeStatusCode(302);
     }
 
     /**
