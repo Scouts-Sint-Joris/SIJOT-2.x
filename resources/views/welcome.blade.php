@@ -86,7 +86,7 @@
                         {{-- CSRF FIELD --}}
                         {{ csrf_field() }}
 
-                        <input type="text" name="email" class="form-control" placeholder="Email adres">
+                        <input style="border-top-left-radius: 4px; border-bottom-left-radius: 4px;" type="text" name="email" class="form-control" placeholder="Email adres">
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-default" type="button">
                                 <span class="fa fa-envelope"></span>
