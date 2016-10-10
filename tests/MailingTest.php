@@ -9,11 +9,17 @@ class MailingTest extends TestCase
     use DatabaseMigrations, DatabaseTransactions;
 
     /**
+     * GET|HEAD: /backend/mailing
+     * ROUTE:    backend.mailing.index
      *
+     * @group mailing
+     * @group all
      */
     public function testBackendEndIndex()
     {
-
+        $this->authentication();
+        $this->get(route('backend.mailing.index'));
+        $this->seeStatusCode(200);
     }
 
     /**
