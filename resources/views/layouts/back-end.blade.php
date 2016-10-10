@@ -19,6 +19,12 @@
             <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+        <style>
+            .navbar-nav > .notifications-menu > .dropdown-menu > li .menu{
+                max-height: auto;
+            }
+        </style>
     </head>
 <body class="hold-transition @if(isset(auth()->user()->theme)) {{ auth()->user()->theme }} @else skin-blue @endif sidebar-mini">
     {{-- Site wrapper --}}
