@@ -15,7 +15,8 @@ use Carbon\Carbon;
 $factory->define(App\Rental::class, function (Faker\Generator $faker) {
     return [
         'start_date'   => $faker->word, 
-        'end_date'     => $faker->word, 
+        'end_date'     => $faker->word,
+        'status_id'    => $faker->numberBetween(0, 3),
         'group'        => $faker->name,
         'phone_number' => $faker->phoneNumber, 
         'email'        => $faker->email
@@ -53,6 +54,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name'           => $faker->name,
         'email'          => $faker->safeEmail,
+        'theme'          => $faker->word,
         'password'       => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
     ];

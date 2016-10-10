@@ -161,9 +161,9 @@ class MailingController extends Controller
     /**
      * [METHOD]: Delete a email address out of the system.
      *
-     * @url:platform GET|HEAD:
-     * @see:phpunit
-     * @see:phpunit
+     * @url:platform  GET|HEAD:
+     * @see:phpunit   MailingTest::
+     * @see:phpunit   MailingTest::
      *
      * @param  string $string the checksum for the email address.
      * @return \Illuminate\Http\RedirectResponse
