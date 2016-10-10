@@ -34,6 +34,9 @@ Route::get('/backend/rental/option/{id}', 'RentalController@setOption')->name('r
 Route::get('/backend/rental/confirm/{id}', 'RentalController@setConfirmed')->name('rental.backend.confirm');
 Route::get('/backend/rental/destroy/{id}', 'RentalController@destroy')->name('rental.backend.destroy');
 
+// Newsletter routes v
+Route::post('/newsletter/register', 'MailingController@registerMailing')->name('newsletter.register');
+
 // News items. 
 Route::get('/backend/news', 'NewsController@index')->name('news.backend.index');
 

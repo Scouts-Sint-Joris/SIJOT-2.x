@@ -79,10 +79,10 @@ class MailingController extends Controller
      * @see:phpunit   TODO: create test when validation fails.
      * @see:phpunit   TODO: create test when validation passes.
      *
-     * @param  Request $request
+     * @param  Requests\NewsLetterValidator $input
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function registerNewsLetter(Request $input)
+    public function registerNewsLetter(Requests\NewsLetterValidator $input)
     {
         // TODO: Create notification to the inserted email address.
         //       In the notification the user must un subscribe his email.
@@ -113,7 +113,7 @@ class MailingController extends Controller
             session()->flash('message', trans('flash-session.mailing-register'));
         }
 
-        return redirect()->back(); 
+        return redirect()->back(302);
     }
     
     /**
