@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Groups;
+use App\Activity; 
 use Illuminate\Http\Request;
 use App\Http\Requests\GroupValidator;
 use App\Http\Requests;
@@ -16,18 +17,27 @@ use App\Http\Requests;
 class GroupController extends Controller
 {
     /**
+     * Auth middleware protected routes. 
+     * 
+     * @var array
+     */
+    protected $authRoutes;
+    
+    /**
      * GroupController constuctor
      */
     public function __construct()
 	{
+        $this->authRoutes = [];
+        
 		$this->middleware('lang');
-		// TODO: set the authencation middleware.
+		$this->middleware('auth')->only($this->authRoutes);
 	}
 
 	/**
 	 * [FRONT-END]: Display all the scouting groups.
 	 *
-	 * @url:platform  GET|HEAD:
+	 * @url:platform  GET|HEAD: /groups
 	 * @see:phpunit   GroupControllerTest::
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -39,11 +49,14 @@ class GroupController extends Controller
         $groups = Groups::all(['selector']);
         // dd($groups);
 
-        foreach ($groups as $group) {
-            $data[$group->selector] = Groups::getGroup($group->selector)->get();
-        }
+        $data['kapoenen']   = Groups::getGroup('kapoenen')->get();
+        $data['welpen']     = Groups::getGroup('welpen')->get();
+        $data['jongGivers'] = Groups::getGroup('jonggivers')->get();
+        $data['givers']     = Groups::getGroup('givers')->get();
+        $data['jins']       = Groups::getGroup('jins')->get();
+        $data['leiding']    = Groups::getGroup('leiding')->get();
 
-		return view('', $data);
+		return view('groups.frontend-index', $data);
 	}
 
 	/**
@@ -52,12 +65,14 @@ class GroupController extends Controller
 	 * @url:platform  GET|HEAD:
 	 * @see:phpunit   GroupControllerTest::
 	 *
-	 * @param  string $param the gorup identifier in the database.
+	 * @param  string $param the group identifier in the database.
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-	public function specific($string)
+	public function specific($param)
 	{
-		$data['data'] = '';
+		$data['group']    = Groups::getGroup('selector', $param)->get();
+        $data['activity'] = Activity::where('', '')->get(); 
+        
 		return view('groups.show', $data);
 	}
 
@@ -67,10 +82,12 @@ class GroupController extends Controller
 	 * @url:platform  GET|HEAD:
 	 * @see:phpunit   GroupControllerTest::
 	 *
+     * @param  string $param The group selector in the database.
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-	public function edit()
+	public function edit($param)
 	{
+	    $data['group'] = Groups::getGroup($param)->get();
 		return view('', $data);
 	}
 
@@ -89,9 +106,10 @@ class GroupController extends Controller
 	{
 		$group = Groups::where('selector', $param);
 
-		if ($group->update($input->except('_token'))) {
+		if ($group->update($input->except('_token'))) // Update the group data
+		{
 			session()->flash('class', 'alert alert-success');
-			session()->flash('message',  '');
+			session()->flash('message',  trans('flash-session.group-update'));
 		}
 	}
 }

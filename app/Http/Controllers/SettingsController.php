@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BackUpSettingsValidator;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
 /**
- * 
+ * @package   App\Http\Controllers
+ * @author    Tim Joosten <Topairy@gmail.com>
+ * @copyright Tim Joosten 2015 - 2016
+ * @version   2.0.0
  */
 class SettingsController extends Controller
 {
@@ -21,46 +23,76 @@ class SettingsController extends Controller
     }
 
     /**
-     * [BACK-END]: Get the update view for the application settings. 
-     * 
-     * @url:platform  GET|HEAD: 
-     * @see:phpunit 
-     * @see:phpunit 
-     * 
+     * [BACK-END]: Get the update view for the application settings.
+     *
+     * @url:platform  GET|HEAD:
+     * @see:phpunit   SettingsTest::
+     * @see:phpunit   SettingsTest::
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-		return view();
+		return view('settings.index');
     }
 
     /**
      * [METHOD]: Update the general application settings.
-	 *
-	 * @url:platform  POST:
-	 * @see:phpunit   Write phpunit test -> when validation fails.
-	 * @see:phpunit   Write phpunit test -> when validation passes.
-	 *
+     *
+     * @url:platform  PUT|PATCH:
+     * @see:phpunit   SettingsTest::
+     * @see:phpunit   SettingsTest::
+     *
+     * @param  Requests\SettingsUpdateValidator $input
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updatePlatformSettings()
+    public function updatePlatformSettings(Requests\SettingsUpdateValidator $input)
     {
-        session()->flash('class', 'alert alert-success'); 
-        session()->flash('message', '');
-		return redirect()->back();
+        dd($input->all()); // For debugging propose.
+
+        session()->flash('class', 'alert alert-success');
+        session()->flash('message', trans('flash-session.update-platform'));
+
+		return redirect()->back(302);
     }
 
     /**
-     * @param  BackUpSettingsValidator $input
+     * [METHOD]: Update the environment settings.
+     *
+     * @url:platform  PUT|PATCH:
+     * @see:phpunit   SettingsTest::
+     * @see:phpunit   SettingsTest::
+     *
+     * @param  Requests\EnvironmentValidator $input
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateBackUpSettings(BackUpSettingsValidator $input)
+    public function updateEnvironmentSettings(Requests\EnvironmentValidator $input)
     {
-		dd($input->all()); // For debugging propose 
+        dd($input->all()); // For debugging propose.
 
-		session()->flash('class', '');
-		session()->flash('message', '');
+        session()->flash('class', 'alert alert-success');
+        session()->flash('message', trans('flash-session.update-environment'));
 
-		return redirect()->back();
+        return redirect()->back(302);
+    }
+
+    /**
+     * [METHOD]: Update the database backup settings.
+     *
+     * @url:platform  PUT|PATCH:
+     * @see:phpunit   SettingsTest::
+     * @see:phpunit   SettingsTest::
+     *
+     * @param  Requests\BackUpSettingsValidator $input
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateBackUpSettings(Requests\BackUpSettingsValidator $input)
+    {
+		dd($input->all()); // For debugging propose
+
+		session()->flash('class', 'alert alert-success');
+		session()->flash('message', trans('flash-session.update-backup'));
+
+		return redirect()->back(302);
     }
 }

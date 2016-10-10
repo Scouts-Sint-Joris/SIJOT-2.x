@@ -4,6 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Groups
+ * @package App
+ */
 class Groups extends Model
 {
     /**
@@ -11,7 +15,7 @@ class Groups extends Model
      * 
      * @var array 
      */
-    protected $fillable = ['selector', 'title', 'sub_heading', 'heading', 'description'];
+    protected $fillable = ['selector', 'sub_heading', 'heading', 'description'];
     
     /**
      * Hidden fields 

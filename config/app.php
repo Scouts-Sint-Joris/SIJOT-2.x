@@ -168,6 +168,9 @@ return [
          */
         Barryvdh\Debugbar\ServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+        PrettyRoutes\ServiceProvider::class,
+        Themsaid\Langman\LangmanServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -225,6 +228,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class
 
     ],
 

@@ -13,13 +13,32 @@ class GroupsTableSeeder extends Seeder
     public function run()
     {
         $data = [
-            // ['selector' => ''],  
-            ['selector' => 'kapoenen'],
-            ['selector' => 'welpen'],
-            ['selector' => 'jonggivers'],
-            ['selector' => 'givers'],
-            ['selector' => 'jins'],
-            ['selector' => 'leiding']
+            // TEMPLATE: 
+            // ---------------
+            // [
+            //    'selector' => '',
+            //    'title'     => '',
+            // ],  
+
+            [
+                'selector' => 'kapoenen',
+                'heading'  => 'De Kapoenen'
+            ], [
+                'selector' => 'welpen',
+                'heading'  => 'De Welpen'
+            ], [   
+                'selector' => 'jonggivers',
+                'heading'  => 'De Jong-Givers'
+            ], [
+                'selector' => 'givers',
+                'heading'  => 'De Givers'
+            ], [
+                'selector' => 'jins',
+                'heading'  => 'De Jins'
+            ], [
+                'selector' => 'leiding',
+                'heading'  => 'De Leiding'
+            ],
         ];
         
         $table = DB::table('groups'); 

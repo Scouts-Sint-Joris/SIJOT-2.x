@@ -57,7 +57,8 @@ class LanguageMiddleware
 	 */
 	private function setSupportedLanguage($lang)
 	{
-		if ($this->isLanguageSupported($lang)) {
+		if ($this->isLanguageSupported($lang)) // Check if the language is supported.
+		{
 			App::setLocale($lang); 
 			Session::put('lang', $lang);
 		}

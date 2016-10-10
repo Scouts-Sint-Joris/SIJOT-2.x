@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\News;
+use App\User;
+use App\Activity;
 use Illuminate\Http\Request;
 
 /**
@@ -18,32 +21,40 @@ class HomeController extends Controller
     public function __construct()
     {
 		$this->middleware('lang');
-		$this->middleware('auth', ['only' => ['homeFront']]);
+		$this->middleware('auth', ['only' => ['homeBackend']]);
     }
 
     /**
      * [FRONT-END]: Get the front-end index page.
 	 *
-	 * @url:platform
-	 * @see:phpunit
+	 * @url:platform  GET|HEAD: /
+     * @see:phpunit   HomeTest::testHomeFrontend()
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
     public function homeFront()
     {
-        return view('');
+        $data['news']       = News::where('state', 1)->paginate(4);
+        $data['activities'] = Activity::with(['groups', 'creator'])
+            ->where('state', 1)
+            ->orderBy('date', 'ASC')
+            ->paginate(25)
+            ->take(6);
+
+        return view('welcome', $data);
     }
 
     /**
      * [BACK-END]: Get the backend home view fgor the website.
 	 *
-	 * @url:platform  GET|HEAD:
-	 * @see:phpunit
+	 * @url:platform  GET|HEAD: /home
+     * @see:phpunit   HomeTest::testHomeBackend()
 	 *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function homeBackend()
     {
-        return view('');
+        $data['users'] = User::all();
+        return view('backend', $data);
     }
 }

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LoginValidator;
-use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\User;
+use App\Mail\NewUser;
+use App\Http\Requests;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\LoginValidator;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class UserManagementController
@@ -18,13 +21,19 @@ use App\User;
 class UserManagementController extends Controller
 {
     /**
+     * @todo: build up the mailable views.
+     * @todo: write search controller & test.
+     * @todo: Implement user specific index view.
+     * @todo: add create new user wizard.
+     */
+
+    /**
      * UserManagementController constructor.
      */
     public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('lang');
-        // TODO: Implement user activity middleware.
     }
 
     /**
@@ -55,6 +64,29 @@ class UserManagementController extends Controller
     }
 
     /**
+     * @param  int $id The user id in the database.
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function resetPassword($id)
+    {
+        return redirect()->back();
+    }
+
+    /**
+     * [METHOD]: Search for a specific user.
+     *
+     * @url:platform
+     * @see:phpunit
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function search()
+    {
+        $data['users'] = '';
+        return view('', $data);
+    }
+
+    /**
      * [METHOD]: Insert a new login into the database.
      *
      * @url:platform  POST: /backend/users
@@ -66,9 +98,19 @@ class UserManagementController extends Controller
      */
     public function store(LoginValidator $input)
     {
-        if (User::create($input->except('_token'))) {
+        $password = str_random(16);
+        $data     = array_merge(['password' => bcrypt($password)], $input->except('_token'));
+        $newUser  = User::create($data);
+
+        $findNewUser = User::find($newUser->id);
+        $setPass     = $findNewUser->update($password);
+
+        if ($newUser && $setPass) {
+            // TODO: Build up the mail.
+            Mail::to($findNewUser->email)->send(new NewUser($findNewUser));
+
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', '');
+            session()->flash('message', trans('flash-session.user-store'));
         }
 
         return redirect()->back();
@@ -87,7 +129,7 @@ class UserManagementController extends Controller
     {
 		if (User::destroy($id)) {
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', '');
+            session()->flash('message', trans('flash-session.user-destroy'));
         }
 
         return redirect()->back();
@@ -96,13 +138,23 @@ class UserManagementController extends Controller
     /**
      * [METHOD]: block a user login
      *
+     * @url:platform  GET|HEAD:
+     * @see:phpunit
+     *
      * @param  int $id the login id in the database.
      * @return \Illuminate\Http\RedirectResponse
      */
     public function block($id)
     {
-		session()->flash('class', '');
-		session()->flash('message', '');
+        $user = User::findOrFail($id);
+        $user->revokePermissionTo('active');
+        $user->givePermssionTo('blocked');
+
+        // Delete session if user is authencated.
+        DB::table('sessions')->where('user_id', $id)->delete();
+
+		session()->flash('class', 'alert alert-success');
+		session()->flash('message', trans('flash-session.user-block'));
 
         return redirect()->back();
     }
@@ -110,7 +162,7 @@ class UserManagementController extends Controller
     /**
      * [METHOD]: Unblock a user login.
      *
-     * @url:platform
+     * @url:platform  GET|HEAD:
      * @see:phpunit
      *
      * @param  int $id the login id in the database.
@@ -118,8 +170,12 @@ class UserManagementController extends Controller
      */
     public function unblock($id)
     {
+        $user = User::findOrFail($id);
+        $user->revokePermissionTo('blocked');
+        $user->givePermissionTo('active');
+
 		session()->flash('class', 'alert alert-success');
-		session()->flash('message', '');
+		session()->flash('message', trans('flash-session.user-unblock'));
 
         return redirect()->back();
     }

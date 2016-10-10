@@ -10,16 +10,31 @@ class GroupControllerTest extends TestCase
     // DatabaseTransactions = Used to run the database transactions to the db stub.
     use DatabaseMigrations, DatabaseTransactions;
 
+    /**
+     * @group all
+     * @group frontend
+     * @group groups
+     */
     public function testOverview()
     {
 
     }
 
+    /**
+     * @group all 
+     * @group frontend
+     * @group groups
+     */
     public function testEditForm()
     {
 
     }
 
+    /**
+     * @group all 
+     * @group frontend 
+     * @group groups
+     */
     public function testUpdateMethod()
     {
 

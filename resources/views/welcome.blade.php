@@ -1,91 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.front-end')
 
-        <title>Laravel</title>
+@section('content')
+    <div class="row">
+        <div class="col-sm-12">
+            <img src="{{ asset('assets/img/front.jpg') }}" style="height:400px; width:100%; border-top-right-radius: 6px; border-top-left-radius: 6px;" alt="Alternate Text" />
+        </div>
+    </div>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <div class="content-margin row">
+        <div class="col-sm-12">
+            <div style="border-radius:0px; border: 0px;" class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-8">
+                        <h3>Alice in Wonderland, part dos</h3>
+                        <p>
+                            'You ought to be ashamed of yourself for asking such a simple question,' added the Gryphon; and then they both sat silent and looked at poor Alice, who felt ready to sink into the earth. At last the Gryphon said to the Mock Turtle, 'Drive on, old fellow! Don't be all day about it!' and he went on in these words:
+                            'Yes, we went to school in the sea, though you mayn't believe it�'
+                            'I never said I didn't!' interrupted Alice.
+                            'You did,' said the Mock Turtle.
+                        </p>
+                        <div>
+                            <span class="badge">Posted 2012-08-02 20:47:04</span><div class="pull-right">
+                                <span class="label label-default">alice</span> <span class="label label-primary">story</span> <span class="label label-success">blog</span> <span class="label label-info">personal</span> <span class="label label-warning">Warning</span>
+                                <span class="label label-danger">Danger</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <h3>Revolution has begun!</h3>
+                        <p>
+                            'I am bound to Tahiti for more men.'
+                            'Very good. Let me board you a moment�I come in peace.' With that he leaped from the canoe, swam to the boat; and climbing the gunwale, stood face to face with the captain.
+                            'Cross your arms, sir; throw back your head. Now, repeat after me. As soon as Steelkilt leaves me, I swear to beach this boat on yonder island, and remain there six days. If I do not, may lightning strike me!'A pretty scholar,' laughed the Lakeman. 'Adios, Senor!' and leaping into the sea, he swam back to his comrades.
+                        </p>
+                        <div>
+                            <span class="badge">Posted 2012-08-02 20:47:04</span><div class="pull-right">
+                                <span class="label label-default">alice</span> <span class="label label-primary">story</span> <span class="label label-success">blog</span> <span class="label label-info">personal</span> <span class="label label-warning">Warning</span>
+                                <span class="label label-danger">Danger</span>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway';
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Activiteiten:</div>
 
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    <a href="{{ url('/login') }}">Login</a>
-                    <a href="{{ url('/register') }}">Register</a>
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                            <div class="list-group">
+                                @foreach($activities as $activity)
+                                    <a href="" class="list-group-item">02/02/2002: Ik ben een activiteit</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+
+<footer class="footer-bs">
+    <div class="row">
+        <div class="col-md-7 footer-brand animated fadeInLeft">
+            <h2>Over ons</h2>
+            <p>
+                Wij zijn een gemenge scoutsgroep die elke zondag van de maand, van 2u tot 5u vergaderingen houd. 
+                Buiten de laatste zondag van de maand dan is het van 101u tot 5u. voor de rest zijn wij geleden te <br>
+                Sint-Jorislaan 11, 2300 Turnhout.
+            </p>
+
+            <p>&copy; 2015 - {{ date('Y') }} Scouts en Gidsen - Sint Joris, Turnhout</p>
+        </div>
+        <div class="col-md-2 footer-social animated fadeInDown">
+            <h4>Social Media</h4>
+            <ul>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+            </ul>
+        </div>
+        <div class="col-md-3 footer-ns animated fadeInRight">
+            <h4>Nieuwsbrief</h4>
+            <p>Wilt u op de hoogte blijven? Kunt u zich hier inschrijven op de nieuwsbrief. Zodat u op de hoogte blijft.</p>
+            <p>
+                <form action="" method="POST">
+                    <div class="input-group">
+                        <input type="text" name="" class="form-control" placeholder="Email adres">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default" type="button">
+                                <span class="fa fa-envelope"></span>
+                            </button>
+                        </span>
+                    </div>{{-- /input-group --}}
+                </form>
+            </p>
+        </div>
+    </div>
+</footer>
+@endsection

@@ -13,7 +13,7 @@ class RentalValidator extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class RentalValidator extends FormRequest
     public function rules()
     {
         return [
-            //
+            'start_date' => 'required', 
+            'end_date'   => 'required', 
+            'group'      => 'required',  
+            'email'      => 'required'
         ];
     }
 }

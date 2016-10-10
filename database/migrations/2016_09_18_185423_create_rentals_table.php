@@ -15,6 +15,12 @@ class CreateRentalsTable extends Migration
     {
         Schema::create('rentals', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('status_id')->nullable();
+            $table->integer('start_date');
+            $table->integer('end_date'); 
+            $table->string('group');
+            $table->string('phone_number'); 
+            $table->string('email');
             $table->timestamps();
         });
     }

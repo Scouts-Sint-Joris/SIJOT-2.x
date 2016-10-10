@@ -1,12 +1,18 @@
 <?php
 
+use Illuminate\Support\Facades\Hash;
+
 /**
  * Class TestCase
- * 
+ *
  * TODO: Implement mailing stub.
  */
 abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
+    /**
+     * @todo: implement mailing stub.
+     */
+
     /**
      * The base URL to use while testing the application.
      *
@@ -26,6 +32,8 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
     {
         $app = require __DIR__.'/../bootstrap/app.php';
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+
+        Hash::setRounds(5);
 
         return $app;
     }
