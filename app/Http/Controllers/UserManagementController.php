@@ -75,8 +75,8 @@ class UserManagementController extends Controller
     /**
      * [METHOD]: Search for a specific user.
      *
-     * @url:platform
-     * @see:phpunit
+     * @url:platform  POST:
+     * @see:phpunit   UserManagementTest::
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -139,7 +139,7 @@ class UserManagementController extends Controller
      * [METHOD]: block a user login
      *
      * @url:platform  GET|HEAD:
-     * @see:phpunit
+     * @see:phpunit   UserManagementTest::
      *
      * @param  int $id the login id in the database.
      * @return \Illuminate\Http\RedirectResponse
