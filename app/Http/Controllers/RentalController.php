@@ -157,8 +157,9 @@ class RentalController extends Controller
     public function insert(Requests\RentalValidator $input)
     {
         $insert = Rental::create($input->except('_token'));
+        $status = RentalStatus::where('name', 'Nieuwe aanvraag')->first();
 
-        Rental::find($insert->id)->update(['status_id' => 3]);
+        Rental::find($insert->id)->update(['status_id' => $status->id]);
 
         if ($insert) // The Rental data has been inserted.
         {
