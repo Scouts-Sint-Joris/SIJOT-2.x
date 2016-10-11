@@ -16,6 +16,8 @@
         
         {{-- IE10 vieuwport hack for Surface/Desktop Windows 8 bug --}}
         <link rel="stylesheet" href="{{ asset('assets/css/ie-10-viewport-bug-workaround.css') }}">
+
+        <script> window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token()]); ?></script>
     </head>
     <body class="background front-end">
         {{-- Navigation bar --}}
@@ -95,11 +97,15 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="">
-                                    <span class="icon-green fa fa-sign-out"></span> Uitloggen
+                                <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Uitloggen
                                 </a>
+
+                                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                             </li>
-                        @else 
+                        @else
                             <li>
                                 <a href="{{ url('login') }}">
                                     <span class="icon-green fa fa-sign-in"></span> Login
