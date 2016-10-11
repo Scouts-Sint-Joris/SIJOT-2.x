@@ -267,7 +267,7 @@ class RentalController extends Controller
      */
     public function exportExcel()
     {
-        Excel::create('Verhuringen', function ($excel) {
+        Excel::create('Verhuringen-'. date('d/m/Y'), function ($excel) {
 
             // Sheet: for all the rentals.
             $excel->sheet('Alle', function($sheet) {
