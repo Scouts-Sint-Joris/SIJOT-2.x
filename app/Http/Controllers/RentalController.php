@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Notification;
 use App\Notifications\RentalOption;
 use App\Notifications\RentalConfirmed; 
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 
 /**
  * Class RentalController
@@ -257,10 +258,23 @@ class RentalController extends Controller
     }
 
     /**
-     * [METHOD]:
+     * [METHOD]: Export all the rental to an excel sheet
+     *
+     * @url:platform  GET|HEAD: /backend/rental/export
+     * @see:phpunit   RentalTest::
+     *
+     * @return void | Excel download
      */
     public function exportExcel()
     {
+        Excel::create('Verhuringen', function ($excel) {
 
+            // Sheet: for all the rentals.
+            $excel->sheet('Alle', function($sheet) {
+                $all = Rental::with('status')->get();
+                $sheet->loadView('rental.export.all', compact('all'));
+            });
+
+        })->download('xls');
     }
 }
