@@ -119,6 +119,14 @@
         
         {{-- Content --}}
         <div class="container">
+            {{-- Cookie consent --}}
+            <div class="row">
+                <div class="col-sm-12">
+                    @include('cookieConsent::index')
+                </div>
+            </div>
+            {{-- Cookie consent --}}
+
             @yield('content')
         </div>
     

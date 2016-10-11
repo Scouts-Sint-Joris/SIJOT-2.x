@@ -171,6 +171,7 @@ return [
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
         PrettyRoutes\ServiceProvider::class,
         Themsaid\Langman\LangmanServiceProvider::class,
+        Spatie\CookieConsent\CookieConsentServiceProvider::class,
 
         /*
          * Application Service Providers...
