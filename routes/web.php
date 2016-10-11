@@ -44,6 +44,8 @@ Route::get('/backend/mailing', 'MailingController@index')->name('backend.mailing
 Route::get('backend/users/create', 'UserManagementController@create')->name('users.create');
 Route::get('backend/users', 'UserManagementController@overview')->name('users.index');
 Route::get('backend/users/destroy/{id}', 'UserManagementController@destroy')->name('users.destroy');
+Route::get('backend/users/block/{id}', 'UserManagementController@block')->name('users.block');
+Route::get('backend/users/unblock/{id}', 'UserManagementController@unblock')->name('users.unblock');
 Route::post('backend/users', 'UserManagementController@store')->name('auth.new');
 
 

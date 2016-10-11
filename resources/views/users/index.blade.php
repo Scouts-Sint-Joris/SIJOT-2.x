@@ -71,8 +71,10 @@
                             <a class="label label-info" href="mailto:{{ $user->email }}">Email gebruiker</a>
                             <a class="label label-warning" href="#">Reset wachtwoord</a>
 
-                            @if ($user->can('active'))
-                            @elseif ($user->can('blocked'))
+                            @if ($user->can('active') && auth()->user()->can('admin'))
+                                <a href="{{ route('users.block', $user->id) }}" class="label label-danger">Blokkeer</a>
+                            @elseif ($user->can('blocked') && auth()->user()->can('admin'))
+                                <a href="{{ route('users.unblock', $user->id) }}" class="label label-danger">Activeer</a>
                             @endif
 
                             @if (auth()->user()->can('admin'))
