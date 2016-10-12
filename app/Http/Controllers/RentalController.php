@@ -100,7 +100,9 @@ class RentalController extends Controller
      */
     public function setOption($id)
     {
-        if (Rental::find($id)->update(['status_id' => 1])) // Rental update check.
+        $status = RentalStatus::where('name', 'Optie')->first();
+
+        if (Rental::find($id)->update(['status_id' => $status->id])) // Rental update check.
         {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.rental-option'));
@@ -120,7 +122,9 @@ class RentalController extends Controller
      */
     public function setConfirmed($id)
     {
-        if (Rental::find($id)->update(['status_id' => 2])) // Rental update check.
+        $status = RentalStatus::where('name', 'Bevestigd')->first();
+
+        if (Rental::find($id)->update(['status_id' => $status->id])) // Rental update check.
         {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.rental-confirm'));
