@@ -48,7 +48,7 @@ class UserManagementTest extends TestCase
     public function testPasswordReset()
     {
         $user  = factory(App\User::class)->make();
-        $route = route('users.reset', ['id' => $user->id]);
+        $route = 'backend/users/reset/' . $user->id;
 
         // Session data
         $session['class']   = 'alert alert-success';

@@ -69,7 +69,7 @@ class UserManagementController extends Controller
      */
     public function resetPassword($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::find($id);
         $user->password =  str_random(16);
 
         if ($user->save()) // If the user has been updated;
