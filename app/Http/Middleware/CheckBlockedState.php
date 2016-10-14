@@ -18,7 +18,7 @@ class CheckBlockedState
     {
         if (!Auth::user()) {
             $request->session()->flash('message', 'Please login.');
-            return redirect()->to('login')
+            return redirect()->to('login');
         }
         if(!Auth::user()->isActive()) {
             $request->session()->flash('message', 'You have no permission. You are blocked. Please login again.');
