@@ -43,12 +43,12 @@
                             </a>
                             
                             <ul class="dropdown-menu">
-                                <li><a href=""><span class="fa fa-asterisk"></span> De kapoenen</a></li>
-                                <li><a href=""><span class="fa fa-asterisk"></span> De Welpen</a></li>
-                                <li><a href=""><span class="fa fa-asterisk"></span> De Jong-Givers</a></li>
-                                <li><a href=""><span class="fa fa-asterisk"></span> De Givers</a></li>
-                                <li><a href=""><span class="fa fa-asterisk"></span> De Jins</a></li>
-                                <li><a href=""><span class="fa fa-asterisk"></span> De Leiding</a></li>
+                                <li><a href="{{ route('frontend.groups.specific', ['selector' => '']) }}"><span class="fa fa-asterisk"></span> De kapoenen</a></li>
+                                <li><a href="{{ route('frontend.groups.specific', ['selector' => '']) }}"><span class="fa fa-asterisk"></span> De Welpen</a></li>
+                                <li><a href="{{ route('frontend.groups.specific', ['selector' => '']) }}"><span class="fa fa-asterisk"></span> De Jong-Givers</a></li>
+                                <li><a href="{{ route('frontend.groups.specific', ['selector' => '']) }}"><span class="fa fa-asterisk"></span> De Givers</a></li>
+                                <li><a href="{{ route('frontend.groups.specific', ['selector' => '']) }}"><span class="fa fa-asterisk"></span> De Jins</a></li>
+                                <li><a href="{{ route('frontend.groups.specific', ['selector' => '']) }}"><span class="fa fa-asterisk"></span> De Leiding</a></li>
                             </ul>
                         </li>
                         
