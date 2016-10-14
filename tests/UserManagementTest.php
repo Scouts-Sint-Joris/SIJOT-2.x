@@ -37,6 +37,28 @@ class UserManagementTest extends TestCase
 		$this->seeStatusCode(200);
 	}
 
+    /**
+     * GET|HEAD:
+     * ROUTE:
+     *
+     * @group all
+     * @group auth
+     * @group backend
+     */
+    public function testPasswordReset()
+    {
+        $user  = factory(App\User::class)->make();
+        $route = route('users.reset', ['id' => $user->id]);
+
+        // Session data
+        $session['class']   = 'alert alert-success';
+        $session['message'] = trans('flash-session.user-reset');
+
+        $this->post($route);
+        // $this->dontSeeInDatabase('users', ['password' => $user->password]);
+        $this->seeStatusCode(302);
+        $this->session($session);
+    }
 
     /**
      * POST:  /backend/users

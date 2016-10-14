@@ -46,6 +46,7 @@ Route::get('/backend/news', 'NewsController@index')->name('news.backend.index');
 Route::get('/backend/mailing', 'MailingController@index')->name('backend.mailing.index'); 
 
 // User management routes.
+Route::get('backend/users/reset/{id}', 'UserManagementController@resetPassword')->name('users.reset');
 Route::get('backend/users/create', 'UserManagementController@create')->name('users.create');
 Route::get('backend/users', 'UserManagementController@overview')->name('users.index');
 Route::get('backend/users/destroy/{id}', 'UserManagementController@destroy')->name('users.destroy');
