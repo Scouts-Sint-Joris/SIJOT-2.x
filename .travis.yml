@@ -13,7 +13,7 @@ before_script:
     - travis_retry composer self-update
     - travis_retry composer install --no-interaction --prefer-source --dev
     - php artisan key:generate
-    - php artisan migrate --database=sqlite --force
+    - php artisan migrate --database=testing --force
 script:
     - vendor/bin/phpunit --coverage-clover=coverage.xml
 
