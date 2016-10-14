@@ -28,7 +28,7 @@ $factory->define(App\Activity::class, function (Faker\Generator $faker) {
     // $faker->time($format = 'H:i:s', $max = 'now')  -> '20:49:42'
 
     return [
-        'user_id'     => factory(App\User::class)->create(['id' => 4])->id,
+        'user_id'     => $faker->numberBetween(0, 4),
         'heading'     => $faker->text(200),
         'description' => $faker->text(200),
         'date'        => Carbon::now(),

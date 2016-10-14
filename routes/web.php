@@ -21,18 +21,23 @@ Route::get('/home', 'Homecontroller@homeBackend')->name('home.backend');
 
 // Group routes.
 Route::get('/groups', 'GroupController@overview')->name('frontend.groups');
+Route::get('/groups/{selector}', 'GroupController@specific')->name('frontend.groups.specific');
 
 // Rental routes
 Route::get('/rental', 'RentalController@indexFrontEnd')->name('rental.frontend.index');
 Route::get('/rental/insert', 'RentalController@insertViewFrontEnd')->name('rental.frontend.insert');
 Route::get('/rental/calendar', 'RentalController@calendar')->name('rental.frontend-calendar');
 Route::get('/rental/reachable', 'RentalController@domainReachable')->name('rental.frontend.reachable');
+Route::get('/backend/rental/export', 'RentalController@exportExcel')->name('rental.backend.export');
 Route::post('/rental/insert','RentalController@insert')->name('rental.store');
 
 Route::get('/backend/rental', 'RentalController@indexBackEnd')->name('rental.backend');
 Route::get('/backend/rental/option/{id}', 'RentalController@setOption')->name('rental.backend.option');
 Route::get('/backend/rental/confirm/{id}', 'RentalController@setConfirmed')->name('rental.backend.confirm');
 Route::get('/backend/rental/destroy/{id}', 'RentalController@destroy')->name('rental.backend.destroy');
+
+// Newsletter routes v
+Route::post('/newsletter/register', 'MailingController@registerNewsLetter')->name('newsletter.register');
 
 // News items. 
 Route::get('/backend/news', 'NewsController@index')->name('news.backend.index');
@@ -44,7 +49,10 @@ Route::get('/backend/mailing', 'MailingController@index')->name('backend.mailing
 Route::get('backend/users/create', 'UserManagementController@create')->name('users.create');
 Route::get('backend/users', 'UserManagementController@overview')->name('users.index');
 Route::get('backend/users/destroy/{id}', 'UserManagementController@destroy')->name('users.destroy');
+Route::get('backend/users/block/{id}', 'UserManagementController@block')->name('users.block');
+Route::get('backend/users/unblock/{id}', 'UserManagementController@unblock')->name('users.unblock');
 Route::post('backend/users', 'UserManagementController@store')->name('auth.new');
+
 
 // Settings routes.
 Route::get('settings', 'SettingsController@index')->name('settings.index');

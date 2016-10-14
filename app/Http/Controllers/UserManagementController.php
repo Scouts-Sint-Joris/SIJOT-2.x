@@ -75,8 +75,8 @@ class UserManagementController extends Controller
     /**
      * [METHOD]: Search for a specific user.
      *
-     * @url:platform
-     * @see:phpunit
+     * @url:platform  POST:
+     * @see:phpunit   UserManagementTest::
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -103,7 +103,7 @@ class UserManagementController extends Controller
         $newUser  = User::create($data);
 
         $findNewUser = User::find($newUser->id);
-        $setPass     = $findNewUser->update($password);
+        $setPass     = $findNewUser->update(['password' => $password]);
 
         if ($newUser && $setPass) {
             // TODO: Build up the mail.
@@ -139,7 +139,7 @@ class UserManagementController extends Controller
      * [METHOD]: block a user login
      *
      * @url:platform  GET|HEAD:
-     * @see:phpunit
+     * @see:phpunit   UserManagementTest::
      *
      * @param  int $id the login id in the database.
      * @return \Illuminate\Http\RedirectResponse
@@ -148,7 +148,7 @@ class UserManagementController extends Controller
     {
         $user = User::findOrFail($id);
         $user->revokePermissionTo('active');
-        $user->givePermssionTo('blocked');
+        $user->givePermissionTo('blocked');
 
         // Delete session if user is authencated.
         DB::table('sessions')->where('user_id', $id)->delete();

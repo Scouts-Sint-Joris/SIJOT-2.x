@@ -16,6 +16,8 @@
         
         {{-- IE10 vieuwport hack for Surface/Desktop Windows 8 bug --}}
         <link rel="stylesheet" href="{{ asset('assets/css/ie-10-viewport-bug-workaround.css') }}">
+
+        <script> window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token()]); ?></script>
     </head>
     <body class="background front-end">
         {{-- Navigation bar --}}
@@ -41,12 +43,12 @@
                             </a>
                             
                             <ul class="dropdown-menu">
-                                <li><a href=""><span class="fa fa-asterisk"></span> De kapoenen</a></li>
-                                <li><a href=""><span class="fa fa-asterisk"></span> De Welpen</a></li>
-                                <li><a href=""><span class="fa fa-asterisk"></span> De Jong-Givers</a></li>
-                                <li><a href=""><span class="fa fa-asterisk"></span> De Givers</a></li>
-                                <li><a href=""><span class="fa fa-asterisk"></span> De Jins</a></li>
-                                <li><a href=""><span class="fa fa-asterisk"></span> De Leiding</a></li>
+                                <li><a href="{{ route('frontend.groups.specific', ['selector' => '']) }}"><span class="fa fa-asterisk"></span> De kapoenen</a></li>
+                                <li><a href="{{ route('frontend.groups.specific', ['selector' => '']) }}"><span class="fa fa-asterisk"></span> De Welpen</a></li>
+                                <li><a href="{{ route('frontend.groups.specific', ['selector' => '']) }}"><span class="fa fa-asterisk"></span> De Jong-Givers</a></li>
+                                <li><a href="{{ route('frontend.groups.specific', ['selector' => '']) }}"><span class="fa fa-asterisk"></span> De Givers</a></li>
+                                <li><a href="{{ route('frontend.groups.specific', ['selector' => '']) }}"><span class="fa fa-asterisk"></span> De Jins</a></li>
+                                <li><a href="{{ route('frontend.groups.specific', ['selector' => '']) }}"><span class="fa fa-asterisk"></span> De Leiding</a></li>
                             </ul>
                         </li>
                         
@@ -95,11 +97,15 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="">
-                                    <span class="icon-green fa fa-sign-out"></span> Uitloggen
+                                <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Uitloggen
                                 </a>
+
+                                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                             </li>
-                        @else 
+                        @else
                             <li>
                                 <a href="{{ url('login') }}">
                                     <span class="icon-green fa fa-sign-in"></span> Login
@@ -113,6 +119,14 @@
         
         {{-- Content --}}
         <div class="container">
+            {{-- Cookie consent --}}
+            <div class="row">
+                <div class="col-sm-12">
+                    @include('cookieConsent::index')
+                </div>
+            </div>
+            {{-- Cookie consent --}}
+
             @yield('content')
         </div>
     
