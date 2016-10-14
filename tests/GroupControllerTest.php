@@ -17,6 +17,8 @@ class GroupControllerTest extends TestCase
      */
     public function testOverview()
     {
+        $this->get(route('frontend.groups'));
+        $this->seeStatusCode('200');
 
     }
 
