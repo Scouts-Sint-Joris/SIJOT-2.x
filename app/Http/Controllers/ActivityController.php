@@ -127,7 +127,7 @@ class ActivityController extends Controller
         $update   = $activity->update($inputs);
 
         if ($update) {
-            session()->flash('alert alert-success');
+            session()->flash('success', 'alert alert-success');
             session()->flash('message', '');
         }
 
