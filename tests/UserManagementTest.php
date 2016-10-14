@@ -69,10 +69,6 @@ class UserManagementTest extends TestCase
      */
     public function testCreateMethodWithoutErrors()
     {
-        // Test fails:
-        // ---
-        // Integrity constraint violation: 19 NOT NULL constraint failed: users.password
-
         $session['class']   = 'alert alert-success';
         $session['message'] = '';
 
@@ -83,7 +79,7 @@ class UserManagementTest extends TestCase
         $this->dontSeeInDatabase('users', $input);
         $this->post(route('auth.new'), $input);
         $this->seeInDatabase('users', $input);
-        $this->seeStatusCode(200);
+        $this->seeStatusCode(302);
         $this->session($session);
     }
 

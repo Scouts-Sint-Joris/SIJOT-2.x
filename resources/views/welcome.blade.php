@@ -81,11 +81,14 @@
             <h4>Nieuwsbrief</h4>
             <p>Wilt u op de hoogte blijven? Kunt u zich hier inschrijven op de nieuwsbrief. Zodat u op de hoogte blijft.</p>
             <p>
-                <form action="" method="POST">
-                    <div class="input-group">
-                        <input type="text" name="" class="form-control" placeholder="Email adres">
+                <form action="{{ route('newsletter.register') }}" method="POST">
+                    <div class="input-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
+                        {{-- CSRF FIELD --}}
+                        {{ csrf_field() }}
+
+                        <input style="border-top-left-radius: 4px; border-bottom-left-radius: 4px;" type="text" name="email" class="form-control" placeholder="Email adres">
                         <span class="input-group-btn">
-                            <button type="submit" class="btn btn-default" type="button">
+                            <button type="submit" class="btn btn-danger" type="button">
                                 <span class="fa fa-envelope"></span>
                             </button>
                         </span>
