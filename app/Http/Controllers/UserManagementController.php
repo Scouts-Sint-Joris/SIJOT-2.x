@@ -103,7 +103,7 @@ class UserManagementController extends Controller
         $newUser  = User::create($data);
 
         $findNewUser = User::find($newUser->id);
-        $setPass     = $findNewUser->update($password);
+        $setPass     = $findNewUser->update(['password' => $password]);
 
         if ($newUser && $setPass) {
             // TODO: Build up the mail.
