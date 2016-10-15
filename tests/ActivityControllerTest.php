@@ -12,6 +12,7 @@ class ActivityControllerTest extends TestCase
     // DatabaseMigrations   = Trait for running the db migrations each test.
     // DatabaseTransactions = Trait for running qeuries against the db stub.
     use DatabaseMigrations, DatabaseTransactions;
+    
     /**
      * GET|HEAD: /backend/activity
      * ROUTE:    activity.index
