@@ -23,6 +23,15 @@ $factory->define(App\Rental::class, function (Faker\Generator $faker) {
 
 });
 
+$factory->define(App\Groups::class, function (Faker\Generator $faker) {
+    return [
+        'selector'    => $faker->word,
+        'sub_heading' => $faker->word,
+        'heading'     => $faker->word,
+        'description'     => $faker->word,      
+    ];
+});
+
 $factory->define(App\Activity::class, function (Faker\Generator $faker) {
     // $faker->unixTime($max = 'now')                 -> (timestamp) 58781813
     // $faker->time($format = 'H:i:s', $max = 'now')  -> '20:49:42'
@@ -43,7 +52,7 @@ $factory->define(App\Groups::class, function (Faker\Generator $faker) {
         'selector'    => $faker->name,
         'sub_heading' => $faker->name,
         'heading'     => $faker->name,
-        'description' => $faker->name
+        'description' => $faker->name,
     ];
 });
 
