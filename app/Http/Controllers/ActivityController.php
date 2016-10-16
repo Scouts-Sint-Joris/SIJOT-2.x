@@ -18,11 +18,11 @@ class ActivityController extends Controller
     protected $inputFilter;
 
     /**
-     * MySQL database relations array. 
-     * 
-     * @var array  
+     * MySQL database relations array.
+     *
+     * @var array
      */
-    protected $dbRelations; 
+    protected $dbRelations;
 
     /**
      * ActivityController constructor
@@ -30,7 +30,7 @@ class ActivityController extends Controller
     public function __construct()
     {
         $this->inputFilter = ['_token', 'group'];   // Fill in the filter array for the inputs.
-        $this->dbRelations = ['groups', 'creator']; // The MySQL database relations.    
+        $this->dbRelations = ['groups', 'creator']; // The MySQL database relations.
 
         $this->middleware('auth'); // See if the user is logged in.
         $this->middleware('lang'); // Determine the language and get the correct trans. files.
@@ -87,7 +87,7 @@ class ActivityController extends Controller
 
         if ($create) {
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', '');
+            session()->flash('message', trans('flash-session.activity-store'));
         }
 
         return redirect()->back();
@@ -128,7 +128,7 @@ class ActivityController extends Controller
 
         if ($update) {
             session()->flash('alert alert-success');
-            session()->flash('message', '');
+            session()->flash('message', trans('flash-session.activity-update'));
         }
 
         return redirect()->back();
@@ -149,7 +149,7 @@ class ActivityController extends Controller
 
         if (Activity::destroy($id)) {
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', '');
+            session()->flash('message', trans('flash-session.activity-destroy'));
         }
 
         return redirect()->back();
