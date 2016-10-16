@@ -45,6 +45,7 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
     {
         parent::setUp();
         $this->user = factory(App\User::class)->create();
+        $this->rentalStatusSetupUp();
     }
 
     /**
@@ -57,5 +58,26 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
     {
         $this->actingAs($this->user);
         $this->seeIsAuthenticatedAs($this->user);
+    }
+
+    private function rentalStatusSetupUp()
+    {
+        $data = [
+            [
+                'name'  => 'Optie', 
+                'class' => 'label label-warning',
+            ], 
+            [
+                'name'  => 'Bevestigd',
+                'class' => 'label label-success', 
+            ], 
+            [
+                'name'  => 'Nieuwe aanvraag', 
+                'class' => 'label label-danger',
+            ],
+        ];
+
+        $table = DB::table('rental_statuses'); 
+        $table->insert($data);
     }
 }
