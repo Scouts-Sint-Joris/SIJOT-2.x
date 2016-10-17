@@ -30,13 +30,6 @@ $factory->define(App\RentalStatus::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\RentalStatus::class, function (Faker\Generator $faker) {
-    return [
-        'name'  => $faker->word,
-        'class' => $faker->word,
-    ];
-});
-
 $factory->define(App\Activity::class, function (Faker\Generator $faker) {
     // $faker->unixTime($max = 'now')                 -> (timestamp) 58781813
     // $faker->time($format = 'H:i:s', $max = 'now')  -> '20:49:42'
