@@ -20,7 +20,22 @@ $factory->define(App\Rental::class, function (Faker\Generator $faker) {
         'phone_number' => $faker->phoneNumber,
         'email'        => $faker->email
     ];
+});
 
+$factory->define(App\RentalStatus::class, function (Faker\Generator $faker) {
+    return [
+        'name'   => $faker->word,
+        'class'  => $faker->word,
+    ];
+});
+
+$factory->define(App\Groups::class, function (Faker\Generator $faker) {
+    return [
+        'selector'    => $faker->word,
+        'sub_heading' => $faker->word,
+        'heading'     => $faker->word,
+        'description'     => $faker->word,      
+    ];
 });
 
 $factory->define(App\Activity::class, function (Faker\Generator $faker) {
@@ -43,7 +58,7 @@ $factory->define(App\Groups::class, function (Faker\Generator $faker) {
         'selector'    => $faker->name,
         'sub_heading' => $faker->name,
         'heading'     => $faker->name,
-        'description' => $faker->name
+        'description' => $faker->name,
     ];
 });
 
