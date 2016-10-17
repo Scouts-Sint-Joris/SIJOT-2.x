@@ -45,7 +45,6 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
     {
         parent::setUp();
         $this->user = factory(App\User::class)->create();
-        $this->rentalStatusSetupUp();
     }
 
     /**
@@ -60,24 +59,33 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
         $this->seeIsAuthenticatedAs($this->user);
     }
 
-    private function rentalStatusSetupUp()
+    protected function rentalSetup()
     {
-        $data = [
-            [
-                'name'  => 'Optie', 
-                'class' => 'label label-warning',
-            ], 
-            [
-                'name'  => 'Bevestigd',
-                'class' => 'label label-success', 
-            ], 
-            [
-                'name'  => 'Nieuwe aanvraag', 
-                'class' => 'label label-danger',
-            ],
-        ];
+        factory(App\Rental::class)->create([
+            'status_id' => function () {
+                return factory(App\RentalStatus::class)->create([
+                    'name'  => 'Optie', 
+                    'class' => 'label label-warning',
+                ])->id;
+            }
+        ]);
 
-        $table = DB::table('rental_statuses'); 
-        $table->insert($data);
+        factory(App\Rental::class)->create([
+            'status_id' => function () {
+                return factory(App\RentalStatus::class)->create([
+                    'name'  => 'Bevestigd',
+                    'class' => 'label label-success',
+                ])->id;
+            }
+        ]);
+
+        factory(App\Rental::class)->create([
+            'status_id' => function () {
+                return factory(App\RentalStatus::class)->create([
+                    'name'  => 'Nieuwe aanvraag', 
+                    'class' => 'label label-danger',
+                ])->id;
+            }
+        ]);
     }
 }
