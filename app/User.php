@@ -41,4 +41,8 @@ class User extends Authenticatable
     {
         return Cache::has('user-is-online-' . $this->id);
     }
+
+    public function isActive() {
+        return in_array('active', $this->permissions()->get()->map(function ($p) {return $p->name;}));
+    }
 }
