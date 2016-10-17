@@ -12,7 +12,7 @@ class ActivityControllerTest extends TestCase
     // DatabaseMigrations   = Trait for running the db migrations each test.
     // DatabaseTransactions = Trait for running qeuries against the db stub.
     use DatabaseMigrations, DatabaseTransactions;
-
+    
     /**
      * GET|HEAD: /backend/activity
      * ROUTE:    activity.index
@@ -123,5 +123,71 @@ class ActivityControllerTest extends TestCase
         $this->dontSeeInDatabase('activities', $data);
         $this->seeStatusCode(302);
         $this->session($session);
+    }
+
+    /**
+     * GET|HEAD:  /backend/activity
+     * ROUTE:     activity.store
+     *
+     * @group all
+     * @group activity
+     * @group back-end
+     */
+    public function testActivityStorePublishedSuccesfully()
+    {
+        $user  = factory(App\User::class)->create();
+        $group = factory(App\Groups::class)->create();
+
+        $this->actingAs($user)->visit('/backend/activity')
+            ->type('framework for artisan web', 'description')
+            ->type('This is new activity', 'heading')
+            ->type('2016-10-14 14:50:51', 'date')
+            ->type('2016-10-14 14:50:51', 'start_time')
+            ->type('2016-10-14 14:50:51', 'end_time')
+            ->type(1, 'state')
+            ->type($group->id, 'group')
+            ->press('Aanmaken')
+            ->see('This is new activity');
+    }
+
+     /**
+     * GET|HEAD:  /backend/activity
+     * ROUTE:     activity.store
+     *
+     * @group all
+     * @group activity
+     * @group back-end
+     */
+    public function testActivityStoreDraftedSuccesfully()
+    {
+        $user  = factory(App\User::class)->create();
+        $group = factory(App\Groups::class)->create();
+
+        $this->actingAs($user)->visit('/backend/activity')
+            ->type('framework for artisan web', 'description')
+            ->type('This is new activity', 'heading')
+            ->type('2016-10-14 14:50:51', 'date')
+            ->type('2016-10-14 14:50:51', 'start_time')
+            ->type('2016-10-14 14:50:51', 'end_time')
+            ->type(0, 'state')
+            ->type($group->id, 'group')
+            ->press('Aanmaken')
+            ->see('This is new activity');
+    }
+
+    /**
+     * GET|HEAD:  /backend/activity
+     * ROUTE:     activity.store
+     *
+     * @group all
+     * @group activity
+     * @group back-end
+     */
+    public function testActivityStoreUnsuccesfullyDueToMissingFields()
+    {
+        $user     = factory(App\User::class)->create();
+        $this->actingAs($user)->visit('/backend/activity')
+            ->press('Aanmaken')
+            ->see('Er zijn geen klad activiteiten');
     }
 }
