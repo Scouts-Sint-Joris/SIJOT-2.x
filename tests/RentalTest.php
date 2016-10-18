@@ -20,7 +20,10 @@ class RentalTest extends TestCase
      */
     public function testFrontendOverView()
     {
-
+        $this->authentication();
+        $this->visit(route('rental.frontend.index'));
+        $this->seeStatusCode(200);
+        $this->see('Verhuur info.');
     }
 
     /**
@@ -31,7 +34,11 @@ class RentalTest extends TestCase
      */
     public function testRentalInsertErrors()
     {
-
+        $this->authentication();
+        $this->post(route('rental.store'), []);
+        $this->seeStatusCode(302);
+        $this->assertHasOldInput();
+        $this->assertSessionHasErrors();
     }
 
     /**
@@ -42,7 +49,10 @@ class RentalTest extends TestCase
      */
     public function testReachablePage() 
     {
-
+        $this->authentication();
+        $this->visit(route('rental.frontend.reachable'));
+        $this->seeStatusCode(200);
+        $this->see('Verhuur bereikbaarheid');
     }
 
     /**
@@ -53,38 +63,53 @@ class RentalTest extends TestCase
      */
     public function testRentalInsertSuccess()
     {
+        factory(App\RentalStatus::class)->create([
+            'name' => 'Nieuwe aanvraag',
+            'class' => 'label label-danger'
+        ]);
+
+        $user = factory(App\User::class)->create();
+
+        $this->actingAs($user)->visit(route('rental.store'))
+            ->type('2016-10-14 14:50:51', 'start_date')
+            ->type('2016-10-14 14:50:51', 'end_date')
+            ->type('Cubbs', 'group')
+            ->type('tjoosten@gmail.com', 'email')
+            ->type('08132009384', 'phone_number')
+            ->press('Aanvragen')
+            ->seePageIs(route('rental.frontend.insert'))
+            ->see('Verhuur aanvraag.');
+    }
+
+    /**
+     * @group backend
+     * @group all
+     * @group rental
+     */
+    public function testRentalUpdateView()
+    {
 
     }
 
-	/**
+    /**
      * @group backend
-	 * @group all
+     * @group all
      * @group rental
-	 */
-	public function testRentalUpdateView()
-	{
+     */
+    public function testRentalUpdateWithoutSuccess()
+    {
 
-	}
+    }
 
-	/**
+    /**
      * @group backend
-	 * @group all
+     * @group all
      * @group rental
-	 */
-	public function testRentalUpdateWithoutSuccess()
-	{
+     */
+    public function testRentalUpdateWithSuccess()
+    {
 
-	}
-
-	/**
-     * @group backend
-	 * @group all
-     * @group rental
-	 */
-	public function testRentalUpdateWithSuccess()
-	{
-
-	}
+    }
 
     /**
      * @group backend
@@ -93,7 +118,17 @@ class RentalTest extends TestCase
      */
     public function testRentalDelete()
     {
+        $rental = factory(App\Rental::class)->create();
+        $data   = ['id' => $rental->id];
 
+        $session['class'] = 'alert alert-success';
+        $session['message'] = '';
+ 
+        $this->authentication();
+        $this->seeInDatabase('rentals', $data);
+        $this->get(route('rental.backend.destroy', $data));
+        $this->dontSeeInDatabase('rentals', $data);
+        $this->session($session);
     }
 
     /**
@@ -106,6 +141,9 @@ class RentalTest extends TestCase
      */
     public function testRentalCalendar()
     {
+        $this->visit(route('rental.frontend-calendar'));
+        $this->seeStatusCode(200);
+        $this->see('Verhuur kalender.');
     }
 
     /**
@@ -118,7 +156,10 @@ class RentalTest extends TestCase
      */
     public function testRentalInsertFormFrontEnd()
     {
-
+        $this->authentication();
+        $this->visit(route('rental.frontend.insert'));
+        $this->seeStatusCode(200);
+        $this->see('Verhuur aanvraag.');
     }
 
     /**
@@ -131,6 +172,9 @@ class RentalTest extends TestCase
      */
     public function testRentalInsertFormBackend()
     {
-
+        $this->authentication();
+        $this->visit(route('rental.backend'));
+        $this->seeStatusCode(200);
+        $this->see('Verhuring toevoegen.');
     }
 }
