@@ -96,7 +96,23 @@ class ActivityControllerTest extends TestCase
      */
     public function testUpdateWithOutError()
     {
-
+        $activity = factory(App\Activity::class)->create();
+        $this->authentication();
+        $this->post (route('activity.update', ['id' => $activity->id]) , [
+            'heading' => 'This is the updated heading for the activity.',
+            'description' => 'This is the updated description',
+            'state'       => 1,
+            'group'       => 'required', 
+            'start_time'  => 1476466655,
+            'date'        => '2016-10-13 17:33:31',
+            'end_time'    => 1476496655, 
+        ]);
+        $updatedActivity = App\Activity::find($activity->id);
+        $this->seeStatusCode(302);
+        $this->assertSessionHas('success', 'alert alert-success');
+        $this->assertRedirectedToRoute('home');
+        $this->assertEquals('This is the updated heading for the activity.', $updatedActivity->heading);
+        $this->assertEquals('This is the updated description', $updatedActivity->description);
     }
 
     /**
