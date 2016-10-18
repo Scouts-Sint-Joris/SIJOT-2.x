@@ -136,9 +136,9 @@
                         <a href="#">
                             <i class="fa fa-home"></i> <span>Verhuur</span>
                             <span class="pull-right-container">
-                                <small class="label pull-right bg-yellow">{{ $option }}</small>
-                                <small class="label pull-right bg-green">{{ $confirmed }}</small>
-                                <small class="label pull-right bg-red">{{ $new }}</small>
+                                <small class="label pull-right bg-yellow">{{ isset($option) ? $option : '0' }}</small>
+                                <small class="label pull-right bg-green">{{ isset($confirmed) ? $confirmed : '0'}}</small>
+                                <small class="label pull-right bg-red">{{ isset($new) ? $new : '0'}}</small>
                             </span>
                         </a>
                         <ul class="treeview-menu">

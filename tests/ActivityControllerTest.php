@@ -24,6 +24,7 @@ class ActivityControllerTest extends TestCase
     public function testOverview()
     {
         $this->authentication();
+        $this->rentalSetup();
         $this->visit(route('activity.index'));
         $this->seeStatusCode(200);
     }
