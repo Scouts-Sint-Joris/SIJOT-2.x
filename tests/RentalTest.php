@@ -98,7 +98,7 @@ class RentalTest extends TestCase
      */
     public function testRentalUpdateWithoutSuccess()
     {
-       
+
     }
 
     /**
@@ -118,7 +118,17 @@ class RentalTest extends TestCase
      */
     public function testRentalDelete()
     {
+        $rental = factory(App\Rental::class)->create();
+        $data   = ['id' => $rental->id];
 
+        $session['class'] = 'alert alert-success';
+        $session['message'] = '';
+ 
+        $this->authentication();
+        $this->seeInDatabase('rentals', $data);
+        $this->get(route('rental.backend.destroy', $data));
+        $this->dontSeeInDatabase('rentals', $data);
+        $this->session($session);
     }
 
     /**
@@ -131,7 +141,9 @@ class RentalTest extends TestCase
      */
     public function testRentalCalendar()
     {
-
+        $this->visit(route('rental.frontend-calendar'));
+        $this->seeStatusCode(200);
+        $this->see('Verhuur kalender.');
     }
 
     /**
