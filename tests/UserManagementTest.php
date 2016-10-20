@@ -9,33 +9,34 @@ class UserManagementTest extends TestCase
     use DatabaseMigrations, DatabaseTransactions;
 
     /**
-	 * GET|HEAD:  /backend/users
-	 * ROUTE: users.index
-	 *
-	 * @group all
-	 * @group auth
-	 * @group backend
+     * GET|HEAD:  /backend/users
+     * ROUTE: users.index
+     *
+     * @group all
+     * @group auth
+     * @group backend
      */
     public function testOverview()
     {
-		$this->authentication();
-		$this->get(route('users.index'));
-		$this->seeStatusCode(200);
+        $this->authentication();
+        $this->get(route('users.index'));
+        $this->see('Overzicht.');
+        $this->seeStatusCode(200);
     }
 
-	/**
-	 * GET|HEAD:
-	 *
-	 * @group all
-	 * @group auth
-	 * @group backend
-	 */
-	public function testCreateViewBackend()
-	{
-		$this->authentication();
-		$this->get(route('users.create'));
-		$this->seeStatusCode(200);
-	}
+    /**
+     * GET|HEAD:
+     *
+     * @group all
+     * @group auth
+     * @group backend
+     */
+    public function testCreateViewBackend()
+    {
+        $this->authentication();
+        $this->get(route('users.create'));
+        $this->seeStatusCode(200);
+    }
 
 
     /**
@@ -84,12 +85,12 @@ class UserManagementTest extends TestCase
     }
 
     /**
-	 * GET|HEAD: /backend/users/destroy/1
-	 * ROUTE:    users.destroy
-	 *
-	 * @group all
-	 * @group auth
-	 * @group backend
+     * GET|HEAD: /backend/users/destroy/1
+     * ROUTE:    users.destroy
+     *
+     * @group all
+     * @group auth
+     * @group backend
      */
     public function testDeleteMethod()
     {
