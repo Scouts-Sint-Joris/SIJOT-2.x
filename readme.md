@@ -1,5 +1,5 @@
 # Sijot website.
-
+[![Build Status](https://travis-ci.org/Tjoosten/website.svg?branch=develop)](https://travis-ci.org/Tjoosten/website)
 ## Info
 This website belongs to a local scouting group at Turnhout,Belguim. The website provides information such as :-
 * Branches
