@@ -14,7 +14,7 @@ use App\Http\Requests;
  * @copyright Tim Joosten 2015 - 2016
  * @version   2.0.0
  */
-class GroupController extends Controller
+class GroupControllerTest extends Controller
 {
     /**
      * Auth middleware protected routes. 
