@@ -17,6 +17,7 @@ return [
     'user-destroy' => 'The user has been deleted.', 
     'user-block'   => 'The user has been blocked from the system.',
     'user-unblock' => 'The user is active again.',
+    'user-reset'   => 'The password has been resetted.',
 
     // news section flash messages. 
     'news-destroy' => 'The news message has been deleted.',
