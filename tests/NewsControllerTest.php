@@ -11,8 +11,11 @@ class NewsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testNewsOverview()
     {
-        $this->assertTrue(true);
+        $this->authentication(); 
+        $this->get(route('news.backend.index')); 
+        $this->seeStatusCode(200);
+        $this->see('Nieuwsberichten');
     }
 }
