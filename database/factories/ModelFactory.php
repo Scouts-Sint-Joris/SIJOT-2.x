@@ -34,23 +34,7 @@ $factory->define(App\Groups::class, function (Faker\Generator $faker) {
         'selector'    => $faker->word,
         'sub_heading' => $faker->word,
         'heading'     => $faker->word,
-        'description'     => $faker->word,      
-    ];
-});
-
-$factory->define(App\Groups::class, function (Faker\Generator $faker) {
-    return [
-        'selector'    => $faker->word,
-        'sub_heading' => $faker->word,
-        'heading'     => $faker->word,
-        'description'     => $faker->word,      
-    ];
-});
-
-$factory->define(App\RentalStatus::class, function (Faker\Generator $faker) {
-    return [
-        'name'  => $faker->word,
-        'class' => $faker->word
+        'description' => $faker->word,      
     ];
 });
 
@@ -66,15 +50,6 @@ $factory->define(App\Activity::class, function (Faker\Generator $faker) {
         'start_time'  => Carbon::now(),
         'end_time'    => Carbon::now(),
         'state'       => 1,
-    ];
-});
-
-$factory->define(App\Groups::class, function (Faker\Generator $faker) {
-    return [
-        'selector'    => $faker->name,
-        'sub_heading' => $faker->name,
-        'heading'     => $faker->name,
-        'description' => $faker->name,
     ];
 });
 
