@@ -173,7 +173,6 @@ return [
         Themsaid\Langman\LangmanServiceProvider::class,
         Spatie\CookieConsent\CookieConsentServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
         EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider::class,
 
         /*
