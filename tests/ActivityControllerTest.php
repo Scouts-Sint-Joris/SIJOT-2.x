@@ -202,7 +202,7 @@ class ActivityControllerTest extends TestCase
      */
     public function testActivityStoreUnsuccesfullyDueToMissingFields()
     {
-        $user     = factory(App\User::class)->create();
+        $user = factory(App\User::class)->create();
         $this->actingAs($user)->visit('/backend/activity')
             ->press('Aanmaken')
             ->see('Er zijn geen klad activiteiten');
