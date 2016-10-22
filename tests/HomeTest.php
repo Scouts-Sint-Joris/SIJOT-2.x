@@ -15,10 +15,21 @@ class HomeTest extends TestCase
      */
     public function testHomeFrontend()
     {
-        $activity = factory(App\Activity::class)->create(); 
+        $activity = factory(App\Activity::class)->create();
+        
+        $tags = factory(App\Tags::class, 3)->create();
+
+        $news = factory(App\News::class, 3)
+           ->create([
+                'user_id' => App\User::first()
+            ])
+           ->each(function ($news) use ($tags) {
+                $news->tags()->attach($tags);
+            });
 
         $this->get(route('home')); 
-        $this->seeStatusCode(200);
+        $this->seeStatusCode(200)
+            ->see($news->first()->heading);
     }
 
     /**
