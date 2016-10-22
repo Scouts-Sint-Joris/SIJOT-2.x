@@ -85,8 +85,25 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name'           => $faker->name,
         'email'          => $faker->safeEmail,
-        'theme'          => array_rand($themes),
+        'theme'          => $themes[array_rand($themes)],
         'password'       => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\Tags::class, function (Faker\Generator $faker) {
+    $classes = ['label label-default', 'label label-primary', 'label label-success', 'label label-info', 'label label-warning', 'label label-danger'];
+
+    return [
+        'name'   => $faker->word,
+        'class'  => $classes[array_rand($classes)],
+    ];
+});
+
+$factory->define(App\News::class, function (Faker\Generator $faker) {
+    return [
+        'state' => 1,
+        'heading' => $faker->words(3, true),
+        'content' => $faker->text(200),
     ];
 });
