@@ -12,20 +12,24 @@
             <div style="border-radius:0px; border: 0px;" class="panel panel-default">
                 <div class="panel-body">
                     <div class="col-md-8" id="news">
-                        @foreach($news as $article)
-                            <article>
-                                <h3>{{ $article->heading }}</h3>
-                                <p>{{ $article->content }}</p>
-                                <div>
-                                    <span class="badge">Posted {{ $article->created_at->format('Y-m-d H:i:s') }}</span>
-                                    <div class="pull-right">
-                                        @foreach($article->tags as $tag)
-                                            <span class="{{ $tag->class }}">{{ $tag->name }}</span>
-                                        @endforeach
+                        @if($news->count())
+                            @foreach($news as $article)
+                                <article>
+                                    <h3>{{ $article->heading }}</h3>
+                                    <p>{{ $article->content }}</p>
+                                    <div>
+                                        <span class="badge">Posted {{ $article->created_at->format('Y-m-d H:i:s') }}</span>
+                                        <div class="pull-right">
+                                            @foreach($article->tags as $tag)
+                                                <span class="{{ $tag->class }}">{{ $tag->name }}</span>
+                                            @endforeach
+                                        </div>
                                     </div>
-                                </div>
-                            </article>
-                        @endforeach
+                                </article>
+                            @endforeach
+                        @else
+                            <p>Check back here soon for updates!</p>
+                        @endif
                         <hr>
                     </div>
                     <div class="col-md-4">
