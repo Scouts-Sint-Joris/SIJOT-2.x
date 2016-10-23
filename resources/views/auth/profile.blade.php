@@ -26,7 +26,6 @@
     </ul>
 
     <div class="tab-content">
-
         {{-- Account information --}}
         <div class="tab-pane fade in active" id="tab_1">
             <div class="row">
@@ -63,7 +62,7 @@
                             <select id="view" class="form-control" name="theme">
                                 <option value="">-- Selecteer uw weergave --</option>µ
 
-                                @foreach($themes as $theme) 
+                                @foreach($themes as $theme)
                                     <option value="{{ $theme->class }}">{{ $theme->name }}</option>
                                 @endforeach
                             </select>
@@ -71,19 +70,13 @@
                     </div>
 
                 </form>
-            </form>
-        </div>
-        {{-- /Account information--}}
-
-        {{-- Account security --}}
-        <div class="tab-pane fade in" id="tab_2">
-            <div class="row">
-                <form action="" method="POST" class="form-horizontal">
-                    {{-- CSRF Token --}}
-                    {{ csrf_field() }}
-                </form>
             </div>
         </div>
-        {{-- /Account security --}}
+        {{-- /Account information --}}
+
+        <div class="tab-pane fade in" id="tab_2">
+            Password
+        </div>
     </div>
+</div>
 @endsection
