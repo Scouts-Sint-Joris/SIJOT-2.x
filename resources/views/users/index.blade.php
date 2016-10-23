@@ -18,7 +18,7 @@
 
         <div class="box-tools pull-right">
             <a href="#"><span class="label label-danger">Gebruiker zoeken</span></a>
-            <a href="#"><span class="label label-success">Gebruiker toevoegen</span></a>
+            <a href="#" class="label label-success" data-toggle="modal" data-target="#newUser">Gebruiker toevoegen.</a>
         </div>
     </div>
     <div class="box-body no-padding">

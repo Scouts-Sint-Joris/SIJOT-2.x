@@ -24,7 +24,6 @@ class UserManagementController extends Controller
      * @todo: build up the mailable views.
      * @todo: write search controller & test.
      * @todo: Implement user specific index view.
-     * @todo: add create new user wizard.
      */
 
     /**
@@ -107,14 +106,16 @@ class UserManagementController extends Controller
      */
     public function store(LoginValidator $input)
     {
-        $password = str_random(16);
-        $data     = array_merge(['password' => bcrypt($password)], $input->except('_token'));
+        $db['password'] = bcrypt(str_random(16));
+        $db['theme']    = 'skin-red';
+
+        $data     = array_merge($db, $input->except('_token'));
         $newUser  = User::create($data);
 
         $findNewUser = User::find($newUser->id);
-        $setPass     = $findNewUser->update(['password' => $password]);
+        $setStatus     = $findNewUser->givePermissionTo('active');
 
-        if ($newUser && $setPass) {
+        if ($newUser && $setStatus) {
             // TODO: Build up the mail.
             Mail::to($findNewUser->email)->send(new NewUser($findNewUser));
 
