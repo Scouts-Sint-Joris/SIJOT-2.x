@@ -63,7 +63,9 @@
                                 <option value="">-- Selecteer uw weergave --</option>µ
 
                                 @foreach($themes as $theme)
-                                    <option value="{{ $theme->class }}">{{ $theme->name }}</option>
+                                    <option value="{{ $theme->class }}" @if(auth()->user()->theme === $theme->class) selected @endif>
+                                        {{ $theme->name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
