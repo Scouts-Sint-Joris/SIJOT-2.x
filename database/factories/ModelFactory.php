@@ -55,7 +55,15 @@ $factory->define(App\Activity::class, function (Faker\Generator $faker) {
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
-    $themes = array('skin-black','skin-black-light','skin-blue','skin-blue-light','skin-green','skin-green-light','skin-purple','skin-purple-light','skin-red','skin-red-light','skin-yellow','skin-yellow-light');
+
+    $themes = [
+        'skin-black','skin-black-light',
+        'skin-blue','skin-blue-light',
+        'skin-green','skin-green-light',
+        'skin-purple','skin-purple-light',
+        'skin-red','skin-red-light',
+        'skin-yellow','skin-yellow-light'
+    ];
 
     return [
         'name'           => $faker->name,
@@ -67,7 +75,11 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Tags::class, function (Faker\Generator $faker) {
-    $classes = ['label label-default', 'label label-primary', 'label label-success', 'label label-info', 'label label-warning', 'label label-danger'];
+    $classes = [
+        'label label-default', 'label label-primary',
+        'label label-success', 'label label-info',
+        'label label-warning', 'label label-danger'
+    ];
 
     return [
         'name'   => $faker->word,
