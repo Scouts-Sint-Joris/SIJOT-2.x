@@ -24,6 +24,8 @@ class UserManagementController extends Controller
      * @todo: build up the mailable views.
      * @todo: write search controller & test.
      * @todo: Implement user specific index view.
+     * @todo: Write test for resetPassword.
+     * @todo: Register route for show().
      */
 
     /**
@@ -66,7 +68,7 @@ class UserManagementController extends Controller
      * Reset the password for a specific user.
      *
      * @url:platform  GET|HEAD: /backend/users/reset/{id}
-     * @see:phpunit   // TODO: write unit test.
+     * @see:phpunit
      *
      * @param  int $id The user id in the database.
      * @return \Illuminate\Http\RedirectResponse
@@ -83,6 +85,21 @@ class UserManagementController extends Controller
         }
 
         return redirect()->back(302);
+    }
+
+    /**
+     * Show the details for a specific user.
+     *
+     * @url:platform  GET|HEAD:
+     * @see:phpunit
+     *
+     * @param  int $id The user id in the database.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show($id)
+    {
+        $data['user'] = User::findOrFail($id);
+        return view('', $data);
     }
 
     /**
