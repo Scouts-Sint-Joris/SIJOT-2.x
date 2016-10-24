@@ -114,13 +114,13 @@
                         </div>
                         <div class="pull-left info">
                             <p>{{ auth()->user()->name }}</p>
-                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                            <a href="#"><i class="fa fa-circle text-success"></i> {{ trans('backend-theme.status-online') }}</a>
                         </div>
                     </div>
                     {{-- search form --}}
                     <form action="#" method="get" class="sidebar-form">
                         <div class="input-group">
-                            <input type="text" name="q" class="form-control" placeholder="Search...">
+                            <input type="text" name="q" class="form-control" placeholder="{{ trans('backend-theme.search-placeholder') }}"">
                             <span class="input-group-btn">
                                 <button type="submit" name="search" id="search-btn" class="btn btn-flat">
                                     <i class="fa fa-search"></i>

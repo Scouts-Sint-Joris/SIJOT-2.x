@@ -24,4 +24,11 @@ return [
     'groups'                => 'Groups',
     'news-item'             => 'News items',
 
+    // Auth status codes
+    'status-online'         => 'Online',
+
+    // Sidebar - Search form.
+    'search-placeholder'    => 'Search...',
+
+
 ];
