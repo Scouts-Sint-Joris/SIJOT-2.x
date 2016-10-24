@@ -84,7 +84,34 @@
         {{-- /Account information --}}
 
         <div class="tab-pane fade in" id="tab_2">
-            Password
+            <form action="" class="form-horizontal" method="POST">
+                <div class="form-group">
+                    <label class="control-label col-sm-1">
+                        Wachtwoord: <span class="text-danger">*</span>
+                    </label>
+
+                    <div class="col-sm-2">
+                        <input class="form-control" name="password" placeholder="Nieuw wachtwoord" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-1">
+                        Bevestiging: <span class="text-danger">*</span>
+                    </label>
+
+                    <div class="col-sm-2">
+                        <input class="form-control" name="password_confirmation" placeholder="Wachtwoord bevestiging" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-1 cols-sm-9">
+                        <button type="submit" class="btn btn-sm btn-flat btn-success">Wijzigen</button>
+                        <button type="reset" class="btn btn-sm btn-flat btn-danger">Reset</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
