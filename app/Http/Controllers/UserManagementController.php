@@ -63,12 +63,17 @@ class UserManagementController extends Controller
     }
 
     /**
+     * Reset the password for a specific user.
+     *
+     * @url:platform  GET|HEAD: /backend/users/reset/{id}
+     * @see:phpunit   // TODO: write unit test.
+     *
      * @param  int $id The user id in the database.
      * @return \Illuminate\Http\RedirectResponse
      */
     public function resetPassword($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->password =  str_random(16);
 
         if ($user->save()) // If the user has been updated;
