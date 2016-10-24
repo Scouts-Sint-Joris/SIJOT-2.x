@@ -69,6 +69,13 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <div class="col-sm-offset-1 col-sm-9">
+                            <button type="submit" class="btn btn-sm btn-flat btn-success">Wijzigen.</button>
+                            <button type="reset" class="btn btn-danger btn-flat btn-sm">Reset</button>
+                        </div>
+                    </div>
+
                 </form>
             </div>
         </div>
