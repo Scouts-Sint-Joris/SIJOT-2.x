@@ -30,13 +30,13 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Start datum:</th>
-                    <th>Eind datum:</th>
-                    <th>Status:</th>
-                    <th>Groep:</th>
-                    <th>Email:</th>
-                    <th>GSM-nummer:</th>
-                    <th>Aanvraag datum:</th>
+                    <th>{{ trans('rental.lease-start-date') }}</th>
+                    <th>{{ trans('rental.lease-end-date') }}</th>
+                    <th>{{ trans('rental.lease-status') }}</th>
+                    <th>{{ trans('rental.lease-group') }}</th>
+                    <th>{{ trans('rental.lease-email') }}</th>
+                    <th>{{ trans('rental.lease-phone-number') }}</th>
+                    <th>{{ trans('rental.lease-create-date') }}</th>
                     <th></th> {{-- Options --}}
                 </tr>
             </thead>
