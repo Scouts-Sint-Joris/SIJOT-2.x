@@ -17,8 +17,12 @@
         <h3 class="box-title">Verhuur overzicht</h3>
 
         <div class="pull-right">
-            <a href="{{ route('rental.backend.export') }}" class="btn btn-danger btn-xs">Exporteer</a>
-            <a href="#" class="btn btn-success btn-xs" data-toggle="modal" data-target="#insert">Verhuring toevoegen</a>
+            <a href="{{ route('rental.backend.export') }}" class="btn btn-danger btn-xs">
+                {{ trans('rental.lease-export') }}
+            </a>
+            <a href="#" class="btn btn-success btn-xs" data-toggle="modal" data-target="#insert">
+                {{ trans('rental.lease-add') }}
+            </a>
         </div>
     </div>
     <div class="box-body">
@@ -53,16 +57,16 @@
                             <div class="pull-right">
                                 <div class="btn-group">
                                     <a class="btn btn-xs btn-success @if($rental->status->name === 'Bevestigd') disabled @endif" href="{{ route('rental.backend.confirm', ['id' => $rental->id]) }}">
-                                        <span class="fa fa-check"></span> Bevestig
+                                        <span class="fa fa-check"></span> {{ trans('rental.lease-confirm') }}
                                     </a>
 
                                     <a class="btn btn-xs btn-warning @if($rental->status->name === 'Optie') disabled @endif" href="{{ route('rental.backend.option', ['id' => $rental->id]) }}">
-                                        <span class="fa fa-asterisk"></span>Optie
+                                        <span class="fa fa-asterisk"></span> {{ trans('rental.lease-option') }}
                                     </a>
                                 </div>
                                 <div class="btn-group">
                                     <a class="btn btn-xs btn-danger" href="{{ route('rental.backend.destroy', ['id' => $rental->id]) }}">
-                                        <span class="fa fa-close"></span> Verwijder
+                                        <span class="fa fa-close"></span> {{ trans('rental.lease-delete') }}
                                     </a>
                                 </div>
                             </div>

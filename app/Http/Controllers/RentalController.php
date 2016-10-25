@@ -83,7 +83,7 @@ class RentalController extends Controller
     public function calendar()
     {
         $data['items'] = Rental::whereHas('status', function ($query) {
-            $query->where('name', 'Bevestigd');
+            $query->where('name', trans('rental.confirm'));
         })->get();
 
         return view('rental.frontend-calendar', $data);
@@ -100,7 +100,7 @@ class RentalController extends Controller
      */
     public function setOption($id)
     {
-        $status = RentalStatus::where('name', 'Optie')->first();
+        $status = RentalStatus::where('name', trans('rental.lease-option'))->first();
 
         if (Rental::find($id)->update(['status_id' => $status->id])) // Rental update check.
         {
@@ -122,7 +122,7 @@ class RentalController extends Controller
      */
     public function setConfirmed($id)
     {
-        $status = RentalStatus::where('name', 'Bevestigd')->first();
+        $status = RentalStatus::where('name', trans('rental.lease-confirm'))->first();
 
         if (Rental::find($id)->update(['status_id' => $status->id])) // Rental update check.
         {
@@ -162,7 +162,7 @@ class RentalController extends Controller
     public function insert(Requests\RentalValidator $input)
     {
         $insert = Rental::create($input->except('_token'));
-        $status = RentalStatus::where('name', 'Nieuwe aanvraag')->first();
+        $status = RentalStatus::where('name', trans('rental.lease-new'))->first();
 
         Rental::find($insert->id)->update(['status_id' => $status->id]);
 
