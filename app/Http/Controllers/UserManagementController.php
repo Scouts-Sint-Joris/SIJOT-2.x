@@ -138,7 +138,6 @@ class UserManagementController extends Controller
         $setStatus     = $findNewUser->givePermissionTo('active');
 
         if ($newUser && $setStatus) {
-            // TODO: Build up the mail.
             Mail::to($findNewUser->email)->send(new NewUser($findNewUser));
 
             session()->flash('class', 'alert alert-success');
