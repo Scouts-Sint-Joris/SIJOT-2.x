@@ -89,15 +89,12 @@
     </div>
     {{-- /.box-body --}}
 
-    <div class="box-footer clearfix">
-        <ul class="pagination pagination-sm no-margin">
-            <li><a href="#"><span class="fa fa-angle-left"></a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#"><span class="fa fa-angle-right"></a></li>
-        </ul>
-    </div>
+    @if (count($users) > 15)
+        <div class="box-footer clearfix">
+            {{-- Pagination rendered with laravel --}}
+            {{ $user->links() }}
+        </div>
+    @endif
     {{-- /.box footer --}}
 
     {{-- Partials --}}
