@@ -92,6 +92,9 @@ class UserManagementTest extends TestCase
      */
     public function testCreateMethodWithoutErrors()
     {
+        factory(Spatie\Permission\Models\Permission::class)->create(['name' => 'active']);
+        factory(Spatie\Permission\Models\Permission::class)->create(['name' => 'blocked']);
+
         $session['class']   = 'alert alert-success';
         $session['message'] = '';
 
