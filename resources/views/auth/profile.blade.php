@@ -29,7 +29,7 @@
         {{-- Account information --}}
         <div class="tab-pane fade in active" id="tab_1">
             <div class="row">
-                <form action="" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                <form action="{{ route('settings.profile.post') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                     {{-- CSRF TOKEN --}}
                     {{ csrf_field() }}
 
