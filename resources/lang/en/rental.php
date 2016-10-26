@@ -8,7 +8,7 @@ return [
      * --------------------------------------------------------------------------
      *
      * The following language lines are used by rental system.
-     * Her you can modify these lines.
+     * Here you can modify these lines.
      *
      */
 
