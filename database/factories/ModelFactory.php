@@ -94,3 +94,7 @@ $factory->define(App\News::class, function (Faker\Generator $faker) {
         'content' => $faker->text(200),
     ];
 });
+
+$factory->define(Spatie\Permission\Models\Permission::class, function (Faker\Generator $faker) {
+    return ['name' => 'active'];
+});
