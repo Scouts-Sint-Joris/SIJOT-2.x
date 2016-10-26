@@ -10,7 +10,6 @@ use App\User;
 use App\RentalStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\RentalOption;
 use App\Notifications\RentalConfirmed; 
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
