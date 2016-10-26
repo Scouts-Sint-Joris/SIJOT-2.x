@@ -29,9 +29,19 @@
         {{-- Account information --}}
         <div class="tab-pane fade in active" id="tab_1">
             <div class="row">
-                <form action="" method="POST" class="form-horizontal">
+                <form action="" method="POST" class="form-horizontal" enctype="multipart/form-data">
                     {{-- CSRF TOKEN --}}
                     {{ csrf_field() }}
+
+                    <div class="form-group">
+                        <label for="avatar" class="control-label col-sm-1">
+                            Avatar: <!-- <span class="text-danger">*</span> -->
+                        </label>
+
+                        <div class="col-sm-2">
+                            <input type="file" name="avatar" id="avatar">
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label for="name" class="control-label col-sm-1">

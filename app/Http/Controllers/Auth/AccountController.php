@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileInfoValidator;
 use App\Http\Requests\SecurityInfoValidator;
+use Illuminate\Support\Facades\Input;
+use Intervention\Image\Facades\Image;
 
 /**
  * Class AccountController
@@ -58,9 +60,23 @@ class AccountController extends Controller
     public function updateInfo(ProfileInfoValidator $input)
     {
         $userId = auth()->user()->id;
+        $user   = User::find($userId);
 
-        if (User::find($userId)->update($input->except('_token'))) // Check if we can do the update
+        if ($user->update($input->except('_token'))) // Check if we can do the update
         {
+            if (Input::file()) // The user want a new avatar.
+            {
+                $image    = Input::file('avatar');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $path     = public_path('avatars/' . $filename);
+
+                Image::make($image->getRealPath())->resize(160, 160)->save($path);
+
+                // Save the avatar path to the database.
+                $user->avatar = $filename;
+                $user->save();
+            }
+
             session()->flash('class',   'alert alert-success');
             session()->flash('message', trans('auth.FlashInfo'));
         }
