@@ -180,7 +180,6 @@ class RentalController extends Controller
             } 
             elseif (auth()->check()) // User is authencated. Send notification.
             {
-                // TODO: Create the notification class.
                 // Notification::send(User::all(), new RentalInsertNotification());
             }
         }
