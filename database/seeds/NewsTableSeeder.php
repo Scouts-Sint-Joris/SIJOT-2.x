@@ -4,7 +4,6 @@ use App\News;
 use App\Tags;
 use App\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class NewsTableSeeder extends Seeder
 {
