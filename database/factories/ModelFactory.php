@@ -98,3 +98,7 @@ $factory->define(App\News::class, function (Faker\Generator $faker) {
 $factory->define(Spatie\Permission\Models\Permission::class, function (Faker\Generator $faker) {
     return ['name' => 'active'];
 });
+
+$factory->define(Spatie\Permission\Models\Role::class, function (Faker\Generator $faker) {
+    return ['name' => $faker->word];
+});
