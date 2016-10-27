@@ -64,7 +64,7 @@ class RentalTest extends TestCase
     public function testRentalInsertSuccess()
     {
         factory(App\RentalStatus::class)->create([
-            'name' => 'Nieuwe aanvraag',
+            'name' => trans('rental.lease-new'),
             'class' => 'label label-danger'
         ]);
 
