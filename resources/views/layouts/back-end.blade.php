@@ -47,44 +47,17 @@
                     <div class="slimScrollDiv navbar-custom-menu">
                         <ul class="nav navbar-nav">
                             {{-- Notifications: style can be found in dropdown.less --}}
-                            @if (count(auth()->user()->unreadNotifications) == 0)
-                            <li class="dropdown notifications-menu">
-                                <!-- Menu toggle button -->
+                            <li class="notifications-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-bell-o"></i>
-                                    <span class="label label-warning">10</span>
+                                    <span class="label label-success">0</span>
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li class="header">You have 10 notifications</li>
-                                    <li>
-                                        <!-- Inner Menu: contains the notifications -->
-                                        <ul class="menu" style="overflow: hidden; width: 100%; height: auto !important;">
-                                            <li>
-                                                <!-- start notification -->
-                                                <a href="#">
-                                                    <i class="fa fa-users text-aqua"></i>5 new members joined today
-                                                </a>
-                                            </li><!-- end notification -->
-                                        </ul>
-                                    </li>
-                                    <li class="footer">
-                                        <a href="#">View all</a>
-                                    </li>
-                                </ul>
                             </li>
-                            @else
-                               <li class="notifications-menu">
-                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                       <i class="fa fa-bell-o"></i>
-                                       <span class="label label-warning">0</span>
-                                   </a>
-                               </li>
-                            @endif
 
                             {{-- User Account: style can be found in dropdown.less --}}
                             <li class="user user-menu">
                                 <a href="{{ route('settings.profile') }}">
-                                    @if (file_exists(public_path(auth()->user()->avatar)))
+                                    @if (file_exists(public_path(auth()->user()->avatar)) && auth()->user()->avatar !== null)
                                         <img class="user-image" src="{{ asset(auth()->user()->avatar) }}" alt="{{ auth()->user()->name }}">
                                     @else
                                         <img src="{{ asset('assets/avatars/default.png') }}" class="user-image" alt="{{ auth()->user()->name }}">
@@ -115,7 +88,7 @@
                     {{-- Sidebar user panel --}}
                     <div class="user-panel">
                         <div class="pull-left image">
-                            @if (file_exists(public_path(auth()->user()->avatar)))
+                            @if (file_exists(public_path(auth()->user()->avatar)) && auth()->user()->avatar !== null)
                                 <img src="{{ asset(auth()->user()->avatar) }}" class="img-circle" alt="User Image">
                             @else
                                 <img src="{{ asset('assets/avatars/default.png') }}" class="img-circle" alt="User Image">
