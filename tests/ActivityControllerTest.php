@@ -167,6 +167,14 @@ class ActivityControllerTest extends TestCase
             ->see('This is new activity');
     }
 
+    /**
+     *
+     */
+    public function testEditView()
+    {
+
+    }
+
      /**
      * GET|HEAD:  /backend/activity
      * ROUTE:     activity.store

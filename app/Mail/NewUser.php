@@ -40,7 +40,6 @@ class NewUser extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.new-registration')
-            ->with($this->data);
+        return $this->view('emails.new-registration');
     }
 }
