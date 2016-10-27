@@ -58,8 +58,9 @@ Route::post('backend/users', 'UserManagementController@store')->name('auth.new')
 // Settings routes.
 Route::get('settings', 'SettingsController@index')->name('settings.index');
 
-// Profile seetings routes
+// Profile settings routes
 Route::get('settings/profile', 'Auth\AccountController@index')->name('settings.profile');
+Route::post('settings/profile', 'Auth\AccountController@updateInfo')->name('settings.profile.post');
 
 // Activity routes
 Route::get('backend/activity', 'ActivityController@index')->name('activity.index');
