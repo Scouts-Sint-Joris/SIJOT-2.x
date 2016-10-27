@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileInfoValidator;
 use App\Http\Requests\SecurityInfoValidator;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 /**
@@ -60,24 +61,31 @@ class AccountController extends Controller
     public function updateInfo(ProfileInfoValidator $input)
     {
         $userId = auth()->user()->id;
-        $user   = User::find($userId);
+        $user = User::find($userId);
 
-        if ($user->update($input->except('_token'))) // Check if we can do the update
+        if ($user->update($input->except(['avatar', '_token']))) // Check if we can do the update
         {
-            if (Input::file()) // The user want a new avatar.
+            if ($input->hasFile('avatar')) // The user want a new avatar.
             {
-                $image    = Input::file('avatar');
-                $filename = time() . '.' . $image->getClientOriginalExtension();
-                $path     = public_path('avatars/' . $filename);
+                $avatar = public_path(auth()->user()->avatar);
 
-                Image::make($image->getRealPath())->resize(160, 160)->save($path);
+                if (file_exists($avatar)) // Check if the file exists on the server. If true delete this file.
+                {
+                    File::delete($avatar);
+                }
+
+                $image = $input->file('avatar');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $path = public_path('assets/avatars/' . $filename);
+
+                Image::make($image->getLinkTarget())->resize(80, 80)->save($path);
 
                 // Save the avatar path to the database.
-                $user->avatar = $filename;
+                $user->avatar = 'assets/avatars/' . $filename;
                 $user->save();
             }
 
-            session()->flash('class',   'alert alert-success');
+            session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('auth.FlashInfo'));
         }
 
