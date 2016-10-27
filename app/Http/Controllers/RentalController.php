@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\RentalNotification;
 use App\Mail\RentalNotificationRequest;
 use App\Http\Requests;
+use App\Notifications\RentalInsertNotification;
 use App\Rental;
 use App\User;
 use App\RentalStatus;
@@ -180,7 +181,7 @@ class RentalController extends Controller
             } 
             elseif (auth()->check()) // User is authencated. Send notification.
             {
-                // Notification::send(User::all(), new RentalInsertNotification());
+                Notification::send(User::all(), new RentalInsertNotification());
             }
         }
 
