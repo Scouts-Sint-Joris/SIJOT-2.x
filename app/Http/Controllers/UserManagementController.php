@@ -21,14 +21,6 @@ use Illuminate\Support\Facades\DB;
 class UserManagementController extends Controller
 {
     /**
-     * @todo: build up the mailable views.
-     * @todo: write search controller & test.
-     * @todo: Implement user specific index view.
-     * @todo: Write test for resetPassword.
-     * @todo: Register route for show().
-     */
-
-    /**
      * UserManagementController constructor.
      */
     public function __construct()
