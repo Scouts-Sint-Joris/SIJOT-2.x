@@ -84,7 +84,12 @@
                             {{-- User Account: style can be found in dropdown.less --}}
                             <li class="user user-menu">
                                 <a href="{{ route('settings.profile') }}">
-                                    <img src="https://placehold.it/160x160" class="user-image" alt="{{ auth()->user()->name }}">
+                                    @if (file_exists(public_path(auth()->user()->avatar)))
+                                        <img class="user-image" src="{{ asset(auth()->user()->avatar) }}" alt="{{ auth()->user()->name }}">
+                                    @else
+                                        <img src="{{ asset('assets/avatars/default.png') }}" class="user-image" alt="{{ auth()->user()->name }}">
+                                    @endif
+
                                     <span class="hidden-xs">{{ auth()->user()->name }}</span>
                                 </a>
                             </li>
@@ -110,7 +115,11 @@
                     {{-- Sidebar user panel --}}
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="https://placehold.it/160x160" class="img-circle" alt="User Image">
+                            @if (file_exists(public_path(auth()->user()->avatar)))
+                                <img src="{{ asset(auth()->user()->avatar) }}" class="img-circle" alt="User Image">
+                            @else
+                                <img src="{{ asset('assets/avatars/default.png') }}" class="img-circle" alt="User Image">
+                            @endif
                         </div>
                         <div class="pull-left info">
                             <p>{{ auth()->user()->name }}</p>
