@@ -10,7 +10,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileInfoValidator;
 use App\Http\Requests\SecurityInfoValidator;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 /**
@@ -78,7 +77,7 @@ class AccountController extends Controller
                 $filename = time() . '.' . $image->getClientOriginalExtension();
                 $path = public_path('assets/avatars/' . $filename);
 
-                Image::make($image->getLinkTarget())->resize(80, 80)->save($path);
+                Image::make($image->getLinkTarget())->resize(160, 160)->save($path);
 
                 // Save the avatar path to the database.
                 $user->avatar = 'assets/avatars/' . $filename;
