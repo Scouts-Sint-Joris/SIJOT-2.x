@@ -35,4 +35,9 @@ return [
     'lease-title'            => 'Leases',
     'lease-sub-title'        => 'Leases module for the website.',
 
+    // Backend insert modal buttons.
+    'lease-button-add'       => 'Insert',
+    'lease-button-close'     => 'Close'
+
+
 ];
