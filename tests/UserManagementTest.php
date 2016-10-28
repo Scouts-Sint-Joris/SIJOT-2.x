@@ -65,7 +65,7 @@ class UserManagementTest extends TestCase
         factory(Spatie\Permission\Models\Permission::class)->create(['name' => 'blocked']);
         factory(Spatie\Permission\Models\Permission::class)->create(['name' => 'active']);
 
-        $route = route('users.block', ['id' => $this->user->id]);
+        $route = route('users.unblock', ['id' => $this->user->id]);
 
         $this->authentication();
         $this->get($route);
