@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "066b594d226e51cf0c1672709e809cd0",
-    "content-hash": "64648eba22387bffb886e5e408dd9ae8",
+    "hash": "10e89ae2cbf239cf92404d07c6ffa9ed",
+    "content-hash": "ceba00c9ba0e33b577edb384eb27db01",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -60,6 +60,47 @@
                 "webprofiler"
             ],
             "time": "2016-09-15 14:05:56"
+        },
+        {
+            "name": "brotzka/laravel-dotenv-editor",
+            "version": "v2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Brotzka/laravel-dotenv-editor.git",
+                "reference": "ec773c3ead7ba39e9edbb91a84a1fb5da179c395"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Brotzka/laravel-dotenv-editor/zipball/ec773c3ead7ba39e9edbb91a84a1fb5da179c395",
+                "reference": "ec773c3ead7ba39e9edbb91a84a1fb5da179c395",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Brotzka\\DotenvEditor\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabian Hagen",
+                    "email": "fabianhagen87@gmail.com"
+                }
+            ],
+            "description": "A package for editing the .env file in your Laravel root.",
+            "keywords": [
+                "dotenv",
+                "dotenv-editor",
+                "laravel"
+            ],
+            "time": "2016-10-10 12:33:36"
         },
         {
             "name": "classpreloader/classpreloader",
