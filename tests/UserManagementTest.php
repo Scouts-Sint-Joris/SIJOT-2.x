@@ -1,9 +1,13 @@
 <?php
 
+use App\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+/**
+ * Class UserManagementTest
+ */
 class UserManagementTest extends TestCase
 {
     use DatabaseMigrations, DatabaseTransactions;
@@ -22,6 +26,38 @@ class UserManagementTest extends TestCase
         $this->get(route('users.index'));
         $this->see('Overzicht.');
         $this->seeStatusCode(200);
+    }
+
+    /**
+     * GET|HEAD: /backend/users/block/{id}
+     * ROUTE:    users.block
+     *
+     * @group all
+     * @group auth
+     * @group backend
+     */
+    public function testBlockUser()
+    {
+        factory(Spatie\Permission\Models\Permission::class)->create(['name' => 'blocked']);
+        factory(Spatie\Permission\Models\Permission::class)->create(['name' => 'active']);
+
+        $route = route('users.block', ['id' => $this->user->id]);
+
+        $this->authentication();
+        $this->get($route);
+        $this->seeStatusCode(302);
+        $this->session([
+            'class'     => 'alert alert-success',
+            'message'   => trans('flash-session.user-block')
+        ]);
+    }
+
+    /**
+     *
+     */
+    public function testUnblockUser()
+    {
+
     }
 
     /**
