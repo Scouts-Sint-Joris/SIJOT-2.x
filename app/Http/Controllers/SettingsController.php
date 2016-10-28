@@ -36,19 +36,6 @@ class SettingsController extends Controller
     }
 
     /**
-     * [BACK-END]: Get the config view for the environment Settings.
-     *
-     * @url:platform
-     * @see:phpunit
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function environmentIndex()
-    {
-        return view('');
-    }
-
-    /**
      * [METHOD]: Update the general application settings.
      *
      * @url:platform  PUT|PATCH:
