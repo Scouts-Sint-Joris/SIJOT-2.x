@@ -148,11 +148,26 @@
                                 <span>{{ trans('backend-theme.activities') }}</span>
                             </a>
                         </li>
-                        <li>
+                        <li class="treeview">
                             <a href="{{route('settings.index') }}">
                                 <i class="fa fa-cogs"></i>
                                 <span>{{ trans('backend-theme.platform-settings') }}</span>
                             </a>
+
+                            <ul class="treeview-menu">
+                                <li>
+                                    <a href="">
+                                        <i class="fa fa-circle-o"></i>
+                                        Environment settings
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="fa fa-circle-o"></i>
+                                        Platform settings
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="{{ route('news.backend.index') }}">

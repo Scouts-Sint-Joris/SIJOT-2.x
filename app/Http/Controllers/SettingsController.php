@@ -27,13 +27,25 @@ class SettingsController extends Controller
      *
      * @url:platform  GET|HEAD:
      * @see:phpunit   SettingsTest::
-     * @see:phpunit   SettingsTest::
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
 		return view('settings.index');
+    }
+
+    /**
+     * [BACK-END]: Get the config view for the environment Settings.
+     *
+     * @url:platform
+     * @see:phpunit
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function environmentIndex()
+    {
+        return view('');
     }
 
     /**
