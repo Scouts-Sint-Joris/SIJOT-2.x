@@ -53,11 +53,27 @@ class UserManagementTest extends TestCase
     }
 
     /**
+     * GET|HEAD: /backend/users/unblock/{id}
+     * ROUTE:    users.unblock
      *
+     * @group all
+     * @group auth
+     * @group backend
      */
     public function testUnblockUser()
     {
+        factory(Spatie\Permission\Models\Permission::class)->create(['name' => 'blocked']);
+        factory(Spatie\Permission\Models\Permission::class)->create(['name' => 'active']);
 
+        $route = route('users.block', ['id' => $this->user->id]);
+
+        $this->authentication();
+        $this->get($route);
+        $this->seeStatusCode(302);
+        $this->session([
+            'class'     => 'alert alert-success',
+            'message'   => trans('flash-session.user-unblock')
+        ]);
     }
 
     /**
