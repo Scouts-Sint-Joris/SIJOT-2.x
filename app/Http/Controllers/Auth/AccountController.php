@@ -77,7 +77,11 @@ class AccountController extends Controller
                 $filename = time() . '.' . $image->getClientOriginalExtension();
                 $path = public_path('assets/avatars/' . $filename);
 
-                Image::make($image->getLinkTarget())->resize(160, 160)->save($path);
+                // For windows servers.
+                // Image::make($image->getLinkTarget())->resize(160, 160)->save($path);
+
+                // For linux based servers.
+                Image::make($image->getRealPath())->resize(160, 160)->save($path);
 
                 // Save the avatar path to the database.
                 $user->avatar = 'assets/avatars/' . $filename;
