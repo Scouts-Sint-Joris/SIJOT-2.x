@@ -39,11 +39,11 @@ Route::get('/backend/rental/destroy/{id}', 'RentalController@destroy')->name('re
 // Newsletter routes v
 Route::post('/newsletter/register', 'MailingController@registerNewsLetter')->name('newsletter.register');
 
-// News items. 
+// News items.
 Route::get('/backend/news', 'NewsController@index')->name('news.backend.index');
 
-// Mailing routes 
-Route::get('/backend/mailing', 'MailingController@index')->name('backend.mailing.index'); 
+// Mailing routes
+Route::get('/backend/mailing', 'MailingController@index')->name('backend.mailing.index');
 
 // User management routes.
 Route::get('backend/users/reset/{id}', 'UserManagementController@resetPassword')->name('users.reset');
@@ -61,6 +61,7 @@ Route::get('settings', 'SettingsController@index')->name('settings.index');
 // Profile settings routes
 Route::get('settings/profile', 'Auth\AccountController@index')->name('settings.profile');
 Route::post('settings/profile', 'Auth\AccountController@updateInfo')->name('settings.profile.post');
+Route::post('settings/profile/security', 'Auth\AccountController@updateSecurity')->name('settings.profile.password.post');
 
 // Activity routes
 Route::get('backend/activity', 'ActivityController@index')->name('activity.index');
@@ -68,13 +69,13 @@ Route::post('backend/activity/update/{id}', 'ActivityController@update')->name('
 Route::get('backend/activity/destroy/{id}', 'ActivityController@destroy')->name('activity.destroy');
 Route::post('backend/activity', 'ActivityController@store')->name('activity.store');
 
-// Debugging routes 
+// Debugging routes
 if (config('app.debug')) {
-    app()->register(PrettyRoutes\ServiceProvider::class); 
+    app()->register(PrettyRoutes\ServiceProvider::class);
 
     Route::get('/routes', function () {
         return view('pretty-routes::routes', [
-            'routes' => Route::getRoutes(),    
-        ]);   
+            'routes' => Route::getRoutes(),
+        ]);
     });
 }
