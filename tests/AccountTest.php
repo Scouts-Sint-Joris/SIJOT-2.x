@@ -17,7 +17,13 @@ class AccountTest extends TestCase
     }
 
     /**
+     * POST:  settings/profile/security
+     * ROUTE: settings.profile.password.post
      *
+     * @group auth
+     * @group profile
+     * @group all
+     * @group backend
      */
     public function testUpdatePassword()
     {
@@ -25,7 +31,7 @@ class AccountTest extends TestCase
         $input['password_confirmation'] = 'password';
 
         $session['class']   = 'alert alert-success';
-        $session['message'] = trans('');
+        $session['message'] = trans('auth.FlashSec');
 
         $this->authentication();
         $this->post(route('settings.profile.password.post'), $input);
