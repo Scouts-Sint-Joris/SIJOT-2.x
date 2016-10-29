@@ -146,6 +146,36 @@ class RentalTest extends TestCase
         $this->see('Verhuur kalender.');
     }
 
+    public function testSetOptionRental()
+    {
+        $lease = factory(App\Rental::class)->create();
+        $route = route('rental.backend.option', [
+            'id' => $lease->id
+        ]);
+
+        $session['class']   = 'alert alert-success';
+        $session['message'] = trans('flash-session.rental-option');
+
+        $this->authentication();
+        $this->get($route);
+        $this->session($session);
+    }
+
+    public function testSetConfirmedRental()
+    {
+        $lease = factory(App\Rental::class)->create();
+        $route = route('rental.backend.confirm', [
+            'id' => $lease->id
+        ]);
+
+        $session['class']   = 'alert alert-success';
+        $session['message'] = trans('flash-session.rental-confirm');
+
+        $this->authentication();
+        $this->get($route);
+        $this->session($session);
+    }
+
     /**
      * GET|HEAD: /rental/insert
      * ROUTE:    rental.frontend.insert

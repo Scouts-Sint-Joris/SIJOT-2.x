@@ -100,12 +100,15 @@ class UserManagementController extends Controller
      * @url:platform  POST:
      * @see:phpunit   UserManagementTest::TestSearchBackend()
      *
+     * @param  Request $input
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function search()
+    public function search(Request $input)
     {
-        $data['users'] = '';
-        return view('', $data);
+        $term = $input->get('name');
+
+        $data['users'] = User::where('name', 'LIKE', "$term")->get();
+        return view('users.index', $data);
     }
 
     /**

@@ -92,8 +92,8 @@ class RentalController extends Controller
     /**
      * [METHOD]: Set a rental status to 'Option'.
      *
-     * @url:platform
-     * @see:phpunit
+     * @url:platform  GET|HEAD:
+     * @see:phpunit   RentalTest::testSetOptionRental()
      *
      * @param  int $id the rental id in the database.
      * @return \Illuminate\Http\RedirectResponse
@@ -114,8 +114,8 @@ class RentalController extends Controller
     /**
      * [METHOD]: Set a rental status to 'confirmed'.
      *
-     * @url:platform
-     * @see:phpunit
+     * @url:platform  GET|HEAD:
+     * @see:phpunit   RentalTest::testSetConfirmedRental()
      *
      * @param  int $id the rental id in the database.
      * @return \Illuminate\Http\RedirectResponse
