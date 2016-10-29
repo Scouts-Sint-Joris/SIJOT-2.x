@@ -264,7 +264,7 @@ class RentalController extends Controller
      * [METHOD]: Export all the rental to an excel sheet
      *
      * @url:platform  GET|HEAD: /backend/rental/export
-     * @see:phpunit   RentalTest::
+     * @see:phpunit   RentalTest::testExport()
      *
      * @return void | Excel download
      */

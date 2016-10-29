@@ -98,7 +98,7 @@ class UserManagementController extends Controller
      * [METHOD]: Search for a specific user.
      *
      * @url:platform  POST:
-     * @see:phpunit   UserManagementTest::
+     * @see:phpunit   UserManagementTest::TestSearchBackend()
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

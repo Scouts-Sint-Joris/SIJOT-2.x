@@ -215,4 +215,14 @@ class ActivityControllerTest extends TestCase
             ->press('Aanmaken')
             ->see('Er zijn geen klad activiteiten');
     }
+
+    /**
+     * @group all
+     * @group activity
+     * @group back-end
+     */
+    public function testEdit()
+    {
+
+    }
 }

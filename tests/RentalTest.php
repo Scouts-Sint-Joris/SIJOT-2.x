@@ -162,6 +162,12 @@ class RentalTest extends TestCase
         $this->see('Verhuur aanvraag.');
     }
 
+    public function testExport()
+    {
+        $this->authentication();
+        $this->get(route('rental.backend.export'));
+    }
+
     /**
      * GET|HEAD:  /
      * ROUTE:     rental.backend.insert

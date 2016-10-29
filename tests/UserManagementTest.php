@@ -76,6 +76,11 @@ class UserManagementTest extends TestCase
         ]);
     }
 
+    public function TestSearchBackend()
+    {
+
+    }
+
     /**
      * GET|HEAD:
      *
