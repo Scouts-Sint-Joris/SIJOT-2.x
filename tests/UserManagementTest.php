@@ -76,6 +76,14 @@ class UserManagementTest extends TestCase
         ]);
     }
 
+    /**
+     * POST:
+     * ROUTE:
+     *
+     * @group all
+     * @group auth
+     * @group backend
+     */
     public function testSearchBackend()
     {
         $user  = factory(App\User::class)->create();
@@ -92,6 +100,7 @@ class UserManagementTest extends TestCase
 
     /**
      * GET|HEAD:
+     * ROUTE:
      *
      * @group all
      * @group auth

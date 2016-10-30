@@ -1,3 +1,5 @@
+![alt tag](https://github.com/Tjoosten/SVG-scss/blob/master/repo-assets/logo.jpg)
+
 # Sijot website.
 [![Build Status](https://travis-ci.org/Tjoosten/website.svg?branch=develop)](https://travis-ci.org/Tjoosten/website)
 ## Info
