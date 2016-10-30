@@ -1,7 +1,7 @@
 ![alt tag](https://github.com/Tjoosten/SVG-scss/blob/master/repo-assets/logo.jpg)
 
 <p align="center">
-[![Build Status](https://travis-ci.org/Tjoosten/website.svg?branch=develop)](https://travis-ci.org/Tjoosten/website)
+    <a href="https://travis-ci.org/Tjoosten/website"><img src="https://travis-ci.org/Tjoosten/website.svg?branch=develop">
 </p>
 ## Info
 This website belongs to a local scouting group at Turnhout,Belguim. The website provides information such as :-
