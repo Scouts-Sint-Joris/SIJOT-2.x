@@ -93,7 +93,7 @@ class RentalController extends Controller
      * [METHOD]: Set a rental status to 'Option'.
      *
      * @url:platform  GET|HEAD:
-     * @see:phpunit   RentalTest::testSetOptionRental()
+     * @see:phpunit   RentalTest::testSetOptionRental();
      *
      * @param  int $id the rental id in the database.
      * @return \Illuminate\Http\RedirectResponse
@@ -174,10 +174,10 @@ class RentalController extends Controller
             if (! auth()->check()) // No logged in user found.
             {
                 $rental = Rental::find($insert->id);
-                $logins = User::with('permissions')->whereIn('name', ['rental']);
+                $logins = User::with('permissions')->whereIn('name', ['rental'])->get();
 
-                Mail::to($insert)->queue(new RentalNotificationRequest($rental));
                 Mail::to($logins)->queue(new RentalNotification($rental));
+                Mail::to($insert)->queue(new RentalNotificationRequest($rental));
             } 
             elseif (auth()->check()) // User is authencated. Send notification.
             {

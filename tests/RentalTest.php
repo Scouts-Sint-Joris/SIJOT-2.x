@@ -3,12 +3,13 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Spinen\MailAssertions\MailTracking;
 
 class RentalTest extends TestCase
 {
     // DatabaseMigrations   = Running migrations agianst the database stub.
     // DatabaseTransactions = Running queries against the database stub.
-    use DatabaseMigrations, DatabaseTransactions;
+    use DatabaseMigrations, DatabaseTransactions, MailTracking;
 
     /**
      * GET|HEAD:  /rental
@@ -218,6 +219,11 @@ class RentalTest extends TestCase
         $this->see('Verhuur aanvraag.');
     }
 
+    /**
+     * @group backend
+     * @group all
+     * @group rental
+     */
     public function testExport()
     {
         $this->authentication();
@@ -238,5 +244,25 @@ class RentalTest extends TestCase
         $this->visit(route('rental.backend'));
         $this->seeStatusCode(200);
         $this->see('Verhuring toevoegen.');
+    }
+
+    public function testRentalInsertNoAuth()
+    {
+        factory(Spatie\Permission\Models\Permission::class)->create(['name' => 'rental']);
+        factory(App\RentalStatus::class)->create(['name' => trans('rental.lease-new')]);
+
+        // TODO: Make test email for the permission user.
+        $this->visit(route('rental.store'))
+            ->type('2016-10-14 14:50:51', 'start_date')
+            ->type('2016-10-14 14:50:51', 'end_date')
+            ->type('Cubbs', 'group')
+            ->type('tjoosten@gmail.com', 'email')
+            ->type('08132009384', 'phone_number')
+            ->press('Aanvragen')
+            ->seePageIs(route('rental.frontend.insert'))
+            ->seeEmailWasSent()
+            ->seeEmailTo('tjoosten@gmail.com')
+            ->see('Verhuur aanvraag.');
+
     }
 }
