@@ -146,9 +146,21 @@ class RentalTest extends TestCase
         $this->see('Verhuur kalender.');
     }
 
+    /**
+     * GET|HEAD: /backend/rental/option/{id}
+     * ROUTE:    rental.backend.option
+     *
+     * @group backend
+     * @group all
+     * @group rental
+     */
     public function testSetOptionRental()
     {
-        $lease = factory(App\Rental::class)->create();
+        $lease  = factory(App\Rental::class)->create();
+        $status = factory(App\RentalStatus::class)->create([
+            'name' => trans('rental.lease-option')
+        ]);
+
         $route = route('rental.backend.option', [
             'id' => $lease->id
         ]);
@@ -159,11 +171,24 @@ class RentalTest extends TestCase
         $this->authentication();
         $this->get($route);
         $this->session($session);
+        $this->seeStatusCode(302);
     }
 
+    /**
+     * GET|HEAD: /backend/rental/confirm/{id}
+     * ROUTE:    rental.backend.confirm
+     *
+     * @group backend
+     * @group all
+     * @group rental
+     */
     public function testSetConfirmedRental()
     {
-        $lease = factory(App\Rental::class)->create();
+        $lease  = factory(App\Rental::class)->create();
+        $status = factory(App\RentalStatus::class)->create([
+            'name' => trans('rental.lease-confirm')
+        ]);
+
         $route = route('rental.backend.confirm', [
             'id' => $lease->id
         ]);
@@ -174,6 +199,7 @@ class RentalTest extends TestCase
         $this->authentication();
         $this->get($route);
         $this->session($session);
+        $this->seeStatusCode(302);
     }
 
     /**
