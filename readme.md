@@ -23,9 +23,9 @@ please send an e-mail to Tim Joosten at Topairy@gmail.com. All security vulnerab
 ## Contribution & Guidelines
 
 <ul>
-    <li>Contributions should follow the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding style.</li>
-    <li>Git commit messages should follow [Chris Beams](http://chris.beams.io/posts/git-commit/)' guidelines on writing good commit messages.</li>
-    <li>Contributions are highly appreciated. Please read the [contribution guidelines](contributing.md) here.</li>
+    <li>Contributions should follow the <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md">PSR-2</a> coding style.</li>
+    <li>Git commit messages should follow <a href="http://chris.beams.io/posts/git-commit/">Chris Beams</a> guidelines on writing good commit messages.</li>
+    <li>Contributions are highly appreciated. Please read the <a href="contributing.md">contribution guidelines</a> here.</li>
 </ul>
 
 ## Handy repositories
