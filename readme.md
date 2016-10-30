@@ -2,7 +2,7 @@
 
 <p align="center">
     <a href="https://travis-ci.org/Tjoosten/website"><img src="https://travis-ci.org/Tjoosten/website.svg?branch=develop">
-    <a href="https://github.com/Scouts-Sint-Joris/SIJOT-2.x/releases"><img src="https://img.shields.io/github/Scouts-Sint-Joris/SIJOT-2.x/rubidium.svg"></a>
+    <a href="https://github.com/Scouts-Sint-Joris/SIJOT-1.svg/tags"><img src="https://img.shields.io/github/tag/Scouts-Sint-Joris/SIJOT-2.x.svg?style=flat&label=release"></a>
 </p>
 
 ## About
