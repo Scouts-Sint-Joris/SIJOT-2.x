@@ -1,8 +1,9 @@
 ![alt tag](https://github.com/Tjoosten/SVG-scss/blob/master/repo-assets/logo.jpg)
 
 <p align="center">
-    <a href="https://travis-ci.org/Tjoosten/website"><img src="https://travis-ci.org/Tjoosten/website.svg?branch=develop">
+    <a href="https://travis-ci.org/Tjoosten/website"><img src="https://travis-ci.org/Tjoosten/website.svg?branch=develop"></a>
     <a href="https://github.com/Scouts-Sint-Joris/SIJOT-2.x/releases"><img src="https://img.shields.io/github/tag/Scouts-Sint-Joris/SIJOT-2.x.svg?style=flat&label=release"></a>
+    <a href="https://github.com/Scouts-Sint-Joris/SIJOT-2.x/blob/develop/LICENSE"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat"></a>
 </p>
 
 ## About
