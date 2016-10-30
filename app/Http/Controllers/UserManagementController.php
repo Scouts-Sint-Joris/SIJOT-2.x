@@ -97,7 +97,7 @@ class UserManagementController extends Controller
     /**
      * [METHOD]: Search for a specific user.
      *
-     * @url:platform  POST:
+     * @url:platform  POST: /backend/users/search
      * @see:phpunit   UserManagementTest::TestSearchBackend()
      *
      * @param  Request $input
@@ -105,9 +105,9 @@ class UserManagementController extends Controller
      */
     public function search(Request $input)
     {
-        $term = $input->get('name');
+        $term = $input->get('term');
 
-        $data['users'] = User::where('name', 'LIKE', "$term")->get();
+        $data['users'] = User::where('name', 'LIKE', "%$term%")->get();
         return view('users.index', $data);
     }
 

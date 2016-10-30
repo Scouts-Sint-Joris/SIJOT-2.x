@@ -8,7 +8,7 @@
                 <h4 class="modal-title">Search user.</h4>
             </div>
             <div class="modal-body">
-                <form method="GET" class="form-horizontal">
+                <form method="POST" action="{{ route('users.search') }}" class="form-horizontal">
                     {{-- CSRF Field --}}
                     {{ csrf_field() }}
 

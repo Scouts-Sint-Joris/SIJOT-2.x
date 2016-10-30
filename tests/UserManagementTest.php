@@ -76,9 +76,18 @@ class UserManagementTest extends TestCase
         ]);
     }
 
-    public function TestSearchBackend()
+    public function testSearchBackend()
     {
+        $user  = factory(App\User::class)->create();
+        $route = route('users.search');
+        $input = ['name', $user->name];
 
+        $this->authentication();
+        $this->post($route, $input);
+        $this->see($user->name);
+        $this->see($user->email);
+        $this->see($user->created_at);
+        $this->seeStatusCode(200);
     }
 
     /**

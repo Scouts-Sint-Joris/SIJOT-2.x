@@ -53,7 +53,7 @@ Route::get('backend/users/destroy/{id}', 'UserManagementController@destroy')->na
 Route::get('backend/users/block/{id}', 'UserManagementController@block')->name('users.block');
 Route::get('backend/users/unblock/{id}', 'UserManagementController@unblock')->name('users.unblock');
 Route::post('backend/users', 'UserManagementController@store')->name('auth.new');
-
+Route::post('/backend/users/search', 'UserManagementController@search')->name('users.search');
 
 // Settings routes.
 Route::get('settings', 'SettingsController@index')->name('settings.index');

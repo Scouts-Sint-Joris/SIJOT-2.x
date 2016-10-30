@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5c3a5b8cf435f35cb6acc5341fdd1039",
+    "hash": "c88342b38e3bfa2cdc3f4b567ca5f60d",
     "content-hash": "b67fcd9ff6f5e3eec8347dc3ff87d0b2",
     "packages": [
         {
@@ -1622,16 +1622,16 @@
         },
         {
             "name": "spatie/laravel-cookie-consent",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-cookie-consent.git",
-                "reference": "a2ed5e851bd9e17139053d71ff0f2317a6fda22e"
+                "reference": "c97188f11c8b02e1239302d3fbb06cb8f36b33c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-cookie-consent/zipball/a2ed5e851bd9e17139053d71ff0f2317a6fda22e",
-                "reference": "a2ed5e851bd9e17139053d71ff0f2317a6fda22e",
+                "url": "https://api.github.com/repos/spatie/laravel-cookie-consent/zipball/c97188f11c8b02e1239302d3fbb06cb8f36b33c2",
+                "reference": "c97188f11c8b02e1239302d3fbb06cb8f36b33c2",
                 "shasum": ""
             },
             "require": {
@@ -1679,7 +1679,7 @@
                 "law",
                 "spatie"
             ],
-            "time": "2016-10-11 21:46:14"
+            "time": "2016-10-30 17:57:52"
         },
         {
             "name": "spatie/laravel-permission",
