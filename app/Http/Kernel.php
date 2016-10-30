@@ -31,7 +31,6 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\LogLastUserActivity::class,
-            \App\Http\Middleware\BlockedMiddleware::class,
         ],
 
         'api' => [
@@ -55,5 +54,6 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'blocked'  => \App\Http\Middleware\CheckBlockedState::class, 
     ];
 }
