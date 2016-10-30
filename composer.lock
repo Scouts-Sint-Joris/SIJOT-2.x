@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "066b594d226e51cf0c1672709e809cd0",
-    "content-hash": "64648eba22387bffb886e5e408dd9ae8",
+    "hash": "5c3a5b8cf435f35cb6acc5341fdd1039",
+    "content-hash": "b67fcd9ff6f5e3eec8347dc3ff87d0b2",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -1733,6 +1733,58 @@
                 "spatie"
             ],
             "time": "2016-08-26 07:17:52"
+        },
+        {
+            "name": "spinen/laravel-mail-assertions",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spinen/laravel-mail-assertions.git",
+                "reference": "e6b6d2c28af022862bf010f69817d2e412523eb4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spinen/laravel-mail-assertions/zipball/e6b6d2c28af022862bf010f69817d2e412523eb4",
+                "reference": "e6b6d2c28af022862bf010f69817d2e412523eb4",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.1.10|5.2.*|5.3.*",
+                "php": ">=5.5.0",
+                "swiftmailer/swiftmailer": "~5.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.1",
+                "phpunit/phpunit": "~4.0|~5.0",
+                "psy/psysh": "^0.5.1",
+                "satooshi/php-coveralls": "^0.6.1",
+                "symfony/var-dumper": "~2.7|~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spinen\\MailAssertions\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jimmy Puckett",
+                    "email": "jimmy.puckett@spinen.com"
+                }
+            ],
+            "description": "PHPUnit mail assertions for testing email in Laravel.",
+            "keywords": [
+                "email",
+                "laravel",
+                "library",
+                "phpunit",
+                "spinen"
+            ],
+            "time": "2016-08-26 15:46:46"
         },
         {
             "name": "swiftmailer/swiftmailer",
