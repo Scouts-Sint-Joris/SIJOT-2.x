@@ -15,7 +15,8 @@
         "spatie/laravel-cookie-consent": "^1.5",
         "maatwebsite/excel": "^2.1",
         "filp/whoops": "^2.1",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "spinen/laravel-mail-assertions": "^0.1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
