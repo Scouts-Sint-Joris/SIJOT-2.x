@@ -14,15 +14,26 @@ class GroupControllerTest extends TestCase
     use DatabaseMigrations, DatabaseTransactions;
 
     /**
+     * GET|HEAD:
+     * ROUTE:
+     *
+     * @group frontend
+     * @group all
      * @group groups
      */
     public function testFrontEndOverview()
     {
+        $route = route('frontend.groups');
+
+        $this->get($route);
+        $this->seeStatusCode(200);
 
     }
 
     /**
+     * @group frontend
      * @group groups
+     * @group all
      */
     public function testFrontEndSpecific()
     {
