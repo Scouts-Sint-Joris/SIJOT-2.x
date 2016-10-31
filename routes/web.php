@@ -22,6 +22,8 @@ Route::get('/home', 'Homecontroller@homeBackend')->name('home.backend');
 // Group routes.
 Route::get('/groups', 'GroupController@overview')->name('frontend.groups');
 Route::get('/groups/{selector}', 'GroupController@specific')->name('frontend.groups.specific');
+Route::get('/groups/edit', 'GroupController@edit')->name('groups.edit');
+Route::post('/groups/update/{selector}', 'GroupController@update')->name('groups.update');
 
 // Rental routes
 Route::get('/rental', 'RentalController@indexFrontEnd')->name('rental.frontend.index');

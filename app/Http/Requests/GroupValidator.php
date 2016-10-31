@@ -24,10 +24,9 @@ class GroupValidator extends FormRequest
     public function rules()
     {
         return [
-            'start_date' => 'required', 
-            'end_date'   => 'required', 
-            'group'      => 'required', 
-            'email'      => 'required'
+            'heading'       => 'required',
+            'sub_heading'   => 'required',
+            'description'   => 'required'
         ];
     }
 }
