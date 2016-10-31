@@ -28,7 +28,7 @@ class GroupController extends Controller
      */
     public function __construct()
 	{
-        $this->authRoutes = [];
+        $this->authRoutes = ['edit', 'update'];
         
 		$this->middleware('lang');
 		$this->middleware('auth')->only($this->authRoutes);
@@ -38,7 +38,7 @@ class GroupController extends Controller
 	 * [FRONT-END]: Display all the scouting groups.
 	 *
 	 * @url:platform  GET|HEAD: /groups
-	 * @see:phpunit   GroupControllerTest::
+	 * @see:phpunit   GroupControllerTest::testFrontEndOverview()
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
@@ -57,8 +57,8 @@ class GroupController extends Controller
 	/**
 	 * [FRONT-END]: Get a specific group and display them.
 	 *
-	 * @url:platform  GET|HEAD:
-	 * @see:phpunit   GroupControllerTest::
+	 * @url:platform  GET|HEAD: /groups/{selector}
+	 * @see:phpunit   GroupControllerTest::testFrontEndSpecific()
 	 *
 	 * @param  string $param the group identifier in the database.
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -74,8 +74,8 @@ class GroupController extends Controller
 	/**
 	 * [BACK-END]: Update for a group.
 	 *
-	 * @url:platform  GET|HEAD:
-	 * @see:phpunit   GroupControllerTest::
+	 * @url:platform  GET|HEAD: /groups/edit
+	 * @see:phpunit   GroupControllerTest::testUpdateView()
 	 *
      * @param  string $param The group selector in the database.
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -83,15 +83,15 @@ class GroupController extends Controller
 	public function edit($param)
 	{
 	    $data['group'] = Groups::getGroup($param)->get();
-		return view('', $data);
+		return view('groups.backend-index', $data);
 	}
 
 	/**
 	 * [METHOD]: Update a group description.
 	 *
-	 * @url:platform  PUT|PATCH:
-	 * @see:phpunit   GroupControllerTest::
-	 * @see:phpunit   GroupControllerTest::
+	 * @url:platform  PUT|PATCH: /groups/update/{selector}
+	 * @see:phpunit   GroupControllerTest::testUpdateMethodWithErrors()
+	 * @see:phpunit   GroupControllerTest::testUpdateMethodWithoutErrors()
 	 *
 	 * @param  GroupValidator $input
 	 * @param  string $param The group selector in the database.
