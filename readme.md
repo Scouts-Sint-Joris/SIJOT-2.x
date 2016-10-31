@@ -17,7 +17,7 @@ This website belongs to a local scouting group at Turnhout,Belguim. The website 
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within this project, 
+If you discover a security vulnerability within this project,
 please send an e-mail to Tim Joosten at Topairy@gmail.com. All security vulnerabilities will be promptly addressed.
 
 ## Contribution & Guidelines
@@ -29,6 +29,13 @@ please send an e-mail to Tim Joosten at Topairy@gmail.com. All security vulnerab
 </ul>
 
 ## Handy repositories
+
+<ul>
+  <li><a href="">SIJOT-2.x: Composer module skeleton.</a></li>
+  <li><a href="">SIJOT 2.x: translations.</a></li>
+  <li><a href="">SIJOT-2.x: API documentation.</a></li>
+  <li><a href="">SIJOT-1.x: Webplatform.</a></li>
+</ul>
 
 ## License
 
