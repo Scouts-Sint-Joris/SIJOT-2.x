@@ -17,9 +17,8 @@
         <h3 class="box-title">Overzicht.</h3>
 
         <div class="box-tools pull-right">
-            <a href="#"><span class="label label-danger">Gebruiker zoeken</span></a>
-            <a href="#"
-               class="label label-success" data-toggle="modal" data-target="#newUser">Gebruiker toevoegen.</a>
+            <a href="#" class="label label-danger" data-toggle="modal" data-target="#searchUser">Gebruiker zoeken</a>
+            <a href="#" class="label label-success" data-toggle="modal" data-target="#newUser">Gebruiker toevoegen.</a>
         </div>
     </div>
     <div class="box-body no-padding">

@@ -93,8 +93,8 @@ class RentalController extends Controller
     /**
      * [METHOD]: Set a rental status to 'Option'.
      *
-     * @url:platform
-     * @see:phpunit
+     * @url:platform  GET|HEAD:
+     * @see:phpunit   RentalTest::testSetOptionRental();
      *
      * @param  int $id the rental id in the database.
      * @return \Illuminate\Http\RedirectResponse
@@ -115,8 +115,8 @@ class RentalController extends Controller
     /**
      * [METHOD]: Set a rental status to 'confirmed'.
      *
-     * @url:platform
-     * @see:phpunit
+     * @url:platform  GET|HEAD:
+     * @see:phpunit   RentalTest::testSetConfirmedRental()
      *
      * @param  int $id the rental id in the database.
      * @return \Illuminate\Http\RedirectResponse
@@ -175,10 +175,10 @@ class RentalController extends Controller
             if (! auth()->check()) // No logged in user found.
             {
                 $rental = Rental::find($insert->id);
-                $logins = User::with('permissions')->whereIn('name', ['rental']);
+                $logins = User::with('permissions')->whereIn('name', ['rental'])->get();
 
-                Mail::to($insert)->queue(new RentalNotificationRequest($rental));
                 Mail::to($logins)->queue(new RentalNotification($rental));
+                Mail::to($insert)->queue(new RentalNotificationRequest($rental));
             } 
             elseif (auth()->check()) // User is authencated. Send notification.
             {
@@ -265,7 +265,7 @@ class RentalController extends Controller
      * [METHOD]: Export all the rental to an excel sheet
      *
      * @url:platform  GET|HEAD: /backend/rental/export
-     * @see:phpunit   RentalTest::
+     * @see:phpunit   RentalTest::testExport()
      *
      * @return void | Excel download
      */

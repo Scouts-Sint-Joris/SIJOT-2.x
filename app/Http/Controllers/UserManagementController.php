@@ -60,7 +60,7 @@ class UserManagementController extends Controller
      * Reset the password for a specific user.
      *
      * @url:platform  GET|HEAD: /backend/users/reset/{id}
-     * @see:phpunit
+     * @see:phpunit   UserManagementTest::testUserPasswordReset()
      *
      * @param  int $id The user id in the database.
      * @return \Illuminate\Http\RedirectResponse
@@ -68,7 +68,7 @@ class UserManagementController extends Controller
     public function resetPassword($id)
     {
         $user = User::findOrFail($id);
-        $user->password =  str_random(16);
+        $user->password =  bcrypt(str_random(16));
 
         if ($user->save()) // If the user has been updated;
         {
@@ -97,15 +97,18 @@ class UserManagementController extends Controller
     /**
      * [METHOD]: Search for a specific user.
      *
-     * @url:platform  POST:
-     * @see:phpunit   UserManagementTest::
+     * @url:platform  POST: /backend/users/search
+     * @see:phpunit   UserManagementTest::testSearchBackend()
      *
+     * @param  Request $input
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function search()
+    public function search(Request $input)
     {
-        $data['users'] = '';
-        return view('', $data);
+        $term = $input->get('term');
+
+        $data['users'] = User::where('name', 'LIKE', "%$term%")->get();
+        return view('users.index', $data);
     }
 
     /**
