@@ -17,4 +17,4 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::get('/api/env/values', 'EnvSettingsController@getValues');
+Route::get('/env/values', 'EnvSettingsController@getValues');
