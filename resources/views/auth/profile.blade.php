@@ -12,7 +12,6 @@
 
 @section('content')
     <div class="row">
-        <div class="row-col-sm-3">
             <div class="col-md-3">
 
                 <!-- Profile Image -->
@@ -20,7 +19,7 @@
                     <div class="box-body box-profile">
                         <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
 
-                        <h3 class="profile-username text-center">Nina Mcintire</h3>
+                        <h3 class="profile-username text-center">{{ $user->name }}</h3>
 
                         <p class="text-muted text-center">Software Engineer</p>
 
@@ -40,7 +39,6 @@
                     </div>
                     <!-- /.box-body -->
                 </div>
-            </div>
         </div>
 
         <div class="col-md-9">
@@ -50,6 +48,7 @@
                     <li class="active"><a href="#security" data-toggle="tab">Security</a></li>
                     <li><a href="#api" data-toggle="tab">API</a></li>
                     <li><a href="#logs" data-toggle="tab">Logs</a></li>
+                    <li><a href="#notifications" data-toggle="tab">Notifications</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane" id="activity">
