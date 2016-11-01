@@ -3,40 +3,49 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use Brotzka\DotenvEditor\DotenvEditor;
 use Illuminate\Http\Request;
 
+/**
+ * Class EnvSettingsController
+ * @package App\Http\Controllers
+ */
 class EnvSettingsController extends Controller
 {
     /**
-     * [BACK-END]: Get the update view for the application settings.
+     * @var DotenvEditor
+     */
+    private $env;
+
+    /**
+     * EnvSettingsController constructor.
+     *
+     * @param DotenvEditor $env The env directory values.
+     */
+    public function __construct(DotenvEditor $env)
+    {
+        $this->middleware('auth')->only('index');
+        $this->middleware('auth:api')->only('getValues');
+        $this->middleware('lang');
+
+        $this->env = $env;
+    }
+
+    /**
+     * [METHOD]: The index view for the environment settings.
      *
      * @url:platform  GET|HEAD:
-     * @see:phpunit   SettingsTest::
+     * @see:phpunit
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        return view('settings.index');
+        return view('environment.index');
     }
 
-    /**
-     * [METHOD]: Update the environment settings.
-     *
-     * @url:platform  PUT|PATCH:
-     * @see:phpunit   SettingsTest::
-     * @see:phpunit   SettingsTest::
-     *
-     * @param  Requests\EnvironmentValidator $input
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function updateEnvironmentSettings(Requests\EnvironmentValidator $input)
+    public function getValues()
     {
-        dd($input->all()); // For debugging propose.
 
-        session()->flash('class', 'alert alert-success');
-        session()->flash('message', trans('flash-session.update-environment'));
-
-        return redirect()->back(302);
     }
 }

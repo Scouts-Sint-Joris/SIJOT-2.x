@@ -102,7 +102,7 @@
                     {{-- search form --}}
                     <form action="#" method="get" class="sidebar-form">
                         <div class="input-group">
-                            <input type="text" name="q" class="form-control" placeholder="{{ trans('backend-theme.search-placeholder') }}"">
+                            <input type="text" name="q" class="form-control" placeholder="{{ trans('backend-theme.search-placeholder') }}">
                             <span class="input-group-btn">
                                 <button type="submit" name="search" id="search-btn" class="btn btn-flat">
                                     <i class="fa fa-search"></i>
@@ -156,7 +156,7 @@
 
                             <ul class="treeview-menu">
                                 <li>
-                                    <a href="">
+                                    <a href="{{ route('settings.env') }}">
                                         <i class="fa fa-circle-o"></i>
                                         Environment settings
                                     </a>
@@ -219,5 +219,9 @@
         <script src="{{ asset('assets/js/jquery.slimscroll.min.js') }}"></script>
         <script src="{{ asset('assets/js/fastclick.js') }}"></script>
         <script src="{{ asset('js/app.js') }}"></script>
+
+        @if(request()->is('settings/*'))
+            <script src="{{ asset('js/vue-settings.js') }}"></script>
+        @endif
     </body>
 </html>

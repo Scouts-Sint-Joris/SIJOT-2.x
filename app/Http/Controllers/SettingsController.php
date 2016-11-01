@@ -43,6 +43,19 @@ class SettingsController extends Controller
     }
 
     /**
+     * [BACK-END]: Get the update view for the application settings.
+     *
+     * @url:platform  GET|HEAD:
+     * @see:phpunit   SettingsTest::
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
+        return view('settings.index');
+    }
+
+    /**
      * [METHOD]: Update the database backup settings.
      *
      * @url:platform  PUT|PATCH:
