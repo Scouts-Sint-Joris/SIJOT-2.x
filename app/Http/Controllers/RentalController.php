@@ -27,6 +27,7 @@ class RentalController extends Controller
 {
     /**
      * Authencation middleware protected routes.
+     *
      * @var mixed
      */
     protected $authMiddleware;

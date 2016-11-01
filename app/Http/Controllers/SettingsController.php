@@ -23,20 +23,6 @@ class SettingsController extends Controller
     }
 
     /**
-     * [BACK-END]: Get the update view for the application settings.
-     *
-     * @url:platform  GET|HEAD:
-     * @see:phpunit   SettingsTest::
-     * @see:phpunit   SettingsTest::
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function index()
-    {
-		return view('settings.index');
-    }
-
-    /**
      * [METHOD]: Update the general application settings.
      *
      * @url:platform  PUT|PATCH:
@@ -57,23 +43,16 @@ class SettingsController extends Controller
     }
 
     /**
-     * [METHOD]: Update the environment settings.
+     * [BACK-END]: Get the update view for the application settings.
      *
-     * @url:platform  PUT|PATCH:
-     * @see:phpunit   SettingsTest::
+     * @url:platform  GET|HEAD:
      * @see:phpunit   SettingsTest::
      *
-     * @param  Requests\EnvironmentValidator $input
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function updateEnvironmentSettings(Requests\EnvironmentValidator $input)
+    public function index()
     {
-        dd($input->all()); // For debugging propose.
-
-        session()->flash('class', 'alert alert-success');
-        session()->flash('message', trans('flash-session.update-environment'));
-
-        return redirect()->back(302);
+        return view('settings.index');
     }
 
     /**

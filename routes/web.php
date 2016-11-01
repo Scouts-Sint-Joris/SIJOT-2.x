@@ -22,6 +22,8 @@ Route::get('/home', 'Homecontroller@homeBackend')->name('home.backend');
 // Group routes.
 Route::get('/groups', 'GroupController@overview')->name('frontend.groups');
 Route::get('/groups/{selector}', 'GroupController@specific')->name('frontend.groups.specific');
+Route::get('/groups/edit', 'GroupController@edit')->name('groups.edit');
+Route::post('/groups/update/{selector}', 'GroupController@update')->name('groups.update');
 
 // Rental routes
 Route::get('/rental', 'RentalController@indexFrontEnd')->name('rental.frontend.index');
@@ -57,6 +59,9 @@ Route::post('/backend/users/search', 'UserManagementController@search')->name('u
 
 // Settings routes.
 Route::get('settings', 'SettingsController@index')->name('settings.index');
+
+// Environment routes.
+Route::get('settings/environment', 'EnvSettingsController@index')->name('settings.env');
 
 // Profile settings routes
 Route::get('settings/profile', 'Auth\AccountController@index')->name('settings.profile');
