@@ -11,118 +11,146 @@
 @endsection
 
 @section('content')
-<div class="nav-tabs-custom">
-    <ul class="nav nav-tabs">
-        <li class="active">
-            <a href="#tab_1" data-toggle="tab">
-                Account informatie
-            </a>
-        </li>
-        <li>
-            <a href="#tab_2" data-toggle="tab">
-                Account beveiliging.
-            </a>
-        </li>
-    </ul>
+    <div class="row">
+        <div class="row-col-sm-3">
+            <div class="col-md-3">
 
-    <div class="tab-content">
-        {{-- Account information --}}
-        <div class="tab-pane fade in active" id="tab_1">
-            <div class="row">
-                <form action="{{ route('settings.profile.post') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
-                    {{-- CSRF TOKEN --}}
-                    {{ csrf_field() }}
+                <!-- Profile Image -->
+                <div class="box box-primary">
+                    <div class="box-body box-profile">
+                        <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
 
-                    <div class="form-group">
-                        <label for="avatar" class="control-label col-sm-1">
-                            Avatar: <!-- <span class="text-danger">*</span> -->
-                        </label>
+                        <h3 class="profile-username text-center">Nina Mcintire</h3>
 
-                        <div class="col-sm-2">
-                            <input type="file" name="avatar" id="avatar">
-                        </div>
+                        <p class="text-muted text-center">Software Engineer</p>
+
+                        <ul class="list-group list-group-unbordered">
+                            <li class="list-group-item">
+                                <b>Followers</b> <a class="pull-right">1,322</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Following</b> <a class="pull-right">543</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Friends</b> <a class="pull-right">13,287</a>
+                            </li>
+                        </ul>
+
+                        <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
                     </div>
-
-                    <div class="form-group">
-                        <label for="name" class="control-label col-sm-1">
-                            Naam: <span class="text-danger">*</span>
-                        </label>
-
-                        <div class="col-sm-2">
-                            <input type="text" id="name" class="form-control" placeholder="Gebruikersnaam" value="{{ auth()->user()->name}}" name="name" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email" class="control-label col-sm-1">
-                            Email adres: <span class="text-danger">*</span>
-                        </label>
-
-                        <div class="col-sm-2">
-                            <input type="email" id="email" name="email" class="form-control" placeholder="Email adres." value="{{ auth()->user()->email }}" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="view" class="control-label col-sm-1">
-                            Weergave: {{-- <span class="text-danger">*</span> --}}
-                        </label>
-
-                        <div class="col-sm-2">
-                            <select id="view" class="form-control" name="theme">
-                                <option value="">-- Selecteer uw weergave --</option>µ
-
-                                @foreach($themes as $theme)
-                                    <option value="{{ $theme->class }}" @if(auth()->user()->theme === $theme->class) selected @endif>
-                                        {{ $theme->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-sm-offset-1 col-sm-9">
-                            <button type="submit" class="btn btn-sm btn-flat btn-success">Wijzigen.</button>
-                            <button type="reset" class="btn btn-danger btn-flat btn-sm">Reset</button>
-                        </div>
-                    </div>
-
-                </form>
+                    <!-- /.box-body -->
+                </div>
             </div>
         </div>
-        {{-- /Account information --}}
 
-        <div class="tab-pane fade in" id="tab_2">
-            <form action="" class="form-horizontal" method="POST">
-                <div class="form-group">
-                    <label class="control-label col-sm-1">
-                        Wachtwoord: <span class="text-danger">*</span>
-                    </label>
+        <div class="col-md-9">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li><a href="#settings" data-toggle="settings">Account</a></li>
+                    <li class="active"><a href="#security" data-toggle="tab">Security</a></li>
+                    <li><a href="#api" data-toggle="tab">API</a></li>
+                    <li><a href="#logs" data-toggle="tab">Logs</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="active tab-pane" id="activity">
+                        <!-- Post -->
+                        <div class="post">
+                            <div class="user-block">
+                                <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+                                <span class="username">
+                          <a href="#">Jonathan Burke Jr.</a>
+                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                        </span>
+                                <span class="description">Shared publicly - 7:30 PM today</span>
+                            </div>
+                            <!-- /.user-block -->
+                            <p>
+                                Lorem ipsum represents a long-held tradition for designers,
+                                typographers and the like. Some people hate it and argue for
+                                its demise, but others ignore the hate as they create awesome
+                                tools to help create filler text for everyone from bacon lovers
+                                to Charlie Sheen fans.
+                            </p>
+                            <ul class="list-inline">
+                                <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
+                                <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
+                                </li>
+                                <li class="pull-right">
+                                    <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
+                                        (5)</a></li>
+                            </ul>
 
-                    <div class="col-sm-2">
-                        <input class="form-control" name="password" placeholder="Nieuw wachtwoord" />
-                    </div>
-                </div>
+                            <input class="form-control input-sm" type="text" placeholder="Type a comment">
+                        </div>
+                        <!-- /.post -->
 
-                <div class="form-group">
-                    <label class="control-label col-sm-1">
-                        Bevestiging: <span class="text-danger">*</span>
-                    </label>
+                        <!-- Post -->
+                        <div class="post clearfix">
+                            <div class="user-block">
+                                <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg" alt="User Image">
+                                <span class="username">
+                          <a href="#">Sarah Ross</a>
+                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                        </span>
+                                <span class="description">Sent you a message - 3 days ago</span>
+                            </div>
+                            <!-- /.user-block -->
+                            <p>
+                                Lorem ipsum represents a long-held tradition for designers,
+                                typographers and the like. Some people hate it and argue for
+                                its demise, but others ignore the hate as they create awesome
+                                tools to help create filler text for everyone from bacon lovers
+                                to Charlie Sheen fans.
+                            </p>
 
-                    <div class="col-sm-2">
-                        <input class="form-control" name="password_confirmation" placeholder="Wachtwoord bevestiging" />
-                    </div>
-                </div>
+                            <form class="form-horizontal">
+                                <div class="form-group margin-bottom-none">
+                                    <div class="col-sm-9">
+                                        <input class="form-control input-sm" placeholder="Response">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button type="submit" class="btn btn-danger pull-right btn-block btn-sm">Send</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.post -->
 
-                <div class="form-group">
-                    <div class="col-sm-offset-1 cols-sm-9">
-                        <button type="submit" class="btn btn-sm btn-flat btn-success">Wijzigen</button>
-                        <button type="reset" class="btn btn-sm btn-flat btn-danger">Reset</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+                        <!-- Post -->
+                        <div class="post">
+                            <div class="user-block">
+                                <img class="img-circle img-bordered-sm" src="../../dist/img/user6-128x128.jpg" alt="User Image">
+                                <span class="username">
+                          <a href="#">Adam Jones</a>
+                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                        </span>
+                                <span class="description">Posted 5 photos - 5 days ago</span>
+                            </div>
+                            <!-- /.user-block -->
+                            <div class="row margin-bottom">
+                                <div class="col-sm-6">
+                                    <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <img class="img-responsive" src="../../dist/img/photo2.png" alt="Photo">
+                                            <br>
+                                            <img class="img-responsive" src="../../dist/img/photo3.jpg" alt="Photo">
+                                        </div>
+                                        <!-- /.col -->
+                                        <div class="col-sm-6">
+                                            <img class="img-responsive" src="../../dist/img/photo4.jpg" alt="Photo">
+                                            <br>
+                                            <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                    <!-- /.row -->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
     </div>
-</div>
 @endsection
