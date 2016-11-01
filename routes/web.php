@@ -60,6 +60,9 @@ Route::post('/backend/users/search', 'UserManagementController@search')->name('u
 // Settings routes.
 Route::get('settings', 'SettingsController@index')->name('settings.index');
 
+// Environment routes.
+Route::get('settings/environment', 'EnvSettingsController@index')->name('settings.env');
+
 // Profile settings routes
 Route::get('settings/profile', 'Auth\AccountController@index')->name('settings.profile');
 Route::post('settings/profile', 'Auth\AccountController@updateInfo')->name('settings.profile.post');
