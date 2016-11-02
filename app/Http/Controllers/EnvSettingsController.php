@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use Brotzka\DotenvEditor\DotenvEditor;
 use Illuminate\Http\Request;
 
 /**
@@ -13,22 +12,13 @@ use Illuminate\Http\Request;
 class EnvSettingsController extends Controller
 {
     /**
-     * @var DotenvEditor
-     */
-    private $env;
-
-    /**
      * EnvSettingsController constructor.
-     *
-     * @param DotenvEditor $env The env directory values.
      */
-    public function __construct(DotenvEditor $env)
+    public function __construct()
     {
         $this->middleware('auth')->only('index');
         $this->middleware('auth:api')->only('getValues');
         $this->middleware('lang');
-
-        $this->env = $env;
     }
 
     /**
@@ -42,10 +32,5 @@ class EnvSettingsController extends Controller
     public function index()
     {
         return view('environment.index');
-    }
-
-    public function getValues()
-    {
-
     }
 }
