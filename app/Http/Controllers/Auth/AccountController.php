@@ -5,6 +5,7 @@ namespace App\Http\Controllers\auth;
 use App\User;
 use App\Themes;
 use App\Http\Requests;
+use Chrisbjr\ApiGuard\Models\ApiKey;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileInfoValidator;
@@ -44,6 +45,7 @@ class AccountController extends Controller
         $userId         = auth()->user()->id;
         $data['themes'] = Themes::all();
         $data['user']   = User::find($userId);
+        $data['keys']   = ApiKey::where('user_id', $data['user']->id)->get();
 
         return view('auth.profile', $data);
     }
