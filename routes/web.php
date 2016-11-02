@@ -66,6 +66,7 @@ Route::get('settings/environment', 'EnvSettingsController@index')->name('setting
 // Profile settings routes
 Route::get('settings/profile', 'Auth\AccountController@index')->name('settings.profile');
 Route::post('settings/profile', 'Auth\AccountController@updateInfo')->name('settings.profile.post');
+Route::post('settips/api/key', 'Auth\AccountController@createKey')->name('settings.profile.key');
 Route::post('settings/profile/security', 'Auth\AccountController@updateSecurity')->name('settings.profile.password.post');
 
 // Activity routes

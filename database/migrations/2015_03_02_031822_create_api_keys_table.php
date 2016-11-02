@@ -16,7 +16,7 @@ class CreateApiKeysTable extends Migration
         Schema::create('api_keys', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id', false, true)->nullable();
-            $table->string('service');
+            $table->string('service')->nullable();
             $table->string('key', 40);
             $table->smallInteger('level');
             $table->boolean('ignore_limits');

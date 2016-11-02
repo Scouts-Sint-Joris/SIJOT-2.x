@@ -9,9 +9,12 @@
                 <h4 class="modal-title">Create new API key.</h4>
             </div>
             <div class="modal-body">
-                <form action="" method="POST" class="form-horizontal">
+                <form action="{{ route('settings.profile.key') }}" method="POST" class="form-horizontal">
                     {{-- CSRF field --}}
                     {{ csrf_field() }}
+
+                    {{-- user id --}}
+                    <input type="hidden" name="userid" value="{{ $user->id }}">
 
                     <div class="form-group">
                         <label class="control-label col-sm-2">

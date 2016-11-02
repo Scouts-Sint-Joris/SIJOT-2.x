@@ -29,7 +29,7 @@ class AccountController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-		$this->middleware('lang');
+        $this->middleware('lang');
     }
 
     /**
@@ -42,10 +42,10 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $userId         = auth()->user()->id;
+        $userId = auth()->user()->id;
         $data['themes'] = Themes::all();
-        $data['user']   = User::find($userId);
-        $data['keys']   = ApiKey::where('user_id', $data['user']->id)->get();
+        $data['user'] = User::find($userId);
+        $data['keys'] = ApiKey::where('user_id', $data['user']->id)->get();
 
         return view('auth.profile', $data);
     }
@@ -109,13 +109,38 @@ class AccountController extends Controller
      */
     public function updateSecurity(SecurityInfoValidator $input)
     {
-        $userId  = auth()->user()->id;
+        $userId = auth()->user()->id;
         $filters = ['_token', 'password_confirmation'];
 
         if (User::find($userId)->update($input->except($filters))) // Check if we can do the update
         {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('auth.FlashSec'));
+        }
+
+        return redirect()->back();
+    }
+
+    /**
+     * [METHOD]: Create a key for the background api.
+     *
+     * @url:platform  POST: /settings/api/key
+     * @see:phpunit   AccountTest::
+     *
+     * @param  Requests\ApiKeyValidator $input
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function createKey(Requests\ApiKeyValidator $input)
+    {
+        $insert = ApiKey::make($input->userid);
+
+        $update = ApiKey::find($insert->id);
+        $update->service = $input->service;
+
+        if ($insert && $update->save()) // If the api token and service name is created.
+        {
+            session()->flash('class', 'alert alert-success');
+            session()->flash('message', 'The api token has been created');
         }
 
         return redirect()->back();
