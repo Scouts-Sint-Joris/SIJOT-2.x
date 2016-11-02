@@ -16,6 +16,7 @@
                     {{-- user id --}}
                     <input type="hidden" name="userid" value="{{ $user->id }}">
 
+                    {{-- Service name --}}
                     <div class="form-group">
                         <label class="control-label col-sm-2">
                             Service: <span class="text-danger">*</span>
