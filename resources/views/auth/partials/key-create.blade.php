@@ -12,6 +12,15 @@
                 <form action="" method="POST" class="form-horizontal">
                     {{-- CSRF field --}}
                     {{ csrf_field() }}
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">
+                            Service: <span class="text-danger">*</span>
+                        </label>
+                        <div class="col-sm-10">
+                            <input class="form-control" name="service" id="service" placeholder="service name">
+                        </div>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-success">Create</button>
