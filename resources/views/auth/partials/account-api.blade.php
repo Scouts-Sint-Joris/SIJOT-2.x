@@ -24,7 +24,7 @@
                         <td><code>{{ $key->key }}</code></td>
                         <td>
                             <div class="btn-group btn-group-xs">
-                                <a href="" data-toggle="tooltip" data-placement="bottom" title="Regenrate" class="btn btn-primary">
+                                <a href="{{ route('key.regenerate', ['id' => $key->id]) }}" data-toggle="tooltip" data-placement="bottom" title="Regenerate" class="btn btn-primary">
                                     <span class="fa fa-refresh"></span>
                                 </a>
                                 <a href="" data-toggle="tooltip" data-placement="bottom" title="Logs" class="btn btn-primary">

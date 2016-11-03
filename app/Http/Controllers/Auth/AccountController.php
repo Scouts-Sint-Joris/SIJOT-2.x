@@ -145,4 +145,26 @@ class AccountController extends Controller
 
         return redirect()->back();
     }
+
+    /**
+     * [METHOD]: Regenerate a API key.
+     *
+     * @url:platform
+     * @see:phpunit
+     *
+     * @param  ApiKey $apiKey
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function RegenerateKey(ApiKey $apiKey, $id)
+    {
+        $new = $apiKey->generateKey();
+
+        if ($apiKey->find($id)->update(['key' => $new])) // There is a new key generated.
+        {
+            session()->flash('class', 'alert alert-success');
+            session()->flash('message', 'The api key has been generated.');
+        }
+
+        return redirect()->back();
+    }
 }

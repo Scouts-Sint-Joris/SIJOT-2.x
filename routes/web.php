@@ -69,6 +69,9 @@ Route::post('settings/profile', 'Auth\AccountController@updateInfo')->name('sett
 Route::post('settips/api/key', 'Auth\AccountController@createKey')->name('settings.profile.key');
 Route::post('settings/profile/security', 'Auth\AccountController@updateSecurity')->name('settings.profile.password.post');
 
+// Api Routes
+Route::get('/settings/key/regenerate/{id}', 'Auth\AccountController@RegenerateKey')->name('key.regenerate');
+
 // Activity routes
 Route::get('backend/activity', 'ActivityController@index')->name('activity.index');
 Route::post('backend/activity/update/{id}', 'ActivityController@update')->name('activity.update');
