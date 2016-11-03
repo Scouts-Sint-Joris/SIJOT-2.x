@@ -174,7 +174,6 @@ return [
         Spatie\CookieConsent\CookieConsentServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Brotzka\DotenvEditor\DotenvEditorServiceProvider::class,
         Chrisbjr\ApiGuard\Providers\ApiGuardServiceProvider::class,
 
         /*
@@ -185,6 +184,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Brotzka\DotenvEditor\DotenvEditorServiceProvider::class,
 
     ],
 

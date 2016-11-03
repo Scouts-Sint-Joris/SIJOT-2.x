@@ -23,7 +23,11 @@
         <div class="box-header with-border">
             <h3 class="box-title">Environment configuratie.</h3>
         </div>
-        <div class="box-body">
+        <div id="settings" class="box-body">
+            @foreach($keys as $name => $meh)
+                {{ $name }} - {{ $meh }} <br>
+
+            @endforeach
         </div>
     </div>
 @endsection

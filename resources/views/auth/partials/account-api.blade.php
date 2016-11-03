@@ -44,10 +44,4 @@
     {{-- Key create modal --}}
     @include('auth.partials.key-create')
 
-        <script>
-            $(document).ready(function(){
-                $('[data-toggle="tooltip"]').tooltip();
-            });
-        </script>
-
 </div>
