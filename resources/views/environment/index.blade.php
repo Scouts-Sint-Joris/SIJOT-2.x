@@ -2,8 +2,8 @@
 
 @section('content-header')
     <h1>
-        Framework settings.
-        <small>Configure the backbone for this platform.</small>
+        Environment settings.
+        <small>Configure the framework.</small>
     </h1>
     <ol class="breadcrumb">
         <li>
@@ -13,21 +13,48 @@
             </a>
         </li>
         <li class="active">
-            Framework settings.
+            Environment settings.
         </li>
     </ol>
 @endsection
 
 @section('content')
-    <div class="box">
-        <div class="box-header with-border">
-            <h3 class="box-title">Environment configuratie.</h3>
-        </div>
-        <div id="settings" class="box-body">
-            @foreach($keys as $name => $meh)
-                {{ $name }} - {{ $meh }} <br>
+    <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab_1" data-toggle="tab">Settings</a></li>
+            <li><a href="" data-toggle="tab">Backup</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab_1">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <p class="text-danger<a href="" class="label label-warning">Edit</a>">Here u can see the current active .env file.</p>
 
-            @endforeach
+                        <table class="table table-condensed table-hover">
+                            <thead>
+                            <tr>
+                                <th>Key:</th>
+                                <th>Value:</th>
+                                <th>Options:</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($keys as $key => $value)
+                                <tr>
+                                    <td>{{ $key }}</td>
+                                    <td>{{ $value }}</td>
+                                    <td>
+                                        <a href="" class="label label-warning">Edit</a>
+                                        <a href="" class="label label-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- /.tab-content -->
     </div>
 @endsection
