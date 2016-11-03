@@ -30,7 +30,7 @@
                                 <a href="" data-toggle="tooltip" data-placement="bottom" title="Logs" class="btn btn-primary">
                                     <span class="fa fa-file-archive-o"></span>
                                 </a>
-                                <a href="" data-toggle="tooltip" data-placement="bottom" title="Delete" class="btn btn-primary">
+                                <a href="{{ route('key.destroy', ['id' => $key->id]) }}" data-toggle="tooltip" data-placement="bottom" title="Delete" class="btn btn-primary">
                                     <span class="fa fa-close"></span>
                                 </a>
                             </div>

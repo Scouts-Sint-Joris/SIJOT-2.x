@@ -152,6 +152,7 @@ class AccountController extends Controller
      * @url:platform
      * @see:phpunit
      *
+     * @param  int $id The api key id.
      * @param  ApiKey $apiKey
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -163,6 +164,24 @@ class AccountController extends Controller
         {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', 'The api key has been generated.');
+        }
+
+        return redirect()->back();
+    }
+
+    /**
+     * [METHOD]: Destroy a api key.
+     *
+     * @param  ApiKey $apiKey
+     * @param  int $id the api key id.
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroyKey(ApiKey $apiKey, $id)
+    {
+        if ($apiKey->destroy($id)) // The api key is destroyed
+        {
+            session()->flash('class', 'alert alert-success');
+            session()->flash('message', 'The api key has been deleted');
         }
 
         return redirect()->back();
