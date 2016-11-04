@@ -39,16 +39,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($keys as $key => $value)
-                                <tr>
-                                    <td>{{ $key }}</td>
-                                    <td>{{ $value }}</td>
-                                    <td>
-                                        <a href="" class="label label-warning">Edit</a>
-                                        <a href="" class="label label-danger">Delete</a>
-                                    </td>
-                                </tr>
-                            @endforeach
+                                @foreach($keys as $key => $value)
+                                    <tr>
+                                        <td>{{ $key }}</td>
+                                        <td>{{ $value }}</td>
+                                        <td>
+                                            <a href="" class="label label-warning">Edit</a>
+                                            <a href="" class="label label-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -57,8 +57,21 @@
 
             <div class="tab-pane fade in" id="tab_2">
                 <div class="row">
-                    <div class="col-sm-7">
+                    <div class="col-sm-4">
                         <a href="{{ route('settings.env.backup') }}" class="btn btn-sm btn-success">Take backup</a>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Backup naam:</th>
+                                    <th>Genomen op:</th>
+                                    <th>Opties:</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

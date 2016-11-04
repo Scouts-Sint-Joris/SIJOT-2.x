@@ -39,13 +39,18 @@ class EnvSettingsController extends Controller
      */
     public function index()
     {
-        $data['keys']   = $this->env->getContent();
-        $data['backup'] = $this->env->AutoBackupEnabled();
+        $data['keys']    = $this->env->getContent();
+        $data['backups'] = $this->env->getBackupVersions();
+
+        // DEBUGGING PROPOSE: 
+        // --------------------
+        // dd($data);
+
         return view('environment.index', $data);
     }
 
     /**
-     * [METHOD]: Create az backup for thep revious backup file.
+     * [METHOD]: Create az backup for the previous backup file.
      *
      * @url:platform GET|HEAD: /settings/env/backup
      * @see:phpunit
