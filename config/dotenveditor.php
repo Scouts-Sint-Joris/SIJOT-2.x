@@ -31,7 +31,7 @@ return [
     */
 
     // Activate or deactivate the graphical interface
-    'activated'         => false,
+    'activated'         => true,
 
     // Set the base-route. All requests start here
     'route'             =>  '/enveditor',

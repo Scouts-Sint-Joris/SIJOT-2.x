@@ -38,7 +38,7 @@ Route::get('/backend/rental/option/{id}', 'RentalController@setOption')->name('r
 Route::get('/backend/rental/confirm/{id}', 'RentalController@setConfirmed')->name('rental.backend.confirm');
 Route::get('/backend/rental/destroy/{id}', 'RentalController@destroy')->name('rental.backend.destroy');
 
-// Newsletter routes v
+// Newsletter routes
 Route::post('/newsletter/register', 'MailingController@registerNewsLetter')->name('newsletter.register');
 
 // News items.
@@ -61,13 +61,18 @@ Route::post('/backend/users/search', 'UserManagementController@search')->name('u
 Route::get('settings', 'SettingsController@index')->name('settings.index');
 
 // Environment routes.
-Route::get('settings/environment', 'EnvSettingsController@index')->name('settings.env');
+Route::get('settings/env', 'EnvSettingsController@index')->name('settings.env');
+Route::get('settings/env/backup', 'EnvSettingsController@createBackup')->name('settings.env.backup');
 
 // Profile settings routes
 Route::get('settings/profile', 'Auth\AccountController@index')->name('settings.profile');
 Route::post('settings/profile', 'Auth\AccountController@updateInfo')->name('settings.profile.post');
+Route::post('settips/api/key', 'Auth\AccountController@createKey')->name('settings.profile.key');
 Route::post('settings/profile/security', 'Auth\AccountController@updateSecurity')->name('settings.profile.password.post');
 
+// Api Routes
+Route::get('/settings/key/regenerate/{id}', 'Auth\AccountController@RegenerateKey')->name('key.regenerate');
+Route::get('/settings/key/destroy/{id}', 'Auth\AccountController@destroyKey')->name('key.destroy');
 // Activity routes
 Route::get('backend/activity', 'ActivityController@index')->name('activity.index');
 Route::post('backend/activity/update/{id}', 'ActivityController@update')->name('activity.update');

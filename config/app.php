@@ -174,7 +174,7 @@ return [
         Spatie\CookieConsent\CookieConsentServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Brotzka\DotenvEditor\DotenvEditorServiceProvider::class,
+        Chrisbjr\ApiGuard\Providers\ApiGuardServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -184,6 +184,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Brotzka\DotenvEditor\DotenvEditorServiceProvider::class,
 
     ],
 
@@ -236,6 +237,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'DotenvEditor' => Brotzka\DotenvEditor\DotenvEditorFacade::class,
+        'ApiGuardAuth' => Chrisbjr\ApiGuard\Facades\ApiGuardAuth::class,
 
     ],
 

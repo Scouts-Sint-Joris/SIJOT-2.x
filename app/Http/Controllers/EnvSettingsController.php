@@ -18,34 +18,48 @@ class EnvSettingsController extends Controller
     private $env;
 
     /**
-     * EnvSettingsController constructor.
+     * EnvController constructor.
      *
-     * @param DotenvEditor $env The env directory values.
+     * @param DotenvEditor $env
      */
     public function __construct(DotenvEditor $env)
     {
-        $this->middleware('auth')->only('index');
-        $this->middleware('auth:api')->only('getValues');
+        $this->middleware('auth');
         $this->middleware('lang');
-
         $this->env = $env;
     }
 
     /**
      * [METHOD]: The index view for the environment settings.
      *
-     * @url:platform  GET|HEAD:
+     * @url:platform  GET|HEAD: settings/env
      * @see:phpunit
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        return view('environment.index');
+        $data['keys']   = $this->env->getContent();
+        $data['backup'] = $this->env->AutoBackupEnabled();
+        return view('environment.index', $data);
     }
 
-    public function getValues()
+    /**
+     * [METHOD]: Create az backup for thep revious backup file.
+     *
+     * @url:platform GET|HEAD: /settings/env/backup
+     * @see:phpunit
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function createBackup()
     {
+        if ($this->env->createBackup()) // Can create the backup.
+        {
+            session()->flash('class', 'alert alert-success');
+            session()->flash('message', 'Created the backup file');
+        }
 
+        return redirect()->back();
     }
 }

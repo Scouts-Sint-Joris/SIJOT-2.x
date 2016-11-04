@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <meta id="_token" value="{{ csrf_token() }}">
 
         <title>Scouts en gidsen Sint-Joris | Backend</title>
    
@@ -219,9 +220,6 @@
         <script src="{{ asset('assets/js/jquery.slimscroll.min.js') }}"></script>
         <script src="{{ asset('assets/js/fastclick.js') }}"></script>
         <script src="{{ asset('js/app.js') }}"></script>
-
-        @if(request()->is('settings/*'))
-            <script src="{{ asset('js/vue-settings.js') }}"></script>
-        @endif
+            <script>$(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});</script>
     </body>
 </html>

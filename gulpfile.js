@@ -44,5 +44,5 @@ elixir(mix => {
         
         // custom css
         .webpack('app.js')
-        .webpack('vue-settings.js');
+        .scripts('vue-settings.js', assetJs + '/vue-settings.js');
 });
