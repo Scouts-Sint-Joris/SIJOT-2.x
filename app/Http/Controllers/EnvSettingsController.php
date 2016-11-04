@@ -50,7 +50,7 @@ class EnvSettingsController extends Controller
     }
 
     /**
-     * [METHOD]: Create az backup for the previous backup file.
+     * [METHOD]: Create a backup for the previous backup file.
      *
      * @url:platform GET|HEAD: /settings/env/backup
      * @see:phpunit
@@ -61,8 +61,52 @@ class EnvSettingsController extends Controller
     {
         if ($this->env->createBackup()) // Can create the backup.
         {
+            /**
+             * @todo: create notification. 
+             * --- 
+             * alse so for the option that users, 
+             * can set an option taht they wont mail the backup or not.  
+             */
+
             session()->flash('class', 'alert alert-success');
             session()->flash('message', 'Created the backup file');
+        } 
+        else 
+        {
+            session()->flash('class', 'alert alert-danger'); 
+            session()->flash('message', 'Could not create the settings backup');
+        }
+
+        return redirect()->back();
+    }
+
+    /**
+     * [METHOD]: Dlete a environment setting key. 
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteEnvKey() 
+    {
+        if () // The kay can be deleted. 
+        {
+            session()->flash('class', 'alert alert-success'); 
+            session()->flash('message', 'The evironment setting key has been deleted');
+        }
+
+        return redirect()->back();
+    }
+
+    /**
+     * [METHOD]: Delete a settings backup. 
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteBackup() 
+    {
+        if () // The env backup is deleted. 
+        {
+            session()->flash('class', 'alert alert-success'); 
+            session()->flash('message', 'The backup file has been deleted.');
         }
 
         return redirect()->back();

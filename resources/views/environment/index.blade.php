@@ -58,9 +58,9 @@
             <div class="tab-pane fade in" id="tab_2">
                 <div class="row">
                     <div class="col-sm-4">
-                        <a href="{{ route('settings.env.backup') }}" class="btn btn-sm btn-success">Take backup</a>
+                        <a style="margin-bottom: 10px;" href="{{ route('settings.env.backup') }}" class="btn btn-sm btn-success">Take backup</a>
 
-                        <table>
+                        <table class="table table-condensed table-hover">
                             <thead>
                                 <tr>
                                     <th>Backup naam:</th>
@@ -69,7 +69,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                               
+                                @foreach($backups as $output) 
+                                    <tr>
+                                        <td>{{ $output['unformatted'] }}_env</td>
+                                        <td>{{ $output['formatted'] }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
