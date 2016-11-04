@@ -38,7 +38,7 @@ Route::get('/backend/rental/option/{id}', 'RentalController@setOption')->name('r
 Route::get('/backend/rental/confirm/{id}', 'RentalController@setConfirmed')->name('rental.backend.confirm');
 Route::get('/backend/rental/destroy/{id}', 'RentalController@destroy')->name('rental.backend.destroy');
 
-// Newsletter routes v
+// Newsletter routes
 Route::post('/newsletter/register', 'MailingController@registerNewsLetter')->name('newsletter.register');
 
 // News items.
@@ -61,7 +61,8 @@ Route::post('/backend/users/search', 'UserManagementController@search')->name('u
 Route::get('settings', 'SettingsController@index')->name('settings.index');
 
 // Environment routes.
-Route::get('settings/environment', 'EnvSettingsController@index')->name('settings.env');
+Route::get('settings/env', 'EnvSettingsController@index')->name('settings.env');
+Route::get('settings/env/backup', 'EnvSettingsController@createBackup')->name('settings.env.backup');
 
 // Profile settings routes
 Route::get('settings/profile', 'Auth\AccountController@index')->name('settings.profile');
