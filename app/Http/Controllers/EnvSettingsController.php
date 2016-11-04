@@ -83,11 +83,14 @@ class EnvSettingsController extends Controller
     /**
      * [METHOD]: Dlete a environment setting key. 
      *
+     * @param  string $param The key that neews to be delete.
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function deleteEnvKey() 
+    public function deleteEnvKey($param)
     {
-        if () // The kay can be deleted. 
+        $input = $this->env->getValue($param);
+
+        if ($this->env->deleteData($input)) // The kay can be deleted.
         {
             session()->flash('class', 'alert alert-success'); 
             session()->flash('message', 'The evironment setting key has been deleted');
