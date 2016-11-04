@@ -99,11 +99,12 @@ class EnvSettingsController extends Controller
     /**
      * [METHOD]: Delete a settings backup. 
      *
+     * @param  int $timestamp The unformatted timestamp from the backup 
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function deleteBackup() 
+    public function deleteBackup($timestamp) 
     {
-        if () // The env backup is deleted. 
+        if ($this->env->deleteBackup($timestamp)) // The env backup is deleted. 
         {
             session()->flash('class', 'alert alert-success'); 
             session()->flash('message', 'The backup file has been deleted.');

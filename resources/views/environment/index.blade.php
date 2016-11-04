@@ -73,6 +73,10 @@
                                     <tr>
                                         <td>{{ $output['unformatted'] }}_env</td>
                                         <td>{{ $output['formatted'] }}</td>
+                                        
+                                        <td>
+                                            <a href="label label-info">Herstel</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
