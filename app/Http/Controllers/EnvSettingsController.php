@@ -39,13 +39,18 @@ class EnvSettingsController extends Controller
      */
     public function index()
     {
-        $data['keys']   = $this->env->getContent();
-        $data['backup'] = $this->env->AutoBackupEnabled();
+        $data['keys']    = $this->env->getContent();
+        $data['backups'] = $this->env->getBackupVersions();
+
+        // DEBUGGING PROPOSE: 
+        // --------------------
+        // dd($data);
+
         return view('environment.index', $data);
     }
 
     /**
-     * [METHOD]: Create az backup for thep revious backup file.
+     * [METHOD]: Create a backup for the previous backup file.
      *
      * @url:platform GET|HEAD: /settings/env/backup
      * @see:phpunit
@@ -56,8 +61,56 @@ class EnvSettingsController extends Controller
     {
         if ($this->env->createBackup()) // Can create the backup.
         {
+            /**
+             * @todo: create notification. 
+             * --- 
+             * alse so for the option that users, 
+             * can set an option taht they wont mail the backup or not.  
+             */
+
             session()->flash('class', 'alert alert-success');
             session()->flash('message', 'Created the backup file');
+        } 
+        else 
+        {
+            session()->flash('class', 'alert alert-danger'); 
+            session()->flash('message', 'Could not create the settings backup');
+        }
+
+        return redirect()->back();
+    }
+
+    /**
+     * [METHOD]: Dlete a environment setting key. 
+     *
+     * @param  string $param The key that neews to be delete.
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteEnvKey($param)
+    {
+        $input = $this->env->getValue($param);
+
+        if ($this->env->deleteData($input)) // The kay can be deleted.
+        {
+            session()->flash('class', 'alert alert-success'); 
+            session()->flash('message', 'The evironment setting key has been deleted');
+        }
+
+        return redirect()->back();
+    }
+
+    /**
+     * [METHOD]: Delete a settings backup. 
+     *
+     * @param  int $timestamp The unformatted timestamp from the backup 
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteBackup($timestamp) 
+    {
+        if ($this->env->deleteBackup($timestamp)) // The env backup is deleted. 
+        {
+            session()->flash('class', 'alert alert-success'); 
+            session()->flash('message', 'The backup file has been deleted.');
         }
 
         return redirect()->back();

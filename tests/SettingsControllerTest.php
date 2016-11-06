@@ -40,4 +40,14 @@ class SettingsControllerTest extends TestCase
         $this->visit(route('settings.profile'));
         $this->seeStatusCode(200);
     }
+
+    public function testSettingsPlatform()
+    {
+        //
+    }
+
+    public function testSettingsMySqlBackup()
+    {
+        //
+    }
 }

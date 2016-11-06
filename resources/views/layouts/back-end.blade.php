@@ -45,15 +45,43 @@
                         <span class="icon-bar"></span>
                     </a>
 
-                    <div class="slimScrollDiv navbar-custom-menu">
+                    <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
                             {{-- Notifications: style can be found in dropdown.less --}}
-                            <li class="notifications-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-bell-o"></i>
-                                    <span class="label label-success">0</span>
-                                </a>
-                            </li>
+                            @if(count(auth()->user()->unreadNotifications) === 0)
+                                <li class="dropdown notifications-menu">
+                                    <a href="">
+                                        <i class="fa fa-bell-o"></i>
+                                        <span class="label label-warning">
+                                            {{ count(auth()->user()->unreadNotifications) }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @else
+                                <li class="dropdown notifications-menu">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="fa fa-bell-o"></i>
+                                        <span class="label label-warning">{{ count(auth()->user()->unreadNotifications) }}</span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="header">You have {{ count(auth()->user()->unreadNotifications) }} notifications</li>
+                                        <li>
+                                            <!-- inner menu: contains the actual data -->
+                                            <ul class="menu">
+                                                @foreach(array_slice(auth()->user()->unreadNotifications, 0, 6) as $notification)
+                                                    <li>
+                                                        <a href="{{ route('settings.profile') }}">
+                                                            <i class="{{ $notification->class }}"></i>
+                                                            {{ $notification->message }}
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                        <li class="footer"><a href="#">View all</a></li>
+                                    </ul>
+                                </li>
+                            @endif
 
                             {{-- User Account: style can be found in dropdown.less --}}
                             <li class="user user-menu">

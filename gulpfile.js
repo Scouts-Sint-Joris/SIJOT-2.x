@@ -43,6 +43,5 @@ elixir(mix => {
         .scripts(adminLTE + 'plugins/iCheck/icheck.min.js', assetJs + '/icheck.min.js')
         
         // custom css
-        .webpack('app.js')
-        .scripts('vue-settings.js', assetJs + '/vue-settings.js');
+        .webpack('app.js');
 });
