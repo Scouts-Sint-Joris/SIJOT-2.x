@@ -9,7 +9,13 @@ class AccountTest extends TestCase
     use DatabaseMigrations, DatabaseTransactions;
 
     /**
+     * POST:
+     * ROUTE:
      *
+     * @group auth
+     * @group profile
+     * @group all
+     * @group backend
      */
     public function testUpdateInformation()
     {
