@@ -68,11 +68,14 @@
                                         <li>
                                             <!-- inner menu: contains the actual data -->
                                             <ul class="menu">
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                                    </a>
-                                                </li>
+                                                @foreach(array_slice(auth()->user()->unreadNotifications, 0, 6) as $notification)
+                                                    <li>
+                                                        <a href="{{ route('settings.profile') }}">
+                                                            <i class="{{ $notification->class }}"></i>
+                                                            {{ $notification->message }}
+                                                        </a>
+                                                    </li>
+                                                @endforeach
                                             </ul>
                                         </li>
                                         <li class="footer"><a href="#">View all</a></li>
