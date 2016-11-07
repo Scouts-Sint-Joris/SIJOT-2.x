@@ -9,11 +9,30 @@ class AccountTest extends TestCase
     use DatabaseMigrations, DatabaseTransactions;
 
     /**
+     * POST:
+     * ROUTE:
      *
+     * @group auth
+     * @group profile
+     * @group all
+     * @group backends
      */
     public function testUpdateInformation()
     {
+        $route = route('settings.profile.post');
 
+        $input['name']   = 'John Doe';
+        $input['theme']  = 'skin-red';
+        $input['email']  = 'name@domain.tld';
+
+        $session['class']   = 'alert alert-success'; 
+        $session['message'] = trans('auth.FlashInfo'); 
+
+        $this->authentication(); 
+        $this->post($route, $input);
+        $this->seeStatusCode(302); 
+        $this->seeInDatabase('users', $input);
+        $this->session($session);
     }
 
     /**
