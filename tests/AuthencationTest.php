@@ -39,32 +39,76 @@ class AuthencationTest extends TestCase
     }
 
     /**
+     * GET|HEAD:
+     * ROUTE: 
+     * 
      * @group auth
      * @group all
      * @group api
      */
     public function testRegenerateKey()
     {
+        //$route = route(); 
+        $key   = factory(Chrisbjr\ApiGuard\Models\ApiKey::class)->create();
 
+        $this->authentication();
+        //$this->seeStatusCode(302);
     }
 
     /**
+     * POST: 
+     * ROUTE: settings.profile.key
+     *
+     * - Without validation errors.
+     *
      * @group auth
      * @group all
      * @group api
      */
-    public function testCreateKey()
+    public function testCreateKeyWithoutErrors()
+    {
+        $route = route('settings.profile.key');
+
+        $session['class']   = 'alert alert-success';
+        $session['message'] = 'The api token has been created';
+
+        $input['userid']   = $this->user->id;
+        $input['service']  = 'Test application';
+
+        $this->authentication();
+        $this->post($route, $input);
+        $this->seeInDatabase('api_keys', ['user_id' => $input['userid'], 'service' => $input['service']]);
+        $this->session($session);
+        $this->seeStatusCode(302);
+    }
+
+    /**
+     * POST:
+     * ROUTE: settings.profile.key
+     *
+     * - With validation errors.
+     *
+     * @group auth
+     * @group all
+     * @group api
+     */
+    public function testCreateKeyWithErrors()
     {
 
     }
 
     /**
+     * GET|HEAD:
+     * ROUTE: 
+     *
      * @group auth
      * @group all
      * @group api
      */
     public function testDeleteKey()
-    {
+    { 
+        $key   = factory(Chrisbjr\ApiGuard\Models\ApiKey::class)->create();
 
+        $this->authentication(); 
     }
 }

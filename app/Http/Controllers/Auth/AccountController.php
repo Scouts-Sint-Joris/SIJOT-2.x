@@ -125,6 +125,7 @@ class AccountController extends Controller
      * [METHOD]: Create a key for the background api.
      *
      * @url:platform  POST: /settings/api/key
+     * @see:phpunit   AccountTest::testCreateKeyWithoutErrors()
      * @see:phpunit   AccountTest::
      *
      * @param  Requests\ApiKeyValidator $input
