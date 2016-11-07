@@ -10,8 +10,6 @@ return [
     /**
      * The methods to hide.
      */
-    'hide_methods' => [
-        'HEAD',
-    ],
+    'hide_methods' => [ ],
 
 ];

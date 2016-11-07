@@ -43,6 +43,13 @@ Route::post('/newsletter/register', 'MailingController@registerNewsLetter')->nam
 
 // News items.
 Route::get('/backend/news', 'NewsController@index')->name('news.backend.index');
+Route::get('/backend/news/draft/{id}', 'NewsController@draft')->name('news.backend.draft');
+Route::get('/backend/news/publish/{id}', 'NewsController@publish')->name('news.backend.publish');
+Route::get('/backend/news/destroy/{id}', 'NewsController@destroy')->name('news.backend.destroy');
+Route::get('/backend/news/update/{id}', 'NewsController@edit')->name('news.backend.edit');
+Route::get('/backend/news/show/{id}', 'NewsController@backendShow')->name('news.backend.show');
+Route::post('/backend/news/update/{id}', 'NewsController@update')->name('news.backend.update');
+Route::post('/backend/news/insert', 'NewsController@store')->name('news.backend.insert');
 
 // Mailing routes
 Route::get('/backend/mailing', 'MailingController@index')->name('backend.mailing.index');
