@@ -13,7 +13,7 @@
                     <option value="">-- Select your theme --</option>
 
                     @foreach($themes as $theme)
-                        <option value="{{ $theme->id }}" @if($user->theme === $theme->class) selected="selected" @endif>
+                        <option value="{{ $theme->class }}" @if($user->theme === $theme->class) selected="selected" @endif>
                             {{ $theme->name }}
                         </option>
                     @endforeach

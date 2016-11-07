@@ -39,7 +39,15 @@ class SettingsControllerTest extends TestCase
         $this->authentication();
         $this->visit(route('settings.profile'));
         $this->seeStatusCode(200);
-        $this->see('Account configuratie');
-        $this->see('Account configuratie');
+    }
+
+    public function testSettingsPlatform()
+    {
+        //
+    }
+
+    public function testSettingsMySqlBackup()
+    {
+        //
     }
 }

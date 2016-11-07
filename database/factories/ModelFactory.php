@@ -90,7 +90,8 @@ $factory->define(App\Tags::class, function (Faker\Generator $faker) {
 
 $factory->define(App\News::class, function (Faker\Generator $faker) {
     return [
-        'state' => 1,
+        'state'   => 1,
+        'user_id' => 1,
         'heading' => $faker->words(3, true),
         'content' => $faker->text(200),
     ];
