@@ -28,6 +28,19 @@ class AuthencationTest extends TestCase
     /**
      * @group auth
      * @group all
+     * @group web
+     */
+    public function tesztLoginUrl()
+    {
+        $route = url('/login');
+
+        $this->get($route);
+        $this->seeStatusCode(200);
+    }
+
+    /**
+     * @group auth
+     * @group all
      * @group api
      */
     public function testRegenerateKey()
