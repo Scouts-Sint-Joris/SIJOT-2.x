@@ -177,7 +177,7 @@ class AccountController extends Controller
      * @param  int $id the api key id.
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroyKey(ApiKey $apiKey, $id)
+    public function destroyKey($id, ApiKey $apiKey)
     {
         if ($apiKey->destroy($id)) // The api key is destroyed
         {

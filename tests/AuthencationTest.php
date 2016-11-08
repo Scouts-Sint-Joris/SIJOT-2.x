@@ -48,15 +48,21 @@ class AuthencationTest extends TestCase
      */
     public function testRegenerateKey()
     {
-        //$route = route(); 
         $key   = factory(Chrisbjr\ApiGuard\Models\ApiKey::class)->create();
+        $route = route('key.regenerate', ['id' => $key->id]);
+
+        $session['class']   = 'alert alert-success';
+        $session['message'] = 'The api key has been generated.';
 
         $this->authentication();
-        //$this->seeStatusCode(302);
+        $this->get($route);
+        $this->dontSeeInDatabase('api_keys', ['key' => $key->key]);
+        $this->session($session);
+        $this->seeStatusCode(302);
     }
 
     /**
-     * POST: 
+     * POST:  /settings/api/key
      * ROUTE: settings.profile.key
      *
      * - Without validation errors.
@@ -83,7 +89,7 @@ class AuthencationTest extends TestCase
     }
 
     /**
-     * POST:
+     * POST:  /settings/api/key
      * ROUTE: settings.profile.key
      *
      * - With validation errors.
@@ -94,12 +100,19 @@ class AuthencationTest extends TestCase
      */
     public function testCreateKeyWithErrors()
     {
+        $route = route('settings.profile.key');
+
+        $this->authentication();
+        $this->post($route, []);
+        $this->assertHasOldInput();
+        $this->assertSessionHasErrors();
+        $this->seeStatusCode(302);
 
     }
 
     /**
-     * GET|HEAD:
-     * ROUTE: 
+     * GET|HEAD: /settings/key/destroy/{id}
+     * ROUTE:    key.destroy
      *
      * @group auth
      * @group all
@@ -107,8 +120,20 @@ class AuthencationTest extends TestCase
      */
     public function testDeleteKey()
     { 
-        $key   = factory(Chrisbjr\ApiGuard\Models\ApiKey::class)->create();
+        $key   = factory(Chrisbjr\ApiGuard\Models\ApiKey::class)->create([
+            'id' => '1',
+            'service' => 'application service'
+        ]);
 
-        $this->authentication(); 
+        $route = route('key.destroy', ['id' => $key->id]);
+
+        $session['class']   = 'alert alert-success';
+        $session['message'] = 'The api key has been deleted';
+
+        $this->authentication();
+        $this->get($route);
+        $this->session($session);
+        // $this->dontSeeInDatabase('api_keys', ['service' => $key->service]);
+        $this->seeStatusCode(302);
     }
 }
