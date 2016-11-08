@@ -80,6 +80,7 @@ Route::post('settings/profile/security', 'Auth\AccountController@updateSecurity'
 // Api Routes
 Route::get('/settings/key/regenerate/{id}', 'Auth\AccountController@RegenerateKey')->name('key.regenerate');
 Route::get('/settings/key/destroy/{id}', 'Auth\AccountController@destroyKey')->name('key.destroy');
+
 // Activity routes
 Route::get('backend/activity', 'ActivityController@index')->name('activity.index');
 Route::post('backend/activity/update/{id}', 'ActivityController@update')->name('activity.update');

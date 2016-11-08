@@ -97,6 +97,16 @@ $factory->define(App\News::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(Chrisbjr\ApiGuard\Models\ApiKey::class, function (Faker\Generator $faker) {
+    return [
+        'user_id'       => 1,
+        'service'       => $faker->word,
+        'key'           => $faker->password,
+        'level'         => 10,
+        'ignore_limits' => 0
+    ];
+});
+
 $factory->define(Spatie\Permission\Models\Permission::class, function (Faker\Generator $faker) {
     return ['name' => 'active'];
 });
