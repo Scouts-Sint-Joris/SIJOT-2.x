@@ -25,7 +25,7 @@
 /.gitattributes export-ignore
 /.gitignore export-ingore
 /Vagrantfile export-ignore
-/composer.lock
+/composer.lock export-ignore
 
 # Line endings & standards
 # ---------------------------------------------------
