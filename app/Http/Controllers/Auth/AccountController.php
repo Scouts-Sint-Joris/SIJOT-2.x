@@ -125,6 +125,7 @@ class AccountController extends Controller
      * [METHOD]: Create a key for the background api.
      *
      * @url:platform  POST: /settings/api/key
+     * @see:phpunit   AccountTest::testCreateKeyWithoutErrors()
      * @see:phpunit   AccountTest::
      *
      * @param  Requests\ApiKeyValidator $input
@@ -176,7 +177,7 @@ class AccountController extends Controller
      * @param  int $id the api key id.
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroyKey(ApiKey $apiKey, $id)
+    public function destroyKey($id, ApiKey $apiKey)
     {
         if ($apiKey->destroy($id)) // The api key is destroyed
         {
