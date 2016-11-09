@@ -14,28 +14,39 @@
 @section('content')
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
-            <li class=""><a href="#tab_1" data-toggle="tab" aria-expanded="false">Tab 1</a></li>
-            <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Tab 2</a></li>
-            <li class="active"><a href="#tab_3" data-toggle="tab" aria-expanded="true">Tab 3</a></li>
+            <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="false">Mailinglists</a></li>
+            <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Newsletter</a></li>
+            <li class=""><a href="#tab_3" data-toggle="" aria-expanded="false">Verstuur mailing</a></li>
+            <li class=""><a href="#tab_4" data-toggle="" aria-expanded="false">Verstuur nieuwsbrief</a></li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane" id="tab_1">
-                <b>How to use:</b>
+            <div class="tab-pane fade in active" id="tab_1">
+                <div style="margin-bottom: 10px;">
+                    <a href="" class="btn btn-sm btn-success">Toevoegen contact</a>
+                    <a href="" class="btn btn-sm btn-info">Exporteer</a>
+                </div>
 
-                <p>
-                    Exactly like the original bootstrap tabs except you should use
-                    the custom wrapper <code>.nav-tabs-custom</code> to achieve this style.
-                </p>
-                A wonderful serenity has taken possession of my entire soul,
-                like these sweet mornings of spring which I enjoy with my whole heart.
-                I am alone, and feel the charm of existence in this spot,
-                which was created for the bliss of souls like mine. I am so happy,
-                my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
-                that I neglect my talents. I should be incapable of drawing a single stroke
-                at the present moment; and yet I feel that I never was a greater artist than now.
+                @if(count($mailing) === 0)
+                    <div class="alert alert-info">
+                        <p>There are no mailing addresses in the system.</p>
+                    </div>
+                @else 
+                    <table>
+                        <thead>
+                            <th>#</th>
+                            <th>Naam:</th>
+                            <th>Email:</th>
+                            <th></th> {{-- Functions --}}
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                @endif
             </div>
             <!-- /.tab-pane -->
-            <div class="tab-pane" id="tab_2">
+
+            <div class="tab-pane fade in" id="tab_2">
                 The European languages are members of the same family. Their separate existence is a myth.
                 For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ
                 in their grammar, their pronunciation and their most common words. Everyone realizes why a
@@ -45,17 +56,8 @@
                 and regular than that of the individual languages.
             </div>
             <!-- /.tab-pane -->
-            <div class="tab-pane active" id="tab_3">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                It has survived not only five centuries, but also the leap into electronic typesetting,
-                remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-                sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-                like Aldus PageMaker including versions of Lorem Ipsum.
+            
             </div>
-            <!-- /.tab-pane -->
-        </div>
         <!-- /.tab-content -->
     </div>
 @endsection
