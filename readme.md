@@ -31,10 +31,10 @@ please send an e-mail to Tim Joosten at Topairy@gmail.com. All security vulnerab
 ## Handy repositories
 
 <ul>
-  <li><a href="">SIJOT-2.x: Composer module skeleton.</a></li>
-  <li><a href="">SIJOT 2.x: translations.</a></li>
-  <li><a href="">SIJOT-2.x: API documentation.</a></li>
-  <li><a href="">SIJOT-1.x: Webplatform.</a></li>
+  <li><a href="https://github.com/Scouts-Sint-Joris/Module-skeleton">SIJOT-2.x: Composer module skeleton.</a></li>
+  <li><a href="https://github.com/Scouts-Sint-Joris/Translations.">SIJOT 2.x: >Translations.</a></li>
+  <li><a href="https://github.com/Scouts-Sint-Joris/API-docs">SIJOT-2.x: API documentation.</a></li>
+  <li><a href="https://github.com/Scouts-Sint-Joris/SIJOT-1.x">SIJOT-1.x: Webplatform.</a></li>
 </ul>
 
 ## License
