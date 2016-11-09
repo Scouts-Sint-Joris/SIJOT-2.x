@@ -92,7 +92,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         @if (Auth::check())
                             <li>
-                                <a href="">
+                                <a href="{{ route('home.backend') }}">
                                     <span class="icon-green fa fa-chevron-circle-right"></span> Backend
                                 </a>
                             </li>
