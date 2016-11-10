@@ -39,7 +39,21 @@
                             <th></th> {{-- Functions --}}
                         </thead>
                         <tbody>
-                            
+                            @foreach($mailing as $mail)
+                                <tr>
+                                    <td><code>#{{ $mail->id }}</code></td>
+                                    <td>{{ $mail->name }}</td>
+                                    <td>{{ $mail->email }}</td>
+
+                                    {{-- Functions --}}
+                                    <td>
+                                        <a href="" class="label label-info">Bekijk</a>
+                                        <a href="" class="label label-warning">Wijzig</a>
+                                        <a href="" class="label label-danger">Delete</a>
+                                    </td>
+                                    {{-- /Functions --}}
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 @endif

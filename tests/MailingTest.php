@@ -23,11 +23,25 @@ class MailingTest extends TestCase
     }
 
     /**
+     * DESTROY:  /backend/mailing/destroy/{id}
+     * ROUTE:    backend.mailing.destroy
      *
+     * @group mailing
+     * @group all
      */
-    public function testMailingDestory()
+    public function testMailingDestroy()
     {
+        $mailing = factory(App\Mailing::class)->create();
+        $route   = route('backend.mailing.destroy', ['id' => $mailing->id]);
 
+        $session['class']   = 'alert alert-success';
+        $session['message'] = trans('flash-session.mailing-destroy');
+
+        $this->authentication();
+        $this->get($route);
+        $this->dontSeeInDatabase('mailings', ['id' => $mailing->id]);
+        $this->session($session);
+        $this->seeStatusCode(302);
     }
 
     /**
@@ -43,12 +57,20 @@ class MailingTest extends TestCase
      */
     public function testNewsLetterCreateWithErrors()
     {
-
+        $letter = factory(App\NewsLetter::class)->create();
     }
 
+    /**
+     * POST:
+     * ROUTE:
+     *
+     * @group mailing
+     * @group newsletter
+     * @group all
+     */
     public function testNewsLetterInsertWithoutErrors()
     {
-
+        $letter = factory(App\NewsLetter::class)->create();
     }
 
     /**
@@ -84,6 +106,7 @@ class MailingTest extends TestCase
 
         $input['email'] = 'jhon@doe.tld';
 
+        $this->authentication();
         $this->post(route('newsletter.register'), $input);
         $this->seeInDatabase('news_letters', $input);
         $this->seeStatusCode(302);

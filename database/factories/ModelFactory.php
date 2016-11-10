@@ -40,6 +40,8 @@ $factory->define(App\Groups::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Mailing::class, function (Faker\Generator $faker) {
     return [
+        'name'  => $faker->name,
+        'email' => $faker->email,
     ];
 });
 
@@ -77,6 +79,20 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'theme'          => $themes[array_rand($themes)],
         'password'       => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\NewsLetter::class, function (Faker\Generator $faker) {
+    return [
+        'email' => $faker->email,
+        'code'  => str_random(16),
+    ];
+});
+
+$factory->define(App\MailingGroups::class, function (Faker\Generator $faker) {
+    return [
+        'name'  => $faker->name,
+        'class' => $faker->name,
     ];
 });
 
