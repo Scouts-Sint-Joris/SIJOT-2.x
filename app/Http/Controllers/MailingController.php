@@ -31,7 +31,7 @@ class MailingController extends Controller
      */
     public function __construct()
     {
-        $this->authMiddleware = ['registerNewsLetter'];
+        $this->authMiddleware = ['registerNewsLetter', 'destroyNewsletter'];
 
         // Middleware
         // $this->middleware('auth');
@@ -166,23 +166,23 @@ class MailingController extends Controller
     /**
      * [METHOD]: Delete a email address out of the system.
      *
-     * @url:platform  GET|HEAD:
-     * @see:phpunit   MailingTest::
-     * @see:phpunit   MailingTest::
+     * @url:platform  GET|HEAD:  /newsletter/destroy/{id}
+     * @see:phpunit   MailingTest::testNewsLetterDestroy()
      *
      * @param  string $string the checksum for the email address.
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroyNewsletter($string)
     {
-        $data = NewsLetter::where('string', $string);
+        $data = NewsLetter::where('code', $string);
 
         if ($data->count() === 1) // Delete control function.
         {
-            $data->destroy();
+            $result = $data->first();
+            NewsLetter::destroy($result->id);
 
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', '');
+            session()->flash('message', 'The email address has been removed.');
         }
 
         return redirect()->back();

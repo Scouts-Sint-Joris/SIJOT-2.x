@@ -45,12 +45,26 @@ class MailingTest extends TestCase
     }
 
     /**
-     * GET|HEAD:
-     * ROUTE:
+     * GET|HEAD:  /newsletter/destroy/{id}
+     * ROUTE:     backend.newsletter.destroy
+     *
+     * @group all
+     * @group mailing
+     * @group newsletter
+     * @group all
      */
     public function testNewsLetterDestroy()
     {
+        $newsletter = factory(App\NewsLetter::class)->create();
+        $route      = route('backend.newsletter.destroy', ['string' => $newsletter->code]);
 
+        $session['class']   = 'alert alert-success';
+        $session['message'] = 'The email address has been removed.';
+
+        $this->get($route);
+        $this->dontSeeInDatabase('news_letters', ['id' => $newsletter->id]);
+        $this->seeStatusCode(302);
+        $this->session($session);
     }
 
     /**

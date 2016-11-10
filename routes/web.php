@@ -58,6 +58,7 @@ Route::get('/backend/mailing/destroy/{id}', 'MailingController@mailingDestroy')-
 
 // Newsletter routes.
 Route::post('/newsletter/insert', 'MailingController@registerNewsLetter')->name('newsletter.insert');
+Route::get('/newsletter/destroy/{string}', 'MailingController@destroyNewsletter')->name('backend.newsletter.destroy');
 
 // User management routes.
 Route::get('backend/users/reset/{id}', 'UserManagementController@resetPassword')->name('users.reset');
