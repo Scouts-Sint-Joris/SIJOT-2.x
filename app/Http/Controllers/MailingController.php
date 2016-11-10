@@ -31,11 +31,11 @@ class MailingController extends Controller
      */
     public function __construct()
     {
-        $this->authMiddleware = ['index'];
+        $this->authMiddleware = ['registerNewsLetter'];
 
         // Middleware
         // $this->middleware('auth');
-        $this->middleware('auth')->only($this->authMiddleware);
+        $this->middleware('auth')->except($this->authMiddleware);
         $this->middleware('lang');
     }
 
@@ -58,8 +58,8 @@ class MailingController extends Controller
     /**
      * [METHOD]: Delete a mailing record out of the database. 
      *
-     * @url:platform  DELETE:
-     * @see:phpunit   MailingTest::
+     * @url:platform  DELETE:  /backend/mailing/destroy/{id}
+     * @see:phpunit   MailingTest::testMailingDestroy()
      *
      * @param  int $id the id for the email record in the database.  
      * @return \Illuminate\Http\RedirectResponse
@@ -78,7 +78,7 @@ class MailingController extends Controller
     /**
      * [METHOD]: Register the email to the newletter module.
      *
-     * @url:platform  POST
+     * @url:platform  POST:
      * @see:phpunit   MailingTest::testNewsLetterCreateWithErrors()
      * @see:phpunit   MailingTest::testNewsLetterCreateWithoutErrors()
      *
@@ -107,10 +107,10 @@ class MailingController extends Controller
      * @see:phpunit   MailingTest::
      * @see:phpunit   MailingTest::
      *
-     * @param  Request $input
+     * @param Requests\MailingValidator| $input
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function registerMailing(Request $input)
+    public function registerMailing(Requests\MailingValidator $input)
     {
         $create = Mailing::create($input->except('_token'));
 

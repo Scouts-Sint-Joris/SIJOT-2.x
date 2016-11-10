@@ -45,7 +45,8 @@ class MailingTest extends TestCase
     }
 
     /**
-     *
+     * GET|HEAD:
+     * ROUTE:
      */
     public function testNewsLetterDestroy()
     {
@@ -53,16 +54,31 @@ class MailingTest extends TestCase
     }
 
     /**
+     * POST:   /newsletter/insert
+     * ROUTE:  newsletter.insert
      *
+     * - With validation errors.
+     *
+     * @group mailing
+     * @group newsletter
+     * @group mailing
+     * @group all
      */
     public function testNewsLetterCreateWithErrors()
     {
-        $letter = factory(App\NewsLetter::class)->create();
+        $route  = route('newsletter.insert');
+
+        $this->post($route, []);
+        $this->assertSessionHasErrors();
+        $this->assertHasOldInput();
+        $this->seeStatusCode(302);
     }
 
     /**
-     * POST:
-     * ROUTE:
+     * POST:  /newsletter/insert
+     * ROUTE: newsletter.insert
+     *
+     * - Without validation errors.
      *
      * @group mailing
      * @group newsletter
@@ -70,12 +86,23 @@ class MailingTest extends TestCase
      */
     public function testNewsLetterInsertWithoutErrors()
     {
-        $letter = factory(App\NewsLetter::class)->create();
+        $route  = route('newsletter.insert');
+
+        $input['email'] = 'Jhon@example.tld';
+        $input['code']  = str_limit(16);
+
+        $session['class']   = 'alert alert-success';
+        $session['message'] = trans('flash-session.newsletter-register');
+
+        $this->post($route, $input);
+        $this->session($session);
+        $this->seeInDatabase('news_letters', $input);
+        $this->seeStatusCode(302);
     }
 
     /**
-     * POST:  /newsletter/register
-     * ROUTE: newsletter.register
+     * POST:  /backend/mailing/insert
+     * ROUTE: mailing.register
      *
      * - With validation errors.
      *
@@ -85,14 +112,16 @@ class MailingTest extends TestCase
      */
     public function testMailingInsertWithError()
     {
-        $this->post(route('newsletter.register'), []);
+        $this->authentication();
+        $this->post(route('mailing.register'), []);
         $this->seeStatusCode(302);
         $this->assertHasOldInput();
+        $this->assertSessionHasErrors();
     }
 
     /**
-     * POST:  /newsletter/register
-     * ROUTE: newsletter.register
+     * POST:  /backend/mailing/insert
+     * ROUTE: mailing.register
      *
      * - Without validation errors.
      *
@@ -102,13 +131,12 @@ class MailingTest extends TestCase
      */
     public function testMailingInsertWithoutError()
     {
-        factory(Spatie\Permission\Models\Permission::class)->create();
-
         $input['email'] = 'jhon@doe.tld';
+        $input['name']  = 'Jhon Doe';
 
         $this->authentication();
-        $this->post(route('newsletter.register'), $input);
-        $this->seeInDatabase('news_letters', $input);
+        $this->post(route('mailing.register'), $input);
+        $this->seeInDatabase('mailings', $input);
         $this->seeStatusCode(302);
     }
 
