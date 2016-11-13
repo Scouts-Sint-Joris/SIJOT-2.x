@@ -15,7 +15,7 @@ class Mailing extends Model
      *
      * @var array 
      */
-    protected $fillable = [];
+    protected $fillable = ['email', 'name'];
 
     /**
      * Connect the mailing address to a group.

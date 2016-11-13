@@ -53,6 +53,12 @@ Route::post('/backend/news/insert', 'NewsController@store')->name('news.backend.
 
 // Mailing routes
 Route::get('/backend/mailing', 'MailingController@index')->name('backend.mailing.index');
+Route::post('/backend/mailing/insert', 'MailingController@registerMailing')->name('mailing.register');
+Route::get('/backend/mailing/destroy/{id}', 'MailingController@mailingDestroy')->name('backend.mailing.destroy');
+
+// Newsletter routes.
+Route::post('/newsletter/insert', 'MailingController@registerNewsLetter')->name('newsletter.insert');
+Route::get('/newsletter/destroy/{string}', 'MailingController@destroyNewsletter')->name('backend.newsletter.destroy');
 
 // User management routes.
 Route::get('backend/users/reset/{id}', 'UserManagementController@resetPassword')->name('users.reset');
