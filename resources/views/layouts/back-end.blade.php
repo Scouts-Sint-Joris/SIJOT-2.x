@@ -68,7 +68,7 @@
                                         <li>
                                             <!-- inner menu: contains the actual data -->
                                             <ul class="menu">
-                                                @foreach(array_slice(auth()->user()->unreadNotifications, 0, 6) as $notification)
+                                                @foreach(auth()->user()->unreadNotifications as $notification)
                                                     <li>
                                                         <a href="{{ route('settings.profile') }}">
                                                             <i class="{{ $notification->class }}"></i>
