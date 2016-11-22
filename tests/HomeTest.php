@@ -1,5 +1,6 @@
 <?php
 
+use Chrisbjr\ApiGuard\Models\ApiKey;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -42,5 +43,27 @@ class HomeTest extends TestCase
         $this->authentication(); 
         $this->get(route('home.backend')); 
         $this->seeStatusCode(200);
+    }
+
+    /**
+     * GET|HEAD: /api
+     *
+     * @group all
+     * @group api
+     */
+    public function testApiHome()
+    {
+        $apiKey = factory(ApiKey::class)->create();
+        $headers['X-Authorization'] = $apiKey->key;
+
+        $this->get('/api', $headers);
+        $this->seeStatusCode(200);
+        $this->seeJsonEquals([
+            'data' => [
+                'group' => config('app.name'),
+                'admin' => 'Tim Joosten',
+                'version' => '1.0.0',
+            ]
+        ]);
     }
 }
