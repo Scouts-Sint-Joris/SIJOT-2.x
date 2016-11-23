@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Transformers\LeaseTransformer;
 use App\Rental;
 use Chrisbjr\ApiGuard\Http\Controllers\ApiGuardController;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use League\Fractal\Manager;
@@ -74,10 +75,18 @@ class RentalController extends ApiGuardController
 
     /**
      * @param  int $id the rental id.
+     * @return mixed
      */
     public function show($id)
     {
-        //
+        try {
+            $lease = Rental::findOrFail($id);
+            $content = $this->response->withItem($lease, new LeaseTransformer());
+
+            return response($content, Status::HTTP_OK)->header('Content-Type', 'application/json');
+        } catch (ModelNotFoundException $exception) {
+            return $this->response->errorNotFound();
+        }
     }
 
     /**

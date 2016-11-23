@@ -17,3 +17,4 @@ Route::get('/', 'Api\HomeController@index');
 
 // Rental API section
 Route::get('/rental', 'Api\RentalController@index');
+Route::get('/rental/{id}', 'Api\RentalController@show');
