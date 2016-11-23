@@ -53,37 +53,4 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
         $this->actingAs($this->user);
         $this->seeIsAuthenticatedAs($this->user);
     }
-
-    /**
-     * The setup for the rental stuff.
-     */
-    protected function rentalSetup()
-    {
-        factory(App\Rental::class)->create([
-            'status_id' => function () {
-                return factory(App\RentalStatus::class)->create([
-                    'name'  => 'Optie', 
-                    'class' => 'label label-warning',
-                ])->id;
-            }
-        ]);
-
-        factory(App\Rental::class)->create([
-            'status_id' => function () {
-                return factory(App\RentalStatus::class)->create([
-                    'name'  => 'Bevestigd',
-                    'class' => 'label label-success',
-                ])->id;
-            }
-        ]);
-
-        factory(App\Rental::class)->create([
-            'status_id' => function () {
-                return factory(App\RentalStatus::class)->create([
-                    'name'  => 'Nieuwe aanvraag', 
-                    'class' => 'label label-danger',
-                ])->id;
-            }
-        ]);
-    }
 }

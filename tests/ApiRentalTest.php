@@ -15,12 +15,50 @@ class ApiRentalTest extends TestCase
     use DatabaseMigrations, DatabaseTransactions;
 
     /**
+     * ROUTE: api/rental
+     *
      * @group api
      * @group all
      */
     public function testRentalIndex()
     {
         $apiKey = factory(ApiKey::class)->create();
+        $headers['X-Authorization'] = $apiKey->key;
+
+        // Test unauthencated.
+        $noAuth = $this->get('api/rental');
+        $noAuth->seeStatusCode(401);
+        $noAuth->seeJson([
+            "error" => [
+                "code" => "GEN-UNAUTHORIZED",
+                "http_code" => 401,
+                "message" => "Unauthorized"
+            ]
+        ]);
+
+        // See No data with authencation.
+        $noData = $this->get('api/rental', $headers);
+        $noData->seeStatusCode(200);
+        $noData->seeJson(['message' => 'Er zijn geen verhuringen']);
+
+        // With data
+        $rental = factory(App\Rental::class)->create();
+
+        $withData = $this->get('api/rental', $headers);
+        $withData->seeStatusCode(200);
+        $withData->seeJson([
+            "data" => [[
+                "id" => $rental->id
+            ]],
+            "meta" => [
+                "cursor" => [
+                    "current" => false,
+                    "prev" => 6,
+                    "next" => 1,
+                    "count" => 1
+                ]
+            ]
+        ]);
     }
 
     /**
