@@ -12,7 +12,9 @@ use League\Fractal\TransformerAbstract;
 class LeaseTransformer extends TransformerAbstract
 {
     /**
-     * @param Rental $book
+     * Output interface for the rental api section.
+     *
+     * @param Rental $rental
      * @return array
      */
     public function transform(Rental $rental)
