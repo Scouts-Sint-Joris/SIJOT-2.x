@@ -20,7 +20,17 @@ class LeaseTransformer extends TransformerAbstract
     public function transform(Rental $rental)
     {
         return [
-            'id' => $rental->id
+            'id' => $rental->id,
+            'status' => $rental->status_id,
+            'group' => $rental->group,
+            'date' => [
+                'start_date' => $rental->start_date,
+                'end_date' => $rental->end_date,
+            ],
+            'contact' => [
+                'phone' => $rental->phone_number,
+                'email' => $rental->email,
+            ]
         ];
     }
 }
