@@ -116,4 +116,3 @@ class RentalController extends ApiGuardController
         return $response;
     }
 }
-
