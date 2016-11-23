@@ -128,17 +128,40 @@ class ApiRentalTest extends TestCase
      * @group api
      * @group all
      */
-    public function testRentalDeleteValidId()
+    public function testRentalDelete()
     {
-        $apiKey = factory(ApiKey::class)->create();
-    }
+        $idArray = ['id' => 2];
+        $apiKey  = factory(ApiKey::class)->create();
+        $lease   = factory(App\Rental::class)->create($idArray);
 
-    /**
-     * @group api
-     * @group all
-     */
-    public function testRentalDeleteInvalidId()
-    {
-        $apiKey = factory(ApiKey::class)->create();
+        $headers['X-Authorization'] = $apiKey->key;
+
+        // Unauthencated
+        $noAuth = $this->delete('api/rental/0');
+        $noAuth->seeStatusCode(401);
+        $noAuth->seeJson([
+            "error" => [
+                "code" => "GEN-UNAUTHORIZED",
+                "http_code" => 401,
+                "message" => "Unauthorized"
+            ]
+        ]);
+
+        // No record found.
+        $noRec = $this->delete('/api/rental/1000000000', $headers);
+        $noRec->seeStatusCode(404);
+        $noRec->seeJson([
+            "error" => [
+                "code" => "GEN-NOT-FOUND",
+                "http_code" => 404,
+                "message" => "Resource Not Found",
+            ]
+        ]);
+
+        // Record found.
+        $rec = $this->delete('/api/rental/' . $lease->id, $headers);
+        $rec->dontSeeInDatabase('rentals', $idArray);
+        $rec->seeStatusCode(200);
+        $rec->seeJson();
     }
 }

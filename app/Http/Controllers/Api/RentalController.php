@@ -99,10 +99,20 @@ class RentalController extends ApiGuardController
     }
 
     /**
-     * @param int $id the rental id.
+     * @param  int $id the rental id.
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|mixed|Status
      */
     public function destroy($id)
     {
-        //
+        if (! Rental::destroy($id)) {
+            return $this->response->errorNotFound();
+        }
+
+        $content  = ['message' => 'De verhuring is verwijderd'];
+        $response = response($content, Status::HTTP_OK);
+
+        $response->header('Content-Type', 'application/json');
+
+        return $response;
     }
 }
