@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,4 +16,5 @@ Route::get('/', 'Api\HomeController@index');
 // Rental API section
 Route::get('/rental', 'Api\RentalController@index');
 Route::get('/rental/{id}', 'Api\RentalController@show');
+Route::post('/rental', 'Api\RentalController@store');
 Route::delete('/rental/{id}', 'Api\RentalController@destroy');

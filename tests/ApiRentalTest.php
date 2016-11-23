@@ -89,21 +89,58 @@ class ApiRentalTest extends TestCase
     }
 
     /**
+     * POST: /api/rental
+     *
      * @group api
      * @group all
      */
-    public function testRentalInsertErrors()
+    public function testRentalInsert()
     {
         $apiKey = factory(ApiKey::class)->create();
-    }
+        $headers['X-Authorization'] = $apiKey->key;
 
-    /**
-     * @group api
-     * @group all
-     */
-    public function testRentalInsertWithoutErrors()
-    {
-        $apiKey = factory(ApiKey::class)->create();
+        // Unauthencated.
+        $noAuth = $this->post('api/rental', []);
+        $noAuth->seeStatusCode(401);
+        $noAuth->seeJson([
+            "error" => [
+                "code" => "GEN-UNAUTHORIZED",
+                "http_code" => 401,
+                "message" => "Unauthorized"
+            ]
+        ]);
+
+        // Validation errors.
+        $err = $this->post('/api/rental', [], $headers);
+        $err->seeStatusCode(200);
+        $err->seeJson([
+            'message' => 'Could not process the insert.',
+            'http_code' => 400,
+            'errors' => [
+                'start_date' => ['The start date field is required.'],
+                'end_date' => ['The end date field is required.',],
+                'group' => ['The group field is required.',],
+                'email' => ['The email field is required.',],
+            ],
+        ]);
+
+        // No validation errors.
+        $input['start_date']   = '10/10/1995';
+        $input['end_date']     = '11/10/1995';
+        $input['group']        = 'Sint-Joris, Turnhout';
+        $input['email']        = 'contact@st-joris-turnhout.be';
+        $input['phone_number'] = '0000/00.00.00';
+
+        $req = $this->post('/api/rental', $input, $headers);
+        $req->seeStatusCode(200);
+        $req->seeJson(['message' => 'De verhuring is aangemaakt.', 'http_code' => 201]);
+        $req->seeIndatabase('rentals', [
+            'email' => $input['email'],
+            'group' => $input['group'],
+            'phone_number' => $input['phone_number'],
+            'end_date' => strtotime(str_replace('/', '-', $input['end_date'])),
+            'start_date' => strtotime(str_replace('/', '-', $input['start_date']))
+        ]);
     }
 
     /**

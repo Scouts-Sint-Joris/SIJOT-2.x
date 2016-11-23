@@ -8,6 +8,7 @@ use Chrisbjr\ApiGuard\Http\Controllers\ApiGuardController;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use League\Fractal\Manager;
 use League\Fractal\Pagination\Cursor;
 use League\Fractal\Resource\Collection;
@@ -25,7 +26,6 @@ class RentalController extends ApiGuardController
     public function __construct()
     {
         parent::__construct();
-
     }
 
     /**
@@ -65,11 +65,32 @@ class RentalController extends ApiGuardController
     }
 
     /**
-     * @param Request $request
+     * @param  Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), $this->validationCriteria());
+        $headers['Content-Type'] = 'application/json';
+
+        if ($validator->fails()) {
+            // Validation fails.
+            $content = [
+                'message' => 'Could not process the insert.',
+                'http_code' => Status::HTTP_BAD_REQUEST,
+                'errors' => $validator->errors()
+            ];
+
+            return $this->response->withArray($content, $headers);
+        }
+
+        // Validation passes proceed controller.
+        Rental::create($request->all());
+
+        return $this->response->withArray([
+            'message' => 'De verhuring is aangemaakt.',
+            'http_code' => Status::HTTP_CREATED,
+        ], $headers);
     }
 
 
@@ -108,11 +129,22 @@ class RentalController extends ApiGuardController
             return $this->response->errorNotFound();
         }
 
-        $content  = ['message' => 'De verhuring is verwijderd'];
-        $response = response($content, Status::HTTP_OK);
+        return response(['message' => 'De verhuring is verwijderd'], Status::HTTP_OK)
+            ->header('Content-Type', 'application/json');
+    }
 
-        $response->header('Content-Type', 'application/json');
+    /**
+     * The validation criteria for the rental API section.
+     *
+     * @return mixed
+     */
+    protected function validationCriteria()
+    {
+        $criteria['start_date'] = 'required';
+        $criteria['end_date']   = 'required';
+        $criteria['group']      = 'required';
+        $criteria['email']      = 'required';
 
-        return $response;
+        return $criteria;
     }
 }
