@@ -158,7 +158,7 @@ class AccountController extends Controller
      * @param  ApiKey $apiKey
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function RegenerateKey(ApiKey $apiKey, $id)
+    public function regenerateKey(ApiKey $apiKey, $id)
     {
         if ($apiKey->find($id)->update(['key' => $apiKey->generateKey()])) {
             // There is a new key generated.

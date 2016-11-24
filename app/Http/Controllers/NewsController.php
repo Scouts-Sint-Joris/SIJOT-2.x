@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 class NewsController extends Controller
 {
     /**
-     * NewsController constructor. 
+     * NewsController constructor.
      */
     public function __construct()
     {
@@ -27,21 +27,21 @@ class NewsController extends Controller
     }
 
     /**
-     * [BACKEND]: Get the backend overview page. 
+     * [BACKEND]: Get the backend overview page.
      *
      * @url:platform  GET|HEAD: /backend/news
      * @see:phpunit   NewsControllerTest::testNewsOverview()
-     * 
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        // Item states: 
+        // Item states:
         // -----
-        // 1 = publish 
-        // 0 = draft. 
+        // 1 = publish
+        // 0 = draft.
 
-        $data['draft']   = News::where('state', 0)->get(); 
+        $data['draft']   = News::where('state', 0)->get();
         $data['publish'] = News::where('state', 1)->get();
         $data['tags']    = Tags::all();
 
@@ -69,12 +69,12 @@ class NewsController extends Controller
     }
 
     /**
-     * [BACKEND]: Show a specific news item. 
-     * 
+     * [BACKEND]: Show a specific news item.
+     *
      * @url:platform  GET|HEAD:
      * @see:phpunit   NewsControllerTest::testItemBackendShow()
-     * 
-     * @param  int $id the news item id in the database. 
+     *
+     * @param  int $id the news item id in the database.
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function backendShow($id)
@@ -85,14 +85,14 @@ class NewsController extends Controller
     
     /**
      * [BACKEND]: Edit view for a news message.
-     * 
+     *
      * @url:platform  GET|HEAD: /backend/news/update/{id}
      * @see:phpunit   NewsControllerTest::testEditView()
-     * 
+     *
      * @param  String $id The news id in the database.
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id) 
+    public function edit($id)
     {
         $data['item'] = News::find($id);
         return view('news.edit', $data);
@@ -100,13 +100,13 @@ class NewsController extends Controller
     
     /**
      * [METHOD]: Update a news message in the database.
-     * 
+     *
      * @url:platform  POST: /backend/news/update/{id}
      * @see:phpunit   NewsControllerTest::testUpdateMethodWithoutErrors()
      * @see:phpunit   NewsControllerTest::testUpdateMethodWithErrors()
-     * 
+     *
      * @param  Requests\NewsValidator $input
-     * @return \Illuminate\Http\RedirectResponse 
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Requests\NewsValidator $input, $id)
     {

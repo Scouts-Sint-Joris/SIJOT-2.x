@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\Model;
 class Mailing extends Model
 {
     /**
-     * Mass-assign fields. 
+     * Mass-assign fields.
      *
-     * @var array 
+     * @var array
      */
     protected $fillable = ['email', 'name'];
 

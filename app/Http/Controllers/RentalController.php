@@ -149,8 +149,8 @@ class RentalController extends Controller
      * [METHOD]: Insert method for the rental module.
      *
      * @url:platform  POST: /rental/insert
-	 * @see:phpunit	  RentalTest::testRentalInsertErrors()
-	 * @see:phpunit   RentalTest::testRentalInsertSuccess()
+     * @see:phpunit   RentalTest::testRentalInsertErrors()
+     * @see:phpunit   RentalTest::testRentalInsertSuccess()
      *
      * @param  Requests\RentalValidator $input
      * @return \Illuminate\Http\RedirectResponse
@@ -182,23 +182,23 @@ class RentalController extends Controller
      * [BACK-END]: Update view for the rental module.
      *
      * @url:platform  GET|HEAD:
-	 * @see:phpunit   RentalTest::testRentalUpdateView()
+     * @see:phpunit   RentalTest::testRentalUpdateView()
      *
      * @param  int $id the rental id in the database.
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
-		$data['rental'] = $this->lease->find($id);
-	    return view('', $data);
+        $data['rental'] = $this->lease->find($id);
+        return view('', $data);
     }
 
     /**
      * [METHOD]: Update the rental in the module.
      *
      * @url:platform  PUT|PATCH:
-	 * @see:phpunit   RentalTest::testRentalUpdateWithoutSuccess()
-	 * @see:phpunit   RentalTest::testRentalUpdateWithSuccess()
+     * @see:phpunit   RentalTest::testRentalUpdateWithoutSuccess()
+     * @see:phpunit   RentalTest::testRentalUpdateWithSuccess()
      *
      * @param  Requests\RentalValidator $input
      * @param  int $id the rental id in the database.
@@ -232,8 +232,8 @@ class RentalController extends Controller
      * [METHOD]: Delete method for the rental method.
      *
      * @url:platform:  GET|HEAD: /rental/destroy/{id}
-	 * @see:phpunit    RentalTest::testRentalDelete()
-	 *
+     * @see:phpunit    RentalTest::testRentalDelete()
+     *
      * @param  int $id the rental id in the database
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -260,11 +260,10 @@ class RentalController extends Controller
         Excel::create('Verhuringen-'. date('d/m/Y'), function ($excel) {
 
             // Sheet: for all the rentals.
-            $excel->sheet('Alle', function($sheet) {
+            $excel->sheet('Alle', function ($sheet) {
                 $all = Rental::with('status')->get();
                 $sheet->loadView('rental.export.all', compact('all'));
             });
-
         })->download('xls');
     }
 }

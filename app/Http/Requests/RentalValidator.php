@@ -24,9 +24,9 @@ class RentalValidator extends FormRequest
     public function rules()
     {
         return [
-            'start_date' => 'required', 
-            'end_date'   => 'required', 
-            'group'      => 'required',  
+            'start_date' => 'required',
+            'end_date'   => 'required',
+            'group'      => 'required',
             'email'      => 'required'
         ];
     }
