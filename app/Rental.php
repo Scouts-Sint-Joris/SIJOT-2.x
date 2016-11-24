@@ -1,12 +1,11 @@
 <?php
 
-namespace App;
+namespace app;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Rental
- * @package App
+ * Class Rental.
  */
 class Rental extends Model
 {
@@ -32,9 +31,10 @@ class Rental extends Model
     protected $hidden = ['updated_at', 'created_at'];
 
     /**
-     * Format the timestamp format
+     * Format the timestamp format.
      *
-     * @param  string $date The start time from the form
+     * @param string $date The start time from the form
+     *
      * @return string
      */
     public function setStartDateAttribute($date)
@@ -46,9 +46,10 @@ class Rental extends Model
     }
 
     /**
-     * Format the timestamp format
+     * Format the timestamp format.
      *
-     * @param  string $date The start time from the form
+     * @param string $date The start time from the form
+     *
      * @return string
      */
     public function setEndDateAttribute($date)
@@ -60,13 +61,12 @@ class Rental extends Model
     }
 
     /**
-     * Rental status relation. 
-     * 
+     * Rental status relation.
+     *
      * @return mixed
      */
-    public function status() 
+    public function status()
     {
         return $this->belongsTo('App\RentalStatus', 'status_id', 'id');
     }
-
 }
