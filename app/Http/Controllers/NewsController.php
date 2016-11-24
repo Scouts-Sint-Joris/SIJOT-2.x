@@ -62,8 +62,7 @@ class NewsController extends Controller
     {
         $create = News::create($input->except('_token')); 
 
-        if ($create) // Can create  the news item.
-        {
+        if ($create) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.news-create')); 
         }
@@ -134,8 +133,7 @@ class NewsController extends Controller
      */
     public function draft($id)
     {
-        if (News::findOrFail($id)->update(['state' => 0])) 
-        {
+        if (News::findOrFail($id)->update(['state' => 0])) {
             session()->flash('class', 'alert alert-success'); 
             session()->flash('message', trans('flash-session.new-draft')); 
         } 
@@ -154,8 +152,7 @@ class NewsController extends Controller
      */
     public function publish($id)
     {
-        if (News::find($id)->update(['state' => 1]))
-        {
+        if (News::find($id)->update(['state' => 1])) {
             session()->flash('class', 'alert alert-danger'); 
             session()->flash('message', trans('flash-session.news-publish'));
         }
@@ -178,8 +175,7 @@ class NewsController extends Controller
         $destroy->tags()->sync([]); 
         $destroy->delete();
 
-        if ($destroy) // Check: can destroy a news item. 
-        {
+        if ($destroy) {
             session()->flash('class', 'alert alert-danger');
             session()->flash('message', trans('flash-session.news-destroy'));
         }
