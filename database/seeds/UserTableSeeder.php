@@ -4,6 +4,15 @@ use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class UserTableSeeder
+ *
+ * @category Database_Table_Seeds.
+ * @package  SIJOT_Website
+ * @author   Tim Joosten <Topairy@gmail.com>
+ * @license  MIT License
+ * @link     https://github.com/Scouts-Sint-Joris/SIJOT-2.x
+ */
 class UserTableSeeder extends Seeder
 {
     /**
@@ -18,8 +27,8 @@ class UserTableSeeder extends Seeder
         $data1['theme']      = 'skin-red';
 		$data1['password']   = bcrypt('root1995');
 
-        $data2['name']       = 'Tim Joosten'; 
-        $data2['email']      = 'Topairy@gmail.com'; 
+        $data2['name']       = 'Tim Joosten';
+        $data2['email']      = 'Topairy@gmail.com';
         $data2['theme']      = 'skin-red';
         $data2['password']   = bcrypt('admin1995');
 

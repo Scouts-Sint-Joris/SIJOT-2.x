@@ -3,6 +3,15 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class UserTableSeeder
+ *
+ * @category Database_Table_Seeds.
+ * @package  SIJOT_Website
+ * @author   Tim Joosten <Topairy@gmail.com>
+ * @license  MIT License
+ * @link     https://github.com/Scouts-Sint-Joris/SIJOT-2.x
+ */
 class GroupsTableSeeder extends Seeder
 {
     /**
