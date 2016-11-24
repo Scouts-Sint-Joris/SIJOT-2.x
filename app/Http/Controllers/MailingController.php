@@ -41,38 +41,38 @@ class MailingController extends Controller
 
     /**
      * [BACKEND]: Index overview for the mailing module.
-     * 
+     *
      * @url:platform  GET|HEAD: /backend/mailing
      * @see:phpunit   MailingTest::testBackendEndIndex()
-     * 
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $data['newsletter'] = NewsLetter::paginate(25); 
-        $data['mailing']    = Mailing::paginate(25);  
+        $data['newsletter'] = NewsLetter::paginate(25);
+        $data['mailing']    = Mailing::paginate(25);
 
-        return view('mailing.index', $data);        
+        return view('mailing.index', $data);
     }
 
     /**
-     * [METHOD]: Delete a mailing record out of the database. 
+     * [METHOD]: Delete a mailing record out of the database.
      *
      * @url:platform  DELETE:  /backend/mailing/destroy/{id}
      * @see:phpunit   MailingTest::testMailingDestroy()
      *
-     * @param  int $id the id for the email record in the database.  
+     * @param  int $id the id for the email record in the database.
      * @return \Illuminate\Http\RedirectResponse
      */
     public function mailingDestroy($id)
     {
         if (Mailing::destroy($id)) // Check if the mailing record is deleted.
         {
-            session()->flash('class', 'alert alert-success'); 
+            session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.mailing-destroy'));
         }
 
-        return redirect()->back(); 
+        return redirect()->back();
     }
 
     /**
@@ -114,7 +114,7 @@ class MailingController extends Controller
     {
         $create = Mailing::create($input->except('_token'));
 
-        if ($create) // Create the email address for the mailing platform.  
+        if ($create) // Create the email address for the mailing platform.
         {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.mailing-register'));
@@ -124,33 +124,33 @@ class MailingController extends Controller
     }
     
     /**
-     * [BACKEND]: Update view for the mailing data. 
-     * 
+     * [BACKEND]: Update view for the mailing data.
+     *
      * @url:platform  GET|HEAD:
      * @see:phpunit   MailingTest::
      * @see:phpunit   MailingTest::
-     * 
+     *
      * @param  Int $id the mailing record in the database.
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function editMailing($id) 
+    public function editMailing($id)
     {
         $data['mailing'] = Mailing::find($id);
-        return view('', $data);  
+        return view('', $data);
     }
 
     /**
-     * [METHOD]: Update the mailing address in the database. 
-     * 
+     * [METHOD]: Update the mailing address in the database.
+     *
      * @url:platform  PUT|PATCH:
      * @see:phpunit   MailingTest::
      * @see:phpunit   MailingTest::
      *
      * @param  Requests\Mailingvalidator $input
-     * @param  int $id the mailing row in the database. 
+     * @param  int $id the mailing row in the database.
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateMailing(Requests\MailingValidator $input, $id) 
+    public function updateMailing(Requests\MailingValidator $input, $id)
     {
         $insert = Mailing::find($id)->update($input->except('_token'));
             
@@ -160,7 +160,7 @@ class MailingController extends Controller
             session()->flash('message', trans('flash-session.mailing-update'));
         }
         
-        return redirect()->back(); 
+        return redirect()->back();
     }
 
     /**
