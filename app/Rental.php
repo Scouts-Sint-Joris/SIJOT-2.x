@@ -33,8 +33,7 @@ class Rental extends Model
     /**
      * Format the timestamp format.
      *
-     * @param string $date The start time from the form
-     *
+     * @param  string $date The start time from the form
      * @return string
      */
     public function setStartDateAttribute($date)
@@ -48,8 +47,7 @@ class Rental extends Model
     /**
      * Format the timestamp format.
      *
-     * @param string $date The start time from the form
-     *
+     * @param  string $date The start time from the form
      * @return string
      */
     public function setEndDateAttribute($date)

@@ -42,6 +42,11 @@ class User extends Authenticatable
         return Cache::has('user-is-online-' . $this->id);
     }
 
+    /**
+     * Check if the user is logged in.
+     *
+     * @return bool
+     */
     public function isActive()
     {
         return in_array('active', $this->permissions()->get()->map(function ($p) {

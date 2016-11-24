@@ -23,9 +23,8 @@ class LanguageMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
-     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure                 $next
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -39,8 +38,7 @@ class LanguageMiddleware
     /**
      * Check if the language is supported.
      *
-     * @param string $lang
-     *
+     * @param  string $lang
      * @return bool
      */
     private function isLanguageSupported($lang)
@@ -51,7 +49,8 @@ class LanguageMiddleware
     /**
      * Set the language.
      *
-     * @param string $lang
+     * @param  string $lang
+     * @return void
      */
     private function setSupportedLanguage($lang)
     {
