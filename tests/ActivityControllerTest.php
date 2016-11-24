@@ -23,8 +23,34 @@ class ActivityControllerTest extends TestCase
      */
     public function testOverview()
     {
+        factory(App\Rental::class)->create([
+            'status_id' => function () {
+                return factory(App\RentalStatus::class)->create([
+                    'name'  => 'Optie',
+                    'class' => 'label label-warning',
+                ])->id;
+            }
+        ]);
+
+        factory(App\Rental::class)->create([
+            'status_id' => function () {
+                return factory(App\RentalStatus::class)->create([
+                    'name'  => 'Bevestigd',
+                    'class' => 'label label-success',
+                ])->id;
+            }
+        ]);
+
+        factory(App\Rental::class)->create([
+            'status_id' => function () {
+                return factory(App\RentalStatus::class)->create([
+                    'name'  => 'Nieuwe aanvraag',
+                    'class' => 'label label-danger',
+                ])->id;
+            }
+        ]);
+
         $this->authentication();
-        $this->rentalSetup();
         $this->visit(route('activity.index'));
         $this->seeStatusCode(200);
     }

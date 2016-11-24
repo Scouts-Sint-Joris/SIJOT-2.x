@@ -4,15 +4,9 @@ use Illuminate\Support\Facades\Hash;
 
 /**
  * Class TestCase
- *
- * TODO: Implement mailing stub.
  */
 abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
-    /**
-     * @todo: implement mailing stub.
-     */
-
     /**
      * The base URL to use while testing the application.
      *
@@ -47,6 +41,7 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
         $this->user = factory(App\User::class)->create();
     }
 
+
     /**
      * [STUB]: Authencation users.
      *
@@ -57,35 +52,5 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
     {
         $this->actingAs($this->user);
         $this->seeIsAuthenticatedAs($this->user);
-    }
-
-    protected function rentalSetup()
-    {
-        factory(App\Rental::class)->create([
-            'status_id' => function () {
-                return factory(App\RentalStatus::class)->create([
-                    'name'  => 'Optie', 
-                    'class' => 'label label-warning',
-                ])->id;
-            }
-        ]);
-
-        factory(App\Rental::class)->create([
-            'status_id' => function () {
-                return factory(App\RentalStatus::class)->create([
-                    'name'  => 'Bevestigd',
-                    'class' => 'label label-success',
-                ])->id;
-            }
-        ]);
-
-        factory(App\Rental::class)->create([
-            'status_id' => function () {
-                return factory(App\RentalStatus::class)->create([
-                    'name'  => 'Nieuwe aanvraag', 
-                    'class' => 'label label-danger',
-                ])->id;
-            }
-        ]);
     }
 }

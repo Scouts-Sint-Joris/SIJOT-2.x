@@ -14,8 +14,8 @@ use Carbon\Carbon;
 */
 $factory->define(App\Rental::class, function (Faker\Generator $faker) {
     return [
-        'start_date'   => $faker->word,
-        'end_date'     => $faker->word,
+        'start_date'   => strtotime(str_replace('/', '-', '10/10/1995')),
+        'end_date'     => strtotime(str_replace('/', '-', '11/10/1995')),
         'group'        => $faker->name,
         'phone_number' => $faker->phoneNumber,
         'email'        => $faker->email

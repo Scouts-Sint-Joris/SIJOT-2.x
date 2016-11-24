@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +11,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
+Route::get('/', 'Api\HomeController@index');
+
+// Rental API section
+Route::get('/rental', 'Api\RentalController@index');
+Route::get('/rental/{id}', 'Api\RentalController@show');
+Route::post('/rental', 'Api\RentalController@store');
+Route::delete('/rental/{id}', 'Api\RentalController@destroy');
+Route::match(['put', 'patch'], '/rental/{id}', 'Api\RentalController@update');
