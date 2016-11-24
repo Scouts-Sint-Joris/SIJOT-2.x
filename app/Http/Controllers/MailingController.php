@@ -108,10 +108,8 @@ class MailingController extends Controller
      */
     public function registerMailing(Requests\MailingValidator $input)
     {
-        $create = Mailing::create($input->except('_token'));
-
-        if ($create) // Create the email address for the mailing platform.
-        {
+        if (Mailing::create($input->except('_token'))) {
+            // The email address for the mailing platform is created.
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.mailing-register'));
         }
@@ -148,9 +146,7 @@ class MailingController extends Controller
      */
     public function updateMailing(Requests\MailingValidator $input, $id)
     {
-        $insert = Mailing::find($id)->update($input->except('_token'));
-            
-        if ($insert) {
+        if (Mailing::find($id)->update($input->except('_token'))) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.mailing-update'));
         }

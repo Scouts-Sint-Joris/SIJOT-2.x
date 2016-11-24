@@ -123,7 +123,7 @@ class ActivityController extends Controller
     public function update(ActivityValidator $input, $id)
     {
         $activity = Activity::find($id);
-        $inputs = array_merge(['user_id' => auth()->user()->id], $input->except($this->inputFilter));
+        $inputs   = array_merge(['user_id' => auth()->user()->id], $input->except($this->inputFilter));
         $update   = $activity->update($inputs);
 
         if ($update) {
