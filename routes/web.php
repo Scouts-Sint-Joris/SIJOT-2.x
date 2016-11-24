@@ -31,7 +31,7 @@ Route::get('/rental/insert', 'RentalController@insertViewFrontEnd')->name('renta
 Route::get('/rental/calendar', 'RentalController@calendar')->name('rental.frontend-calendar');
 Route::get('/rental/reachable', 'RentalController@domainReachable')->name('rental.frontend.reachable');
 Route::get('/backend/rental/export', 'RentalController@exportExcel')->name('rental.backend.export');
-Route::post('/rental/insert','RentalController@insert')->name('rental.store');
+Route::post('/rental/insert', 'RentalController@insert')->name('rental.store');
 
 Route::get('/backend/rental', 'RentalController@indexBackEnd')->name('rental.backend');
 Route::get('/backend/rental/option/{id}', 'RentalController@setOption')->name('rental.backend.option');
@@ -84,7 +84,7 @@ Route::post('settips/api/key', 'Auth\AccountController@createKey')->name('settin
 Route::post('settings/profile/security', 'Auth\AccountController@updateSecurity')->name('settings.profile.password.post');
 
 // Api Routes
-Route::get('/settings/key/regenerate/{id}', 'Auth\AccountController@RegenerateKey')->name('key.regenerate');
+Route::get('/settings/key/regenerate/{id}', 'Auth\AccountController@regenerateKey')->name('key.regenerate');
 Route::get('/settings/key/destroy/{id}', 'Auth\AccountController@destroyKey')->name('key.destroy');
 
 // Activity routes

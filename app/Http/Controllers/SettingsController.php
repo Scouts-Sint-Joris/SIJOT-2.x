@@ -18,7 +18,7 @@ class SettingsController extends Controller
      */
     public function __construct()
     {
-		$this->middleware('lang');
+        $this->middleware('lang');
         $this->middleware('auth');
     }
 
@@ -39,7 +39,7 @@ class SettingsController extends Controller
         session()->flash('class', 'alert alert-success');
         session()->flash('message', trans('flash-session.update-platform'));
 
-		return redirect()->back(302);
+        return redirect()->back(302);
     }
 
     /**
@@ -67,11 +67,11 @@ class SettingsController extends Controller
      */
     public function updateBackUpSettings(Requests\BackUpSettingsValidator $input)
     {
-		dd($input->all()); // For debugging propose
+        dd($input->all()); // For debugging propose
 
-		session()->flash('class', 'alert alert-success');
-		session()->flash('message', trans('flash-session.update-backup'));
+        session()->flash('class', 'alert alert-success');
+        session()->flash('message', trans('flash-session.update-backup'));
 
-		return redirect()->back(302);
+        return redirect()->back(302);
     }
 }

@@ -39,7 +39,6 @@ class AppServiceProvider extends ServiceProvider
                     $query->where('name', 'Bevestigd');
                 })->count());
             });
-
         }
     }
 
