@@ -1,7 +1,6 @@
 <?php
 
 use Chrisbjr\ApiGuard\Models\ApiKey;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -144,24 +143,150 @@ class ApiRentalTest extends TestCase
     }
 
     /**
+     * PUT:  /api/rental/{id}
+     *
      * @group api
      * @group all
      */
-    public function testRentalUpdateWithErrors()
+    public function testRentalUpdatePut()
     {
+        // Database factories
         $apiKey = factory(ApiKey::class)->create();
+        $lease  = factory(App\Rental::class)->create(['id' => 40]);
+
+        // API Headers (HTTP)
+        $headers['X-Authorization'] = $apiKey->key;
+
+        // User simulated inputs.
+        $input['start_date']   = '10/10/1995';
+        $input['end_date']     = '11/10/1995';
+        $input['group']        = 'Sint-Joris, Turnhout';
+        $input['email']        = 'contact@st-joris-turnhout.be';
+        $input['phone_number'] = '0000/00.00.00';
+
+        // Unauthenticated
+        $noAuth = $this->put('/api/rental/' . $lease->id, []);
+        $noAuth->seeStatusCode(401);
+        $noAuth->seeJson([
+            "error" => [
+                "code" => "GEN-UNAUTHORIZED",
+                "http_code" => 401,
+                "message" => "Unauthorized"
+            ]
+        ]);
+
+        // No record found.
+        $noRec = $this->put('/api/rental/41', $input, $headers);
+        $noRec->seeStatusCode(404);
+        $noRec->seeJson([
+            "error" => [
+                "code" => "GEN-NOT-FOUND",
+                "http_code" => 404,
+                "message" => "Resource Not Found",
+            ]
+        ]);
+
+        // Validation fails.
+        $err = $this->put('/api/rental/' . $lease->id, [], $headers);
+        $err->seeStatusCode(400);
+        $err->seeJson([
+            'message' => 'Could not update the lease information',
+            'http_code' => 400,
+            'errors' => [
+                'start_date' => ['The start date field is required.'],
+                'end_date' => ['The end date field is required.',],
+                'group' => ['The group field is required.',],
+                'email' => ['The email field is required.',],
+            ],
+        ]);
+
+        // Validation passes
+        $data = $this->put('/api/rental/' . $lease->id, $input, $headers);
+        $data->seeStatusCode(200);
+        $data->seeJson(['message' => 'De verhuring is gewijzigd.', 'http_code' => 200]);
+        $data->seeIndatabase('rentals', [
+            'email' => $input['email'],
+            'group' => $input['group'],
+            'phone_number' => $input['phone_number'],
+            'end_date' => strtotime(str_replace('/', '-', $input['end_date'])),
+            'start_date' => strtotime(str_replace('/', '-', $input['start_date']))
+        ]);
     }
 
     /**
+     * PATCH:  /api/rental/{id}
+     *
      * @group api
      * @group all
      */
-    public function testRentalUpdateWithoutErrors()
+    public function testRentalUpdatePatch()
     {
+        // Database factories
         $apiKey = factory(ApiKey::class)->create();
+        $lease  = factory(App\Rental::class)->create(['id' => 40]);
+
+        // API Headers (HTTP)
+        $headers['X-Authorization'] = $apiKey->key;
+
+        // User simulated inputs.
+        $input['start_date']   = '10/10/1995';
+        $input['end_date']     = '11/10/1995';
+        $input['group']        = 'Sint-Joris, Turnhout';
+        $input['email']        = 'contact@st-joris-turnhout.be';
+        $input['phone_number'] = '0000/00.00.00';
+
+        // Unauthenticated
+        $noAuth = $this->patch('/api/rental/' . $lease->id, []);
+        $noAuth->seeStatusCode(401);
+        $noAuth->seeJson([
+            "error" => [
+                "code" => "GEN-UNAUTHORIZED",
+                "http_code" => 401,
+                "message" => "Unauthorized"
+            ]
+        ]);
+
+        // No record found.
+        $noRec = $this->patch('/api/rental/41', $input, $headers);
+        $noRec->seeStatusCode(404);
+        $noRec->seeJson([
+            "error" => [
+                "code" => "GEN-NOT-FOUND",
+                "http_code" => 404,
+                "message" => "Resource Not Found",
+            ]
+        ]);
+
+        // Validation fails.
+        $err = $this->patch('/api/rental/' . $lease->id, [], $headers);
+        $err->seeStatusCode(400);
+        $err->seeJson([
+            'message' => 'Could not update the lease information',
+            'http_code' => 400,
+            'errors' => [
+                'start_date' => ['The start date field is required.'],
+                'end_date' => ['The end date field is required.',],
+                'group' => ['The group field is required.',],
+                'email' => ['The email field is required.',],
+            ],
+        ]);
+
+        // Validation passes
+        $data = $this->patch('/api/rental/' . $lease->id, $input, $headers);
+        $data->seeStatusCode(200);
+        $data->seeJson(['message' => 'De verhuring is gewijzigd.', 'http_code' => 200]);
+        $data->seeIndatabase('rentals', [
+            'email' => $input['email'],
+            'group' => $input['group'],
+            'phone_number' => $input['phone_number'],
+            'end_date' => strtotime(str_replace('/', '-', $input['end_date'])),
+            'start_date' => strtotime(str_replace('/', '-', $input['start_date']))
+        ]);
     }
 
     /**
+     * DELETE:  /api/rental/{id}
+     *
      * @group api
      * @group all
      */

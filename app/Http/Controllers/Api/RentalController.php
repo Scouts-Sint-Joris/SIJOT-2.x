@@ -31,7 +31,7 @@ class RentalController extends ApiGuardController
     /**
      * Get all the rentals through the api interface.
      *
-     * @url:platform /api
+     * @url:platform  GET|HEAD: /api
      * @see:phpunit
      *
      * @param Request $request
@@ -65,6 +65,11 @@ class RentalController extends ApiGuardController
     }
 
     /**
+     * Store a new rental through the api interface.
+     *
+     * @url:platform  POST: /api/rental
+     * @see:phpunit
+     *
      * @param  Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory
      */
@@ -93,8 +98,55 @@ class RentalController extends ApiGuardController
         ], $headers);
     }
 
+    /**
+     * Update a rental throught the api.
+     *
+     * @url:platform  PUT|PATCH:
+     * @see:phpunit
+     *
+     * @param  Request $request
+     * @param  int $id the rental id.
+     * @return \Illuminate\Contracts\Routing\ResponseFactory
+     */
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), $this->validationCriteria());
+        $headers['Content-Type'] = "application/json";
+
+        if ($validator->fails()) {
+            // Validation fails.
+            $content = [
+                'message' => 'Could not update the lease information',
+                'http_code' => Status::HTTP_BAD_REQUEST,
+                'errors' => $validator->errors()
+            ];
+
+            return response($content, Status::HTTP_BAD_REQUEST)
+                ->header('Content-Type', 'application/json');
+        }
+
+        try {
+            Rental::findOrFail($id)->update($request->all());
+
+            $content = [
+                'message' => 'De verhuring is gewijzigd.',
+                'http_code' => Status::HTTP_OK
+            ];
+
+            return response($content, Status::HTTP_OK)
+                ->header('Content-Type', 'application/json');
+        } catch (ModelNotFoundException $exception) {
+            return $this->response->errorNotFound();
+        }
+    }
+
 
     /**
+     * Show a specific lease through the rental API interface.
+     *
+     * @url:platform  GET|HEAD: /api/rental/1
+     * @see:phpunit
+     *
      * @param  int $id the rental id.
      * @return mixed
      */
@@ -111,15 +163,11 @@ class RentalController extends ApiGuardController
     }
 
     /**
-     * @param Request $request
-     * @param int $id the rental id.
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
+     * Delete a lpease out off the system.
+     *
+     * @url:platform  DELETE: /azpi/rental/{id}
+     * @see:phpunit
+     *
      * @param  int $id the rental id.
      * @return \Illuminate\Contracts\Routing\ResponseFactory|mixed|Status
      */
