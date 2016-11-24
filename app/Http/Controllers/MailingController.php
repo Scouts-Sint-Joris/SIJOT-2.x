@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Mail\newNewsletter;
 use App\Mailing;
 use App\NewsLetter;
-use App\Repositories\SessionRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Mail;
@@ -28,22 +27,11 @@ class MailingController extends Controller
     protected $authMiddleware;
 
     /**
-     * The session reporsitory
-     *
-     * @var $session
-     */
-    private $session;
-
-    /**
      * MailingController constructor.
-     *
-     * @param SessionRepository $session
      */
-    public function __construct(SessionRepository $session)
+    public function __construct()
     {
         $this->authMiddleware = ['registerNewsLetter', 'destroyNewsletter'];
-
-        $this->session = $session;
 
         $this->middleware('auth')->except($this->authMiddleware);
         $this->middleware('lang');
@@ -77,7 +65,8 @@ class MailingController extends Controller
     public function mailingDestroy($id)
     {
         if (Mailing::destroy($id)) {
-            $this->session->setFlash('alert alert-success', trans('flash-session.mailing-destroy'));
+            session()->flash('class', 'alert alert-success');
+            session()->flash('message', trans('flash-session.mailing-destroy'));
         }
 
         return redirect()->back();
