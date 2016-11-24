@@ -70,8 +70,8 @@ class UserManagementController extends Controller
         $user = User::findOrFail($id);
         $user->password =  bcrypt(str_random(16));
 
-        if ($user->save()) // If the user has been updated;
-        {
+        if ($user->save()) {
+            // The user is updated.
             session()->flash('class', 'alert alert-danger');
             session()->flash('message', trans('flash-session.user-reset'));
         }

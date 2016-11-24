@@ -60,11 +60,9 @@ class NewsController extends Controller
      */
     public function store(Requests\NewsValidator $input)
     {
-        $create = News::create($input->except('_token')); 
-
-        if ($create) {
+        if (News::create($input->except('_token'))) {
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', trans('flash-session.news-create')); 
+            session()->flash('message', trans('flash-session.news-create'));
         }
 
         return redirect()->back();
@@ -112,10 +110,8 @@ class NewsController extends Controller
      */
     public function update(Requests\NewsValidator $input, $id)
     {
-        $update = News::findOrFail($id)->update($input->except('_token')); 
-        
-        if ($update) {
-            session()->flash('class', 'alert alert-success'); 
+        if (News::findOrFail($id)->update($input->except('_token'))) {
+            session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.news-update'));
         }
         
@@ -124,36 +120,36 @@ class NewsController extends Controller
 
     /**
      * [METHOD]: Set a news message to draft.
-     * 
+     *
      * @url:platform  GET|HEAD: /backend/news/draft/{id}
      * @see:phpunit   NewsControllerTest::testSetToDraft()
-     * 
-     * @param  string $id the news item id in the database. 
+     *
+     * @param  string $id the news item id in the database.
      * @return \Illuminate\Http\RedirectResponse
      */
     public function draft($id)
     {
         if (News::findOrFail($id)->update(['state' => 0])) {
-            session()->flash('class', 'alert alert-success'); 
-            session()->flash('message', trans('flash-session.new-draft')); 
-        } 
+            session()->flash('class', 'alert alert-success');
+            session()->flash('message', trans('flash-session.new-draft'));
+        }
 
         return redirect()->back();
     }
   
     /**
      * [METHOD]: Publish a news message form the draft status.
-     * 
+     *
      * @see:platform  GET|HEAD: /backend/news/publish/{id}
      * @see:phpunit   NewsControllerTest::testSetToPublish()
-     * 
-     * @param  integer  $id the news item id in the database. 
+     *
+     * @param  integer  $id the news item id in the database.
      * @return \Illuminate\Http\RedirectResponse
      */
     public function publish($id)
     {
         if (News::find($id)->update(['state' => 1])) {
-            session()->flash('class', 'alert alert-danger'); 
+            session()->flash('class', 'alert alert-danger');
             session()->flash('message', trans('flash-session.news-publish'));
         }
 
@@ -172,7 +168,7 @@ class NewsController extends Controller
     public function destroy($id)
     {
         $destroy = News::findOrFail($id);
-        $destroy->tags()->sync([]); 
+        $destroy->tags()->sync([]);
         $destroy->delete();
 
         if ($destroy) {
