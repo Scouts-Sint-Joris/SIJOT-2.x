@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\newNewsletter;
 use App\Mailing;
 use App\NewsLetter;
+use App\Repositories\SessionRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Mail;
@@ -27,14 +28,23 @@ class MailingController extends Controller
     protected $authMiddleware;
 
     /**
-     * MailingController constructor.
+     * The session reporsitory
+     *
+     * @var $session
      */
-    public function __construct()
+    private $session;
+
+    /**
+     * MailingController constructor.
+     *
+     * @param SessionRepository $session
+     */
+    public function __construct(SessionRepository $session)
     {
         $this->authMiddleware = ['registerNewsLetter', 'destroyNewsletter'];
 
-        // Middleware
-        // $this->middleware('auth');
+        $this->session = $session;
+
         $this->middleware('auth')->except($this->authMiddleware);
         $this->middleware('lang');
     }
@@ -66,10 +76,8 @@ class MailingController extends Controller
      */
     public function mailingDestroy($id)
     {
-        if (Mailing::destroy($id)) // Check if the mailing record is deleted.
-        {
-            session()->flash('class', 'alert alert-success'); 
-            session()->flash('message', trans('flash-session.mailing-destroy'));
+        if (Mailing::destroy($id)) {
+            $this->session->setFlash('alert alert-success', trans('flash-session.mailing-destroy'));
         }
 
         return redirect()->back(); 
@@ -89,8 +97,7 @@ class MailingController extends Controller
     {
         $insert = NewsLetter::create($input->except('_token'));
 
-        if ($insert) // Check if the newsletter email is inserted.
-        {
+        if ($insert) {
             Mail::to($insert)->send(new newNewsletter($insert));
 
             session()->flash('class', 'alert alert-success');
@@ -154,8 +161,7 @@ class MailingController extends Controller
     {
         $insert = Mailing::find($id)->update($input->except('_token'));
             
-        if ($insert) // Mailing details insert check.
-        {
+        if ($insert) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.mailing-update'));
         }
@@ -176,8 +182,7 @@ class MailingController extends Controller
     {
         $data = NewsLetter::where('code', $string);
 
-        if ($data->count() === 1) // Delete control function.
-        {
+        if ($data->count() === 1) {
             $result = $data->first();
             NewsLetter::destroy($result->id);
 

@@ -7,11 +7,14 @@ use App\Mail\RentalNotificationRequest;
 use App\Http\Requests;
 use App\Notifications\RentalInsertNotification;
 use App\Rental;
+use App\Repositories\Criteria\Eloquent\Relation;
+use App\Repositories\SessionRepository;
 use App\User;
 use App\RentalStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\RentalConfirmed; 
+use App\Notifications\RentalConfirmed;
+use App\Repositories\LeaseRepository;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -33,15 +36,32 @@ class RentalController extends Controller
     protected $authMiddleware;
 
     /**
-     * RentalController constructor.
+     * The lease repository;
+     *
+     * @var $lease
      */
-    public function __construct()
-    {
-        $this->authMiddleware = [
-            'indexBackEnd', 'setOption', 'setConfirmed', 'destroy'
-        ];
+    private $lease;
 
-        // Middleware
+    /**
+     * The session repository
+     *
+     * @var $session
+     */
+    private $session;
+
+    /**
+     * RentalController constructor.
+     *
+     * @param LeaseRepository $lease
+     * @param SessionRepository $session
+     */
+    public function __construct(LeaseRepository $lease, SessionRepository $session)
+    {
+        $this->authMiddleware = ['indexBackEnd', 'setOption', 'setConfirmed', 'destroy'];
+
+        $this->lease   = $lease;
+        $this->session = $session;
+
         $this->middleware('lang');
         $this->middleware('auth')->only($this->authMiddleware);
     }
@@ -103,10 +123,8 @@ class RentalController extends Controller
     {
         $status = RentalStatus::where('name', trans('rental.lease-option'))->first();
 
-        if (Rental::find($id)->update(['status_id' => $status->id])) // Rental update check.
-        {
-            session()->flash('class', 'alert alert-success');
-            session()->flash('message', trans('flash-session.rental-option'));
+        if ($this->lease->update(['status_id' => $status->id], $id)) {
+            $this->session->setFlash('alert alert-success', trans('flash-session.rental-option'));
         }
 
         return redirect()->back();
@@ -125,10 +143,8 @@ class RentalController extends Controller
     {
         $status = RentalStatus::where('name', trans('rental.lease-confirm'))->first();
 
-        if (Rental::find($id)->update(['status_id' => $status->id])) // Rental update check.
-        {
-            session()->flash('class', 'alert alert-success');
-            session()->flash('message', trans('flash-session.rental-confirm'));
+        if ($this->lease->update(['status_id' => $status->id], $id)) {
+            $this->session->setFlash('alert alert-success', trans('flash-session.rental-confirm'));
 
             // Notification
             Notification::send(User::all(), new RentalConfirmed());
@@ -165,23 +181,18 @@ class RentalController extends Controller
         $insert = Rental::create($input->except('_token'));
         $status = RentalStatus::where('name', trans('rental.lease-new'))->first();
 
-        Rental::find($insert->id)->update(['status_id' => $status->id]);
+        $this->lease->update(['status_id' => $status->id], $insert->id);
 
-        if ($insert) // The Rental data has been inserted.
-        {
-            session()->flash('class', 'alert alert-success');
-            session()->flash('message', trans('flash-session.rental-insert'));
+        if ($insert) {
+            $this->session->setFlash('alert alert-success', trans('flash-session.rental-insert'));
 
-            if (! auth()->check()) // No logged in user found.
-            {
-                $rental = Rental::find($insert->id);
+            if (! auth()->check()) {
+                $rental = $this->lease->find($insert->id);
                 $logins = User::with('permissions')->whereIn('name', ['rental'])->get();
 
                 Mail::to($logins)->queue(new RentalNotification($rental));
                 Mail::to($insert)->queue(new RentalNotificationRequest($rental));
-            } 
-            elseif (auth()->check()) // User is authencated. Send notification.
-            {
+            } elseif (auth()->check()) {
                 Notification::send(User::all(), new RentalInsertNotification());
             }
         }
@@ -200,7 +211,7 @@ class RentalController extends Controller
      */
     public function edit($id)
     {
-		$data['rental'] = Rental::find($id);
+		$data['rental'] = $this->lease->find($id);
 	    return view('', $data);
     }
 
@@ -217,7 +228,7 @@ class RentalController extends Controller
      */
     public function update(Requests\RentalValidator $input, $id)
     {
-        $rental = Rental::find($id);
+        $rental = $this->lease->find($id);
         $rental->input($input->except('_token'));
 
         session()->flash('class', 'alert alert-success');
@@ -248,14 +259,10 @@ class RentalController extends Controller
      * @param  int $id the rental id in the database
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroyLease($id)
     {
-        $delete = Rental::destroy($id);
-
-        if ($delete) // Check if a rental has been deleted. 
-        {
-            session()->flash('class', 'alert alert-success');
-            session()->flash('message', trans('flash-session.rental-delete'));
+        if ($this->lease->delete($id)) {
+            $this->session->setFlash('alert alert-success', trans('flash-session.rental-delete'));
         }
 
         return redirect()->back();
