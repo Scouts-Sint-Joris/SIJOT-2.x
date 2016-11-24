@@ -34,7 +34,7 @@
                             </li>
                         </ul>
 
-                        <a href="#" class="btn btn-primary btn-block"><b>Contact</b></a>
+                        <a href="mailto:{{ $user->email }}" class="btn btn-primary btn-block"><b>Contact</b></a>
                     </div>
                     <!-- /.box-body -->
                 </div>
