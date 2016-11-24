@@ -12,8 +12,8 @@ class RentalNotificationRequest extends Mailable
     use Queueable, SerializesModels;
     
     /**
-     * The rental data form the controller. 
-     * 
+     * The rental data form the controller.
+     *
      * @var mixed
      */
     public $rental;

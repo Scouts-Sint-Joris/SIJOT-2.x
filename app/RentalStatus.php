@@ -12,17 +12,17 @@ class RentalStatus extends Model
 {
     /**
      * Mass-assign fields.
-     * 
-     * @var array 
+     *
+     * @var array
      */
-    protected $fillable = ['name', 'class']; 
+    protected $fillable = ['name', 'class'];
 
     /**
-     * Rental -> Status relation. 
-     * 
-     * @return mixed 
+     * Rental -> Status relation.
+     *
+     * @return mixed
      */
-    public function rentals() 
+    public function rentals()
     {
         return $this->belongsTo('id', 'status_id');
     }

@@ -13,7 +13,7 @@ class Themes extends Model
     /**
      * Mass-assign fields
      *
-     * @var array 
+     * @var array
      */
     protected $fillable = ['name', 'class'];
 }
