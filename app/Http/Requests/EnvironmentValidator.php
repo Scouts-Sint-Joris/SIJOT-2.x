@@ -4,6 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class EnvironmentValidator
+ * @package App\Http\Requests
+ */
 class EnvironmentValidator extends FormRequest
 {
     /**

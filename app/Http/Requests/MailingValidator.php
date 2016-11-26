@@ -4,6 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class MailingValidator
+ * @package App\Http\Requests
+ */
 class MailingValidator extends FormRequest
 {
     /**

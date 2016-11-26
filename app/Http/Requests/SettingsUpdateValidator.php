@@ -4,6 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class SettingsUpdateValidator
+ * @package App\Http\Requests
+ */
 class SettingsUpdateValidator extends FormRequest
 {
     /**
