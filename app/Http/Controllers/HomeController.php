@@ -45,7 +45,7 @@ class HomeController extends Controller
     }
 
     /**
-     * [BACK-END]: Get the backend home view fgor the website.
+     * [BACK-END]: Get the backend home view for the website.
      *
      * @url:platform  GET|HEAD: /home
      * @see:phpunit   HomeTest::testHomeBackend()
