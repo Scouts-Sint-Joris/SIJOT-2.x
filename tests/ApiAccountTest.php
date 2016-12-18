@@ -1,5 +1,6 @@
 <?php
 
+use Chrisbjr\ApiGuard\Models\ApiKey;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -23,7 +24,7 @@ class ApiAccountTest extends TestCase
 
     }
 
-    public function testAccountUpdateUnfoWithoutErrors()
+    public function testAccountUpdateInfoWithoutErrors()
     {
 
     }

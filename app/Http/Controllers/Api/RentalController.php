@@ -184,7 +184,7 @@ class RentalController extends ApiGuardController
     /**
      * The validation criteria for the rental API section.
      *
-     * @return mixed
+     * @return array $criteria
      */
     protected function validationCriteria()
     {
