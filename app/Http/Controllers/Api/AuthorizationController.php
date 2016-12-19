@@ -26,7 +26,7 @@ class AuthorizationController extends ApiGuardController
     /**
      * Get all the api keys into the system.
      *
-     * @url:platform
+     * @url:platform    GET|HEAD: /api/authorizations
      * @see:phpunit
      * @see:phpunit
      * @see:phpunit

@@ -22,13 +22,24 @@ class ApiKeyManagementTest extends TestCase
         $headers['X-Authorization'] = $apiKey->key;
     }
 
+    /**
+     * @group all
+     * @group api
+     */
     public function testIndexOverviewWithPagination()
     {
-
+        $apiKey = factory(ApiKey::class)->create();
+        $headers['X-Authorization'] = $apiKey->key;
     }
 
+    /**
+     * @group all
+     * @group api
+     */
     public function testIndexOverviewWithoutData()
     {
+        $apiKey = factory(ApiKey::class)->create();
+        $headers['X-Authorization'] = $apiKey->key;
 
     }
 }
