@@ -5,6 +5,9 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+/**
+ * Class ApiKeyManagementTest
+ */
 class ApiKeyManagementTest extends TestCase
 {
     use DatabaseMigrations, DatabaseTransactions;
@@ -13,167 +16,19 @@ class ApiKeyManagementTest extends TestCase
      * @group all
      * @group api
      */
-    public function testCreateKeyWithErrors()
+    public function testIndexOverviewWithoutPagination()
     {
         $apiKey = factory(ApiKey::class)->create();
         $headers['X-Authorization'] = $apiKey->key;
-
-        // Test unauthencated.
-        $noAuth = $this->get('api/rental');
-        $noAuth->seeStatusCode(401);
-        $noAuth->seeJson([
-            "error" => [
-                "code" => "GEN-UNAUTHORIZED",
-                "http_code" => 401,
-                "message" => "Unauthorized"
-            ]
-        ]);
     }
 
-    /**
-     * @group all
-     * @group api
-     */
-    public function testCreateKeyWithoutErrors()
+    public function testIndexOverviewWithPagination()
     {
-        $apiKey = factory(ApiKey::class)->create();
-        $headers['X-Authorization'] = $apiKey->key;
 
-        // Test unauthencated.
-        $noAuth = $this->get('api/rental');
-        $noAuth->seeStatusCode(401);
-        $noAuth->seeJson([
-            "error" => [
-                "code" => "GEN-UNAUTHORIZED",
-                "http_code" => 401,
-                "message" => "Unauthorized"
-            ]
-        ]);
     }
 
-    /**
-     * @group all
-     * @group api
-     */
-    public function testRegenerateKey()
+    public function testIndexOverviewWithoutData()
     {
-        $apiKey = factory(ApiKey::class)->create();
-        $headers['X-Authorization'] = $apiKey->key;
 
-        // Test unauthencated.
-        $noAuth = $this->get('api/rental');
-        $noAuth->seeStatusCode(401);
-        $noAuth->seeJson([
-            "error" => [
-                "code" => "GEN-UNAUTHORIZED",
-                "http_code" => 401,
-                "message" => "Unauthorized"
-            ]
-        ]);
-    }
-
-    /**
-     * @group all
-     * @group api
-     */
-    public function testRegenerateKeyWithoutValidId()
-    {
-        $apiKey = factory(ApiKey::class)->create();
-        $headers['X-Authorization'] = $apiKey->key;
-
-        // Test unauthencated.
-        $noAuth = $this->get('api/rental');
-        $noAuth->seeStatusCode(401);
-        $noAuth->seeJson([
-            "error" => [
-                "code" => "GEN-UNAUTHORIZED",
-                "http_code" => 401,
-                "message" => "Unauthorized"
-            ]
-        ]);
-    }
-
-    /**
-     * @group all
-     * @group api
-     */
-    public function testUpdateKeyWithErrors()
-    {
-        $apiKey = factory(ApiKey::class)->create();
-        $headers['X-Authorization'] = $apiKey->key;
-
-        // Test unauthencated.
-        $noAuth = $this->get('api/rental');
-        $noAuth->seeStatusCode(401);
-        $noAuth->seeJson([
-            "error" => [
-                "code" => "GEN-UNAUTHORIZED",
-                "http_code" => 401,
-                "message" => "Unauthorized"
-            ]
-        ]);
-    }
-
-    /**
-     * @group all
-     * @group api
-     */
-    public function testUpdateKeyWithoutErrors()
-    {
-        $apiKey = factory(ApiKey::class)->create();
-        $headers['X-Authorization'] = $apiKey->key;
-
-        // Test unauthencated.
-        $noAuth = $this->get('api/rental');
-        $noAuth->seeStatusCode(401);
-        $noAuth->seeJson([
-            "error" => [
-                "code" => "GEN-UNAUTHORIZED",
-                "http_code" => 401,
-                "message" => "Unauthorized"
-            ]
-        ]);
-    }
-
-    /**
-     * @group all
-     * @group api
-     */
-    public function testDeleteKey()
-    {
-        $apiKey = factory(ApiKey::class)->create();
-        $headers['X-Authorization'] = $apiKey->key;
-
-        // Test unauthencated.
-        $noAuth = $this->get('api/rental');
-        $noAuth->seeStatusCode(401);
-        $noAuth->seeJson([
-            "error" => [
-                "code" => "GEN-UNAUTHORIZED",
-                "http_code" => 401,
-                "message" => "Unauthorized"
-            ]
-        ]);
-    }
-
-    /**
-     * @group all
-     * @group api
-     */
-    public function testDeleteKeyWithoutValidId()
-    {
-        $apiKey = factory(ApiKey::class)->create();
-        $headers['X-Authorization'] = $apiKey->key;
-
-        // Test unauthencated.
-        $noAuth = $this->get('api/rental');
-        $noAuth->seeStatusCode(401);
-        $noAuth->seeJson([
-            "error" => [
-                "code" => "GEN-UNAUTHORIZED",
-                "http_code" => 401,
-                "message" => "Unauthorized"
-            ]
-        ]);
     }
 }

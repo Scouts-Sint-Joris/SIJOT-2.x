@@ -34,7 +34,8 @@ class RentalController extends ApiGuardController
      * @url:platform  GET|HEAD: /api
      * @see:phpunit
      *
-     * @param Request $request
+     * @param  Request $request
+     * @return mixed
      */
     public function index(Request $request)
     {
@@ -46,7 +47,7 @@ class RentalController extends ApiGuardController
             $rentals = Rental::take(5)->get();
         }
 
-        if (count($rentals) > 0) {
+        if (count($rentals) > 0) { // There are rentals found.
             $prevCursorStr = $request->input('prevCursor', 6);
             $newCursorStr  = $rentals->last()->id;
 
@@ -56,7 +57,7 @@ class RentalController extends ApiGuardController
             $resource->setCursor($cursor);
             $content = $fractal->createData($resource)->toJson();
             $status  = Status::HTTP_OK;
-        } elseif (count($rentals) === 0) {
+        } elseif (count($rentals) === 0) { // There are no rentals found.
             $content = ['message' => 'Er zijn geen verhuringen'];
             $status  = Status::HTTP_OK;
         }
