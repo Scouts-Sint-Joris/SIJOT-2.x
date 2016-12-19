@@ -17,7 +17,6 @@ class ApiKeyManagementTest extends TestCase
     {
         $apiKey = factory(ApiKey::class)->create();
         $headers['X-Authorization'] = $apiKey->key;
-<<<<<<< HEAD
 
         // Test unauthencated.
         $noAuth = $this->get('api/rental');
@@ -29,8 +28,6 @@ class ApiKeyManagementTest extends TestCase
                 "message" => "Unauthorized"
             ]
         ]);
-=======
->>>>>>> 59e830bade4a3c7174f22a056962749d7fe36b46
     }
 
     /**
@@ -41,7 +38,6 @@ class ApiKeyManagementTest extends TestCase
     {
         $apiKey = factory(ApiKey::class)->create();
         $headers['X-Authorization'] = $apiKey->key;
-<<<<<<< HEAD
 
         // Test unauthencated.
         $noAuth = $this->get('api/rental');
@@ -53,8 +49,6 @@ class ApiKeyManagementTest extends TestCase
                 "message" => "Unauthorized"
             ]
         ]);
-=======
->>>>>>> 59e830bade4a3c7174f22a056962749d7fe36b46
     }
 
     /**
@@ -65,7 +59,6 @@ class ApiKeyManagementTest extends TestCase
     {
         $apiKey = factory(ApiKey::class)->create();
         $headers['X-Authorization'] = $apiKey->key;
-<<<<<<< HEAD
 
         // Test unauthencated.
         $noAuth = $this->get('api/rental');
@@ -77,8 +70,6 @@ class ApiKeyManagementTest extends TestCase
                 "message" => "Unauthorized"
             ]
         ]);
-=======
->>>>>>> 59e830bade4a3c7174f22a056962749d7fe36b46
     }
 
     /**
@@ -89,7 +80,6 @@ class ApiKeyManagementTest extends TestCase
     {
         $apiKey = factory(ApiKey::class)->create();
         $headers['X-Authorization'] = $apiKey->key;
-<<<<<<< HEAD
 
         // Test unauthencated.
         $noAuth = $this->get('api/rental');
@@ -101,8 +91,6 @@ class ApiKeyManagementTest extends TestCase
                 "message" => "Unauthorized"
             ]
         ]);
-=======
->>>>>>> 59e830bade4a3c7174f22a056962749d7fe36b46
     }
 
     /**
@@ -113,7 +101,6 @@ class ApiKeyManagementTest extends TestCase
     {
         $apiKey = factory(ApiKey::class)->create();
         $headers['X-Authorization'] = $apiKey->key;
-<<<<<<< HEAD
 
         // Test unauthencated.
         $noAuth = $this->get('api/rental');
@@ -125,8 +112,6 @@ class ApiKeyManagementTest extends TestCase
                 "message" => "Unauthorized"
             ]
         ]);
-=======
->>>>>>> 59e830bade4a3c7174f22a056962749d7fe36b46
     }
 
     /**
@@ -137,7 +122,6 @@ class ApiKeyManagementTest extends TestCase
     {
         $apiKey = factory(ApiKey::class)->create();
         $headers['X-Authorization'] = $apiKey->key;
-<<<<<<< HEAD
 
         // Test unauthencated.
         $noAuth = $this->get('api/rental');
@@ -149,8 +133,6 @@ class ApiKeyManagementTest extends TestCase
                 "message" => "Unauthorized"
             ]
         ]);
-=======
->>>>>>> 59e830bade4a3c7174f22a056962749d7fe36b46
     }
 
     /**
@@ -161,7 +143,6 @@ class ApiKeyManagementTest extends TestCase
     {
         $apiKey = factory(ApiKey::class)->create();
         $headers['X-Authorization'] = $apiKey->key;
-<<<<<<< HEAD
 
         // Test unauthencated.
         $noAuth = $this->get('api/rental');
@@ -173,8 +154,6 @@ class ApiKeyManagementTest extends TestCase
                 "message" => "Unauthorized"
             ]
         ]);
-=======
->>>>>>> 59e830bade4a3c7174f22a056962749d7fe36b46
     }
 
     /**
@@ -185,7 +164,6 @@ class ApiKeyManagementTest extends TestCase
     {
         $apiKey = factory(ApiKey::class)->create();
         $headers['X-Authorization'] = $apiKey->key;
-<<<<<<< HEAD
 
         // Test unauthencated.
         $noAuth = $this->get('api/rental');
@@ -197,7 +175,5 @@ class ApiKeyManagementTest extends TestCase
                 "message" => "Unauthorized"
             ]
         ]);
-=======
->>>>>>> 59e830bade4a3c7174f22a056962749d7fe36b46
     }
 }
