@@ -34,7 +34,7 @@ $factory->define(App\Groups::class, function (Faker\Generator $faker) {
         'selector'    => $faker->word,
         'sub_heading' => $faker->word,
         'heading'     => $faker->word,
-        'description' => $faker->word,      
+        'description' => $faker->word,
     ];
 });
 
@@ -122,7 +122,7 @@ $factory->define(Chrisbjr\ApiGuard\Models\ApiKey::class, function (Faker\Generat
     return [
         'user_id'       => 1,
         'service'       => $faker->word,
-        'key'           => $faker->password,
+        'key'           => str_random(40),
         'level'         => 10,
         'ignore_limits' => 0
     ];

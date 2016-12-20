@@ -135,8 +135,8 @@ class AccountController extends Controller
     public function createKey(Requests\ApiKeyValidator $input)
     {
         $insert = ApiKey::make($input->userid);
-
         $update = ApiKey::find($insert->id);
+
         $update->service = $input->service;
 
         if ($insert && $update->save()) {
