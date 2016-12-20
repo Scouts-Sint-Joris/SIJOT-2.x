@@ -142,7 +142,7 @@ class AccountController extends Controller
         if ($insert && $update->save()) {
             // The token and service name are stored.
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', 'The api token has been created');
+            session()->flash('message', trans('flash-session.token-create'));
         }
 
         return redirect()->back();
@@ -163,7 +163,7 @@ class AccountController extends Controller
         if ($apiKey->find($id)->update(['key' => $apiKey->generateKey()])) {
             // There is a new key generated.
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', 'The api key has been generated.');
+            session()->flash('message', 'flash-session.token-regenerate');
         }
 
         return redirect()->back();
@@ -181,7 +181,7 @@ class AccountController extends Controller
         if ($apiKey->destroy($id)) {
             // The api key is destroyed
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', 'The api key has been deleted');
+            session()->flash('message', 'flash-session.token-delete');
         }
 
         return redirect()->back();
