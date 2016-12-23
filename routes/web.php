@@ -25,6 +25,9 @@ Route::get('/groups/{selector}', 'GroupController@specific')->name('frontend.gro
 Route::get('/groups/edit', 'GroupController@edit')->name('groups.edit');
 Route::post('/groups/update/{selector}', 'GroupController@update')->name('groups.update');
 
+// Members Modules Routes.
+Route::get('/members/create', 'MembersController@create')->name('members.create');
+
 // Rental routes
 Route::get('/rental', 'RentalController@indexFrontEnd')->name('rental.frontend.index');
 Route::get('/rental/insert', 'RentalController@insertViewFrontEnd')->name('rental.frontend.insert');
