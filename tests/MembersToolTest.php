@@ -17,7 +17,7 @@ class MembersToolTest extends TestCase
      */
     public function testNewMemberInserForm()
     {
-
+        $
     }
 
     /**
@@ -29,7 +29,7 @@ class MembersToolTest extends TestCase
      */
     public function testConfirmMember()
     {
-
+        
     }
 
     /**
