@@ -19,7 +19,7 @@
                         </div>
                     </div>
 
-                    <form style="padding-top: 15px;" class="form-horizontal" action="" method="POST">
+                    <form style="padding-top: 15px;" class="form-horizontal" action="{{ route('members.store') }}" method="POST">
                         {{-- CSRF Implementation --}}
                         {{ csrf_field() }}
 

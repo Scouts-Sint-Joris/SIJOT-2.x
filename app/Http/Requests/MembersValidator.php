@@ -13,7 +13,7 @@ class MembersValidator extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,15 @@ class MembersValidator extends FormRequest
     public function rules()
     {
         return [
-            //
+            'firstname'         => 'required',
+            'lastname'          => 'required',
+            'gender'            => 'required',
+            'email'             => 'required',
+            'birth_date'        => 'required',
+            'mobile_number'     => 'required',
+            'city'              => 'required',
+            'street'            => 'required',
+            'number'            => 'required',
         ];
     }
 }

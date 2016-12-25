@@ -3,21 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Country;
+use App\Http\Requests\MembersValidator;
 use App\Members;
 use Illuminate\Http\Request;
 
 class MembersController extends Controller
 {
     // FIXME: Set the flash messages to translations files.
+    /**
+     * @var Country
+     */
+    private $countries;
 
     /**
      * MembersController constructor.
      *
-     * @return void.
+     * @param   Country $countries
+     * @return  Void|null
      */
-    public function __constrict()
+    public function __construct(Country $countries)
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['create', 'store']);
+        $this->countries = $countries;
     }
 
     /**
@@ -40,7 +47,7 @@ class MembersController extends Controller
      */
     public function create()
     {
-        $data['countries'] = Country::select('id', 'name')->get();
+        $data['countries'] = $this->countries->select('id', 'name')->get();
         return view('members/create', $data);
     }
 
@@ -51,10 +58,10 @@ class MembersController extends Controller
      * @see:phpunit
      * @see:phpunit
      *
-     * @param  \App\Http\Requests\MemberValidator  $request
+     * @param  MembersValidator $input
      * @return \Illuminate\Http\Response
      */
-    public function store(Requests\MembersValidator $input)
+    public function store(MembersValidator $input)
     {
         if (Members::create($input->except('_token'))) {
             session()->flash('class', 'alert alert-success');
@@ -93,7 +100,7 @@ class MembersController extends Controller
         $member = Members::find($id);
 
         // FIXME: $members is here to supress the syntax error.
-        if ($members) { // User is confirmed.
+        if ($member) { // User is confirmed.
             session()->flash('', '');
             session()->flash('', '');
 
@@ -125,11 +132,11 @@ class MembersController extends Controller
      * @see:phpunit
      * @see:phpunit
      *
-     * @param  \App\Http\Requests\MemberValidator  $request
-     * @param  int  $id The member id in the database.
+     * @param  MembersValidator $input
+     * @param  int $id The member id in the database.
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MembersValidator $input, $id)
     {
         //
     }

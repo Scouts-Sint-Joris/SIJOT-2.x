@@ -27,6 +27,7 @@ Route::post('/groups/update/{selector}', 'GroupController@update')->name('groups
 
 // Members Modules Routes.
 Route::get('/members/create', 'MembersController@create')->name('members.create');
+Route::post('/members/create', 'MembersController@store')->name('members.store');
 
 // Rental routes
 Route::get('/rental', 'RentalController@indexFrontEnd')->name('rental.frontend.index');
