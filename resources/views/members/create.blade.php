@@ -114,7 +114,7 @@
                             <div class="col-md-6">
 
                                 {{-- Country form-group --}}
-                                <div class="form-group">
+                                <div class="form-group has-feedback {{ $errors->has('country') ? 'has-error' : '' }}">
                                     <label for="firstname" class="control-label col-sm-4">
                                         Land: <span class="text-danger">*</span>
                                     </label>
@@ -131,13 +131,13 @@
                                 </div>
 
                                 {{-- Postal code and city form-group --}}
-                                <div class="form-group">
+                                <div class="form-group has-feedback {{ $errors->has('city') ? 'has-error' : '' }}">
                                     <label for="city" class="control-label col-sm-4">
                                         Gemeente: <span class="text-danger">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="text" value="{{ old('coty') }}" id="city" name="city" placeholder="bv. 2300, Turnhout" class="form-control">
+                                        <input type="text" value="{{ old('city') }}" id="city" name="city" placeholder="bv. 2300, Turnhout" class="form-control">
                                     </div>
                                 </div>
 
@@ -152,7 +152,7 @@
                                     </div>
                                 </div>
 
-                                {{-- Houde number form-group --}}
+                                {{-- House number form-group --}}
                                 <div class="form-group has-feedback {{ $errors->has('number') ? 'has-error' : '' }}">
                                     <label for="number" class="control-label col-sm-4">
                                         Huisnummer: <span class="text-danger">*</span>

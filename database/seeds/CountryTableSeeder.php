@@ -3,6 +3,7 @@
 use App\Country;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CountryTableSeeder extends Seeder
 {
@@ -31,7 +32,7 @@ class CountryTableSeeder extends Seeder
         curl_close($curl);
 
         if(! $response) { // If an error occur just log them.
-            die('Error: "' . curl_error($curl) . '" - Code: ' . curl_errno($curl));
+            Log::error('Error: "' . curl_error($curl) . '" - Code: ' . curl_errno($curl));
         }
 
         // Insert the data to the database.
