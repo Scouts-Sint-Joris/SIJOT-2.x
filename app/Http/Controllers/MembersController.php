@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Country;
 use App\Members;
 use Illuminate\Http\Request;
 
@@ -39,8 +40,8 @@ class MembersController extends Controller
      */
     public function create()
     {
-        // FIXME: Add country seeder, migration, and implementation to the view.
-        return view('members/create');
+        $data['countries'] = Country::all();
+        return view('members/create', $data);
     }
 
     /**
@@ -53,7 +54,7 @@ class MembersController extends Controller
      * @param  \App\Http\Requests\MemberValidator  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Requests\membersValidator $input)
+    public function store(Requests\MembersValidator $input)
     {
         if (Members::create($input->except('_token'))) {
             session()->flash('class', 'alert alert-success');

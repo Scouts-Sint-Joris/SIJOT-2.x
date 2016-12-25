@@ -123,7 +123,9 @@
                                         <select class="form-control" name="city">
                                             <option value="" selected>-- Selecteer land --</option>
 
-                                            {{-- TODO: Implement countries.  --}}
+                                            @foreach($countries as $country)
+                                                <option name="{{ $country->id }}">{{ $country->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

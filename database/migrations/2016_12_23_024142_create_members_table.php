@@ -15,18 +15,18 @@ class CreateMembersTable extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->increments('id');
-            $this->string('firstname');
-            $this->string('lastname');
-            $this->string('gender');
-            $this->string('email');
-            $this->string('birth_date');
-            $this->string('bank_number');
-            $this->integer('country');
-            $this->string('street');
-            $this->string('house_number');
-            $this->string('house_sub_number');
-            $this->string('phone_number');
-            $this->text('description');
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('gender');
+            $table->string('email');
+            $table->string('birth_date');
+            $table->string('bank_number');
+            $table->integer('country');
+            $table->string('street');
+            $table->string('house_number');
+            $table->string('house_sub_number');
+            $table->string('phone_number');
+            $table->text('description');
             $table->timestamps();
         });
     }
