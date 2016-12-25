@@ -42,11 +42,15 @@ class MembersController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @url:platform    GET|HEAD:
+     * @see:phpunit     MembersToolTest
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $data['members'] = $this->members->all();
+        return view('members/index', $data);
     }
 
     /**
@@ -67,8 +71,8 @@ class MembersController extends Controller
      * Store a newly created resource in storage.
      *
      * @url:platform
-     * @see:phpunit
-     * @see:phpunit
+     * @see:phpunit     MembersToolTest::
+     * @see:phpunit     MembersToolTest::
      *
      * @param  MembersValidator $input
      * @return \Illuminate\Http\Response
@@ -86,8 +90,8 @@ class MembersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @url:platform
-     * @see:phpunit
+     * @url:platform    GET|HEAD:
+     * @see:phpunit     MembersToolTest::
      *
      * @param  int  $memberId
      * @return \Illuminate\Http\Response
@@ -101,21 +105,19 @@ class MembersController extends Controller
     /**
      * Confirm that a subscription is a group member.
      *
-     * @url:platform
-     * @see:phpunit
+     * @url:platform    GET|HEAD:
+     * @see:phpunit     MembersToolTest::
      *
      * @param  int $memberId The member id in the database.
      * @return response
      */
     public function confirm($memberId)
     {
-        $member = $this->members->find($memberId);
-
-        // FIXME: $members is here to supress the syntax error.
-        if ($member) { // User is confirmed.
+        if ($this->members->find($memberId)) { // User is confirmed.
             session()->flash('class', 'alert alert-success');
             session()->flash('message', 'Het lid bevestigd in het systeem.');
 
+            // TODO: Implement login creation for the parent.
             // TODO: Set notification to the group leaders.
             // TODO: Implement email notification to the parents.
         }
@@ -126,8 +128,8 @@ class MembersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @url:platform
-     * @see:phpunit
+     * @url:platform    GET|HEAD:
+     * @see:phpunit     MembersToolTest::
      *
      * @param  int  $id The member id in the database.
      * @return \Illuminate\Http\Response
@@ -142,8 +144,8 @@ class MembersController extends Controller
      * Update the specified resource in storage.
      *
      * @url:platform
-     * @see:phpunit
-     * @see:phpunit
+     * @see:phpunit     MembersToolTest::
+     * @see:phpunit     MembersToolTest::
      *
      * @param  MembersValidator $input
      * @param  int $id The member id in the database.
@@ -164,7 +166,7 @@ class MembersController extends Controller
      * Remove the specified resource from storage.
      *
      * @url:platform
-     * @see:phpunit
+     * @see:phpunit     MembersToolTest::
      *
      * @param  int  $id The member in the database.
      * @return \Illuminate\Http\Response
