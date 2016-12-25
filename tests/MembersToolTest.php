@@ -17,7 +17,7 @@ class MembersToolTest extends TestCase
      */
     public function testNewMemberInserForm()
     {
-        $
+        //
     }
 
     /**
@@ -29,7 +29,7 @@ class MembersToolTest extends TestCase
      */
     public function testConfirmMember()
     {
-        
+        //
     }
 
     /**
@@ -41,7 +41,7 @@ class MembersToolTest extends TestCase
      */
     public function testRegisterMethod()
     {
-
+        //
     }
 
     /**
@@ -53,7 +53,7 @@ class MembersToolTest extends TestCase
      */
     public function testRegisterValidationErrorMethod()
     {
-
+        //
     }
 
     /**
@@ -65,7 +65,7 @@ class MembersToolTest extends TestCase
      */
     public function testIndexMethod()
     {
-
+        //
     }
 
     /**
@@ -77,7 +77,7 @@ class MembersToolTest extends TestCase
      */
     public function testShowMethod()
     {
-
+        //
     }
 
     /**
@@ -89,7 +89,7 @@ class MembersToolTest extends TestCase
      */
     public function testUpdateMethod()
     {
-
+        //
     }
 
     /**
@@ -101,7 +101,7 @@ class MembersToolTest extends TestCase
      */
     public function testUpdateMethodValidationErrors()
     {
-
+        //
     }
 
     /**
@@ -113,6 +113,6 @@ class MembersToolTest extends TestCase
      */
     public function testDeleteMethod()
     {
-
+        //
     }
 }
