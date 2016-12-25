@@ -40,7 +40,7 @@ class MembersController extends Controller
      */
     public function create()
     {
-        $data['countries'] = Country::all();
+        $data['countries'] = Country::select('id', 'name')->get();
         return view('members/create', $data);
     }
 
