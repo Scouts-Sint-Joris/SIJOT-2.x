@@ -6,25 +6,37 @@ use App\Country;
 use App\Http\Requests\MembersValidator;
 use App\Members;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class MembersController extends Controller
 {
-    // FIXME: Set the flash messages to translations files.
     /**
+     * Country database model.
+     *
      * @var Country
      */
     private $countries;
 
     /**
+     * Members database model.
+     *
+     * @var array
+     */
+    private $members;
+
+    /**
      * MembersController constructor.
      *
      * @param   Country $countries
+     * @param   Members $members
      * @return  Void|null
      */
-    public function __construct(Country $countries)
+    public function __construct(Country $countries, Members $members)
     {
         $this->middleware('auth')->except(['create', 'store']);
+
         $this->countries = $countries;
+        $this->members  = $members;
     }
 
     /**
@@ -63,7 +75,7 @@ class MembersController extends Controller
      */
     public function store(MembersValidator $input)
     {
-        if (Members::create($input->except('_token'))) {
+        if ($this->members->create($input->except('_token'))) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', 'Het lid is aangemaakt in het systeem. De leiding zal de inschrijving snel bevestigen.');
         }
@@ -77,12 +89,12 @@ class MembersController extends Controller
      * @url:platform
      * @see:phpunit
      *
-     * @param  int  $id
+     * @param  int  $memberId
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($memberId)
     {
-        $data['member'] = Members::find($id);
+        $data['member'] = $this->members->find($memberId);
         return view('members/show', $data);
     }
 
@@ -92,17 +104,17 @@ class MembersController extends Controller
      * @url:platform
      * @see:phpunit
      *
-     * @param  int $id The member id in the database.
+     * @param  int $memberId The member id in the database.
      * @return response
      */
-    public function confirm($id)
+    public function confirm($memberId)
     {
-        $member = Members::find($id);
+        $member = $this->members->find($memberId);
 
         // FIXME: $members is here to supress the syntax error.
         if ($member) { // User is confirmed.
-            session()->flash('', '');
-            session()->flash('', '');
+            session()->flash('class', 'alert alert-success');
+            session()->flash('message', 'Het lid bevestigd in het systeem.');
 
             // TODO: Set notification to the group leaders.
             // TODO: Implement email notification to the parents.
@@ -120,9 +132,10 @@ class MembersController extends Controller
      * @param  int  $id The member id in the database.
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($memberId)
     {
-        //
+        $data['member'] = $this->member->find($memberId);
+        return view('members/edit', $data);
     }
 
     /**
@@ -138,11 +151,20 @@ class MembersController extends Controller
      */
     public function update(MembersValidator $input, $id)
     {
-        //
+        if (Members::find($id)->update($input->except('_token'))) {
+            session()->flash('class', 'alert alert-success');
+            session()->flash('message', 'Het Lid is gewijzigd');
+
+            Notification::send();
+            Notification::send();
+        }
     }
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @url:platform
+     * @see:phpunit
      *
      * @param  int  $id The member in the database.
      * @return \Illuminate\Http\Response
@@ -158,5 +180,7 @@ class MembersController extends Controller
             session()->flash('class', 'alert alert-success');
             session()->flash('message', 'Het lid is verwijderd uit het systeem. Vergeet hem niet te verwijderen in de GA');
         }
+
+        return redirect()->back(302);
     }
 }

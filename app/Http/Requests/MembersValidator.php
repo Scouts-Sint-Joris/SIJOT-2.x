@@ -33,6 +33,7 @@ class MembersValidator extends FormRequest
             'city'              => 'required',
             'street'            => 'required',
             'number'            => 'required',
+            'country'           => 'required',
         ];
     }
 }
