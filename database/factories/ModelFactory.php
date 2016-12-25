@@ -135,3 +135,12 @@ $factory->define(Spatie\Permission\Models\Permission::class, function (Faker\Gen
 $factory->define(Spatie\Permission\Models\Role::class, function (Faker\Generator $faker) {
     return ['name' => $faker->word];
 });
+
+$factory->define(App\Country::class, function (Faker\Generator $faker) {
+    return [
+        'capital'       => 'Brussels',
+        'name'          => $faker->country,
+        'alpha2code'    => 'BE',
+        'alpha3code'    => $faker->countryISOAlpha3,
+    ];
+})

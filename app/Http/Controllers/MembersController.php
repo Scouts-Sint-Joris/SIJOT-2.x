@@ -175,7 +175,7 @@ class MembersController extends Controller
      */
     public function destroy($memberId)
     {
-        $member = Members::find($memberId);
+        $member = $this->members->find($memberId);
 
         $recordDelete = $member->delete();
         $parentDelete = $member->parents()->sync([]);
