@@ -15,9 +15,11 @@ class MembersToolTest extends TestCase
      * @group all
      * @group members
      */
-    public function testNewMemberInserForm()
+    public function testNewMemberInsertForm()
     {
-        //
+        $this->authentication();
+        $this->get(route('members.create'));
+        $this->seeStatusCode(200);
     }
 
     /**

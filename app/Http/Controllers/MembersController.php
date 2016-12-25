@@ -40,8 +40,8 @@ class MembersController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @url:platform
-     * @see:phpunit
+     * @url:platform    GET|HEAD: /members/create
+     * @see:phpunit     MembersToolTest::testNewMemberInsertForm()
      *
      * @return \Illuminate\Http\Response
      */
