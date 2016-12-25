@@ -143,4 +143,4 @@ $factory->define(App\Country::class, function (Faker\Generator $faker) {
         'alpha2code'    => 'BE',
         'alpha3code'    => $faker->countryISOAlpha3,
     ];
-})
+});
