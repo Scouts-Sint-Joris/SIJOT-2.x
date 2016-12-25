@@ -77,12 +77,12 @@ class MembersController extends Controller
      * @url:platform
      * @see:phpunit
      *
-     * @param  int  $id
+     * @param  int  $memberId
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($memberId)
     {
-        $data['member'] = Members::find($id);
+        $data['member'] = Members::find($memberId);
         return view('members/show', $data);
     }
 
@@ -92,17 +92,16 @@ class MembersController extends Controller
      * @url:platform
      * @see:phpunit
      *
-     * @param  int $id The member id in the database.
+     * @param  int $memberId The member id in the database.
      * @return response
      */
-    public function confirm($id)
+    public function confirm($memberId)
     {
-        $member = Members::find($id);
+        $member = Members::find($memberId);
 
-        // FIXME: $members is here to supress the syntax error.
         if ($member) { // User is confirmed.
-            session()->flash('', '');
-            session()->flash('', '');
+            session()->flash('class', '');
+            session()->flash('message', '');
 
             // TODO: Set notification to the group leaders.
             // TODO: Implement email notification to the parents.
@@ -117,12 +116,12 @@ class MembersController extends Controller
      * @url:platform
      * @see:phpunit
      *
-     * @param  int  $id The member id in the database.
+     * @param  int  $memberId The member id in the database.
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($memberId)
     {
-        //
+        $data['member'] = Members::find($memberId);
     }
 
     /**
@@ -133,10 +132,10 @@ class MembersController extends Controller
      * @see:phpunit
      *
      * @param  MembersValidator $input
-     * @param  int $id The member id in the database.
+     * @param  int $memberId The member id in the database.
      * @return \Illuminate\Http\Response
      */
-    public function update(MembersValidator $input, $id)
+    public function update(MembersValidator $input, $memberId)
     {
         //
     }
@@ -144,12 +143,12 @@ class MembersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id The member in the database.
+     * @param  int  $memberId The member in the database.
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($memberId)
     {
-        $member = Members::find($id);
+        $member = Members::find($memberId);
 
         $recordDelete = $member->delete();
         $parentDelete = $member->parents()->sync([]);
