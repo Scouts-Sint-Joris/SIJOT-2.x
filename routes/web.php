@@ -26,7 +26,10 @@ Route::get('/groups/edit', 'GroupController@edit')->name('groups.edit');
 Route::post('/groups/update/{selector}', 'GroupController@update')->name('groups.update');
 
 // Members Modules Routes.
+Route::get('/members/index', 'MembersController@index')->name('members.index');
 Route::get('/members/create', 'MembersController@create')->name('members.create');
+Route::get('/members/delete/{memberId}', 'MembersController@destroy')->name('members.delete');
+Route::get('/members/show/{memberId}', 'MembersController@show')->name('members.show');
 Route::post('/members/create', 'MembersController@store')->name('members.store');
 
 // Rental routes

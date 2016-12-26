@@ -11,7 +11,11 @@ class Members extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'firstname', 'lastname', 'gender', 'email', 'birth_date', 'bank_number',
+        'country', 'street', 'house_number', 'house_sub_number', 'phone_number',
+        'description'
+    ];
 
     /**
      * Member -> Country relation.

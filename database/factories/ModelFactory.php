@@ -147,17 +147,17 @@ $factory->define(App\Country::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Members::class, function (Faker\Generator $faker) {
     return [
-        'firstname'             => $faker->firstName,
-        'lastname'              => $faker->lastName,
-        'gender'                => 'male',
-        'email'                 => $faker->email,
-        'birth_date'            => '00/00/0000',
-        'bank_number'           => $faker->swiftBicNumber,
-        'country'               => 1,
-        'street'                => $faker->streetAddress,
-        'house_number'          => $faker->numberBetween(0, 10),
-        'house_sub_number'      => $faker->numberBetween(0, 10),
-        'phone_number'          => $faker->phoneNumber,
-        'description'           => $faker->paragraphs(2)
+        'firstname'             => '',
+        'lastname'              => '',
+        'gender'                => '',
+        'email'                 => '',
+        'birth_date'            => '',
+        'bank_number'           => '',
+        'country'               => '',
+        'street'                => '',
+        'house_number'          => '',
+        'house_sub_number'      => '',
+        'phone_number'          => '',
+        'description'           => ''
     ];
 });

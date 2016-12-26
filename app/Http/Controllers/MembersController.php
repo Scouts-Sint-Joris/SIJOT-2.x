@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Country;
 use App\Http\Requests\MembersValidator;
 use App\Members;
@@ -25,18 +26,28 @@ class MembersController extends Controller
     private $members;
 
     /**
+     * User login database model.
+     *
+     * @var array
+     */
+    private $user;
+
+    /**
      * MembersController constructor.
      *
      * @param   Country $countries
      * @param   Members $members
-     * @return  Void|null
+     * @param   User $user
+     *
+     * @return  void|null
      */
-    public function __construct(Country $countries, Members $members)
+    public function __construct(Country $countries, Members $members, User $user)
     {
         $this->middleware('auth')->except(['create', 'store']);
 
         $this->countries = $countries;
-        $this->members  = $members;
+        $this->members   = $members;
+        $this->user      = $user;
     }
 
     /**
@@ -137,7 +148,7 @@ class MembersController extends Controller
     public function edit($memberId)
     {
         $data['member'] = $this->members->find($memberId);
-        return view('members/edit', $data);
+        return view('members.edit', $data);
     }
 
     /**
@@ -175,12 +186,13 @@ class MembersController extends Controller
      */
     public function destroy($memberId)
     {
-        $member = $this->members->find($memberId);
+        // TODO: Add method to delete the parent if one in the system.
+        //       If multiple don't delete the parent.
 
+        $member       = $this->members->find($memberId);
         $recordDelete = $member->delete();
-        $parentDelete = $member->parents()->sync([]);
 
-        if ($recordDelete && $parentDelete) { // THe user and all the associated relations are deleted.
+        if ($recordDelete) { // THe user and all the associated relations are deleted.
             session()->flash('class', 'alert alert-success');
             session()->flash('message', 'Het lid is verwijderd uit het systeem. Vergeet hem niet te verwijderen in de GA');
         }
