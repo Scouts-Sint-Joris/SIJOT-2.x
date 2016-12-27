@@ -62,7 +62,7 @@ class MembersToolTest extends TestCase
         $this->authentication();
         $this->post(route('members.store'), $input);
         $this->seeStatusCode(302);
-        $this->seeDatabase('members', $input);
+        $this->seeInDatabase('members', $input);
         $this->session($session);
     }
 

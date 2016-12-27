@@ -28,7 +28,7 @@
                             <div class="col-md-6">
 
                                 {{-- Firstname form-group --}}
-                                <div class="form-group">
+                                <div class="form-group has-feedback {{ $errors->has('firstname') ? 'has-error' : '' }}">
                                     <label class="control-label col-sm-4" for="firstname">
                                         Voornaam: <span class="text-danger">*</span>
                                     </label>
@@ -39,7 +39,7 @@
                                 </div>
 
                                 {{-- Lastname form-group --}}
-                                <div class="form-group">
+                                <div class="form-group has-feedback {{ $errors->has('lastname') ? 'has-error' : '' }}">
                                     <label for="lastname" class="control-label col-sm-4">
                                         Achternaam: <span class="text-danger">*</span>
                                     </label>

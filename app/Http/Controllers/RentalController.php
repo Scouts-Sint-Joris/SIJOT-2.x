@@ -257,6 +257,9 @@ class RentalController extends Controller
      */
     public function exportExcel()
     {
+        // FIXME: Phpunit throws an error in the logs. We need to check if this also occurs
+        //        On the web methods. In case of bug risk.
+
         Excel::create('Verhuringen-'. date('d/m/Y'), function ($excel) {
 
             // Sheet: for all the rentals.
