@@ -14,7 +14,7 @@ class Members extends Model
     protected $fillable = [
         'firstname', 'lastname', 'gender', 'email', 'birth_date', 'bank_number',
         'country', 'street', 'house_number', 'house_sub_number', 'phone_number',
-        'description'
+        'description', 'city', 'mobile_number'
     ];
 
     /**

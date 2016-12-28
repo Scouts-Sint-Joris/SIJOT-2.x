@@ -158,6 +158,8 @@ $factory->define(App\Members::class, function (Faker\Generator $faker) {
         'house_number'          => '',
         'house_sub_number'      => '',
         'phone_number'          => '',
+        'mobile_number'         => '',
+        'city'                  => '',
         'description'           => ''
     ];
 });

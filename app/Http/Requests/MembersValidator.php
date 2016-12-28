@@ -32,7 +32,7 @@ class MembersValidator extends FormRequest
             'mobile_number'     => 'required',
             'city'              => 'required',
             'street'            => 'required',
-            'number'            => 'required',
+            'house_number'      => 'required',
             'country'           => 'required',
         ];
     }
