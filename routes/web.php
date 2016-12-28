@@ -98,6 +98,7 @@ Route::get('/settings/key/destroy/{id}', 'Auth\AccountController@destroyKey')->n
 Route::get('backend/activity', 'ActivityController@index')->name('activity.index');
 Route::post('backend/activity/update/{id}', 'ActivityController@update')->name('activity.update');
 Route::get('backend/activity/destroy/{id}', 'ActivityController@destroy')->name('activity.destroy');
+Route::get('activity/rss', 'ActivityController@rssFeed')->name('activity.rss');
 Route::post('backend/activity', 'ActivityController@store')->name('activity.store');
 
 // Debugging routes

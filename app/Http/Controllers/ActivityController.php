@@ -7,6 +7,7 @@ use App\Activity;
 use App\Http\Requests;
 use App\Http\Requests\ActivityValidator;
 use Illuminate\Http\Request;
+use XMLWriter;
 
 class ActivityController extends Controller
 {
@@ -32,8 +33,8 @@ class ActivityController extends Controller
         $this->inputFilter = ['_token', 'group'];   // Fill in the filter array for the inputs.
         $this->dbRelations = ['groups', 'creator']; // The MySQL database relations.
 
-        $this->middleware('auth'); // See if the user is logged in.
-        $this->middleware('lang'); // Determine the language and get the correct trans. files.
+        $this->middleware('auth')->except('rssFeed');   // See if the user is logged in.
+        $this->middleware('lang');                      // Determine the language and get the correct trans. files.
     }
 
     /**
@@ -91,6 +92,53 @@ class ActivityController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    /**
+     * Get the rss feed for the activity.
+     *
+     * @url:platform    GET|HEAD: /activity/rss
+     * @see:phpunit     ActivityControllerTest::testRssFeed();
+     *
+     * @return mixed
+     */
+    public function rssFeed()
+    {
+        // Query.
+        $query = Activity::with($this->dbRelations)
+            ->where('state', 1)
+            ->orderBy('date', 'ASC')
+            ->get();
+
+        // dd($query);  // For debugging propose.
+        // die();       // For debugging propose.
+
+        // Start xml rendering.
+        $xml = new XMLWriter();
+        $xml->openMemory();
+        $xml->startDocument();
+        $xml->startElement('activiteiten');
+
+        foreach($query as $activity) {
+            $start = strtotime('H:i', $activity->start_time);
+            $end   = strtotime('H:i', $activity->end_time);
+
+            $xml->startElement('activiteit');
+            $xml->writeAttribute('id', $activity->id);
+            $xml->writeAttribute('Naam', $activity->heading);
+            $xml->writeAttribute('datum', strtotime('d/m/Y', $activity->date));
+            $xml->writeAttribute('uren', $start . ' - ' . $end);
+            $xml->writeAttribute('Beschrijving', $activity->description);
+            $xml->endElement();
+        }
+
+        $xml->endElement();
+        $xml->endDocument();
+
+        $content = $xml->outputMemory();
+        $xml = null;
+
+        return response($content)->header('Content-Type', 'text/xml');
     }
 
     /**

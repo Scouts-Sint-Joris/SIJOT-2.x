@@ -96,6 +96,20 @@ class ActivityControllerTest extends TestCase
     }
 
     /**
+     * GET|HEAD: /activity/ress
+     * ROUTE:    activity.rss
+     *
+     * @group all
+     * @group activity
+     * @group back-end
+     */
+    public function testRssFeed()
+    {
+        $this->get(route('activity.rss'));
+        $this->seeStatusCode(200);
+    }
+
+    /**
      * PUT|PATCH: /backend/activity/update/{id}
      * ROUTE:     activity.update
      *
