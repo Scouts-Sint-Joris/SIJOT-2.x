@@ -10,7 +10,7 @@
 # Exclude testing files. These files don't belong,
 # in production environments.
 # ---------------------------------------------------
-/test export-ignore
+/tests              export-ignore
 /.travis.yml        export-ignore
 /phpunit.xml        export-ignore
 
