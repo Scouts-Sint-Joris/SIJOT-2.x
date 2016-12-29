@@ -107,17 +107,20 @@ class ActivityController extends ApiGuardController
      */
     public function edit(Request $input, $activityId)
     {
-        $validation = Validator::make($request->all(), $this->validationCriteria());
+        $validation = Validator::make($input->all(), $this->validationCriteria());
+        $headers['Content-Type'] = 'application/json';
 
         if ($validation->fails()) { // Validator fails.
             $content['message']   = 'Wij konden de activiteit niet aanpassen.';
             $content['http_code'] = Status::HTTP_BAD_REQUEST;
             $content['errors']    = $validation->errors();
+
+            return $this->response->withArray($content, $headers);
         }
 
         $activity = Activity::find($activityId);
 
-        if ((int) count($activity) === 1) {
+        if ((int) count($activity) === 1) { // Record is found
             $activity->update($input->all());
 
             $editMsg['message']   = 'De activiteit is aangepast';

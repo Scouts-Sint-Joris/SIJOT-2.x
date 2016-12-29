@@ -185,7 +185,7 @@ class ApiActivityTest extends TestCase
 
         $headers['X-Authorization'] = $apiKey->key;
 
-        $this->put(route('api.activity.edit', 'activityId' => $activity->id), [], $headers);
+        $this->put(route('api.activity.edit', ['activityId' => $activity->id]), [], $headers);
         $this->seeStatusCode(200);
         $this->seeJsonContains(['message' => 'Wij konden de activiteit niet aanpassen.', 'http_code' => 400]);
     }
@@ -205,7 +205,7 @@ class ApiActivityTest extends TestCase
 
         $headers['X-Authorization'] = $apiKey->key;
 
-        $this->patch(route('api.activity.edit', 'activityId' => $activity->id), [], $headers);
+        $this->patch(route('api.activity.edit', ['activityId' => $activity->id]), [], $headers);
         $this->seeStatusCode(200);
         $this->seeJsonContains(['message' => 'Wij konden de activiteit niet aanpassen.', 'http_code' => 400]);
     }
