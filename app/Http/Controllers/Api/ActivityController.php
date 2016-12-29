@@ -17,7 +17,9 @@ use Symfony\Component\HttpFoundation\Response as Status;
 class ActivityController extends ApiGuardController
 {
     // FIXME: Add proper docblocks about platform urls and tests.
-    
+    // FIXME: Set the output data to translation files.
+    // FIXME: Avoid static access to classes.
+
     /**
      * ActivityController constructor.
      *
@@ -95,13 +97,36 @@ class ActivityController extends ApiGuardController
     /**
      * Change a activity through the api.
      *
+     * @url:platform
+     * @see:phpunit
+     * @see:phpunit
+     *
      * @param  Request $input
-     * @param  int $id the activity id in the database.
+     * @param  int      $activityId the activity id in the database.
      * @return mixed
      */
-    public function edit(Request $input, $id)
+    public function edit(Request $input, $activityId)
     {
+        $validation = Validator::make($request->all(), $this->validationCriteria());
 
+        if ($validation->fails()) { // Validator fails.
+            $content['message']   = 'Wij konden de activiteit niet aanpassen.';
+            $content['http_code'] = Status::HTTP_BAD_REQUEST;
+            $content['errors']    = $validation->errors();
+        }
+
+        $activity = Activity::find($activityId);
+
+        if ((int) count($activity) === 1) {
+            $activity->update($input->all());
+
+            $editMsg['message']   = 'De activiteit is aangepast';
+            $editMsg['http_code'] = Status::HTTP_CREATED;
+
+            return $this->response->withArray($editMsg, $headers);
+        }
+
+        return $this->response->errorNotFound();
     }
 
     /**

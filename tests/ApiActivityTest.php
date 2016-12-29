@@ -138,4 +138,106 @@ class ApiActivityTest extends TestCase
         $this->seeStatusCode(404);
         $this->seeJson(["error" => ["code" => "GEN-NOT-FOUND", "http_code" => 404, "message" => "Resource Not Found"]]);
     }
+
+    /**
+     * PUT:   /api/activity/{acitivityId}
+     * ROUTE: api.activity.edit
+     *
+     * @group api
+     * @group all
+     * @group activity
+     */
+    public function testPutActivityUpdateInvalid()
+    {
+        $apiKey = factory(ApiKey::class)->create();
+        $headers['X-Authorization'] = $apiKey->key;
+
+        $this->delete(route('api.activity.edit', ['activityId' => 1000000]), $headers);
+        $this->seeStatusCode(404);
+        $this->seeJson(["error" => ["code" => "GEN-NOT-FOUND", "http_code" => 404, "message" => "Resource Not Found"]]);
+    }
+
+    /**
+     * PUT:   /api/activity/{acitivityId}
+     * ROUTE: api.activity.edit
+     *
+     * @group api
+     * @group all
+     * @group activity
+     */
+    public function testPutActivityUpdateValid()
+    {
+
+    }
+
+    /**
+     * PUT:   /api/activity/{acitivityId}
+     * ROUTE: api.activity.edit
+     *
+     * @group api
+     * @group all
+     * @group activity
+     */
+    public function testPutActivityValidationErrors()
+    {
+        $apiKey   = factory(ApiKey::class)->create();
+        $activity = factory(App\Activity::class)->create();
+
+        $headers['X-Authorization'] = $apiKey->key;
+
+        $this->put(route('api.activity.edit', 'activityId' => $activity->id), [], $headers);
+        $this->seeStatusCode(200);
+        $this->seeJsonContains(['message' => 'Wij konden de activiteit niet aanpassen.', 'http_code' => 400]);
+    }
+
+    /**
+     * PATCH:   /api/activity/{acitivityId}
+     * ROUTE: api.activity.edit
+     *
+     * @group api
+     * @group all
+     * @group activity
+     */
+    public function testPatchActivityValidationErrors()
+    {
+        $apiKey   = factory(ApiKey::class)->create();
+        $activity = factory(App\Activity::class)->create();
+
+        $headers['X-Authorization'] = $apiKey->key;
+
+        $this->patch(route('api.activity.edit', 'activityId' => $activity->id), [], $headers);
+        $this->seeStatusCode(200);
+        $this->seeJsonContains(['message' => 'Wij konden de activiteit niet aanpassen.', 'http_code' => 400]);
+    }
+
+    /**
+     * PATCH: /api/activity/{acitivityId}
+     * ROUTE: api.activity.edit
+     *
+     * @group api
+     * @group all
+     * @group activity
+     */
+    public function testPatchActivityInvalid()
+    {
+        $apiKey = factory(ApiKey::class)->create();
+        $headers['X-Authorization'] = $apiKey->key;
+
+        $this->delete(route('api.activity.edit', ['activityId' => 1000000]), $headers);
+        $this->seeStatusCode(404);
+        $this->seeJson(["error" => ["code" => "GEN-NOT-FOUND", "http_code" => 404, "message" => "Resource Not Found"]]);
+    }
+
+    /**
+     * PATCH: /api/activity/{acitivityId}
+     * ROUTE: api.activity.edit
+     *
+     * @group api
+     * @group all
+     * @group activity
+     */
+    public function testPatchActivityValid()
+    {
+
+    }
 }

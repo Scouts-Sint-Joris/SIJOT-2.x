@@ -24,6 +24,7 @@ Route::match(['put', 'patch'], '/rental/{id}', 'Api\RentalController@update');
 Route::get('/activity/{activityId}', 'Api\ActivityController@show')->name('api.activity.show');
 Route::delete('/activity/{activityId}', 'Api\ActivityController@destroy')->name('api.activity.delete');
 Route::post('/activity', 'Api\ActivityController@create')->name('api.activity.create');
+ROUTE::match(['put', 'patch'], 'activity/{memberId}', 'Api\ActivityController@edit')->name('api.activity.edit');
 
 // Authorizations API section.
 Route::get('/authorizations', 'Api\AuthorizationController@index');
