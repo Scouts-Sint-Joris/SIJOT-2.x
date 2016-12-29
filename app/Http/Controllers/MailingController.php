@@ -84,9 +84,7 @@ class MailingController extends Controller
      */
     public function registerNewsLetter(Requests\NewsLetterValidator $input)
     {
-        $insert = NewsLetter::create($input->except('_token'));
-
-        if ($insert) {
+        if (NewsLetter::create($input->except('_token'))) {
             Mail::to($insert)->send(new newNewsletter($insert));
 
             session()->flash('class', 'alert alert-success');
@@ -116,7 +114,7 @@ class MailingController extends Controller
 
         return redirect()->back(302);
     }
-    
+
     /**
      * [BACKEND]: Update view for the mailing data.
      *
@@ -150,7 +148,7 @@ class MailingController extends Controller
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.mailing-update'));
         }
-        
+
         return redirect()->back();
     }
 
