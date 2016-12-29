@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Chrisbjr\ApiGuard\Models\ApiKey;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -46,5 +47,42 @@ class ApiActivityTest extends TestCase
         $this->delete(route('api.activity.delete', ['activityId' => 1000000]), $headers);
         $this->seeStatusCode(404);
         $this->seeJson(["error" => ["code" => "GEN-NOT-FOUND", "http_code" => 404, "message" => "Resource Not Found"]]);
+    }
+
+    /**
+     * POST:    /api/activity
+     * ROUTE:   api.activity.create
+     *
+     * @group api
+     * @group all
+     * @group activity
+     */
+    public function testActivityCreateWithSuccess()
+    {
+        // Required includes
+        $apiKey = factory(ApiKey::class)->create();
+        $headers['X-Authorization'] = $apiKey->key;
+
+        // Inputs
+        $input['state']       = 1;
+        $input['group']       = 'De Welpen';
+        $input['date']        = Carbon::now();
+        $input['start_time']  = Carbon::now();
+        $input['end_date']    = Carbon::now();
+        $input['description'] = 'Description';
+        $input['heading']     = 'Heading';
+    }
+
+    /**
+     * POST:    /api/activity
+     * ROUTE:   api.activity.create
+     *
+     * @group api
+     * @group all
+     * @group activity
+     */
+    public function testActivityCreateNotOk()
+    {
+
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Activity;
 use Chrisbjr\ApiGuard\Http\Controllers\ApiGuardController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 
 /**
@@ -59,7 +60,23 @@ class ActivityController extends ApiGuardController
      */
     public function create(Request $request)
     {
+        $validation = Validator::make($request->all(), $this->validationCriteria());
+        $headers['Content-Type'] = 'application/json';
 
+        if ($validation->fails()) { // The validation fails
+            $content['message']     = 'Kan de activiteit niet aanmaken.';
+            $content['http_code']   = Status::HTTP_BAD_REQUEST;
+            $content['errors']      = $validation->errors();
+
+            return $this->response->withArray($content, $headers);
+        }
+
+        Activity::create($request->all());
+
+        $creation['message']    = 'De activiteit is aangemaakt.';
+        $creation['http_code']  = Status::HTTP_CREATED;
+
+        return $this->response->withArray($creation, $headers);
     }
 
     /**
@@ -103,7 +120,7 @@ class ActivityController extends ApiGuardController
     {
         $criteria['state']       = 'required';
         $criteria['group']       = 'required';
-        $criteria['data']        = 'required';
+        $criteria['date']        = 'required';
         $criteria['start_time']  = 'required';
         $criteria['end_date']    = 'required';
         $criteria['description'] = 'required';
