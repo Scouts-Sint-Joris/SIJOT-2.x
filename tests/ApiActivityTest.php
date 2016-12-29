@@ -118,6 +118,7 @@ class ApiActivityTest extends TestCase
 
         $this->get(route('api.activity.show', ['activityId' => $activity->id]), $headers);
         $this->seeStatusCode(200);
+        $this->isJson();
     }
 
     /**

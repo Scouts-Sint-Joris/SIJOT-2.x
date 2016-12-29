@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Activity;
+use App\Http\Transformers\ActivityTransformer;
 use Chrisbjr\ApiGuard\Http\Controllers\ApiGuardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
