@@ -21,6 +21,7 @@ Route::delete('/rental/{id}', 'Api\RentalController@destroy');
 Route::match(['put', 'patch'], '/rental/{id}', 'Api\RentalController@update');
 
 // Activity api section.
+Route::get('/activity/{activityId}', 'Api\ActivityController@show')->name('api.activity.show');
 Route::delete('/activity/{activityId}', 'Api\ActivityController@destroy')->name('api.activity.delete');
 Route::post('/activity', 'Api\ActivityController@create')->name('api.activity.create');
 

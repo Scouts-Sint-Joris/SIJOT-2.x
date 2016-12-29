@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\Response as Status;
  */
 class ActivityController extends ApiGuardController
 {
+    // FIXME: Add proper docblocks about platform urls and tests.
+    
     /**
      * ActivityController constructor.
      *
@@ -48,9 +50,16 @@ class ActivityController extends ApiGuardController
      * @param  int      $activityId  The id off the activity in the database.
      * @return mixed
      */
-    public function show()
+    public function show($activityId)
     {
+        $activity = Activity::find($activityId);
 
+        if ((int) count($activity) === 1) { // Record is found.
+            $content  = $this->response->withItem($activity, new ActivityTransformer());
+            return response($content, Status::HTTP_OK)->header('Content-Type', 'application/json');
+        }
+
+        return $this->response->errorNotFound();
     }
 
     /**
@@ -77,7 +86,6 @@ class ActivityController extends ApiGuardController
         $creation = [
             'message' => 'De activiteit is aangemaakt.',
             'http_code' => Status::HTTP_CREATED,
-            'errors' => $validation->errors()
         ];
 
         return $this->response->withArray($creation, $headers);

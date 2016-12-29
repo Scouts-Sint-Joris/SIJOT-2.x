@@ -28,6 +28,7 @@ class ApiActivityTest extends TestCase
 
         $this->delete(route('api.activity.delete', ['activityId' => $activity->id]), $headers);
         $this->seeStatusCode(200);
+        $this->dontSeeInDatabase('activities', ['id' => $activity->id]);
         $this->seeJson(['message' => 'De activiteit is verwijderd']);
     }
 
@@ -97,9 +98,43 @@ class ApiActivityTest extends TestCase
 
         $this->post(route('api.activity.create'), [], $headers);
         $this->seeStatusCode(200);
-        $this->seeJson([
-            'message' => 'Kan de activiteit niet aanmaken.',
-            'http_code' => 400,
-        ]);
+        $this->seeJson(['message' => 'Kan de activiteit niet aanmaken.', 'http_code' => 400]);
+    }
+
+    /**
+     * GET|HEAD:    /api/activity/{activityId}
+     * ROUTE:       activity.show
+     *
+     * @group api
+     * @group all
+     * @group activity
+     */
+    public function testActivityShowValid()
+    {
+        $apiKey   = factory(ApiKey::class)->create();
+        $activity = factory(App\Activity::class)->create();
+
+        $headers['X-Authorization'] = $apiKey->key;
+
+        $this->get(route('api.activity.show', ['activityId' => $activity->id]), $headers);
+        $this->seeStatusCode(200);
+    }
+
+    /**
+     * GET|HEAD:    /api/activity/{activityId}
+     * ROUTE:       api.activity.show
+     *
+     * @group api
+     * @group all
+     * @group activity
+     */
+    public function testActivityShowInvalid()
+    {
+        $apiKey = factory(ApiKey::class)->create();
+        $headers['X-Authorization'] = $apiKey->key;
+
+        $this->get(route('api.activity.show', ['activityId' => 10000]), $headers);
+        $this->seeStatusCode(404);
+        $this->seeJson(["error" => ["code" => "GEN-NOT-FOUND", "http_code" => 404, "message" => "Resource Not Found"]]);
     }
 }
