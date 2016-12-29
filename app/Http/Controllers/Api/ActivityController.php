@@ -7,6 +7,7 @@ use Chrisbjr\ApiGuard\Http\Controllers\ApiGuardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Response as Status;
 
 /**
  * Class ActivityController
