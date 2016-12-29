@@ -167,7 +167,29 @@ class ApiActivityTest extends TestCase
      */
     public function testPutActivityUpdateValid()
     {
+        // Resources
+        $apiKey   = factory(ApiKey::class)->create();
+        $activity = factory(App\Activity::class)->create();
+        $headers['X-Authorization'] = $apiKey->key;
 
+        // Inputs
+        $input['state']       = 1;
+        $input['group']       = 'De Welpen';
+        $input['date']        = Carbon::now();
+        $input['start_time']  = Carbon::now();
+        $input['end_date']    = Carbon::now();
+        $input['description'] = 'Description';
+        $input['heading']     = 'Heading';
+
+        // Output
+        $output['message']   = 'De activiteit is aangepast';
+        $output['http_code'] = 201;
+
+        // Testing sequence
+        $this->put(route('api.activity.edit', ['activityId' => $activity->id]), $input, $headers);
+        $this->seeIndatabase('activities', ['heading' => $input['heading'], 'description' => $input['description']]);
+        $this->seeStatusCode(200);
+        $this->seeJson($output);
     }
 
     /**
@@ -238,6 +260,28 @@ class ApiActivityTest extends TestCase
      */
     public function testPatchActivityValid()
     {
+        // Resources
+        $apiKey   = factory(ApiKey::class)->create();
+        $activity = factory(App\Activity::class)->create();
+        $headers['X-Authorization'] = $apiKey->key;
 
+        // Inputs
+        $input['state']       = 1;
+        $input['group']       = 'De Welpen';
+        $input['date']        = Carbon::now();
+        $input['start_time']  = Carbon::now();
+        $input['end_date']    = Carbon::now();
+        $input['description'] = 'Description';
+        $input['heading']     = 'Heading';
+
+        // Output
+        $output['message']   = 'De activiteit is aangepast';
+        $output['http_code'] = 201;
+
+        // Testing sequence
+        $this->put(route('api.activity.edit', ['activityId' => $activity->id]), $input, $headers);
+        $this->seeIndatabase('activities', ['heading' => $input['heading'], 'description' => $input['description']]);
+        $this->seeStatusCode(200);
+        $this->seeJson($output);
     }
 }
