@@ -74,8 +74,11 @@ class ActivityController extends ApiGuardController
 
         Activity::create($request->all());
 
-        $creation['message']    = 'De activiteit is aangemaakt.';
-        $creation['http_code']  = Status::HTTP_CREATED;
+        $creation = [
+            'message' => 'De activiteit is aangemaakt.',
+            'http_code' => Status::HTTP_CREATED,
+            'errors' => $validation->errors()
+        ];
 
         return $this->response->withArray($creation, $headers);
     }

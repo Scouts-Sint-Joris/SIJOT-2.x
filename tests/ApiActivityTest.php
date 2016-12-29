@@ -71,6 +71,15 @@ class ApiActivityTest extends TestCase
         $input['end_date']    = Carbon::now();
         $input['description'] = 'Description';
         $input['heading']     = 'Heading';
+
+        // output
+        $output['message']    = 'De activiteit is aangemaakt.';
+        $output['http_code']  = 201;
+
+        $this->post(route('api.activity.create'), $input, $headers);
+        $this->seeInDatabase('activities', ['heading' => $input['heading']]);
+        $this->seeStatusCode(200);
+        $this->seeJson($output);
     }
 
     /**
@@ -83,6 +92,14 @@ class ApiActivityTest extends TestCase
      */
     public function testActivityCreateNotOk()
     {
+        $apiKey = factory(ApiKey::class)->create();
+        $headers['X-Authorization'] = $apiKey->key;
 
+        $this->post(route('api.activity.create'), [], $headers);
+        $this->seeStatusCode(200);
+        $this->seeJson([
+            'message' => 'Kan de activiteit niet aanmaken.',
+            'http_code' => 400,
+        ]);
     }
 }
