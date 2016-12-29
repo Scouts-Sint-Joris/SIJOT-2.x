@@ -15,19 +15,36 @@ class ActivityController extends ApiGuardController
 {
     /**
      * ActivityController constructor.
+     *
+     * @return void
      */
     public function __construct()
     {
         parent::__construct();
     }
 
+    /**
+     * Get all the activities through the api.
+     *
+     * @url:platform
+     * @see:phpunit
+     *
+     * @return void
+     */
     public function index()
     {
 
     }
 
     /**
+     * Show a specific aactivity thro)ugh the api.
      *
+     * @url:platform    GET|HEAD:
+     * @see:phpunit
+     * @see:phpunit
+     *
+     * @param  int      $activityId  The id off the activity in the database.
+     * @return mixed
      */
     public function show()
     {
@@ -35,6 +52,8 @@ class ActivityController extends ApiGuardController
     }
 
     /**
+     * Create a new activity through the api.
+     *
      * @param  Request $request
      * @return mixed
      */
@@ -65,9 +84,9 @@ class ActivityController extends ApiGuardController
      * @param  int $id The activity in the database.
      * @return mixed
      */
-    public function destroy($id)
+    public function destroy($activityId)
     {
-        if (! Activity::destroy($id)) {
+        if (! Activity::destroy($activityId)) {
             return $this->response->errorNotFound();
         }
 
@@ -76,7 +95,7 @@ class ActivityController extends ApiGuardController
     }
 
     /**
-     * return array Validation criteria
+     * Return array Validation criteria
      *
      * @return array $criteria
      */

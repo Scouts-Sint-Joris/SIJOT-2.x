@@ -20,6 +20,9 @@ Route::post('/rental', 'Api\RentalController@store');
 Route::delete('/rental/{id}', 'Api\RentalController@destroy');
 Route::match(['put', 'patch'], '/rental/{id}', 'Api\RentalController@update');
 
+// Activity api section.
+Route::delete('/activity/{activityId}', 'Api\ActivityController@destroy')->name('api.activity.delete');
+
 // Authorizations API section.
 Route::get('/authorizations', 'Api\AuthorizationController@index');
 Route::get('/authorizations/regenerate/{id}', 'Api\AuthorizationController@regenerateKey');
