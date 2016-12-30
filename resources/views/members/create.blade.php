@@ -50,7 +50,7 @@
                                 </div>
 
                                 {{-- Gender form-group --}}
-                                <div class="form-group">
+                                <div class="form-group has-feedback {{ $errors->has('firstname') ? 'has-error' : '' }}">
                                     <label for="gender" class="control-label col-sm-4">
                                         Geslacht: <span class="text-danger">*</span>
                                     </label>
@@ -65,8 +65,8 @@
                                 </div>
 
                                 {{-- Email form-group --}}
-                                <div class="form-group">
-                                    <label for="edmail" class="control-label col-sm-4">
+                                <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
+                                    <label for="email" class="control-label col-sm-4">
                                         E-mail: <span class="text-danger">*</span>
                                     </label>
 
@@ -76,7 +76,7 @@
                                 </div>
 
                                 {{-- Birth date form-group --}}
-                                <div class="form-group">
+                                <div class="form-group has-feedback {{ $errors->has('birth_date') ? 'has-error' : '' }}">
                                     <label for="birth_date" class="control-label col-sm-4">
                                         Geboortedatum: <span class="text-danger">*</span>
                                     </label>
@@ -87,7 +87,7 @@
                                 </div>
 
                                 {{-- GSM nummer form-group --}}
-                                <div class="form-group">
+                                <div class="form-group has-feedback {{ $errors->has('mobile_number') ? 'has-error' : '' }}">
                                     <label for="mobile_number" class="control-label col-sm-4">
                                         GSM nummer: <span class="text-danger">*</span>
                                     </label>
@@ -104,7 +104,7 @@
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="text" id="rek_nr"  value="{{ old('rekening_nr') }}" name="rekening_nr" placeholder="Rekening nummmer" class="form-control">
+                                        <input type="text" id="rek_nr"  value="{{ old('bank_number') }}" name="bank_number" placeholder="Rekening nummmer" class="form-control">
                                     </div>
                                 </div>
 
@@ -153,13 +153,13 @@
                                 </div>
 
                                 {{-- House number form-group --}}
-                                <div class="form-group has-feedback {{ $errors->has('number') ? 'has-error' : '' }}">
+                                <div class="form-group has-feedback {{ $errors->has('house_number') ? 'has-error' : '' }}">
                                     <label for="number" class="control-label col-sm-4">
                                         Huisnummer: <span class="text-danger">*</span>
                                     </label>
 
                                     <div class="col-sm-4">
-                                        <input type="text" id="number" value="{{ old('number') }}" name="number" class="form-control" placeholder="Huisnummer">
+                                        <input type="text" id="number" value="{{ old('house_number') }}" name="house_number" class="form-control" placeholder="Huisnummer">
                                     </div>
                                 </div>
 
@@ -170,7 +170,7 @@
                                     </label>
 
                                     <div class="col-sm-4">
-                                        <input type="text" id="bus" value="{{ old('bus')}}" name="bus" class="form-control" placeholder="Bus nummer">
+                                        <input type="text" id="bus" value="{{ old('house_sub_number')}}" name="house_sub_number" class="form-control" placeholder="Bus nummer">
                                     </div>
                                 </div>
 
@@ -181,7 +181,7 @@
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="text" id="tel_num" value="{{ old('telephone_number') }}" name="telephone_number" class="form-control" placeholder="Vaste telefoon nummer">
+                                        <input type="text" id="tel_num" value="{{ old('phone_number') }}" name="phone_number" class="form-control" placeholder="Vaste telefoon nummer">
                                     </div>
                                 </div>
 
@@ -195,7 +195,7 @@
                                     </label>
 
                                     <div class="col-sm-10">
-                                        <textarea name="notes" id="note" value="{{ old('notes') }}" class="form-control" rows="8" placeholder="Opmerkingen"></textarea>
+                                        <textarea name="description" id="note" value="{{ old('description') }}" class="form-control" rows="8" placeholder="Opmerkingen"></textarea>
                                     </div>
                                 </div>
 

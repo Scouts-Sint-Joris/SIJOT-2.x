@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\newNewsletter;
+use App\Mail\NewNewsletter;
 use App\Mailing;
 use App\NewsLetter;
 use Illuminate\Http\Request;
@@ -85,9 +85,9 @@ class MailingController extends Controller
     public function registerNewsLetter(Requests\NewsLetterValidator $input)
     {
         $insert = NewsLetter::create($input->except('_token'));
-
+        
         if ($insert) {
-            Mail::to($insert)->send(new newNewsletter($insert));
+            Mail::to($insert)->send(new NewNewsletter($insert));
 
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.newsletter-register'));
@@ -116,7 +116,7 @@ class MailingController extends Controller
 
         return redirect()->back(302);
     }
-    
+
     /**
      * [BACKEND]: Update view for the mailing data.
      *
@@ -150,7 +150,7 @@ class MailingController extends Controller
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.mailing-update'));
         }
-        
+
         return redirect()->back();
     }
 

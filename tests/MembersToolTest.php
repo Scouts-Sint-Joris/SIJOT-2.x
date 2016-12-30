@@ -50,10 +50,11 @@ class MembersToolTest extends TestCase
         $input['birth_date']        = '10/10/1995';
         $input['bank_number']       = '000/000/000/000';
         $input['country']           =  1;
+        $input['city']              = 'city';
         $input['street']            = 'Street name';
         $input['house_number']      = '1';
         $input['house_sub_number']  = '1';
-        $input['phone_number']      = '0000/00.00.00';
+        $input['mobile_number']     = '0000/00.00.00';
         $input['description']       = 'Description';
 
         $session['class']   = 'alert alert-success';

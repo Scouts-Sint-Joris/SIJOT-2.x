@@ -7,6 +7,7 @@ use App\Country;
 use App\Http\Requests\MembersValidator;
 use App\Members;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 
 class MembersController extends Controller
@@ -91,6 +92,8 @@ class MembersController extends Controller
     public function store(MembersValidator $input)
     {
         // FIXME: Phpunit triggers false on validation.
+
+        Log::debug($input->all());
 
         if ($this->members->create($input->except('_token'))) {
             session()->flash('class', 'alert alert-success');

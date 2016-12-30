@@ -15,18 +15,20 @@ class CreateMembersTable extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('gender');
-            $table->string('email');
-            $table->string('birth_date');
-            $table->string('bank_number');
-            $table->integer('country');
-            $table->string('street');
-            $table->string('house_number');
-            $table->string('house_sub_number');
-            $table->string('phone_number');
-            $table->text('description');
+            $table->string('firstname')->nullable();
+            $table->string('lastname')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('email')->nullable();
+            $table->string('birth_date')->nullable();
+            $table->string('bank_number')->nullable();
+            $table->integer('country')->nullable();
+            $table->string('street')->nullable();
+            $table->string('house_number')->nullable();
+            $table->string('house_sub_number')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('mobile_number')->nullable();
+            $table->string('city')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
