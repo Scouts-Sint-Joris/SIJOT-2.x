@@ -15,10 +15,19 @@ use Illuminate\Http\Request;
  */
 class HomeController extends Controller
 {
+    /** */
+    /** */
+    /** */
+
     /**
      * HomeController constructor.
+     *
+     * @param
+     * @param
+     * @param 
+     * @return Void
      */
-    public function __construct()
+    public function __construct(News $newsDb, Activity $activityDb, User $userDb)
     {
         $this->middleware('lang');
         $this->middleware('auth', ['only' => ['homeBackend']]);
