@@ -25,7 +25,7 @@ class LeaseTransformer extends TransformerAbstract
             'group' => $rental->group,
             'date' => [
                 'start_date' => $rental->start_date,
-                'end_date' => $rental->end_date,
+                'end_date'   => $rental->end_date,
             ],
             'contact' => [
                 'phone' => $rental->phone_number,
