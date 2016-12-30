@@ -44,8 +44,8 @@ class ActivityController extends ApiGuardController
      * @url:platform
      * @see:phpunit
      *
-     * @param   Request $request
-     * @return void
+     * @param  Request $request
+     * @return mixed
      */
     public function index(Request $request)
     {
