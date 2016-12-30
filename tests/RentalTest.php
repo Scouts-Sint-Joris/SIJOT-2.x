@@ -48,7 +48,7 @@ class RentalTest extends TestCase
      * @group all
      * @group rental
      */
-    public function testReachablePage() 
+    public function testReachablePage()
     {
         $this->authentication();
         $this->visit(route('rental.frontend.reachable'));
@@ -124,7 +124,7 @@ class RentalTest extends TestCase
 
         $session['class'] = 'alert alert-success';
         $session['message'] = '';
- 
+
         $this->authentication();
         $this->seeInDatabase('rentals', $data);
         $this->get(route('rental.backend.destroy', $data));
@@ -226,6 +226,8 @@ class RentalTest extends TestCase
      */
     public function testExport()
     {
+        $rental = factory(App\Rental::class)->create();
+        
         $this->authentication();
         $this->get(route('rental.backend.export'));
     }
