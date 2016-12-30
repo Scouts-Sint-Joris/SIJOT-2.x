@@ -8,6 +8,9 @@ use Chrisbjr\ApiGuard\Http\Controllers\ApiGuardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use League\Fractal\Manager;
+use League\Fractal\Pagination\Cursor;
+use League\Fractal\Resource\Collection;
 use Symfony\Component\HttpFoundation\Response as Status;
 
 /**
@@ -36,11 +39,35 @@ class ActivityController extends ApiGuardController
      * @url:platform
      * @see:phpunit
      *
+     * @param   Request $request
      * @return void
      */
-    public function index()
+    public function index(Request $request)
     {
+        $fractal = new Manager();
 
+        if ($currentCursorStr = $request->input('cursor', false)) {
+            $rentals = Activity::where('id', '>', $currentCursorStr)->take(5)->get();
+        } else {
+            $rentals = Activity::take(5)->get();
+        }
+
+        if (count($rentals) > 0) { // There are rentals found.
+            $prevCursorStr = $request->input('prevCursor', 6);
+            $newCursorStr  = $rentals->last()->id;
+
+            $cursor   = new Cursor($currentCursorStr, $prevCursorStr, $newCursorStr, $rentals->count());
+            $resource = new Collection($rentals, new ActivityTransformer);
+
+            $resource->setCursor($cursor);
+            $content = $fractal->createData($resource)->toJson();
+            $status  = Status::HTTP_OK;
+        } elseif (count($rentals) === 0) { // There are no rentals found.
+            $content = ['message' => 'Er zijn geen verhuringen'];
+            $status  = Status::HTTP_OK;
+        }
+
+        return response($content, $status)->header('Content-Type', 'application/json');
     }
 
     /**

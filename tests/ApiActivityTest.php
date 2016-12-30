@@ -11,13 +11,51 @@ class ApiActivityTest extends TestCase
     use DatabaseMigrations, DatabaseTransactions;
 
     /**
+     * GET|HEAD: /api/activity
+     * ROUTE:    api.activity.index
+     *
+     * @group api
+     * @group all
+     * @group activity
+     */
+    public function testActivityWithoutPagination()
+    {
+
+    }
+
+    /**
+     * GET|HEAD: /api/activity
+     * ROUTE:    api.activity.index
+     *
+     * @group api
+     * @group all
+     * @group activity
+     */
+    public function testActivityWithPagination()
+    {
+
+    }
+
+    /**
+     * GET|HEAD: /api/activity
+     * ROUTE:    api.activity.index
+     *
+     * @group api
+     * @group all
+     * @group activity
+     */
+    public function testActivityIndexNoData()
+    {
+
+    }
+
+    /**
      * DELETE: /api/activity/{activityId}
      * ROUTE:  api.activity.destroy
      *
      * @group api
      * @group all
      * @group activity
-     *
      */
     public function testActivityDestroyValidId()
     {
