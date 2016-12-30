@@ -97,14 +97,14 @@ class RentalController extends Controller
      * @url:platform  GET|HEAD:
      * @see:phpunit   RentalTest::testSetOptionRental();
      *
-     * @param  int $id the rental id in the database.
+     * @param  int $rentalId the rental id in the database.
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function setOption($id)
+    public function setOption($rentalId)
     {
         $status = RentalStatus::where('name', trans('rental.lease-option'))->first();
 
-        if ($this->rentalDb->find($id)->update(['status_id' => $status->id])) {
+        if ($this->rentalDb->find($rentalId)->update(['status_id' => $status->id])) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.rental-option'));
         }
@@ -118,14 +118,14 @@ class RentalController extends Controller
      * @url:platform  GET|HEAD:
      * @see:phpunit   RentalTest::testSetConfirmedRental()
      *
-     * @param  int $id the rental id in the database.
+     * @param  int $rentalId the rental id in the database.
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function setConfirmed($id)
+    public function setConfirmed($rentalId)
     {
         $status = RentalStatus::where('name', trans('rental.lease-confirm'))->first();
 
-        if ($this->rentalDb->find($id)->update(['status_id' => $status->id])) {
+        if ($this->rentalDb->find($rentalId)->update(['status_id' => $status->id])) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.rental-confirm'));
 
@@ -241,9 +241,9 @@ class RentalController extends Controller
      * @param  int $id the rental id in the database
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroyLease($id)
+    public function destroyLease($rentalId)
     {
-        if ($this->rentalDb->destroy($id)) {
+        if ($this->rentalDb->destroy($rentalId)) {
             session()->flash('class', 'alert alert-sucess');
             session()->flash('message', trans('flash-session.rental-update'));
         }

@@ -41,9 +41,9 @@ Route::get('/backend/rental/export', 'RentalController@exportExcel')->name('rent
 Route::post('/rental/insert', 'RentalController@insert')->name('rental.store');
 
 Route::get('/backend/rental', 'RentalController@indexBackEnd')->name('rental.backend');
-Route::get('/backend/rental/option/{id}', 'RentalController@setOption')->name('rental.backend.option');
-Route::get('/backend/rental/confirm/{id}', 'RentalController@setConfirmed')->name('rental.backend.confirm');
-Route::get('/backend/rental/destroy/{id}', 'RentalController@destroyLease')->name('rental.backend.destroy');
+Route::get('/backend/rental/option/{rentalId}', 'RentalController@setOption')->name('rental.backend.option');
+Route::get('/backend/rental/confirm/{rentalId}', 'RentalController@setConfirmed')->name('rental.backend.confirm');
+Route::get('/backend/rental/destroy/{rentalId}', 'RentalController@destroyLease')->name('rental.backend.destroy');
 
 // Newsletter routes
 Route::post('/newsletter/register', 'MailingController@registerNewsLetter')->name('newsletter.register');
