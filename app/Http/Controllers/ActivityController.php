@@ -11,30 +11,24 @@ use XMLWriter;
 
 class ActivityController extends Controller
 {
-    /**
-     * Inputs not included in the mass-assigns.
-     *
-     * @var array
-     */
+    /** @var array $inputFilter Inputs not included in the mass-assigns.*/
     protected $inputFilter;
 
-    /**
-     * MySQL database relations array.
-     *
-     * @var array
-     */
+    /** @var array $dbRelations. MySQL database relations array. */
     protected $dbRelations;
 
     /**
      * ActivityController constructor
      */
-    public function __construct()
+    public function __construct(Activity $activityDb)
     {
         $this->inputFilter = ['_token', 'group'];   // Fill in the filter array for the inputs.
         $this->dbRelations = ['groups', 'creator']; // The MySQL database relations.
 
         $this->middleware('auth')->except('rssFeed');   // See if the user is logged in.
         $this->middleware('lang');                      // Determine the language and get the correct trans. files.
+
+        $this->activityDb = $activityDb
     }
 
     /**
@@ -51,12 +45,12 @@ class ActivityController extends Controller
         // 0 = draft
         // 1 = publish
 
-        $data['drafts'] = Activity::with($this->dbRelations)
+        $data['drafts'] = $this->activityDb->with($this->dbRelations)
             ->where('state', 0)
             ->orderBy('date', 'ASC')
             ->paginate(25);
 
-        $data['published'] = Activity::with($this->dbRelations)
+        $data['published'] = $this->activityDb->with($this->dbRelations)
             ->where('state', 1)
             ->orderBy('date', 'ASC')
             ->paginate(25);
@@ -82,9 +76,9 @@ class ActivityController extends Controller
         // dd($input->all());
 
         $inputs = array_merge(['user_id' => auth()->user()->id], $input->except($this->inputFilter));
-        $create = Activity::create($inputs);
+        $create = $this->activityDb->create($inputs);
 
-        Activity::find($create->id)->groups()->attach($input->group);
+        $this->activityDb->find($create->id)->groups()->attach($input->group);
 
         if ($create) {
             session()->flash('class', 'alert alert-success');
@@ -105,7 +99,7 @@ class ActivityController extends Controller
     public function rssFeed()
     {
         // Query.
-        $query = Activity::with($this->dbRelations)
+        $query = $this->activityDb->with($this->dbRelations)
             ->where('state', 1)
             ->orderBy('date', 'ASC')
             ->get();
@@ -119,7 +113,7 @@ class ActivityController extends Controller
         $xml->startDocument();
         $xml->startElement('activiteiten');
 
-        foreach($query as $activity) {
+        foreach ($query as $activity) {
             $start = strtotime('H:i', $activity->start_time);
             $end   = strtotime('H:i', $activity->end_time);
 
@@ -152,7 +146,7 @@ class ActivityController extends Controller
      */
     public function edit($id)
     {
-        $data['activity'] = Activity::find($id);
+        $data['activity'] = $this->activityDb->find($id);
         return view('', $data);
     }
 
@@ -170,7 +164,7 @@ class ActivityController extends Controller
      */
     public function update(ActivityValidator $input, $id)
     {
-        $activity = Activity::find($id);
+        $activity = $this->activityDb->find($id);
         $inputs   = array_merge(['user_id' => auth()->user()->id], $input->except($this->inputFilter));
         $update   = $activity->update($inputs);
 
@@ -193,7 +187,7 @@ class ActivityController extends Controller
      */
     public function destroy($id)
     {
-        if (Activity::destroy($id)) {
+        if ($this->activityDb->destroy($id)) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.activity-destroy'));
         }
