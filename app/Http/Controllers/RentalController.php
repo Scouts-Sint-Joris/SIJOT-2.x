@@ -238,7 +238,7 @@ class RentalController extends Controller
      * @url:platform:  GET|HEAD: /rental/destroy/{id}
      * @see:phpunit    RentalTest::testRentalDelete()
      *
-     * @param  int $id the rental id in the database
+     * @param  int $rentalId the rental id in the database
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroyLease($rentalId)
