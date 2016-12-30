@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests;
+
+use Tests/TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -25,12 +28,12 @@ class AccountTest extends TestCase
         $input['theme']  = 'skin-red';
         $input['email']  = 'name@domain.tld';
 
-        $session['class']   = 'alert alert-success'; 
-        $session['message'] = trans('auth.FlashInfo'); 
+        $session['class']   = 'alert alert-success';
+        $session['message'] = trans('auth.FlashInfo');
 
-        $this->authentication(); 
+        $this->authentication();
         $this->post($route, $input);
-        $this->seeStatusCode(302); 
+        $this->seeStatusCode(302);
         $this->seeInDatabase('users', $input);
         $this->session($session);
     }
@@ -62,7 +65,7 @@ class AccountTest extends TestCase
     /**
      * GET|HEAD: /settings/profile
      * ROUTE:    settings.profile
-     * 
+     *
      * @group auth
      * @group profile
      * @group all

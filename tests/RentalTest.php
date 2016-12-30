@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests;
+
+use Tests/TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -227,7 +230,7 @@ class RentalTest extends TestCase
     public function testExport()
     {
         $rental = factory(App\Rental::class)->create();
-        
+
         $this->authentication();
         $this->get(route('rental.backend.export'));
     }
