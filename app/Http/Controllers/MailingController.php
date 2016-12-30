@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\newNewsletter;
+use App\Mail\NewNewsletter;
 use App\Mailing;
 use App\NewsLetter;
 use Illuminate\Http\Request;
@@ -87,7 +87,7 @@ class MailingController extends Controller
         $insert = NewsLetter::create($input->except('_token'));
         
         if ($insert) {
-            Mail::to($insert)->send(new newNewsletter($insert));
+            Mail::to($insert)->send(new NewNewsletter($insert));
 
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.newsletter-register'));
