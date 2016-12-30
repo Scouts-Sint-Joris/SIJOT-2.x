@@ -16,14 +16,14 @@ class Groups extends Model
      * @var array
      */
     protected $fillable = ['selector', 'sub_heading', 'heading', 'description'];
-    
+
     /**
      * Hidden fields.
      *
      * @var array
      */
     protected $hidden = ['created_at', 'updated_at'];
-    
+
     /**
      * Scope a query to only get the group selected by his selector.
      * ----

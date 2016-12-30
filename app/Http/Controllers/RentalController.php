@@ -25,22 +25,26 @@ use Maatwebsite\Excel\Facades\Excel;
  */
 class RentalController extends Controller
 {
-    /**
-     * Authencation middleware protected routes.
-     *
-     * @var mixed
-     */
+    /** @var mixed $authMiddleware Authencation middleware protected routes */
     protected $authMiddleware;
+
+    /** @var Rental $rentalDb The database model for the rentals. */
+    private $rentalDb;
 
     /**
      * RentalController constructor.
+     *
+     * @param   Rental $rentalDb
+     * @return  void
      */
-    public function __construct()
+    public function __construct(Rental $rentalDb)
     {
         $this->authMiddleware = ['indexBackEnd', 'setOption', 'setConfirmed', 'destroy'];
 
         $this->middleware('lang');
         $this->middleware('auth')->only($this->authMiddleware);
+
+        $this->rentalDb = $rentalDb;
     }
 
     /**
@@ -53,7 +57,7 @@ class RentalController extends Controller
      */
     public function indexBackEnd()
     {
-        $data['rentals'] = Rental::with('status')->paginate(25);
+        $data['rentals'] = $this->rentalDb->with('status')->paginate(25);
         return view('rental.backend-overview', $data);
     }
 
@@ -80,7 +84,7 @@ class RentalController extends Controller
      */
     public function calendar()
     {
-        $data['items'] = Rental::whereHas('status', function ($query) {
+        $data['items'] = $this->rentalDb->whereHas('status', function ($query) {
             $query->where('name', trans('rental.confirm'));
         })->get();
 
@@ -100,7 +104,7 @@ class RentalController extends Controller
     {
         $status = RentalStatus::where('name', trans('rental.lease-option'))->first();
 
-        if (Rental::find($id)->update(['status_id' => $status->id])) {
+        if ($this->rentalDb->find($id)->update(['status_id' => $status->id])) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.rental-option'));
         }
@@ -121,7 +125,7 @@ class RentalController extends Controller
     {
         $status = RentalStatus::where('name', trans('rental.lease-confirm'))->first();
 
-        if (Rental::find($id)->update(['status_id' => $status->id])) {
+        if ($this->rentalDb->find($id)->update(['status_id' => $status->id])) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.rental-confirm'));
 
@@ -157,7 +161,7 @@ class RentalController extends Controller
      */
     public function insert(Requests\RentalValidator $input)
     {
-        $insert = Rental::create($input->except('_token'));
+        $insert = $this->rentalDb->create($input->except('_token'));
         $status = RentalStatus::where('name', trans('rental.lease-new'))->first();
 
         if (Rental::find($insert->id)->update(['status_id' => $status->id])) {
@@ -189,7 +193,7 @@ class RentalController extends Controller
      */
     public function edit($id)
     {
-        $data['rental'] = $this->lease->find($id);
+        $data['rental'] = $this->rentalDb->find($id);
         return view('', $data);
     }
 
@@ -206,7 +210,7 @@ class RentalController extends Controller
      */
     public function update(Requests\RentalValidator $input, $id)
     {
-        $rental = Rental::find($id);
+        $rental = $this->rentalDb->find($id);
         $rental->input($input->except('_token'));
 
         session()->flash('class', 'alert alert-success');
@@ -239,7 +243,7 @@ class RentalController extends Controller
      */
     public function destroyLease($id)
     {
-        if (Rental::destroy($id)) {
+        if ($this->rentalDb->destroy($id)) {
             session()->flash('class', 'alert alert-sucess');
             session()->flash('message', trans('flash-session.rental-update'));
         }
@@ -264,7 +268,7 @@ class RentalController extends Controller
 
             // Sheet: for all the rentals.
             $excel->sheet('Alle', function ($sheet) {
-                $all = Rental::with('status')->get();
+                $all = $this->rentalDb->with('status')->get();
                 $sheet->loadView('rental.export.all', compact('all'));
             });
         })->download('xls');
