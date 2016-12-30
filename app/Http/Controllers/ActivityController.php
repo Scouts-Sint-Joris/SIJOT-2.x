@@ -28,7 +28,7 @@ class ActivityController extends Controller
         $this->middleware('auth')->except('rssFeed');   // See if the user is logged in.
         $this->middleware('lang');                      // Determine the language and get the correct trans. files.
 
-        $this->activityDb = $activityDb
+        $this->activityDb = $activityDb;
     }
 
     /**
