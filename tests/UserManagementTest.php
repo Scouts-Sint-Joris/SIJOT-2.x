@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use Tests/TestCase;
+use Tests\TestCase;
 use App\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;

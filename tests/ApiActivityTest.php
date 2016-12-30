@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use Tests/TestCase;
+use Tests\TestCase;
 use Carbon\Carbon;
 use Chrisbjr\ApiGuard\Models\ApiKey;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
