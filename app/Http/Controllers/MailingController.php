@@ -94,7 +94,7 @@ class MailingController extends Controller
      */
     public function registerNewsLetter(Requests\NewsLetterValidator $input)
     {
-        $insert = $this->newsletterDbcreate($input->except('_token'));
+        $insert = $this->newsletterDb->create($input->except('_token'));
 
         if ($insert) {
             Mail::to($insert)->send(new NewNewsletter($insert));
