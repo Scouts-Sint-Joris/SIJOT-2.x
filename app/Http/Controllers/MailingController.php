@@ -40,7 +40,7 @@ class MailingController extends Controller
         $this->authMiddleware = ['registerNewsLetter', 'destroyNewsletter'];
 
         $this->middleware('auth')->except($this->authMiddleware);
-        $this->middleware('lang');µ
+        $this->middleware('lang');
 
         // Params init
         $this->mailingDb = $mailingDb;
