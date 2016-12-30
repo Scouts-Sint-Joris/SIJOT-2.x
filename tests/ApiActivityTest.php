@@ -20,7 +20,15 @@ class ApiActivityTest extends TestCase
      */
     public function testActivityWithoutPagination()
     {
+        $activities = factory(App\Activity::class, 2)->create();
+        $apiKey     = factory(ApiKey::class)->create();
+        $headers['X-Authorization'] = $apiKey->key;
 
+        $json = '"meta": {"cursor": {"current": false, "prev": 6, "next": 2, "count": 2}}';
+
+        $this->get(route('api.activity.index'), $headers);
+        $this->seeStatusCode(200);
+        $this->seeJson(json_decode($json));
     }
 
     /**
@@ -33,7 +41,15 @@ class ApiActivityTest extends TestCase
      */
     public function testActivityWithPagination()
     {
+        $activities = factory(App\Activity::class, 12)->create();
+        $apiKey     = factory(ApiKey::class)->create();
+        $headers['X-Authorization'] = $apiKey->key;
 
+        $json = '"meta": {"cursor": {"cursor": {"current": false, "prev": 6, "next": 5, "count": 5}}';
+
+        $this->get(route('api.activity.index'), $headers);
+        $this->seeStatusCode(200);
+        $this->seeJson(json_decode($json));
     }
 
     /**
@@ -46,7 +62,14 @@ class ApiActivityTest extends TestCase
      */
     public function testActivityIndexNoData()
     {
+        $apiKey     = factory(ApiKey::class)->create();
+        $headers['X-Authorization'] = $apiKey->key;
 
+        $output['message'] = 'Er zijn geen activiteiten';
+
+        $this->get(route('api.activity.index'), $headers);
+        $this->seeStatusCode(200);
+        $this->seeJson($output);
     }
 
     /**

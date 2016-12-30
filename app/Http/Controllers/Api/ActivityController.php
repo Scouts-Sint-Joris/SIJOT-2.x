@@ -63,7 +63,7 @@ class ActivityController extends ApiGuardController
             $content = $fractal->createData($resource)->toJson();
             $status  = Status::HTTP_OK;
         } elseif (count($rentals) === 0) { // There are no rentals found.
-            $content = ['message' => 'Er zijn geen verhuringen'];
+            $content = ['message' => 'Er zijn geen activiteiten'];
             $status  = Status::HTTP_OK;
         }
 
