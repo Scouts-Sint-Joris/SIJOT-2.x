@@ -12,25 +12,13 @@ use Illuminate\Support\Facades\Notification;
 
 class MembersController extends Controller
 {
-    /**
-     * Country database model.
-     *
-     * @var Country
-     */
+    /** @var Country $country The Country database model. */
     private $countries;
 
-    /**
-     * Members database model.
-     *
-     * @var array
-     */
+    /** @var array $members The members database model. */
     private $members;
 
-    /**
-     * User login database model.
-     *
-     * @var array
-     */
+    /** @var array $user The User login database model. */
     private $user;
 
     /**

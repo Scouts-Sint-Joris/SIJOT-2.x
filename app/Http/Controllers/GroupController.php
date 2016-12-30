@@ -16,22 +16,32 @@ use App\Http\Requests;
  */
 class GroupController extends Controller
 {
-    /**
-     * Auth middleware protected routes.
-     *
-     * @var array
-     */
+    /** @var array $authRoutes The auth middleware protected routes. */
     protected $authRoutes;
-    
+
+    /** @var Activity $activityDb The activity database model. **/
+    private $activityDb;
+
+    /** @var Groups $groupsDb The groups database model. **/
+    private $groupsDb;
+
     /**
      * GroupController constuctor
+     *
+     * @param  Activity $activityDb
+     * @param  Groups   $groupsDb
+     * @return Void
      */
-    public function __construct()
+    public function __construct(Activity $activityDb, Groups $groupsDb)
     {
         $this->authRoutes = ['edit', 'update'];
-        
+
         $this->middleware('lang');
         $this->middleware('auth')->only($this->authRoutes);
+
+        // PARAMS INIT
+        $this->activityDb = $activityDb;
+        $this->groupsDb   = $groupsDb;
     }
 
     /**
@@ -67,7 +77,7 @@ class GroupController extends Controller
     {
         $data['group']    = Groups::getGroup('selector', $param)->get();
         $data['activity'] = Activity::where('', '')->get();
-        
+
         return view('groups.show', $data);
     }
 
