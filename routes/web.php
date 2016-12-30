@@ -17,7 +17,7 @@ Auth::routes();
 
 // Home routes.
 Route::get('/', 'HomeController@homeFront')->name('home');
-Route::get('/home', 'Homecontroller@homeBackend')->name('home.backend');
+Route::get('/home', 'HomeController@homeBackend')->name('home.backend');
 
 // Group routes.
 Route::get('/groups', 'GroupController@overview')->name('frontend.groups');
