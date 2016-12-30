@@ -23,14 +23,19 @@ class ActivityController extends ApiGuardController
     // FIXME: Set the output data to translation files.
     // FIXME: Avoid static access to classes.
 
+    /** @var Activity $activity Activity Database model. */
+    private $activity;
+
     /**
      * ActivityController constructor.
      *
-     * @return void
+     * @param   Activity $activity
+     * @return  void
      */
-    public function __construct()
+    public function __construct(Activity $activity)
     {
         parent::__construct();
+        $this->activity = $activity;
     }
 
     /**
@@ -47,9 +52,9 @@ class ActivityController extends ApiGuardController
         $fractal = new Manager();
 
         if ($currentCursorStr = $request->input('cursor', false)) {
-            $rentals = Activity::where('id', '>', $currentCursorStr)->take(5)->get();
+            $rentals = $this->activity->where('id', '>', $currentCursorStr)->take(5)->get();
         } else {
-            $rentals = Activity::take(5)->get();
+            $rentals = $this->activity->take(5)->get();
         }
 
         if (count($rentals) > 0) { // There are rentals found.
@@ -82,7 +87,7 @@ class ActivityController extends ApiGuardController
      */
     public function show($activityId)
     {
-        $activity = Activity::find($activityId);
+        $activity = $this->activity->find($activityId);
 
         if ((int) count($activity) === 1) { // Record is found.
             $content  = $this->response->withItem($activity, new ActivityTransformer());
@@ -111,7 +116,7 @@ class ActivityController extends ApiGuardController
             return $this->response->withArray($content, $headers);
         }
 
-        Activity::create($request->all());
+        $this->activity->create($request->all());
 
         $creation = [
             'message' => 'De activiteit is aangemaakt.',
@@ -145,7 +150,7 @@ class ActivityController extends ApiGuardController
             return $this->response->withArray($content, $headers);
         }
 
-        $activity = Activity::find($activityId);
+        $activity = $this->activity->find($activityId);
 
         if ((int) count($activity) === 1) { // Record is found
             $activity->update($input->all());
@@ -171,7 +176,7 @@ class ActivityController extends ApiGuardController
      */
     public function destroy($activityId)
     {
-        if (! Activity::destroy($activityId)) {
+        if (! $this->activity->destroy($activityId)) {
             return $this->response->errorNotFound();
         }
 
