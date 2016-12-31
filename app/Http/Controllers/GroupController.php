@@ -54,12 +54,12 @@ class GroupController extends Controller
      */
     public function overview()
     {
-        $data['kapoenen']   = Groups::getGroup('kapoenen')->get();
-        $data['welpen']     = Groups::getGroup('welpen')->get();
-        $data['jongGivers'] = Groups::getGroup('jonggivers')->get();
-        $data['givers']     = Groups::getGroup('givers')->get();
-        $data['jins']       = Groups::getGroup('jins')->get();
-        $data['leiding']    = Groups::getGroup('leiding')->get();
+        $data['kapoenen']   = $this->groupsDb->getGroup('kapoenen')->get();
+        $data['welpen']     = $this->groupsDb->getGroup('welpen')->get();
+        $data['jongGivers'] = $this->groupsDb->getGroup('jonggivers')->get();
+        $data['givers']     = $this->groupsDb->getGroup('givers')->get();
+        $data['jins']       = $this->groupsDb->getGroup('jins')->get();
+        $data['leiding']    = $this->groupsDb->getGroup('leiding')->get();
 
         return view('groups.frontend-index', $data);
     }
@@ -75,8 +75,8 @@ class GroupController extends Controller
      */
     public function specific($param)
     {
-        $data['group']    = Groups::getGroup('selector', $param)->get();
-        $data['activity'] = Activity::where('', '')->get();
+        $data['group']    = $this->groupsDb->getGroup('selector', $param)->get();
+        $data['activity'] = $this->activityDb->where('', '')->get();
 
         return view('groups.show', $data);
     }
@@ -92,7 +92,7 @@ class GroupController extends Controller
      */
     public function edit($param)
     {
-        $data['group'] = Groups::getGroup($param)->get();
+        $data['group'] = $this->groupsDb->getGroup($param)->get();
         return view('groups.backend-index', $data);
     }
 
@@ -109,7 +109,7 @@ class GroupController extends Controller
      */
     public function update(GroupValidator $input, $param)
     {
-        $group = Groups::where('selector', $param);
+        $group = $this->groupsDb->where('selector', $param);
 
         if ($group->update($input->except('_token'))) {
             // The group data has been updated.

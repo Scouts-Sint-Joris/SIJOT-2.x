@@ -164,12 +164,12 @@ class RentalController extends Controller
         $insert = $this->rentalDb->create($input->except('_token'));
         $status = RentalStatus::where('name', trans('rental.lease-new'))->first();
 
-        if (Rental::find($insert->id)->update(['status_id' => $status->id])) {
+        if ($this->rentalDb->find($insert->id)->update(['status_id' => $status->id])) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.rental-insert'));
 
             if (! auth()->check()) {
-                $rental = Rental::find($insert->id);
+                $rental = $this->rentalDb->find($insert->id);
                 $logins = User::with('permissions')->whereIn('name', ['rental'])->get();
 
                 Mail::to($logins)->queue(new RentalNotification($rental));

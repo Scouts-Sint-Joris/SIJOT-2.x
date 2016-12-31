@@ -79,10 +79,6 @@ class MembersController extends Controller
      */
     public function store(MembersValidator $input)
     {
-        // FIXME: Phpunit triggers false on validation.
-
-        Log::debug($input->all());
-
         if ($this->members->create($input->except('_token'))) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', 'Het lid is aangemaakt in het systeem. De leiding zal de inschrijving snel bevestigen.');
@@ -157,7 +153,7 @@ class MembersController extends Controller
      */
     public function update(MembersValidator $input, $memberId)
     {
-        if (Members::find($memberId)->update($input->except('_token'))) {
+        if ($this->members->find($memberId)->update($input->except('_token'))) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', 'Het Lid is gewijzigd');
 
