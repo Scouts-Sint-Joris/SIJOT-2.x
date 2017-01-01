@@ -97,7 +97,7 @@ class MembersController extends Controller
 
         if ($this->members->create($input->except('_token'))) {
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', 'Het lid is aangemaakt in het systeem. De leiding zal de inschrijving snel bevestigen.');
+            session()->flash('message', trans('members-module.flash-insert'));
         }
 
         return redirect()->back();
@@ -131,7 +131,7 @@ class MembersController extends Controller
     {
         if ($this->members->find($memberId)) { // User is confirmed.
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', 'Het lid bevestigd in het systeem.');
+            session()->flash('message', trans('members-module.flash-confirm'));
 
             // TODO: Implement login creation for the parent.
             // TODO: Set notification to the group leaders.
@@ -171,7 +171,7 @@ class MembersController extends Controller
     {
         if (Members::find($memberId)->update($input->except('_token'))) {
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', 'Het Lid is gewijzigd');
+            session()->flash('message', trans('members-module.flash-update'));
 
             Notification::send();
             Notification::send();
@@ -199,7 +199,7 @@ class MembersController extends Controller
 
         if ($recordDelete) { // THe user and all the associated relations are deleted.
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', 'Het lid is verwijderd uit het systeem. Vergeet hem niet te verwijderen in de GA');
+            session()->flash('message', trans('members-module.flash-destroy'));
         }
 
         return redirect()->back(302);
