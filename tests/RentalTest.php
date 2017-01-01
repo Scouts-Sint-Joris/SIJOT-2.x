@@ -227,7 +227,6 @@ class RentalTest extends TestCase
     public function testExport()
     {
         $rental = factory(App\Rental::class)->create();
-        
         $this->authentication();
         $this->get(route('rental.backend.export'));
     }

@@ -40,8 +40,8 @@ class AuthencationTest extends TestCase
 
     /**
      * GET|HEAD:
-     * ROUTE: 
-     * 
+     * ROUTE:
+     *
      * @group auth
      * @group all
      * @group api
@@ -119,7 +119,7 @@ class AuthencationTest extends TestCase
      * @group api
      */
     public function testDeleteKey()
-    { 
+    {
         $key   = factory(Chrisbjr\ApiGuard\Models\ApiKey::class)->create([
             'id' => '1',
             'service' => 'application service'

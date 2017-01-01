@@ -32,7 +32,7 @@ class UserTableSeeder extends Seeder
         $data2['theme']      = 'skin-red';
         $data2['password']   = bcrypt('admin1995');
 
-		$table = DB::table('users');
+        $table = DB::table('users');
 		$table->delete();
 
         $create1 = User::create($data1);
