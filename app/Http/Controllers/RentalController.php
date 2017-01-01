@@ -31,11 +31,11 @@ class RentalController extends Controller
     /** @var Rental $rentalDb The database model for the rentals. */
     private $rentalDb;
 
-    /** */
-    private
+    /** @var RentalStatus $rentalStatus The rental status database model. */
+    private $rentalStatus;
 
-    /** */
-    private
+    /** @var User $userDb The user status database model. */
+    private $userDb;
 
     /**
      * RentalController constructor.
@@ -53,7 +53,9 @@ class RentalController extends Controller
         $this->middleware('auth')->only($this->authMiddleware);
 
         // Param init
-        $this->rentalDb = $rentalDb;
+        $this->rentalDb     = $rentalDb;
+        $this->rentalStatus = $rentalStatus;
+        $this->userDb       = $userDb;
     }
 
     /**
@@ -111,7 +113,7 @@ class RentalController extends Controller
      */
     public function setOption($rentalId)
     {
-        $status = RentalStatus::where('name', trans('rental.lease-option'))->first();
+        $status = $this->rentalStatus->where('name', trans('rental.lease-option'))->first();
 
         if ($this->rentalDb->find($rentalId)->update(['status_id' => $status->id])) {
             session()->flash('class', 'alert alert-success');
@@ -132,14 +134,14 @@ class RentalController extends Controller
      */
     public function setConfirmed($rentalId)
     {
-        $status = RentalStatus::where('name', trans('rental.lease-confirm'))->first();
+        $status = $this->rentalStatus->where('name', trans('rental.lease-confirm'))->first();
 
         if ($this->rentalDb->find($rentalId)->update(['status_id' => $status->id])) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.rental-confirm'));
 
             // Notification
-            Notification::send(User::all(), new RentalConfirmed());
+            Notification::send($this->userDb->all(), new RentalConfirmed());
         }
 
         return redirect()->back();
@@ -171,7 +173,7 @@ class RentalController extends Controller
     public function insert(Requests\RentalValidator $input)
     {
         $insert = $this->rentalDb->create($input->except('_token'));
-        $status = RentalStatus::where('name', trans('rental.lease-new'))->first();
+        $status = $this->rentalStatus->where('name', trans('rental.lease-new'))->first();
 
         if ($this->rentalDb->find($insert->id)->update(['status_id' => $status->id])) {
             session()->flash('class', 'alert alert-success');
@@ -179,12 +181,12 @@ class RentalController extends Controller
 
             if (! auth()->check()) {
                 $rental = $this->rentalDb->find($insert->id);
-                $logins = User::with('permissions')->whereIn('name', ['rental'])->get();
+                $logins = $this->userDb->with('permissions')->whereIn('name', ['rental'])->get();
 
                 Mail::to($logins)->queue(new RentalNotification($rental));
                 Mail::to($insert)->queue(new RentalNotificationRequest($rental));
             } elseif (auth()->check()) {
-                Notification::send(User::all(), new RentalInsertNotification());
+                Notification::send($this->userDb->all(), new RentalInsertNotification());
             }
         }
 
@@ -266,7 +268,7 @@ class RentalController extends Controller
      * @url:platform  GET|HEAD: /backend/rental/export
      * @see:phpunit   RentalTest::testExport()
      *
-     * @return void | Excel download
+     * @return Void | Excel download
      */
     public function exportExcel()
     {
