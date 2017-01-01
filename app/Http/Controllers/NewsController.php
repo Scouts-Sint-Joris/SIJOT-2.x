@@ -17,13 +17,23 @@ use Illuminate\Http\Request;
  */
 class NewsController extends Controller
 {
+    /** @var Collection $tagsDb The tags database model. */
+    private $tagsDb;
+
+    /** @var Collection $newsDb The news database model. */
+    private $newsDb;
+
     /**
      * NewsController constructor.
      */
-    public function __construct()
+    public function __construct(Tags $tagsDb, News $newsDb)
     {
         $this->middleware('auth');
         $this->middleware('lang');
+
+        // Param init.
+        $this->tagsDb = $tagsDb;
+        $this->newsDb = $newsDb;
     }
 
     /**
@@ -41,9 +51,9 @@ class NewsController extends Controller
         // 1 = publish
         // 0 = draft.
 
-        $data['draft']   = News::where('state', 0)->get();
-        $data['publish'] = News::where('state', 1)->get();
-        $data['tags']    = Tags::all();
+        $data['draft']   = $this->newsDb->where('state', 0)->get();
+        $data['publish'] = $this->newsDb->where('state', 1)->get();
+        $data['tags']    = $this->tagsDb->all();
 
         return view('news.index', $data);
     }
@@ -60,7 +70,7 @@ class NewsController extends Controller
      */
     public function store(Requests\NewsValidator $input)
     {
-        if (News::create($input->except('_token'))) {
+        if ($this->newsDb->create($input->except('_token'))) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.news-create'));
         }
@@ -79,10 +89,10 @@ class NewsController extends Controller
      */
     public function backendShow($id)
     {
-        $data['item'] = News::find($id);
+        $data['item'] = $this->newsDb->find($id);
         return view('news.show', $data);
     }
-    
+
     /**
      * [BACKEND]: Edit view for a news message.
      *
@@ -94,10 +104,10 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        $data['item'] = News::find($id);
+        $data['item'] = $this->newsDb->find($id);
         return view('news.edit', $data);
     }
-    
+
     /**
      * [METHOD]: Update a news message in the database.
      *
@@ -110,11 +120,11 @@ class NewsController extends Controller
      */
     public function update(Requests\NewsValidator $input, $id)
     {
-        if (News::findOrFail($id)->update($input->except('_token'))) {
+        if ($this->newsDb->findOrFail($id)->update($input->except('_token'))) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.news-update'));
         }
-        
+
         return redirect()->back(302);
     }
 
@@ -129,14 +139,14 @@ class NewsController extends Controller
      */
     public function draft($id)
     {
-        if (News::findOrFail($id)->update(['state' => 0])) {
+        if ($this->newsDb->findOrFail($id)->update(['state' => 0])) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.new-draft'));
         }
 
         return redirect()->back();
     }
-  
+
     /**
      * [METHOD]: Publish a news message form the draft status.
      *
@@ -148,7 +158,7 @@ class NewsController extends Controller
      */
     public function publish($id)
     {
-        if (News::find($id)->update(['state' => 1])) {
+        if ($this->newsDb->find($id)->update(['state' => 1])) {
             session()->flash('class', 'alert alert-danger');
             session()->flash('message', trans('flash-session.news-publish'));
         }
@@ -167,7 +177,7 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        $destroy = News::findOrFail($id);
+        $destroy = $this->newsDb->findOrFail($id);
         $destroy->tags()->sync([]);
         $destroy->delete();
 
