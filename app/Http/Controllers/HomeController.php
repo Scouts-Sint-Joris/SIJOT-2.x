@@ -53,7 +53,7 @@ class HomeController extends Controller
      */
     public function homeFront()
     {
-        $data['news']       = $this->userDb->where('state', 1)->paginate(4);
+        $data['news']       = $this->newsDb->where('state', 1)->paginate(4);
         $data['activities'] = $this->activityDb->with(['groups', 'creator'])
             ->where('state', 1)
             ->orderBy('date', 'ASC')
