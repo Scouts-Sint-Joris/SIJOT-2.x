@@ -166,8 +166,8 @@ class ActivityController extends Controller
     {
         $activity = $this->activityDb->find($id);
         $inputs   = array_merge(['user_id' => auth()->user()->id], $input->except($this->inputFilter));
-        
-        if ($update->update($inputs)) {
+
+        if ($activity->update($inputs)) {
             session()->flash('success', 'alert alert-success');
             session()->flash('message', trans('flash-session.activity-update'));
         }
