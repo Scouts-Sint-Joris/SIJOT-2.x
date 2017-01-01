@@ -31,19 +31,28 @@ class RentalController extends Controller
     /** @var Rental $rentalDb The database model for the rentals. */
     private $rentalDb;
 
+    /** */
+    private
+
+    /** */
+    private
+
     /**
      * RentalController constructor.
      *
-     * @param   Rental $rentalDb
-     * @return  void
+     * @param   App\Rental          $rentalDb
+     * @param   App\RentalStatus    $rentalStatus
+     * @param   App\User            $userDb
+     * @return  Void
      */
-    public function __construct(Rental $rentalDb)
+    public function __construct(Rental $rentalDb, RentalStatus $rentalStatus, User $userDb)
     {
         $this->authMiddleware = ['indexBackEnd', 'setOption', 'setConfirmed', 'destroy'];
 
         $this->middleware('lang');
         $this->middleware('auth')->only($this->authMiddleware);
 
+        // Param init
         $this->rentalDb = $rentalDb;
     }
 

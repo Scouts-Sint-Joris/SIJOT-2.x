@@ -26,9 +26,10 @@ class RentalController extends ApiGuardController
     /**
      * RentalController constructor.
      *
+     * @param  App\Rental $rentalDb
      * @return Void
      */
-    public function __construct()
+    public function __construct(Rental $rentalDb)
     {
         parent::__construct();
         $this->rentalDb = $rentalDb;
