@@ -20,12 +20,18 @@ use Symfony\Component\HttpFoundation\Response as Status;
  */
 class RentalController extends ApiGuardController
 {
+    /** @var Rental $rentalDb The rental database model. */
+    private $rentalDb;
+
     /**
      * RentalController constructor.
+     *
+     * @return Void
      */
     public function __construct()
     {
         parent::__construct();
+        $this->rentalDb = $rentalDb;
     }
 
     /**
@@ -42,9 +48,9 @@ class RentalController extends ApiGuardController
         $fractal = new Manager();
 
         if ($currentCursorStr = $request->input('cursor', false)) {
-            $rentals = Rental::where('id', '>', $currentCursorStr)->take(5)->get();
+            $rentals = $this->rentalDb->where('id', '>', $currentCursorStr)->take(5)->get();
         } else {
-            $rentals = Rental::take(5)->get();
+            $rentals = $this->rentalDb->take(5)->get();
         }
 
         if (count($rentals) > 0) { // There are rentals found.
@@ -91,7 +97,7 @@ class RentalController extends ApiGuardController
         }
 
         // Validation passes proceed controller.
-        Rental::create($request->all());
+        $this->rentalDb->create($request->all());
 
         return $this->response->withArray([
             'message' => 'De verhuring is aangemaakt.',
@@ -116,23 +122,19 @@ class RentalController extends ApiGuardController
 
         if ($validator->fails()) {
             // Validation fails.
-            $content = [
-                'message' => 'Could not update the lease information',
-                'http_code' => Status::HTTP_BAD_REQUEST,
-                'errors' => $validator->errors()
-            ];
+            $content['message']     = 'Could not update the lease information';
+            $content['http_code']   = Status::HTTP_BAD_REQUEST;
+            $content['errors']      = $validator->errors();
 
             return response($content, Status::HTTP_BAD_REQUEST)
                 ->header('Content-Type', 'application/json');
         }
 
         try {
-            Rental::findOrFail($id)->update($request->all());
+            $this->rentalDb->findOrFail($id)->update($request->all());
 
-            $content = [
-                'message' => 'De verhuring is gewijzigd.',
-                'http_code' => Status::HTTP_OK
-            ];
+            $content['message']   = 'De verhuring is gewijzigd.';
+            $content['http_code'] = Status::HTTP_OK;
 
             return response($content, Status::HTTP_OK)
                 ->header('Content-Type', 'application/json');
@@ -154,7 +156,7 @@ class RentalController extends ApiGuardController
     public function show($id)
     {
         try {
-            $lease = Rental::findOrFail($id);
+            $lease = $this->rentalDb->findOrFail($id);
             $content = $this->response->withItem($lease, new LeaseTransformer());
 
             return response($content, Status::HTTP_OK)->header('Content-Type', 'application/json');
