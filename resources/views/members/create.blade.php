@@ -52,7 +52,7 @@
                                 {{-- Gender form-group --}}
                                 <div class="form-group has-feedback {{ $errors->has('firstname') ? 'has-error' : '' }}">
                                     <label for="gender" class="control-label col-sm-4">
-                                        Geslacht: <span class="text-danger">*</span>
+                                        {{ trans('member-module.label-gender') }} <span class="text-danger">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
@@ -67,7 +67,7 @@
                                 {{-- Email form-group --}}
                                 <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                                     <label for="email" class="control-label col-sm-4">
-                                        E-mail: <span class="text-danger">*</span>
+                                        {{ trans('members-module.label-email') }} <span class="text-danger">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
@@ -116,7 +116,7 @@
                                 {{-- Country form-group --}}
                                 <div class="form-group has-feedback {{ $errors->has('country') ? 'has-error' : '' }}">
                                     <label for="firstname" class="control-label col-sm-4">
-                                        Land: <span class="text-danger">*</span>
+                                        {{ trans('member-module.label-country') }} <span class="text-danger">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
@@ -144,7 +144,7 @@
                                 {{-- Street form-group --}}
                                 <div class="form-group has-feedback {{ $errors->has('street') ? 'has-error' : '' }}">
                                     <label for="street" class="control-label col-sm-4">
-                                        Straat: <span class="text-danger">*</span>
+                                        {{ trans('member-module.label-street') }} <span class="text-danger">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
