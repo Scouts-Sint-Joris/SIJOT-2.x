@@ -30,7 +30,7 @@
                                 {{-- Firstname form-group --}}
                                 <div class="form-group has-feedback {{ $errors->has('firstname') ? 'has-error' : '' }}">
                                     <label class="control-label col-sm-4" for="firstname">
-                                        Voornaam: <span class="text-danger">*</span>
+                                        {{ trans('member-module.firstname') }} <span class="text-danger">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
@@ -41,7 +41,7 @@
                                 {{-- Lastname form-group --}}
                                 <div class="form-group has-feedback {{ $errors->has('lastname') ? 'has-error' : '' }}">
                                     <label for="lastname" class="control-label col-sm-4">
-                                        Achternaam: <span class="text-danger">*</span>
+                                        {{ trans('member-module.lastname') }} <span class="text-danger">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
@@ -52,7 +52,7 @@
                                 {{-- Gender form-group --}}
                                 <div class="form-group has-feedback {{ $errors->has('firstname') ? 'has-error' : '' }}">
                                     <label for="gender" class="control-label col-sm-4">
-                                        Geslacht: <span class="text-danger">*</span>
+                                        {{ trans('member-module.label-gender') }} <span class="text-danger">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
@@ -67,7 +67,7 @@
                                 {{-- Email form-group --}}
                                 <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                                     <label for="email" class="control-label col-sm-4">
-                                        E-mail: <span class="text-danger">*</span>
+                                        {{ trans('member-module.label-email') }} <span class="text-danger">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
@@ -116,7 +116,7 @@
                                 {{-- Country form-group --}}
                                 <div class="form-group has-feedback {{ $errors->has('country') ? 'has-error' : '' }}">
                                     <label for="firstname" class="control-label col-sm-4">
-                                        Land: <span class="text-danger">*</span>
+                                        {{ trans('member-module.label-country') }} <span class="text-danger">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
@@ -133,7 +133,7 @@
                                 {{-- Postal code and city form-group --}}
                                 <div class="form-group has-feedback {{ $errors->has('city') ? 'has-error' : '' }}">
                                     <label for="city" class="control-label col-sm-4">
-                                        Gemeente: <span class="text-danger">*</span>
+                                        {{ trans('member-module.label-city') }} <span class="text-danger">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
@@ -144,7 +144,7 @@
                                 {{-- Street form-group --}}
                                 <div class="form-group has-feedback {{ $errors->has('street') ? 'has-error' : '' }}">
                                     <label for="street" class="control-label col-sm-4">
-                                        Straat: <span class="text-danger">*</span>
+                                        {{ trans('member-module.label-street') }} <span class="text-danger">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
@@ -201,7 +201,7 @@
 
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="submit" class="btn btn-success">Registreren</button>
+                                        <button type="submit" class="btn btn-success">{{ trans('member-module.button-submit') }}</button>
                                         <button type="reset" class="btn btn-danger">Reset</button>
                                     </div>
                                 </div>
