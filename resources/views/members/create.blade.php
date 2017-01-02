@@ -67,7 +67,7 @@
                                 {{-- Email form-group --}}
                                 <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                                     <label for="email" class="control-label col-sm-4">
-                                        {{ trans('members-module.label-email') }} <span class="text-danger">*</span>
+                                        {{ trans('member-module.label-email') }} <span class="text-danger">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
@@ -201,7 +201,7 @@
 
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="submit" class="btn btn-success">Registreren</button>
+                                        <button type="submit" class="btn btn-success">{{ trans('member-module.button-submit') }}</button>
                                         <button type="reset" class="btn btn-danger">Reset</button>
                                     </div>
                                 </div>

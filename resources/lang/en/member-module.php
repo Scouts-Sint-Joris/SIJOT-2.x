@@ -60,6 +60,6 @@ return [
     'placeholder-phone-nr'   => '',
 
     // Form Buttons
-    'button-submit' => '',
-    'button-reset'  => '',
+    'button-submit' => 'Registreren',
+    'button-reset'  => 'Reset',
 ];
