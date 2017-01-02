@@ -30,7 +30,7 @@
                                 {{-- Firstname form-group --}}
                                 <div class="form-group has-feedback {{ $errors->has('firstname') ? 'has-error' : '' }}">
                                     <label class="control-label col-sm-4" for="firstname">
-                                        Voornaam: <span class="text-danger">*</span>
+                                        {{ trans('member-module.firstname') }} <span class="text-danger">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
@@ -41,7 +41,7 @@
                                 {{-- Lastname form-group --}}
                                 <div class="form-group has-feedback {{ $errors->has('lastname') ? 'has-error' : '' }}">
                                     <label for="lastname" class="control-label col-sm-4">
-                                        Achternaam: <span class="text-danger">*</span>
+                                        {{ trans('member-module.lastname') }} <span class="text-danger">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
@@ -133,7 +133,7 @@
                                 {{-- Postal code and city form-group --}}
                                 <div class="form-group has-feedback {{ $errors->has('city') ? 'has-error' : '' }}">
                                     <label for="city" class="control-label col-sm-4">
-                                        Gemeente: <span class="text-danger">*</span>
+                                        {{ trans('member-module.label-city') }} <span class="text-danger">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
