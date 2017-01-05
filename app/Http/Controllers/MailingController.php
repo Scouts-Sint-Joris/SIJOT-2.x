@@ -19,22 +19,32 @@ use Illuminate\Support\Facades\Mail;
  */
 class MailingController extends Controller
 {
-    /**
-     * Auth middleware routes.
-     *
-     * @var array
-     */
+    /** @var array $authMiddleware The auth middleware array. */
     protected $authMiddleware;
+
+    /** @var mailingDb $mailingDb The mailing databse model. */
+    private $mailingDb;
+
+    /** @var Newsletter $newsletterDb The newsletter database model. */
+    private $newsletterDb;
 
     /**
      * MailingController constructor.
+     *
+     * @param  NewsLetter $newsletterDb
+     * @param  Mailing    $mailingDb
+     * @return void
      */
-    public function __construct()
+    public function __construct(Mailing $mailingDb, NewsLetter $newsletterDb)
     {
         $this->authMiddleware = ['registerNewsLetter', 'destroyNewsletter'];
 
         $this->middleware('auth')->except($this->authMiddleware);
         $this->middleware('lang');
+
+        // Params init
+        $this->mailingDb = $mailingDb;
+        $this->newsletterDb = $newsletterDb;
     }
 
     /**
@@ -47,8 +57,8 @@ class MailingController extends Controller
      */
     public function index()
     {
-        $data['newsletter'] = NewsLetter::paginate(25);
-        $data['mailing']    = Mailing::paginate(25);
+        $data['newsletter'] = $this->newsletterDb->paginate(25);
+        $data['mailing']    = $this->mailingDb->paginate(25);
 
         return view('mailing.index', $data);
     }
@@ -64,7 +74,7 @@ class MailingController extends Controller
      */
     public function mailingDestroy($id)
     {
-        if (Mailing::destroy($id)) {
+        if ($this->mailingDb->destroy($id)) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.mailing-destroy'));
         }
@@ -84,8 +94,8 @@ class MailingController extends Controller
      */
     public function registerNewsLetter(Requests\NewsLetterValidator $input)
     {
-        $insert = NewsLetter::create($input->except('_token'));
-        
+        $insert = $this->newsletterDb->create($input->except('_token'));
+
         if ($insert) {
             Mail::to($insert)->send(new NewNewsletter($insert));
 
@@ -108,7 +118,7 @@ class MailingController extends Controller
      */
     public function registerMailing(Requests\MailingValidator $input)
     {
-        if (Mailing::create($input->except('_token'))) {
+        if ($this->mailingDb->create($input->except('_token'))) {
             // The email address for the mailing platform is created.
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.mailing-register'));
@@ -129,7 +139,7 @@ class MailingController extends Controller
      */
     public function editMailing($id)
     {
-        $data['mailing'] = Mailing::find($id);
+        $data['mailing'] = $this->mailingDb->find($id);
         return view('', $data);
     }
 
@@ -146,7 +156,7 @@ class MailingController extends Controller
      */
     public function updateMailing(Requests\MailingValidator $input, $id)
     {
-        if (Mailing::find($id)->update($input->except('_token'))) {
+        if ($this->mailingDb->find($id)->update($input->except('_token'))) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.mailing-update'));
         }
@@ -165,11 +175,11 @@ class MailingController extends Controller
      */
     public function destroyNewsletter($string)
     {
-        $data = NewsLetter::where('code', $string);
+        $data = $this->newsletterDb->where('code', $string);
 
         if ($data->count() === 1) {
             $result = $data->first();
-            NewsLetter::destroy($result->id);
+            $this->newsletterDb->destroy($result->id);
 
             session()->flash('class', 'alert alert-success');
             session()->flash('message', 'The email address has been removed.');

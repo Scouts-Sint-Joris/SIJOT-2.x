@@ -15,13 +15,32 @@ use Illuminate\Http\Request;
  */
 class HomeController extends Controller
 {
+    /** @var Collection $newsDb      The database model for the news items. */
+    private $newsDb;
+
+    /** @var Collection $activityDb The database model for the activities. */
+    private $activityDb;
+
+    /** @var Collection $userDb      The database model for the users */
+    private $userDb;
+
     /**
      * HomeController constructor.
+     *
+     * @param  App\News     $newsDb
+     * @param  App\Activity $activityDb
+     * @param  App\User     $userDb
+     * @return Void
      */
-    public function __construct()
+    public function __construct(News $newsDb, Activity $activityDb, User $userDb)
     {
         $this->middleware('lang');
         $this->middleware('auth', ['only' => ['homeBackend']]);
+
+        // Params init.
+        $this->newsDb     = $newsDb;
+        $this->activityDb = $activityDb;
+        $this->userDb     = $userDb;
     }
 
     /**
@@ -34,8 +53,8 @@ class HomeController extends Controller
      */
     public function homeFront()
     {
-        $data['news']       = News::where('state', 1)->paginate(4);
-        $data['activities'] = Activity::with(['groups', 'creator'])
+        $data['news']       = $this->newsDb->where('state', 1)->paginate(4);
+        $data['activities'] = $this->activityDb->with(['groups', 'creator'])
             ->where('state', 1)
             ->orderBy('date', 'ASC')
             ->paginate(25)
@@ -54,7 +73,7 @@ class HomeController extends Controller
      */
     public function homeBackend()
     {
-        $data['users'] = User::all();
+        $data['users'] = $this->userDb->all();
         return view('backend', $data);
     }
 }

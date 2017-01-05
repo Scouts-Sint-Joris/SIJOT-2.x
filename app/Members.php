@@ -30,7 +30,7 @@ class Members extends Model
     /**
      * User -> Member relationship.
      *
-     * This is needed to connect the members. To Logins. 
+     * This is needed to connect the members. To Logins.
      *
      * @return belongToMany relation.
      */

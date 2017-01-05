@@ -20,7 +20,8 @@ class EnvSettingsController extends Controller
     /**
      * EnvController constructor.
      *
-     * @param DotenvEditor $env
+     * @param  DotenvEditor $env
+     * @return Void
      */
     public function __construct(DotenvEditor $env)
     {
@@ -41,10 +42,6 @@ class EnvSettingsController extends Controller
     {
         $data['keys']    = $this->env->getContent();
         $data['backups'] = $this->env->getBackupVersions();
-
-        // DEBUGGING PROPOSE:
-        // --------------------
-        // dd($data);
 
         return view('environment.index', $data);
     }

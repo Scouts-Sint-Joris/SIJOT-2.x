@@ -20,12 +20,19 @@ use Symfony\Component\HttpFoundation\Response as Status;
  */
 class AuthorizationController extends ApiGuardController
 {
+    /** @var ApiKey $apiKey The apikey database model. */
+    private $apiKey;
+
     /**
      * AuthorizationController constructor.
+     *
+     * @param  ApiKey $apiKey
+     * @return Void
      */
-    public function __construct()
+    public function __construct(ApiKey $apiKey)
     {
         parent::__construct();
+        $this->apiKey = $apiKey;
     }
 
     /**
@@ -44,9 +51,9 @@ class AuthorizationController extends ApiGuardController
         $fractal = new Manager();
 
         if ($currentCursorStr = $request->input('cursor', false)) {
-            $keys = ApiKey::where('id', '>', $currentCursorStr)->take(5)->get();
+            $keys = $this->apiKey->where('id', '>', $currentCursorStr)->take(5)->get();
         } else {
-            $keys = ApiKey::take(5)->get();
+            $keys = $this->apiKey->take(5)->get();
         }
 
         if ((int) count($keys) > 0) { // There are keys found.
@@ -93,9 +100,9 @@ class AuthorizationController extends ApiGuardController
             $content['errors']    = $validator->errors();
             $status               = $content['http_code'];
         } else { // Validation passes.
-            $insert = ApiKey::make($request->user_id);
+            $insert = $this->apiKey->make($request->user_id);
 
-            $update = ApiKey::find($insert->id);
+            $update = $this->apiKey->find($insert->id);
             $update->service = $request->service;
             $update->save();
 
@@ -121,10 +128,10 @@ class AuthorizationController extends ApiGuardController
      */
     public function regenerateKey($id)
     {
-        $key = ApiKey::find($id);
+        $key = $this->apiKey->find($id);
 
         if ((int) count($key) === 1) { // Key is not found into the system.
-            $newKey = ApiKey::generateKey();
+            $newKey = $this->apiKey->generateKey();
             $key->update(['key' => $newKey]);
 
             $content['message'] = 'De API sleutel is aangepast';
@@ -150,10 +157,10 @@ class AuthorizationController extends ApiGuardController
      */
     public function deleteKey($id)
     {
-        $key = ApiKey::find($id);
+        $key = $this->apiKey->find($id);
 
         if ((int) count($key) === 1) { // There is a key found with this id.
-            ApiKey::destroy($id);
+            $this->apiKey->destroy($id);
 
             $content = ['message' => 'De API Sleutel is verwijderd'];
             $status  = Status::HTTP_OK; // 200

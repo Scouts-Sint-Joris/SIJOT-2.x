@@ -25,22 +25,37 @@ use Maatwebsite\Excel\Facades\Excel;
  */
 class RentalController extends Controller
 {
-    /**
-     * Authencation middleware protected routes.
-     *
-     * @var mixed
-     */
+    /** @var mixed $authMiddleware Authencation middleware protected routes */
     protected $authMiddleware;
+
+    /** @var Rental $rentalDb The database model for the rentals. */
+    private $rentalDb;
+
+    /** @var RentalStatus $rentalStatus The rental status database model. */
+    private $rentalStatus;
+
+    /** @var User $userDb The user status database model. */
+    private $userDb;
 
     /**
      * RentalController constructor.
+     *
+     * @param   App\Rental          $rentalDb
+     * @param   App\RentalStatus    $rentalStatus
+     * @param   App\User            $userDb
+     * @return  Void
      */
-    public function __construct()
+    public function __construct(Rental $rentalDb, RentalStatus $rentalStatus, User $userDb)
     {
         $this->authMiddleware = ['indexBackEnd', 'setOption', 'setConfirmed', 'destroy'];
 
         $this->middleware('lang');
         $this->middleware('auth')->only($this->authMiddleware);
+
+        // Param init
+        $this->rentalDb     = $rentalDb;
+        $this->rentalStatus = $rentalStatus;
+        $this->userDb       = $userDb;
     }
 
     /**
@@ -53,7 +68,7 @@ class RentalController extends Controller
      */
     public function indexBackEnd()
     {
-        $data['rentals'] = Rental::with('status')->paginate(25);
+        $data['rentals'] = $this->rentalDb->with('status')->paginate(25);
         return view('rental.backend-overview', $data);
     }
 
@@ -80,7 +95,7 @@ class RentalController extends Controller
      */
     public function calendar()
     {
-        $data['items'] = Rental::whereHas('status', function ($query) {
+        $data['items'] = $this->rentalDb->whereHas('status', function ($query) {
             $query->where('name', trans('rental.confirm'));
         })->get();
 
@@ -93,14 +108,14 @@ class RentalController extends Controller
      * @url:platform  GET|HEAD:
      * @see:phpunit   RentalTest::testSetOptionRental();
      *
-     * @param  int $id the rental id in the database.
+     * @param  int $rentalId the rental id in the database.
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function setOption($id)
+    public function setOption($rentalId)
     {
-        $status = RentalStatus::where('name', trans('rental.lease-option'))->first();
+        $status = $this->rentalStatus->where('name', trans('rental.lease-option'))->first();
 
-        if (Rental::find($id)->update(['status_id' => $status->id])) {
+        if ($this->rentalDb->find($rentalId)->update(['status_id' => $status->id])) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.rental-option'));
         }
@@ -114,19 +129,19 @@ class RentalController extends Controller
      * @url:platform  GET|HEAD:
      * @see:phpunit   RentalTest::testSetConfirmedRental()
      *
-     * @param  int $id the rental id in the database.
+     * @param  int $rentalId the rental id in the database.
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function setConfirmed($id)
+    public function setConfirmed($rentalId)
     {
-        $status = RentalStatus::where('name', trans('rental.lease-confirm'))->first();
+        $status = $this->rentalStatus->where('name', trans('rental.lease-confirm'))->first();
 
-        if (Rental::find($id)->update(['status_id' => $status->id])) {
+        if ($this->rentalDb->find($rentalId)->update(['status_id' => $status->id])) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.rental-confirm'));
 
             // Notification
-            Notification::send(User::all(), new RentalConfirmed());
+            Notification::send($this->userDb->all(), new RentalConfirmed());
         }
 
         return redirect()->back();
@@ -157,21 +172,21 @@ class RentalController extends Controller
      */
     public function insert(Requests\RentalValidator $input)
     {
-        $insert = Rental::create($input->except('_token'));
-        $status = RentalStatus::where('name', trans('rental.lease-new'))->first();
+        $insert = $this->rentalDb->create($input->except('_token'));
+        $status = $this->rentalStatus->where('name', trans('rental.lease-new'))->first();
 
-        if (Rental::find($insert->id)->update(['status_id' => $status->id])) {
+        if ($this->rentalDb->find($insert->id)->update(['status_id' => $status->id])) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.rental-insert'));
 
             if (! auth()->check()) {
-                $rental = Rental::find($insert->id);
-                $logins = User::with('permissions')->whereIn('name', ['rental'])->get();
+                $rental = $this->rentalDb->find($insert->id);
+                $logins = $this->userDb->with('permissions')->whereIn('name', ['rental'])->get();
 
                 Mail::to($logins)->queue(new RentalNotification($rental));
                 Mail::to($insert)->queue(new RentalNotificationRequest($rental));
             } elseif (auth()->check()) {
-                Notification::send(User::all(), new RentalInsertNotification());
+                Notification::send($this->userDb->all(), new RentalInsertNotification());
             }
         }
 
@@ -189,7 +204,7 @@ class RentalController extends Controller
      */
     public function edit($id)
     {
-        $data['rental'] = $this->lease->find($id);
+        $data['rental'] = $this->rentalDb->find($id);
         return view('', $data);
     }
 
@@ -206,7 +221,7 @@ class RentalController extends Controller
      */
     public function update(Requests\RentalValidator $input, $id)
     {
-        $rental = Rental::find($id);
+        $rental = $this->rentalDb->find($id);
         $rental->input($input->except('_token'));
 
         session()->flash('class', 'alert alert-success');
@@ -234,12 +249,12 @@ class RentalController extends Controller
      * @url:platform:  GET|HEAD: /rental/destroy/{id}
      * @see:phpunit    RentalTest::testRentalDelete()
      *
-     * @param  int $id the rental id in the database
+     * @param  int $rentalId the rental id in the database
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroyLease($id)
+    public function destroyLease($rentalId)
     {
-        if (Rental::destroy($id)) {
+        if ($this->rentalDb->destroy($rentalId)) {
             session()->flash('class', 'alert alert-sucess');
             session()->flash('message', trans('flash-session.rental-update'));
         }
@@ -253,7 +268,7 @@ class RentalController extends Controller
      * @url:platform  GET|HEAD: /backend/rental/export
      * @see:phpunit   RentalTest::testExport()
      *
-     * @return void | Excel download
+     * @return Void | Excel download
      */
     public function exportExcel()
     {
@@ -264,7 +279,7 @@ class RentalController extends Controller
 
             // Sheet: for all the rentals.
             $excel->sheet('Alle', function ($sheet) {
-                $all = Rental::with('status')->get();
+                $all = $this->rentalDb->with('status')->get();
                 $sheet->loadView('rental.export.all', compact('all'));
             });
         })->download('xls');

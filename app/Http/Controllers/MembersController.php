@@ -12,25 +12,13 @@ use Illuminate\Support\Facades\Notification;
 
 class MembersController extends Controller
 {
-    /**
-     * Country database model.
-     *
-     * @var Country
-     */
+    /** @var Country $country The Country database model. */
     private $countries;
 
-    /**
-     * Members database model.
-     *
-     * @var array
-     */
+    /** @var array $members The members database model. */
     private $members;
 
-    /**
-     * User login database model.
-     *
-     * @var array
-     */
+    /** @var array $user The User login database model. */
     private $user;
 
     /**
@@ -91,10 +79,6 @@ class MembersController extends Controller
      */
     public function store(MembersValidator $input)
     {
-        // FIXME: Phpunit triggers false on validation.
-
-        Log::debug($input->all());
-
         if ($this->members->create($input->except('_token'))) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', 'Het lid is aangemaakt in het systeem. De leiding zal de inschrijving snel bevestigen.');
@@ -171,7 +155,7 @@ class MembersController extends Controller
      */
     public function update(MembersValidator $input, $memberId)
     {
-        if (Members::find($memberId)->update($input->except('_token'))) {
+        if ($this->members->find($memberId)->update($input->except('_token'))) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', 'Het Lid is gewijzigd');
 

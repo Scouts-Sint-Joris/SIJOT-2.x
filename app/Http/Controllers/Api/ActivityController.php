@@ -57,7 +57,7 @@ class ActivityController extends ApiGuardController
             $rentals = $this->activity->take(5)->get();
         }
 
-        if (count($rentals) > 0) { // There are rentals found.
+        if ((int) count($rentals) > 0) { // There are rentals found.
             $prevCursorStr = $request->input('prevCursor', 6);
             $newCursorStr  = $rentals->last()->id;
 
@@ -67,7 +67,7 @@ class ActivityController extends ApiGuardController
             $resource->setCursor($cursor);
             $content = $fractal->createData($resource)->toJson();
             $status  = Status::HTTP_OK;
-        } elseif (count($rentals) === 0) { // There are no rentals found.
+        } elseif ((int) count($rentals) === 0) { // There are no rentals found.
             $content = ['message' => 'Er zijn geen activiteiten'];
             $status  = Status::HTTP_OK;
         }
