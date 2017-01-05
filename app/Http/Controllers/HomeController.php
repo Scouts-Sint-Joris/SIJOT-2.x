@@ -20,18 +20,18 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-		$this->middleware('lang');
-		$this->middleware('auth', ['only' => ['homeBackend']]);
+        $this->middleware('lang');
+        $this->middleware('auth', ['only' => ['homeBackend']]);
     }
 
     /**
      * [FRONT-END]: Get the front-end index page.
-	 *
-	 * @url:platform  GET|HEAD: /
+     *
+     * @url:platform  GET|HEAD: /
      * @see:phpunit   HomeTest::testHomeFrontend()
-	 *
-	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-	 */
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function homeFront()
     {
         $data['news']       = News::where('state', 1)->paginate(4);
@@ -45,11 +45,11 @@ class HomeController extends Controller
     }
 
     /**
-     * [BACK-END]: Get the backend home view fgor the website.
-	 *
-	 * @url:platform  GET|HEAD: /home
+     * [BACK-END]: Get the backend home view for the website.
+     *
+     * @url:platform  GET|HEAD: /home
      * @see:phpunit   HomeTest::testHomeBackend()
-	 *
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function homeBackend()

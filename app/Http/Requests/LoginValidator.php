@@ -4,6 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class LoginValidator
+ * @package App\Http\Requests
+ */
 class LoginValidator extends FormRequest
 {
     /**
@@ -24,7 +28,7 @@ class LoginValidator extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required', 
+            'name' => 'required',
             'email' => 'required',
         ];
     }

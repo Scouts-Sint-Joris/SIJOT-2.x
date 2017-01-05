@@ -59,8 +59,9 @@ class EnvSettingsController extends Controller
      */
     public function createBackup()
     {
-        if ($this->env->createBackup()) // Can create the backup.
-        {
+        if ($this->env->createBackup()) {
+            // Can create the backup.
+
             /**
              * @todo: create notification.
              * ---
@@ -88,8 +89,8 @@ class EnvSettingsController extends Controller
     {
         $input = $this->env->getValue($param);
 
-        if ($this->env->deleteData($input)) // The kay can be deleted.
-        {
+        if ($this->env->deleteData($input)) {
+            // The key is deleted.
             session()->flash('class', 'alert alert-success');
             session()->flash('message', 'The evironment setting key has been deleted');
         }
@@ -103,11 +104,11 @@ class EnvSettingsController extends Controller
      * @param  int $timestamp The unformatted timestamp from the backup.
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function deleteBackup($timestamp) 
+    public function deleteBackup($timestamp)
     {
-        if ($this->env->deleteBackup($timestamp)) // The env backup is deleted.
-        {
-            session()->flash('class', 'alert alert-success'); 
+        if ($this->env->deleteBackup($timestamp)) {
+            // The env backup is destroyed.
+            session()->flash('class', 'alert alert-success');
             session()->flash('message', 'The backup file has been deleted.');
         }
 

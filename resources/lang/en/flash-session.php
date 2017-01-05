@@ -46,8 +46,13 @@ return [
     'rental-delete'  => 'The rental has been deleted.',
 
     // Activity flash messages.
-    'activity-store' => 'The activity has been published.',
-    'activity-update' => 'The activity has been updated.',
-    'activity-destroy' => 'The activity has been destroyed.'
+    'activity-store'   => 'The activity has been published.',
+    'activity-update'  => 'The activity has been updated.',
+    'activity-destroy' => 'The activity has been destroyed.',
+
+    // Api token management flash messages.
+    'token->create'    => 'The api token has been created.',
+    'token-regenerate' => 'The api key has been generated.',
+    'token-delete'     => 'The api key has been deleted',
 
 ];

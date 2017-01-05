@@ -4,6 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class SecurityInfoValidator
+ * @package App\Http\Requests
+ */
 class SecurityInfoValidator extends FormRequest
 {
     /**

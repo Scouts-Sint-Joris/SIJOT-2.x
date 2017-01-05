@@ -17,7 +17,7 @@ Auth::routes();
 
 // Home routes.
 Route::get('/', 'HomeController@homeFront')->name('home');
-Route::get('/home', 'Homecontroller@homeBackend')->name('home.backend');
+Route::get('/home', 'HomeController@homeBackend')->name('home.backend');
 
 // Group routes.
 Route::get('/groups', 'GroupController@overview')->name('frontend.groups');
@@ -25,13 +25,20 @@ Route::get('/groups/{selector}', 'GroupController@specific')->name('frontend.gro
 Route::get('/groups/edit', 'GroupController@edit')->name('groups.edit');
 Route::post('/groups/update/{selector}', 'GroupController@update')->name('groups.update');
 
+// Members Modules Routes.
+Route::get('/members/index', 'MembersController@index')->name('members.index');
+Route::get('/members/create', 'MembersController@create')->name('members.create');
+Route::get('/members/delete/{memberId}', 'MembersController@destroy')->name('members.delete');
+Route::get('/members/show/{memberId}', 'MembersController@show')->name('members.show');
+Route::post('/members/create', 'MembersController@store')->name('members.store');
+
 // Rental routes
 Route::get('/rental', 'RentalController@indexFrontEnd')->name('rental.frontend.index');
 Route::get('/rental/insert', 'RentalController@insertViewFrontEnd')->name('rental.frontend.insert');
 Route::get('/rental/calendar', 'RentalController@calendar')->name('rental.frontend-calendar');
 Route::get('/rental/reachable', 'RentalController@domainReachable')->name('rental.frontend.reachable');
 Route::get('/backend/rental/export', 'RentalController@exportExcel')->name('rental.backend.export');
-Route::post('/rental/insert','RentalController@insert')->name('rental.store');
+Route::post('/rental/insert', 'RentalController@insert')->name('rental.store');
 
 Route::get('/backend/rental', 'RentalController@indexBackEnd')->name('rental.backend');
 Route::get('/backend/rental/option/{id}', 'RentalController@setOption')->name('rental.backend.option');
@@ -84,13 +91,14 @@ Route::post('settips/api/key', 'Auth\AccountController@createKey')->name('settin
 Route::post('settings/profile/security', 'Auth\AccountController@updateSecurity')->name('settings.profile.password.post');
 
 // Api Routes
-Route::get('/settings/key/regenerate/{id}', 'Auth\AccountController@RegenerateKey')->name('key.regenerate');
+Route::get('/settings/key/regenerate/{id}', 'Auth\AccountController@regenerateKey')->name('key.regenerate');
 Route::get('/settings/key/destroy/{id}', 'Auth\AccountController@destroyKey')->name('key.destroy');
 
 // Activity routes
 Route::get('backend/activity', 'ActivityController@index')->name('activity.index');
 Route::post('backend/activity/update/{id}', 'ActivityController@update')->name('activity.update');
 Route::get('backend/activity/destroy/{id}', 'ActivityController@destroy')->name('activity.destroy');
+Route::get('activity/rss', 'ActivityController@rssFeed')->name('activity.rss');
 Route::post('backend/activity', 'ActivityController@store')->name('activity.store');
 
 // Debugging routes

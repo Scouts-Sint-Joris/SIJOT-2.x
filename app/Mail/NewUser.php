@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 /**
  * Class NewUser
- * 
+ *
  * @package App\Mail
  */
 class NewUser extends Mailable

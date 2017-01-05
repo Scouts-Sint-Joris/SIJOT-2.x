@@ -64,14 +64,15 @@ class AccountController extends Controller
         $userId = auth()->user()->id;
         $user = User::find($userId);
 
-        if ($user->update($input->except(['avatar', '_token']))) // Check if we can do the update
-        {
-            if ($input->hasFile('avatar')) // The user want a new avatar.
-            {
+        if ($user->update($input->except(['avatar', '_token']))) {
+            // Check if we can do the update
+
+            if ($input->hasFile('avatar')) {
+                // The user want a new avatar.
                 $avatar = public_path(auth()->user()->avatar);
 
-                if (file_exists($avatar)) // Check if the file exists on the server. If true delete this file.
-                {
+                if (file_exists($avatar)) {
+                    // Check if the file exists on the server. If true delete this file.
                     File::delete($avatar);
                 }
 
@@ -112,8 +113,8 @@ class AccountController extends Controller
         $userId = auth()->user()->id;
         $filters = ['_token', 'password_confirmation'];
 
-        if (User::find($userId)->update($input->except($filters))) // Check if we can do the update
-        {
+        if (User::find($userId)->update($input->except($filters))) {
+            // The record has been updated
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('auth.FlashSec'));
         }
@@ -134,14 +135,14 @@ class AccountController extends Controller
     public function createKey(Requests\ApiKeyValidator $input)
     {
         $insert = ApiKey::make($input->userid);
-
         $update = ApiKey::find($insert->id);
+
         $update->service = $input->service;
 
-        if ($insert && $update->save()) // If the api token and service name is created.
-        {
+        if ($insert && $update->save()) {
+            // The token and service name are stored.
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', 'The api token has been created');
+            session()->flash('message', trans('flash-session.token-create'));
         }
 
         return redirect()->back();
@@ -157,14 +158,12 @@ class AccountController extends Controller
      * @param  ApiKey $apiKey
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function RegenerateKey(ApiKey $apiKey, $id)
+    public function regenerateKey(ApiKey $apiKey, $id)
     {
-        $new = $apiKey->generateKey();
-
-        if ($apiKey->find($id)->update(['key' => $new])) // There is a new key generated.
-        {
+        if ($apiKey->find($id)->update(['key' => $apiKey->generateKey()])) {
+            // There is a new key generated.
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', 'The api key has been generated.');
+            session()->flash('message', 'flash-session.token-regenerate');
         }
 
         return redirect()->back();
@@ -179,10 +178,10 @@ class AccountController extends Controller
      */
     public function destroyKey($id, ApiKey $apiKey)
     {
-        if ($apiKey->destroy($id)) // The api key is destroyed
-        {
+        if ($apiKey->destroy($id)) {
+            // The api key is destroyed
             session()->flash('class', 'alert alert-success');
-            session()->flash('message', 'The api key has been deleted');
+            session()->flash('message', 'flash-session.token-delete');
         }
 
         return redirect()->back();

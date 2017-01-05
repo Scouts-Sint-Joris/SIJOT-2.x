@@ -34,7 +34,7 @@ $factory->define(App\Groups::class, function (Faker\Generator $faker) {
         'selector'    => $faker->word,
         'sub_heading' => $faker->word,
         'heading'     => $faker->word,
-        'description' => $faker->word,      
+        'description' => $faker->word,
     ];
 });
 
@@ -122,7 +122,7 @@ $factory->define(Chrisbjr\ApiGuard\Models\ApiKey::class, function (Faker\Generat
     return [
         'user_id'       => 1,
         'service'       => $faker->word,
-        'key'           => $faker->password,
+        'key'           => str_random(40),
         'level'         => 10,
         'ignore_limits' => 0
     ];
@@ -134,4 +134,32 @@ $factory->define(Spatie\Permission\Models\Permission::class, function (Faker\Gen
 
 $factory->define(Spatie\Permission\Models\Role::class, function (Faker\Generator $faker) {
     return ['name' => $faker->word];
+});
+
+$factory->define(App\Country::class, function (Faker\Generator $faker) {
+    return [
+        'capital'       => 'Brussels',
+        'name'          => $faker->country,
+        'alpha2code'    => 'BE',
+        'alpha3code'    => $faker->countryISOAlpha3,
+    ];
+});
+
+$factory->define(App\Members::class, function (Faker\Generator $faker) {
+    return [
+        'firstname'             => '',
+        'lastname'              => '',
+        'gender'                => '',
+        'email'                 => '',
+        'birth_date'            => '',
+        'bank_number'           => '',
+        'country'               => '',
+        'street'                => '',
+        'house_number'          => '',
+        'house_sub_number'      => '',
+        'phone_number'          => '',
+        'mobile_number'         => '',
+        'city'                  => '',
+        'description'           => ''
+    ];
 });

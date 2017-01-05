@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\newNewsletter;
+use App\Mail\NewNewsletter;
 use App\Mailing;
 use App\NewsLetter;
-use App\Repositories\SessionRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Mail;
@@ -28,22 +27,11 @@ class MailingController extends Controller
     protected $authMiddleware;
 
     /**
-     * The session reporsitory
-     *
-     * @var $session
-     */
-    private $session;
-
-    /**
      * MailingController constructor.
-     *
-     * @param SessionRepository $session
      */
-    public function __construct(SessionRepository $session)
+    public function __construct()
     {
         $this->authMiddleware = ['registerNewsLetter', 'destroyNewsletter'];
-
-        $this->session = $session;
 
         $this->middleware('auth')->except($this->authMiddleware);
         $this->middleware('lang');
@@ -77,7 +65,8 @@ class MailingController extends Controller
     public function mailingDestroy($id)
     {
         if (Mailing::destroy($id)) {
-            $this->session->setFlash('alert alert-success', trans('flash-session.mailing-destroy'));
+            session()->flash('class', 'alert alert-success');
+            session()->flash('message', trans('flash-session.mailing-destroy'));
         }
 
         return redirect()->back();
@@ -96,9 +85,9 @@ class MailingController extends Controller
     public function registerNewsLetter(Requests\NewsLetterValidator $input)
     {
         $insert = NewsLetter::create($input->except('_token'));
-
+        
         if ($insert) {
-            Mail::to($insert)->send(new newNewsletter($insert));
+            Mail::to($insert)->send(new NewNewsletter($insert));
 
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.newsletter-register'));
@@ -119,17 +108,15 @@ class MailingController extends Controller
      */
     public function registerMailing(Requests\MailingValidator $input)
     {
-        $create = Mailing::create($input->except('_token'));
-
-        if ($create) // Create the email address for the mailing platform.
-        {
+        if (Mailing::create($input->except('_token'))) {
+            // The email address for the mailing platform is created.
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.mailing-register'));
         }
 
         return redirect()->back(302);
     }
-    
+
     /**
      * [BACKEND]: Update view for the mailing data.
      *
@@ -159,13 +146,11 @@ class MailingController extends Controller
      */
     public function updateMailing(Requests\MailingValidator $input, $id)
     {
-        $insert = Mailing::find($id)->update($input->except('_token'));
-            
-        if ($insert) {
+        if (Mailing::find($id)->update($input->except('_token'))) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.mailing-update'));
         }
-        
+
         return redirect()->back();
     }
 

@@ -4,6 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class ProfileInfoValidator
+ * @package App\Http\Requests
+ */
 class ProfileInfoValidator extends FormRequest
 {
     /**

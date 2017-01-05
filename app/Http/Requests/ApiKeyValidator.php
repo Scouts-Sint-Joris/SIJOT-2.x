@@ -4,6 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class ApiKeyValidator
+ * @package App\Http\Requests
+ */
 class ApiKeyValidator extends FormRequest
 {
     /**

@@ -39,7 +39,7 @@ class UserManagementController extends Controller
      */
     public function overview()
     {
-		$data['users'] = User::paginate(15);
+        $data['users'] = User::paginate(15);
         return view('users.index', $data);
     }
 
@@ -48,7 +48,7 @@ class UserManagementController extends Controller
      *
      * @url:platform  GET|HEAD: backend/users/create
      * @see:phpunit   UserManagementTest::testCreateViewBackend()
-	 *
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
@@ -70,8 +70,8 @@ class UserManagementController extends Controller
         $user = User::findOrFail($id);
         $user->password =  bcrypt(str_random(16));
 
-        if ($user->save()) // If the user has been updated;
-        {
+        if ($user->save()) {
+            // The user is updated.
             session()->flash('class', 'alert alert-danger');
             session()->flash('message', trans('flash-session.user-reset'));
         }
@@ -153,7 +153,7 @@ class UserManagementController extends Controller
      */
     public function destroy($id)
     {
-		if (User::destroy($id)) {
+        if (User::destroy($id)) {
             session()->flash('class', 'alert alert-success');
             session()->flash('message', trans('flash-session.user-destroy'));
         }
@@ -179,8 +179,8 @@ class UserManagementController extends Controller
         // Delete session if user is authencated.
         DB::table('sessions')->where('user_id', $id)->delete();
 
-		session()->flash('class', 'alert alert-success');
-		session()->flash('message', trans('flash-session.user-block'));
+        session()->flash('class', 'alert alert-success');
+        session()->flash('message', trans('flash-session.user-block'));
 
         return redirect()->back();
     }
@@ -200,8 +200,8 @@ class UserManagementController extends Controller
         $user->revokePermissionTo('blocked');
         $user->givePermissionTo('active');
 
-		session()->flash('class', 'alert alert-success');
-		session()->flash('message', trans('flash-session.user-unblock'));
+        session()->flash('class', 'alert alert-success');
+        session()->flash('message', trans('flash-session.user-unblock'));
 
         return redirect()->back();
     }

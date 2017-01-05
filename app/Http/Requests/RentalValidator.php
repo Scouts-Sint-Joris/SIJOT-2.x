@@ -4,6 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class RentalValidator
+ * @package App\Http\Requests
+ */
 class RentalValidator extends FormRequest
 {
     /**
@@ -24,9 +28,9 @@ class RentalValidator extends FormRequest
     public function rules()
     {
         return [
-            'start_date' => 'required', 
-            'end_date'   => 'required', 
-            'group'      => 'required',  
+            'start_date' => 'required',
+            'end_date'   => 'required',
+            'group'      => 'required',
             'email'      => 'required'
         ];
     }
