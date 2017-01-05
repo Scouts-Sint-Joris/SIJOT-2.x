@@ -129,7 +129,9 @@ class MembersController extends Controller
      */
     public function confirm($memberId)
     {
-        if ($this->members->find($memberId)) { // User is confirmed.
+        $data['member'] = $this->members->find($memberId);
+
+        if ($data['member']) { // User is confirmed.
             session()->flash('class', 'alert alert-success');
             session()->flash('message', 'Het lid bevestigd in het systeem.');
 
