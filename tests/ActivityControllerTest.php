@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests;
+
+use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -12,7 +15,7 @@ class ActivityControllerTest extends TestCase
     // DatabaseMigrations   = Trait for running the db migrations each test.
     // DatabaseTransactions = Trait for running qeuries against the db stub.
     use DatabaseMigrations, DatabaseTransactions;
-    
+
     /**
      * GET|HEAD: /backend/activity
      * ROUTE:    activity.index
@@ -143,10 +146,10 @@ class ActivityControllerTest extends TestCase
             'heading' => 'This is the updated heading for the activity.',
             'description' => 'This is the updated description',
             'state'       => 1,
-            'group'       => 'required', 
+            'group'       => 'required',
             'start_time'  => 1476466655,
             'date'        => '2016-10-13 17:33:31',
-            'end_time'    => 1476496655, 
+            'end_time'    => 1476496655,
         ]);
         $updatedActivity = App\Activity::find($activity->id);
         $this->seeStatusCode(302);

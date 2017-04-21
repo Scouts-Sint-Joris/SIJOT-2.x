@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests;
+
+use Tests\TestCase;
 use Chrisbjr\ApiGuard\Models\ApiKey;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
